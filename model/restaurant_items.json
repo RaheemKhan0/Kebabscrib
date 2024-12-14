@@ -1,0 +1,72 @@
+[
+  {
+    "item_name": "Cheese Burger",
+    "item_description": "Steak, cheddar, onion, lettuce, tomato and choice of your sauce",
+    "item_price": {
+      "single": 29,
+      "combo": 36
+    },
+    "item_category": "Burger",
+    "item_img_url": ""
+  },
+  {
+    "item_name": "Double Cheese",
+    "item_description": "Steak, cheddar, lettuce, tomato, onion, sauce",
+    "item_price": {
+      "single": 34,
+      "combo": 41
+    },
+    "item_category": "Burger",
+    "item_img_url": ""
+  },
+  {
+    "item_name": "Toast Beef",
+    "item_description": "Beef or chicken, cheddar, lettuce, tomato, onion, sauce",
+    "item_price": {
+      "single": 33,
+      "combo": 40
+    },
+    "item_category": "Toast",
+    "item_img_url": ""
+  },
+  {
+    "item_name": "Double Toast Hummer",
+    "item_description": "Beef or chicken, cheddar, lettuce, tomato, onion, sauce",
+    "item_price": {
+      "single": 38,
+      "combo": 45
+    },
+    "item_category": "Toast",
+    "item_img_url": ""
+  },
+  {
+    "item_name": "Four",
+    "item_description": "Kebab, mozzarella, lettuce, tomato, onion, sauce",
+    "item_price": {
+      "single": 40,
+      "combo": 47
+    },
+    "item_category": "Kebab",
+    "item_img_url": ""
+  },
+  {
+    "item_name": "Croque Monsieur",
+    "item_description": "Emmental, cream, turkey ham, cheddar",
+    "item_price": {
+      "single": 23,
+      "combo": 30
+    },
+    "item_category": "Toast",
+    "item_img_url": ""
+  },
+  {
+    "item_name": "Menu Enfant",
+    "item_description": "Burger/Nuggets, fries, juice, chocolate",
+    "item_price": {
+      "single": 29,
+      "combo": null
+    },
+    "item_category": "Kids Menu",
+    "item_img_url": ""
+  }
+]
