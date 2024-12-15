@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
 
 // Define the schema for menu items
-const menuItemsSchema = new mongoose.Schema({
-  item_name: { type: String, required: true },
-  item_description: { type: String, required: true },
-  item_price: {
-    single: { type: Number, required: false },
-    combo: { type: Number, required: false },
+const MenuItemSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  price: {
+    item: { type: Number, required: true },
+    combo: { type: Number, required: true },
   },
-   item_category: { type: String, required: true },
-  item_img_url: {type:String, required: false}
+  category: { type: String, required: true },
+  sauces: [String],
+  meatType: String,
 });
 
 // Create the model for menu items
-const Menu_items = mongoose.model("MenuItem", menuItemsSchema);
+export default mongoose.models.MenuItem || mongoose.model("MenuItem", MenuItemSchema);
 
-export default Menu_items;
