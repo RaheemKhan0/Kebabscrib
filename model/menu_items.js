@@ -5,8 +5,8 @@ const menuItemsSchema = new mongoose.Schema({
   item_name: { type: String, required: true },
   item_description: { type: String, required: true },
   item_price: {
-    single: { type: Number, required: true },
-    combo: { type: Number, required: true },
+    single: { type: Number, required: false },
+    combo: { type: Number, required: false },
   },
    item_category: { type: String, required: true },
   item_img_url: {type:String, required: false}
