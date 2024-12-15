@@ -26,6 +26,7 @@ export class tacos implements MenuItem {
     this.meatType = meatType;
   }
 
+
   calculatePrice(): number {
     return 1;
   }
