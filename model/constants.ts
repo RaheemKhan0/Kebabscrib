@@ -10,5 +10,5 @@ export const SAUCES = [
   { name: "Harissa", price: 3 },
   { name: "Tabasco", price: 3 },
   { name: "Nachos", price: 3 },
-  { name: "Samuraï", price: 3 }
-]
+  { name: "Samuraï", price: 3 } 
+]  

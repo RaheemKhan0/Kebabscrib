@@ -1,4 +1,4 @@
-import { MenuItem } from "@modelinterfaces/MenuItem";
+import { MenuItem } from "../interfaces/MenuItem";
 
 export class Sandwich implements MenuItem {
     name: string;
