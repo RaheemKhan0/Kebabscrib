@@ -12,3 +12,14 @@ export const SAUCES = [
   { name: "Nachos", price: 3 },
   { name: "Samuraï", price: 3 }
 ]
+export const MEATS= [
+  {name: "Veal Shawarma", price: 8},
+  {name: "Chicken Nuggets" , price: 8},
+  {name: "Falafel" , price: 8},
+  {name: "Chicken Tenders", price: 8},
+  {name: "Ground Beef", price: 8},
+  {name: "Turkey Ham", price: 8},
+  {name: "Merguez", price: 8},
+  {name: "Chicken Breast", price: 8}
+
+]
