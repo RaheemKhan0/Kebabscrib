@@ -6,7 +6,8 @@
       "@public/*" : ["public/*"],
       "@model/*" : ["model/*"],
       "@classes/*" : ["classes/*"],
-      "@interfaces/*" : ["interfaces/*"]
+      "@interfaces/*" : ["interfaces/*"],
+      "@components/*" : ["components/*"]
     }
   }  
 }
