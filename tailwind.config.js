@@ -6,7 +6,12 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}", // Components directory
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        KebabGreen: "#1E5128"
+      },
+    },
   },
   plugins: [],
 };
+
