@@ -1,4 +1,6 @@
+'use client';
 import React from 'react';
+
 
 const Navbar: React.FC = () => (
   <nav className="bg-KebabGreen border-gray-200 bg-KebabGreen dark:border-gray-700">
