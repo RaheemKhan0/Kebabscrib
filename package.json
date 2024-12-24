@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
     "dotenv": "^16.4.7",
     "mongoose": "^8.8.4",
     "next": "^15.1.2",
