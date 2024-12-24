@@ -1,8 +1,9 @@
 import React from 'react'
+import HeroSection from '../components/HomeBody.tsx'
 
 const page = () => {
   return (
-    <div className = "">Home Page</div>
+    <HeroSection />
   )
 }
 
