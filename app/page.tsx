@@ -1,9 +1,27 @@
-import React from 'react'
+// import React from 'react'
+// import MenuItem  from '../components/MenuItem' 
 
-const page = () => {
-  return (
-    <div>Raheem is Gay</div>
-  )
+// const page = () => {
+//   return (
+//     <MenuItem/>
+    
+//   );
+// }
+
+// export default page
+
+
+import MenuList from '../components/MenuList';
+import Layout from './layout';
+
+export default function Home() {
+    return (
+        <>        
+            <div className="py-16 bg-[#014421] text-white text-center">
+                <h1 className="text-5xl font-bold">Welcome to Kebabscrib</h1>
+                <p className="mt-4 text-lg">Explore Our Delicious Menu</p>
+            </div>
+            <MenuList />
+        </>
+    );
 }
-
-export default page

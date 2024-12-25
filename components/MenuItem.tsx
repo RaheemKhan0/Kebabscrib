@@ -51,9 +51,9 @@ const MenuItem: React.FC<MenuItemProps> =  ({
             
              {/* Price */}
              <div className="mt-4"> 
-                <p className="text-lg font-bold">Price: ${item_price.single}  </p>
+                <p className="text-lg font-bold">Price: AED {item_price.single}  </p>
                 {item_price.combo && (
-                    <p className="text-sm text-gray-500">Combo: ${item_price.combo} </p>
+                    <p className="text-sm text-gray-500">Combo: AED {item_price.combo} </p>
                 )}
 
              </div>

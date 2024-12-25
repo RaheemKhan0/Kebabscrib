@@ -11,8 +11,8 @@ const seedMenuItems = async () => {
   try{
     await connectMongodb();
     console.log("MongoDB Connection Established") 
-
-    // Load JSON data 
+    
+    // Load JSON data   
     const filePath = path.join(__dirname, "../seeders/restaurant_items.json")
     // Reads the restaurant_items.json file synchronously as UTF-8 encoded text.
     const menuItemsJson = fs.readFileSync(filePath, "utf-8");

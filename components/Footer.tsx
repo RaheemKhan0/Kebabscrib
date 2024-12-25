@@ -2,7 +2,7 @@ import React from 'react';
 import { FaInstagram, FaFacebookF, FaTwitter } from 'react-icons/fa';
 
 
-const Footer = () => {
+const Footer: React.FC = () => {
     return (
         <footer className="bg-KebabGreen text-white py-8">
             <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
@@ -15,7 +15,7 @@ const Footer = () => {
                     <div>
                         <h3 className="font-semibold text-KebabGold">Follow Us</h3>
                         <div className="flex space-x-6 mt-4">
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.instagram.com/kebabscrib/profilecard/?igsh=cGlla2V3ajJ2ZmVu" target="_blank" rel="noopener noreferrer">
                                 <FaInstagram className="text-KebabGold hover:text-white text-3xl transition-colors duration-300" />
                             </a>
                             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
@@ -24,10 +24,20 @@ const Footer = () => {
                             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
                                 <FaTwitter className="text-yellow-500 hover:text-white text-3xl transition-colors duration-300" />
                             </a>
+                            
+                            {/* <div className="mt-8">
+                                <h3 className="text-lg font-semibold">Find Us</h3>
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509307!2d144.9537363155049!3d-37.81720997975195"
+                                    width="100%" height="300" loading="lazy" className="rounded-md"
+                                ></iframe>
+                            </div> */}
+                            
                         </div>
                     </div>
                 </div>
             </div>
+
             <div className="text-center mt-8 text-sm text-gray-500">
                 © {new Date().getFullYear()} Kebabscrib. All rights reserved. 
             </div>
