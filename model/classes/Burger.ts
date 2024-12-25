@@ -1,6 +1,6 @@
 import { MenuItem } from "../interfaces/MenuItem"; 
 
-export class Burger implements MenuItem {
+ export class Burger implements MenuItem {
     name: string;
     description: string;
     price: { item: number; combo: number };

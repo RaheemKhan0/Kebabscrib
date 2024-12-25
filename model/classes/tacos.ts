@@ -15,6 +15,7 @@ export class tacos implements MenuItem {
     
     price: { item: number; combo: number },
     category: string,
+    size: string,
     sauces: Array<string>,
     meatType : string
   ) { 
@@ -22,6 +23,7 @@ export class tacos implements MenuItem {
     this.description = description;
     this.price = price;
     this.category = category;
+    this.size = size;
     this.sauces = sauces
     this.meatType = meatType;
   }
