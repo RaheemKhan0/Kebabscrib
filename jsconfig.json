@@ -4,7 +4,10 @@
     "paths" : {
       "@lib/*" : ["lib/*"],
       "@public/*" : ["public/*"],
-      "@model*" : ["model/*"] 
+      "@model/*" : ["model/*"],
+      "@classes/*" : ["classes/*"],
+      "@interfaces/*" : ["interfaces/*"],
+      "@components/*" : ["components/*"]
     }
   }  
 }
