@@ -2,8 +2,9 @@ import React from "react";
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="bg-white dark:bg-gray-900">
-      <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+    <section className="relative bg-cover bg-center background  bg-no-repeat bg-black h-[70vh] before:absolute before:inset-0 before:bg-black before:opacity-50">
+      <div className="relative z-10 py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+        {" "}
         <a
           href="#"
           className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
@@ -25,17 +26,16 @@ const HeroSection: React.FC = () => {
             />
           </svg>
         </a>
-        <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+        <h1 className="mb-4 font-extrabold tracking-tight leading-none  md:text-5xl lg:text-6xl dark:text-white">
           Welcome to Kebabs Crib
         </h1>
-        <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-          Here at Flowbite we focus on markets where technology, innovation, and
-          capital can unlock long-term value and drive economic growth.
+        <p className="mb-8 text-lg font-normal font-bold text-KebabGold lg:text-xl sm:px-16 xl:px-48  ">
+          Serving the best kebabs in town since 2011.
         </p>
         <div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
           <a
             href="#"
-            className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+            className="inline-flex justify-center items-center py-3 px-5 text-base bg-KebabGold rounded-full font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
           >
             Order Now
             <svg
