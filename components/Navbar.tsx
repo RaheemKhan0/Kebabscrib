@@ -39,16 +39,38 @@ const Navbar: React.FC = () => {
         {/* Desktop Menu */}
         <div className="hidden md:block md:w-auto">
           <ul className="flex flex-row font-medium p-4 md:p-0 mt-4 md:mt-0 space-x-8">
-            {["Home", "Menu", "Catering", "ContactUs"].map((item) => (
-              <li key={item}>
-                <a
-                  href="#"
-                  className="block py-2 px-3 hover:text-white duration-300 text-KebabGold"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
+            <li>
+              <a
+                href="/"
+                className="block py-2 px-3 hover:text-white duration-300 text-KebabGold"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="/MenuItems"
+                className="block py-2 px-3 hover:text-white duration-300 text-KebabGold"
+              >
+                Menu
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block py-2 px-3 hover:text-white duration-300 text-KebabGold"
+              >
+                Catering
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block py-2 px-3 hover:text-white duration-300 text-KebabGold"
+              >
+                Contact Us
+              </a>
+            </li>
           </ul>
         </div>
 
