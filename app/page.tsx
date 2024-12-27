@@ -18,12 +18,12 @@ import HeroSection from '../components/HomeBody'
 export default function Home() {
     return (
         <>        
-            <HeroSection />
+            <HeroSection git />
             {/* <div className="py-16 bg-[#014421] text-white text-center">
                 <h1 className="text-5xl font-bold">Welcome to Kebabscrib</h1>
                 <p className="mt-4 text-lg">Explore Our Delicious Menu</p>
             </div> */}
-            {/* <MenuList /> */}
+            <MenuList />
         </>
     );
 }
