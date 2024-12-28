@@ -53,11 +53,49 @@ const MenuList: React.FC = () => {
     return (
         <div className="container mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {menuItems.map((item) => (
-                <MenuItem key={item.item_name} {...item} />
+                <MenuItem key={`${item.item_name}-${item.item_category}`} {...item} />
             ))}
         </div>
     );
 };
 
-
 export default MenuList;
+
+  {/*  {...item} – Spread Operator
+This part is crucial but can be confusing at first. Let's break it down:
+
+tsx
+Copy code
+{...item}
+This is called props spreading.
+It takes all the properties of the item object and passes them as props to the MenuItem component.
+If item looks like this:
+ts
+Copy code
+const item = {
+  item_name: "Kebab",
+  item_description: "Delicious grilled kebab",
+  item_price: { single: 10, combo: 15 },
+  item_category: "Wraps",
+};
+The spread operator will translate to:
+tsx
+Copy code
+<MenuItem
+  item_name="Kebab"
+  item_description="Delicious grilled kebab"
+  item_price={{ single: 10, combo: 15 }}
+  item_category="Wraps"
+/>
+This means every property in the object is passed directly as a prop to the MenuItem component.
+It reduces the need to manually write each prop like this:
+tsx
+Copy code
+<MenuItem
+  item_name={item.item_name}
+  item_description={item.item_description}
+  item_price={item.item_price}
+  item_category={item.item_category}
+/>
+Less boilerplate, more efficient.
+  */}
