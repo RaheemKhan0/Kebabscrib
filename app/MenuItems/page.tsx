@@ -1,12 +1,15 @@
-import Navbar from "../../components/Navbar" 
-import MenuItem from "../../components/MenuItem"
-import MenuList from "../../components/MenuList"
+import Navbar from "../../components/Navbar";
+import MenuItem from "../../components/MenuItem";
+import MenuList from "../../components/MenuList";
+import MenuNav from "../../components/MenuNavBar.tsx";
+import MenuBody from "../../components/MenuBody";
+
 const page = () => {
   return (
-    <>   
-      <MenuList />
+    <>
+     <MenuBody />
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;
