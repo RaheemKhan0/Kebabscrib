@@ -8,10 +8,17 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-KebabGreen border-b-2 border-b-KebabGold">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+        {/* <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-KebabGold">
             Kebabs Crib
           </span>
+        </a> */}
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <img
+            src="/assets/kebabscrib_logo_single.png"
+            alt="Kebab's Crib Logo"
+            className="h-10 w-auto"
+          />
         </a>
 
         {/* Mobile Menu Button */}
