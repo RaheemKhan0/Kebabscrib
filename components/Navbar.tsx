@@ -8,10 +8,17 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-KebabGreen border-b-2 border-b-KebabGold">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+        {/* <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-KebabGold">
             Kebabs Crib
           </span>
+        </a> */}
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <img
+            src="/assets/kebabscrib_logo_single.png"
+            alt="Kebab's Crib Logo"
+            className="h-10 w-auto"
+          />
         </a>
 
         {/* Mobile Menu Button */}
@@ -39,16 +46,38 @@ const Navbar: React.FC = () => {
         {/* Desktop Menu */}
         <div className="hidden md:block md:w-auto">
           <ul className="flex flex-row font-medium p-4 md:p-0 mt-4 md:mt-0 space-x-8">
-            {["Home", "Menu", "Catering", "ContactUs"].map((item) => (
-              <li key={item}>
-                <a
-                  href="#"
-                  className="block py-2 px-3 hover:text-white duration-300 text-KebabGold"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
+            <li>
+              <a
+                href="/"
+                className="block py-2 px-3 hover:text-white duration-300 text-KebabGold"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="/MenuItems"
+                className="block py-2 px-3 hover:text-white duration-300 text-KebabGold"
+              >
+                Menu
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block py-2 px-3 hover:text-white duration-300 text-KebabGold"
+              >
+                Catering
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block py-2 px-3 hover:text-white duration-300 text-KebabGold"
+              >
+                Contact Us
+              </a>
+            </li>
           </ul>
         </div>
 

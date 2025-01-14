@@ -6,7 +6,12 @@ const Footer: React.FC = () => {
     <footer className="bg-KebabGreen text-white py-8 border-t-2 border-t-KebabGold">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <div className="mb-6 md:mb-0">
-          <h2 className="text-2xl text-KebabGold font-bold ">Kebabs Crib</h2>
+          {/* <h2 className="text-2xl text-KebabGold font-bold ">Kebabs Crib</h2> */}
+          <img
+            src="/assets/kebabscrib_logo_single.png"
+            alt="Kebab's Crib Logo"
+            className="h-10 w-auto"
+          />
           <p className="mt-2 text-sm text-KebabGold">
             Serving the best kebabs in town since 2011.
           </p>
@@ -28,11 +33,12 @@ const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaFacebookF className="text-yellow-500 hover:text-white text-3xl transition-colors duration-300" />
+                <FaFacebookF className="text-KebabGold hover:text-white text-3xl transition-colors duration-300" />
               </a>
                             
                             {/* <div className="mt-8">
-                                <h3 className="text-lg font-semibold">Find Us</h3>
+                                <h3 className="text-lg font-s+
+                                emibold">Find Us</h3>
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509307!2d144.9537363155049!3d-37.81720997975195"
                                     width="100%" height="300" loading="lazy" className="rounded-md"
