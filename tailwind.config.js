@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        KebabGreen: "#0C6045",
-        KebabGold: "#F7A890"
+        KebabGreen: "#014421",
+        KebabGold: "#D39D55"
       },
     },
   },
