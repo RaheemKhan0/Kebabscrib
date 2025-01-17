@@ -71,6 +71,23 @@ const Navbar: React.FC = () => {
                 Contact Us
               </a>
             </li>
+            <li>
+              <a
+                href="/Signup"
+                className="block py-2 px-3 hover:text-white duration-300 text-KebabGold"
+              >
+                Register
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="/LogIn"
+                className="block py-2 px-3 hover:text-white duration-300 text-KebabGold"
+              >
+                Log In
+              </a>
+            </li>
           </ul>
         </div>
 
