@@ -14,6 +14,7 @@ const SignInForm: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
+    
     if (name === "email") {
       setEmail(value);
     } else if (name === "password") {
@@ -41,7 +42,7 @@ const SignInForm: React.FC = () => {
       console.log("Success: ", response.data);
 
       // [Fix 2: Use router.push for redirection]
-      router.push("/"); // Redirect to homepage
+      router.push("/LogIn"); // Redirect to homepage
     } catch (error: any) {
       if (error.response) {
         console.error("Error Response: ", error.response.data);
@@ -70,7 +71,7 @@ const SignInForm: React.FC = () => {
                   htmlFor="username"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Enter User Name
+                  Enter Name
                 </label>
                 <input
                   type="text" // Fixed the type
@@ -79,7 +80,7 @@ const SignInForm: React.FC = () => {
                   value={user_name}
                   onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                  placeholder="User_Name"
+                  placeholder="Name"
                   required
                 />
               </div>
