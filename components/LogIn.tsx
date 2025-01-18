@@ -20,16 +20,17 @@ const LogIn: React.FC = () => {
     }
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const formData = {
       email: email,
       password: password,
       remember: remember,
     };
     try {
-      const request = await axios.post("/api/users/login", formData);
-      console.log(request.data.message);
+      const request = await axios.post("/api/users/login", formData, {withCredentials: true}); 
+      console.log("Log In Successful")
       // when the user logs in, he should me directed to the homepage
-      router.push("/")
+      router.push("/profile");
     } catch (error : any) {
       if (error.response) {
         console.error("Error Response: ", error.response.data);

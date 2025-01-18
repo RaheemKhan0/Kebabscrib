@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 
 // connect to the data base to check the users registered
-connectUserDataBase();
+await connectUserDataBase();
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
@@ -33,18 +33,21 @@ export async function POST(request: NextRequest) {
       email: user.email,
     };
     // create token
-    const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET, {
+    const token = jwt.sign(tokenData, process.env.TOKEN_SECRET, {
       expiresIn: "12h",
     });
 
     const response = NextResponse.json({
-      message : "Login Successful",
-      success : true
-    })
+      message: "Login Successful",
+      success: true,
+    });
     response.cookies.set("token", token, {
       httpOnly: true,
-    })
+    });
+    console.log("cookies set") 
+
     return response;
+
   } catch (error: any) {
     return NextResponse.json({
       error: error.message,

@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
   try {
     // Parse request body
     const reqBody = await request.json();
-    const {username, email, password } = reqBody;
+    const { username, email, password } = reqBody;
 
     // [Fix 1: Log request body for debugging]
     console.log(reqBody);
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     if (existingUser) {
       return NextResponse.json(
         { error: "User already exists" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     if (!username || !email || !password) {
       return NextResponse.json(
         { error: "All fields are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
         success: true,
         user: userResponse,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error: any) {
     // [Fix 9: Avoid exposing sensitive error details]
@@ -68,8 +68,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-
