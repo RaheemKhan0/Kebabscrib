@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter }  from "next/navigation";
+import toast from "react-hot-toast";
 
 const LogIn: React.FC = () => {
   const [remember, setRemember] = useState(false);
@@ -28,7 +29,7 @@ const LogIn: React.FC = () => {
     };
     try {
       const request = await axios.post("/api/users/login", formData, {withCredentials: true}); 
-      console.log("Log In Successful")
+      toast.success("Login Successfull")
       // when the user logs in, he should me directed to the homepage
       router.push("/profile");
     } catch (error : any) {

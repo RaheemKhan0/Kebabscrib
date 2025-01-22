@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const SignInForm: React.FC = () => {
   const router = useRouter(); // [Fix 1: Move useRouter to the top level]
@@ -39,14 +40,13 @@ const SignInForm: React.FC = () => {
 
     try {
       const response = await axios.post("/api/users/signup", formData);
-      console.log("Success: ", response.data);
-
+      toast.success("Registration Successful");
       // [Fix 2: Use router.push for redirection]
       router.push("/LogIn"); // Redirect to homepage
     } catch (error: any) {
       if (error.response) {
         console.error("Error Response: ", error.response.data);
-        alert(error.response.data.message || "Something went wrong.");
+        toast.error(error.response.data);
       } else if (error.request) {
         console.error("No Response: ", error.request);
         alert("No response from the server. Please try again later.");
