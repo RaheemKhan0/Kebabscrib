@@ -27,6 +27,10 @@ const kebabscribUserSchema = new mongoose.Schema({
   forgotPasswordTokenExpiry: Date,
   verifyToken: String,
   verifyTokenExpiry: Date,
+  lastlogin: {
+    type: Date,
+    default: Date.now,
+  },
 });
 const KebabscribUser =
   mongoose.models.KebabscribUser || // Check if model is already compiled

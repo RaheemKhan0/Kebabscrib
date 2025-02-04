@@ -1,41 +1,81 @@
-import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
-import "dotenv/config"; // Load environment variables from .env.local file
-import { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+import axios from "axios";
 
-type VerifyTokenResult =
-  | { decoded: JwtPayload & { _id: string } } // For valid tokens
-  | NextResponse; // For invalid tokens
-
-export default async function verifytoken(req: NextRequest): Promise<VerifyTokenResult> {
+export async function verifytoken(req: NextRequest): Promise<NextResponse> {
   const token = req.cookies.get("token")?.value;
+
   if (!token) {
+    console.error("No token found, user is not logged in.");
     return NextResponse.json(
-      { message: "Access Denied, No Token Provided" },
+      { error: "Access Denied, No Token Provided" },
       { status: 401 },
     );
   }
+
   try {
-    const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-    return { decoded };
-    // Token is valid
+    const decoded = jwt.verify(token, process.env.TOKEN_SECRET as string);
+    return NextResponse.json({ decoded }, { status: 200 });
   } catch (err: any) {
-    if (err.name === "TokenExpiredError") {
-      console.error("Token has expired:", err.message);
-      return NextResponse.json({ error: "Token has expired" }, { status: 401 });
-    } else if (err.name === "JsonWebTokenError") {
-      console.error("Invalid token:", err.message);
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
-    } else if (err.name === "NotBeforeError") {
-      console.error("Token not active yet:", err.message);
+    if (!token) {
+      console.error("No token found, user is not logged in.");
       return NextResponse.json(
-        { error: "Token not active yet" },
+        { error: "Access Denied, No Token Provided" },
         { status: 401 },
       );
-    } else {
-      console.error("Unknown error:", err.message);
+    }
+
+    try {
+      // ✅ Verify the token
+      const decoded = jwt.verify(token, process.env.TOKEN_SECRET as string);
+      return NextResponse.json({ decoded }, { status: 200 });
+    } catch (err: any) {
+      console.error("Token verification failed:", err.message);
+
+      // 🛑 CASE 2: If token is expired, try refreshing
+      if (err.name === "TokenExpiredError") {
+        try {
+          const refreshResponse = await axios.post(
+            "/api/users/refreshtoken",
+            {},
+            { withCredentials: true }, // ✅ Ensures cookies are sent
+          );
+
+          // ✅ Extract new token from response
+          const newToken = refreshResponse.data?.token;
+          if (!newToken) {
+            console.error(
+              "Refresh token request successful, but no new token received.",
+            );
+            return NextResponse.json(
+              { error: "New token not found, please log in again" },
+              { status: 401 },
+            );
+          }
+
+          // ✅ Verify the new token
+          const decoded = jwt.verify(
+            newToken,
+            process.env.TOKEN_SECRET as string,
+          );
+          return NextResponse.json({ decoded }, { status: 200 });
+        } catch (refreshError: any) {
+          console.error(
+            "Refresh Token has Expired or is Invalid:",
+            refreshError.response?.data?.error || refreshError.message,
+          );
+
+          // 🛑 CASE 3: Refresh token also expired -> User must log in again
+          return NextResponse.json(
+            { error: "Session has Expired, Please Log In again" },
+            { status: 401 },
+          );
+        }
+      }
+
+      // 🛑 CASE 4: Invalid Token / Malformed Token
       return NextResponse.json(
-        { error: "Unauthorized access" },
+        { error: "Invalid token, please log in again" },
         { status: 401 },
       );
     }
