@@ -1,15 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Dialog } from "@headlessui/react";
-import useAuth from "../utils/hooks/useAuth";
+import { AuthContext } from "../utils/context/AuthContext";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 // @ts-ignore
-import { UserIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
+import {
+  UserIcon,
+  ChevronDownIcon,
+  ShoppingCartIcon,
+} from "@heroicons/react/20/solid";
 
 const Navbar: React.FC = () => {
   const [menu, SetMenu] = useState(false);
   const [usermenu, setUserMenu] = useState(false);
-  const { user, loggedin, loading } = useAuth();
+  const auth = useContext(AuthContext);
+  const { user, loggedin, loading } = auth;
 
   if (loading) {
     return (
@@ -173,6 +178,14 @@ const Navbar: React.FC = () => {
                     </div>
                   </MenuItems>
                 </Menu>{" "}
+              </li>
+              <li>
+                <a
+                  className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+                  href="/cart"
+                >
+                  <ShoppingCartIcon className="h-6 w-6 text-KebabGold" />
+                </a>
               </li>
             </ul>
           </div>

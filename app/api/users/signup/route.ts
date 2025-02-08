@@ -11,9 +11,6 @@ export async function POST(request: NextRequest) {
     const reqBody = await request.json();
     const { username, email, password } = reqBody;
 
-    // [Fix 1: Log request body for debugging]
-    console.log(reqBody);
-
     // [Fix 2: Check if the user already exists with `await`]
     const existingUser = await KebabscribUser.findOne({ email });
     if (existingUser) {

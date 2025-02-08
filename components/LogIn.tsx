@@ -1,14 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState , useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { AuthContext } from "../utils/context/AuthContext";
 
 const LogIn: React.FC = () => {
   const [remember, setRemember] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const router = useRouter();
+  const auth = useContext(AuthContext);
+
+  const { user, loggedin, loading, checkAuth } = auth;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = e.target;
@@ -32,6 +36,7 @@ const LogIn: React.FC = () => {
         withCredentials: true,
       });
       if (request.status == 200) {
+        await checkAuth();
         toast.success("Login Successfull");
         router.push("/profile");
       } else {
