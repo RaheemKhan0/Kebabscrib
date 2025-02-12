@@ -15,7 +15,7 @@ const SignInForm: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
-    
+
     if (name === "email") {
       setEmail(value);
     } else if (name === "password") {
@@ -44,15 +44,21 @@ const SignInForm: React.FC = () => {
       // [Fix 2: Use router.push for redirection]
       router.push("/LogIn"); // Redirect to homepage
     } catch (error: any) {
-      if (error.response) {
-        console.error("Error Response: ", error.response.data);
-        toast.error(error.response.data);
-      } else if (error.request) {
-        console.error("No Response: ", error.request);
-        alert("No response from the server. Please try again later.");
+      if (
+        error.response.status == 400 &&
+        error.response?.data?.error == "User already exists"
+      ) {
+        console.log("Error Response: ", error.response?.data?.error);
+        toast.error("This email has already been registered");
+      } else if (
+        error.response.status == 400 &&
+        error.response?.data?.error == "All fields are required"
+      ) {
+        console.log("Please fill all Fields ");
+        toast.error("Please fill all the fields");
       } else {
-        console.error("Error: ", error.message);
-        alert("An unexpected error occurred. Please try again.");
+        console.log("Error: ", error.message);
+        toast.error("Apologies, we are having some technical difficulties");
       }
     }
   };

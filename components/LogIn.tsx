@@ -1,14 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState , useContext } from "react";
 import axios from "axios";
-import { useRouter }  from "next/navigation";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { AuthContext } from "../utils/context/AuthContext";
 
 const LogIn: React.FC = () => {
   const [remember, setRemember] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const router = useRouter();
+  const auth = useContext(AuthContext);
+
+  const { user, loggedin, loading, checkAuth } = auth;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = e.target;
@@ -28,11 +32,17 @@ const LogIn: React.FC = () => {
       remember: remember,
     };
     try {
-      const request = await axios.post("/api/users/login", formData, {withCredentials: true}); 
-      toast.success("Login Successfull")
-      // when the user logs in, he should me directed to the homepage
-      router.push("/profile");
-    } catch (error : any) {
+      const request = await axios.post("/api/users/login", formData, {
+        withCredentials: true,
+      });
+      if (request.status == 200) {
+        await checkAuth();
+        toast.success("Login Successfull");
+        router.push("/profile");
+      } else {
+        toast.error("Login Failed");
+      }
+    } catch (error: any) {
       if (error.response) {
         console.error("Error Response: ", error.response.data);
         alert(error.response.data.message || "Something went wrong.");

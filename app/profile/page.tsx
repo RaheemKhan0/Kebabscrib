@@ -1,24 +1,38 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { AuthContext, useAuth } from "../../utils/context/AuthContext";
 
 const Page = () => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [loadingState, setLoadingState] = useState(false); // Rename to avoid conflict
+  const auth = useContext(AuthContext);
+
+  if (!auth) {
+    return <p>Loading...</p>; // Handle case where context is not available
+  }
+
+  const { user, loggedin, loading, checkAuth } = useAuth(); // Rename loading
 
   const logout = async () => {
-    setLoading(true);
+    setLoadingState(true);
     try {
-      await axios.get("/api/users/logout", {withCredentials : false}); 
-      toast.success("Logout Successful")
+      await axios.get("/api/users/logout", { withCredentials: true });
+
+      // Wait for authentication state to update
+      await checkAuth();
+
+      toast.success("Logout Successful");
+
+      // Redirect to home page
       router.push("/");
-    } catch (error : any) {
+    } catch (error: any) {
       console.error("Logout error:", error.response?.data || error.message);
       toast.error("Failed to log out. Please try again.");
     } finally {
-      setLoading(false);
+      setLoadingState(false);
     }
   };
 
@@ -27,12 +41,12 @@ const Page = () => {
       <h1 className="text-KebabGold text-5xl text-center">Profile</h1>
       <button
         onClick={logout}
-        disabled={loading}
+        disabled={loadingState} // Use the renamed loading state
         className={`p-4 bg-KebabGreen text-lg text-KebabGold font-bold rounded flex items-center ${
-          loading ? "opacity-50 cursor-not-allowed" : ""
+          loadingState ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
-        {loading ? "Logging out..." : "Logout"}
+        {loadingState ? "Logging out..." : "Logout"}
       </button>
     </>
   );

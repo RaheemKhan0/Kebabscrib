@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import MenuList from "./MenuList";
 
 // Define the type for the state object with correct keys

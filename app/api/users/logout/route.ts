@@ -16,6 +16,13 @@ export async function GET() {
       expires: new Date(0), // Expire immediately
     });
 
+    response.cookies.set("refreshtoken", "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      expires: new Date(0), // Expire immediately
+    });
+
     return response;
   } catch (error : any) {
     return NextResponse.json(
