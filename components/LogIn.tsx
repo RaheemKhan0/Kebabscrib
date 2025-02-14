@@ -1,5 +1,5 @@
 "use client";
-import React, { useState , useContext } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -33,7 +33,7 @@ const LogIn: React.FC = () => {
     };
     try {
       const request = await axios.post("/api/users/login", formData, {
-        withCredentials: true,
+        withCredentials: true, 
       });
       if (request.status == 200) {
         await checkAuth();
@@ -43,8 +43,8 @@ const LogIn: React.FC = () => {
         toast.error("Login Failed");
       }
     } catch (error: any) {
-      if (error.response) {
-        console.error("Error Response: ", error.response.data);
+      if (error.response?.data?.status == 400) {
+        toast.error("Wrong Password");
         alert(error.response.data.message || "Something went wrong.");
       } else if (error.request) {
         console.error("No Response: ", error.request);

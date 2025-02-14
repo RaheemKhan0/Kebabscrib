@@ -1,11 +1,10 @@
-import mongoose from "mongoose";
-//import { Burger } from "./classes/Burger";
+import mongoose, { Schema, models } from "mongoose";
 
 const menuItemsSchema = new mongoose.Schema({
   item_name: { type: String, required: true },
   item_description: { type: String, required: true },
   item_price: {
-    single: { type: Number, required: true },
+    single: { type: Number, required: false },
     combo: { type: Number, required: false },
   },
   item_category: { type: String, required: true },
@@ -15,6 +14,5 @@ const menuItemsSchema = new mongoose.Schema({
   item_img_url: { type: String, required: false },
 });
 
-const MenuItem = mongoose.model("MenuItem", menuItemsSchema);
+const MenuItem = mongoose.models.MenuItem || mongoose.model("MenuItem", menuItemsSchema)
 export default MenuItem;
-

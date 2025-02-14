@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifytoken } from "../../../../utils/middleware/verifytoken";
-import connectUserDataBase from "../../../../lib/connectUserDataBase";
 import KebabscribUser from "../../../../model/Kebabscrib_User";
+import connectMongodb from "../../../../lib/mongodb";
 
 export async function GET(req: NextRequest) {
   try {
+    await connectMongodb();
     const result = await verifytoken(req);
 
     if (!result.ok) {
@@ -13,7 +14,7 @@ export async function GET(req: NextRequest) {
 
     const data = await result.json(); // Await the JSON response
     const { decoded, error } = data;
-   console.log("decoded : ", decoded) 
+    console.log("decoded : ", decoded);
 
     if (!decoded || !decoded.email) {
       return NextResponse.json(
@@ -22,7 +23,6 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    await connectUserDataBase();
     const protected_user = await KebabscribUser.findOne({
       email: decoded.email,
     });

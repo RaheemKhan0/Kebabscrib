@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import MenuItem from "./MenuItem";
+import axios from "axios";
+import { normalize } from "path";
 
 interface MenuItem {
   item_name: string;
@@ -28,11 +30,18 @@ const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
-        const res = await fetch("/api/menu");
-        const data: MenuItem[] = await res.json();
-
-        setMenuItems(data);
-        setLoading(false);
+        const storedItems = localStorage.getItem("MenuItems");
+        if (!storedItems) {
+          const res = await fetch("/api/fetchmenuitems", {cache : "no-store"});
+          const data: MenuItem[] = await res.json();
+          localStorage.setItem("MenuItems", JSON.stringify(data));
+          console.log("MenuItems : ", data);
+          setMenuItems(data);
+          setLoading(false);
+        } else {
+          setMenuItems(JSON.parse(localStorage.getItem("MenuItems")));
+          setLoading(false);
+        }
       } catch {
         console.error("Failed to fetch menu items (MenuList.tsx):");
         setLoading(false);
@@ -60,9 +69,7 @@ const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
 
 export default MenuList;
 
-
-
-  /*  {...item} – Spread Operator
+/*  {...item} – Spread Operator
 This part is crucial but can be confusing at first. Let's break it down:
 
 tsx
@@ -74,30 +81,29 @@ If item looks like this:
 ts
 Copy code
 const item = {
-  item_name: "Kebab",
-  item_description: "Delicious grilled kebab",
-  item_price: { single: 10, combo: 15 },
-  item_category: "Wraps",
+item_name: "Kebab",
+item_description: "Delicious grilled kebab",
+item_price: { single: 10, combo: 15 },
+item_category: "Wraps",
 };
 The spread operator will translate to:
 tsx
 Copy code
 <MenuItem
-  item_name="Kebab"
-  item_description="Delicious grilled kebab"
-  item_price={{ single: 10, combo: 15 }}
-  item_category="Wraps"
+item_name="Kebab"
+item_description="Delicious grilled kebab"
+item_price={{ single: 10, combo: 15 }}
+item_category="Wraps"
 />
 This means every property in the object is passed directly as a prop to the MenuItem component.
 It reduces the need to manually write each prop like this:
 tsx
 Copy code
 <MenuItem
-  item_name={item.item_name}
-  item_description={item.item_description}
-  item_price={item.item_price}
-  item_category={item.item_category}
+item_name={item.item_name}
+item_description={item.item_description}
+item_price={item.item_price}
+item_category={item.item_category}
 />
 Less boilerplate, more efficient.
-  */
-
+*/

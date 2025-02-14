@@ -3,18 +3,33 @@ import React, { useState, useContext } from "react";
 import { Dialog } from "@headlessui/react";
 import { AuthContext } from "../utils/context/AuthContext";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 // @ts-ignore
 import {
   UserIcon,
   ChevronDownIcon,
   ShoppingCartIcon,
 } from "@heroicons/react/20/solid";
+import toast from "react-hot-toast";
 
 const Navbar: React.FC = () => {
   const [menu, SetMenu] = useState(false);
   const [usermenu, setUserMenu] = useState(false);
+
   const auth = useContext(AuthContext);
-  const { user, loggedin, loading } = auth;
+  const { user, loggedin, loading, checkAuth } = auth;
+  const router = useRouter();
+  const logout = async () => {
+    try {
+      await axios.get("/api/users/logout");
+      await checkAuth();
+      router.push("/");
+      toast.success("Logout Successful!");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (loading) {
     return (
@@ -128,53 +143,82 @@ const Navbar: React.FC = () => {
                 {/* User Menu only shows when the user is Logged In */}
                 <Menu
                   as="div"
-                  className={`relative inline-block text-left ${loggedin ? "" : "hidden"}`}
+                  className={`relative inline-block z-50 text-left ${loggedin ? "" : "hidden"}`}
                 >
                   <div>
                     <MenuButton className="inline-flex items-center justify-center gap-x-1.5 rounded-full bg-KebabGreen p-2 ring-2 ring-KebabGold shadow-lg hover:ring-KebabGold/80 hover:bg-KebabGreen/90 transition duration-300">
                       <UserIcon className="h-6 w-6 text-KebabGold" />
-                    </MenuButton>{" "}
+                    </MenuButton>
                   </div>
 
                   <MenuItems
                     transition
-                    className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                    className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 transition focus:outline-none data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
                   >
                     <div className="py-1">
+                      {/* Navigate to Account Settings */}
                       <MenuItem>
-                        <a
-                          href="#"
-                          className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                        >
-                          Account settings
-                        </a>
-                      </MenuItem>
-                      <MenuItem>
-                        <a
-                          href="#"
-                          className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                        >
-                          Support
-                        </a>
-                      </MenuItem>
-                      <MenuItem>
-                        <a
-                          href="#"
-                          className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                        >
-                          License
-                        </a>
-                      </MenuItem>
-                      <form action="#" method="POST">
-                        <MenuItem>
+                        {({ active }) => (
                           <button
-                            type="submit"
-                            className="block w-full px-4 py-2 text-left text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+                            onClick={() => router.push("/profile")}
+                            className={`block px-4 py-2 text-sm w-full text-left ${
+                              active
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-700"
+                            }`}
+                          >
+                            Account Settings
+                          </button>
+                        )}
+                      </MenuItem>
+
+                      {/* Navigate to Support Page */}
+                      <MenuItem>
+                        {({ active }) => (
+                          <button
+                            onClick={() => router.push("/support")}
+                            className={`block px-4 py-2 text-sm w-full text-left ${
+                              active
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-700"
+                            }`}
+                          >
+                            Support
+                          </button>
+                        )}
+                      </MenuItem>
+
+                      {/* License Page */}
+                      <MenuItem>
+                        {({ active }) => (
+                          <button
+                            onClick={() => router.push("/license")}
+                            className={`block px-4 py-2 text-sm w-full text-left ${
+                              active
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-700"
+                            }`}
+                          >
+                            License
+                          </button>
+                        )}
+                      </MenuItem>
+
+                      {/* Logout Button */}
+                      <MenuItem>
+                        {({ active }) => (
+                          <button
+                            onClick={logout}
+                            className={`block px-4 py-2 text-sm w-full text-left ${
+                              active
+                                ? "bg-red-100 text-red-700"
+                                : "text-red-600"
+                            }`}
                           >
                             Sign out
                           </button>
-                        </MenuItem>
-                      </form>
+                        )}
+                      </MenuItem>
                     </div>
                   </MenuItems>
                 </Menu>{" "}

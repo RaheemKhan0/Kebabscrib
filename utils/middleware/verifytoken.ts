@@ -50,7 +50,7 @@ export async function verifytoken(req: NextRequest): Promise<NextResponse> {
         );
         return NextResponse.json({ decoded }, { status: 200 });
       } catch (refreshError: any) {
-        console.error(
+        console.log(
           "Refresh Token has Expired or is Invalid:",
           refreshError.response?.data?.error || refreshError.message,
         );
