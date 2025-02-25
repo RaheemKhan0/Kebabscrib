@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar";
 import "../public/styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "../utils/context/AuthContext";
+import { CartProvider } from "../utils/context/ShoppingCartContext";
+import "../public/styles/globals.css";
 
 export const metadata = {
   title: "Kebabscrib",
@@ -17,12 +19,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="grid grid-rows-[auto,1fr,auto] min-h-screen">
         <AuthProvider>
-          <Toaster />
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+          <CartProvider>
+            <Toaster />
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>

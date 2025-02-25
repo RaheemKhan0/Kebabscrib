@@ -14,7 +14,6 @@ export async function GET(req: NextRequest) {
 
     const data = await result.json(); // Await the JSON response
     const { decoded, error } = data;
-    console.log("decoded : ", decoded);
 
     if (!decoded || !decoded.email) {
       return NextResponse.json(

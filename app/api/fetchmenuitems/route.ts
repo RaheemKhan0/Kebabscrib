@@ -11,12 +11,13 @@ export async function GET(req: NextRequest) {
 
   const testItem = await MenuItem.findOne();
   console.log("🛠️ Sample Item: ", testItem);
+  
 
   try {
     const menuItems = await MenuItem.find({});
 
     console.log("✅ Items Fetched - RABIE");
-    console.table(menuItems);
+ 
 
     return NextResponse.json(menuItems, { status: 200 });
   } catch (error: any) {

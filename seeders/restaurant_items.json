@@ -1,602 +1,857 @@
 [
   {
-    "item_name": "Cheese Burger",
-    "item_description": "Steak, cheddar, onion, lettuce, tomato and choice of your sauce",
+    "item_name": "Veggie Special",
+    "item_description": "A crispy falafel masterclass for those who do not want to indulge in meat",
     "item_price": {
-      "single": 29,
-      "combo": 36
+      "single": 35.25,
+      "meal": 45.25
     },
-    "item_category": "Burger",
-    "item_img_url": ""
+    "item_category": "Des Sandwiches"
   },
   {
-    "item_name": "Double Cheese",
-    "item_description": "Steak, cheddar, lettuce, tomato, onion, sauce",
+    "item_name": "Classic Poulet",
+    "item_description": "Carefully curated french chicken kebab",
     "item_price": {
-      "single": 34,
-      "combo": 41
+      "single": 46.25,
+      "meal": 56.25
     },
-    "item_category": "Burger",
-    "item_img_url": ""
+    "item_category": "Des Sandwiches"
   },
   {
-    "item_name": "Toast Beef",
-    "item_description": "Beef or chicken, cheddar, lettuce, tomato, onion, sauce",
+    "item_name": "Classic Veal",
+    "item_description": "Perfectly crafted tender french grilled veal kebab",
     "item_price": {
-      "single": 33,
-      "combo": 40
+      "single": 46.25,
+      "meal": 56.25
     },
-    "item_category": "Burger",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Double Toast Hummer",
-    "item_description": "Beef or chicken, cheddar, lettuce, tomato, onion, sauce",
-    "item_price": {
-      "single": 38,
-      "combo": 45
-    },
-    "item_category": "Burger",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Four",
-    "item_description": "Kebab, mozzarella, lettuce, tomato, onion, sauce",
-    "item_price": {
-      "single": 40,
-      "combo": 47
-    },
-    "item_category": "Burger",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Croque Monsieur",
-    "item_description": "Emmental, cream, turkey ham, cheddar",
-    "item_price": {
-      "single": 23,
-      "combo": 30
-    },
-    "item_category": "Burger",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Menu Enfant",
-    "item_description": "Burger/Nuggets, fries, juice, chocolate",
-    "item_price": {
-      "single": 29,
-      "combo": null
-    },
-    "item_category": "Burger",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Ketchup",
-    "item_description": "Sauce",
-    "item_price": {
-      "single": 1,
-      "combo": null
-    },
-    "item_category": "Sauce",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Mayonnaise",
-    "item_description": "Sauce",
-    "item_price": {
-      "single": 1,
-      "combo": null
-    },
-    "item_category": "Sauce",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Mustard",
-    "item_description": "Sauce",
-    "item_price": {
-      "single": 2,
-      "combo": null
-    },
-    "item_category": "Sauce",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "BBQ",
-    "item_description": "Sauce",
-    "item_price": {
-      "single": 1,
-      "combo": null
-    },
-    "item_category": "Sauce",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Andalouse",
-    "item_description": "Sauce",
-    "item_price": {
-      "single": 2,
-      "combo": null
-    },
-    "item_category": "Sauce",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Crib Sauce",
-    "item_description": "Sauce",
-    "item_price": {
-      "single": 3,
-      "combo": null
-    },
-    "item_category": "Sauce",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Nachos",
-    "item_description": "Sauce",
-    "item_price": {
-      "single": 3,
-      "combo": null
-    },
-    "item_category": "Sauce",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Algérienne",
-    "item_description": "Sauce",
-    "item_price": {
-      "single": 3,
-      "combo": null
-    },
-    "item_category": "Sauce",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Harissa",
-    "item_description": "Sauce",
-    "item_price": {
-      "single": 1,
-      "combo": null
-    },
-    "item_category": "Sauce",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Samourai",
-    "item_description": "Sauce",
-    "item_price": {
-      "single": 1,
-      "combo": null
-    },
-    "item_category": "Sauce",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Biggy Sauce",
-    "item_description": "Sauce",
-    "item_price": {
-      "single": 3,
-      "combo": null
-    },
-    "item_category": "Sauce",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Cheese Sauce",
-    "item_description": "Sauce",
-    "item_price": {
-      "single": 3,
-      "combo": null
-    },
-    "item_category": "Sauce",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Fries",
-    "item_description": "Sides",
-    "item_price": {
-      "single": 12,
-      "combo": null
-    },
-    "item_category": "Sides",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Chicken Nuggets",
-    "item_description": "Sides",
-    "item_price": {
-      "single": 8,
-      "combo": null
-    },
-    "item_category": "Sides",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Chicken Tenders",
-    "item_description": "Sides",
-    "item_price": {
-      "single": 8,
-      "combo": null
-    },
-    "item_category": "Sides",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Bread",
-    "item_description": "Sides",
-    "item_price": {
-      "single": 8,
-      "combo": null
-    },
-    "item_category": "Sides",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Onion",
-    "item_description": "Extra Vegetables",
-    "item_price": {
-      "single": 2,
-      "combo": null
-    },
-    "item_category": "Vegetables",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Lettuce",
-    "item_description": "Extra Vegetables",
-    "item_price": {
-      "single": 2,
-      "combo": null
-    },
-    "item_category": "Vegetables",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Tomato",
-    "item_description": "Extra Vegetables",
-    "item_price": {
-      "single": 2,
-      "combo": null
-    },
-    "item_category": "Vegetables",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Mozarella",
-    "item_description": "Extra Cheese",
-    "item_price": {
-      "single": 3,
-      "combo": null
-    },
-    "item_category": "Cheese",
-    "item_img_url": ""
+    "item_category": "Des Sandwiches"
   },
   {
     "item_name": "Boursin",
-    "item_description": "Extra Cheese",
+    "item_description": "Juicy chicken cubes cooked in a rich, creamy boursin and cheddar cheese sauce",
     "item_price": {
-      "single": 5,
-      "combo": null
+      "single": 46.25,
+      "meal": 56.25
     },
-    "item_category": "Cheese",
-    "item_img_url": ""
+    "item_category": "Des Sandwiches"
   },
   {
-    "item_name": "Vache Qui Rit",
-    "item_description": "Extra Cheese",
+    "item_name": "Beef Duo",
+    "item_description": "A double delight! Two juicy beef patties layered with melted cheddar",
     "item_price": {
-      "single": 5,
-      "combo": null
+      "single": 46.25,
+      "meal": 56.25
     },
-    "item_category": "Cheese",
-    "item_img_url": ""
+    "item_category": "Des Sandwiches"
   },
   {
-    "item_name": "Cheddar",
-    "item_description": "Extra Cheese",
+    "item_name": "Four Veal",
+    "item_description": "Melt-in-your-mouth veal kebab, topped with gooey mozzarella in a baguette",
     "item_price": {
-      "single": 3,
-      "combo": null
+      "single": 46.25,
+      "meal": 56.25
     },
-    "item_category": "Cheese",
-    "item_img_url": ""
+    "item_category": "Des Sandwiches"
   },
   {
-    "item_name": "Veal Kebab",
-    "item_description": "Extra Meats",
+    "item_name": "Four Chicken",
+    "item_description": "A comforting classic\u2014juicy chicken kebab with melted mozzarella in a baguette",
     "item_price": {
-      "single": 8,
-      "combo": null
+      "single": 46.25,
+      "meal": 56.25
     },
-    "item_category": "Meat",
-    "item_img_url": ""
+    "item_category": "Des Sandwiches"
   },
   {
-    "item_name": "Beef Steak",
-    "item_description": "Extra Meats",
+    "item_name": "Mix Kebab",
+    "item_description": "The best of both worlds! Veal and chicken in a perfect marriage",
     "item_price": {
-      "single": 8,
-      "combo": null
+      "single": 46.25,
+      "meal": 56.25
     },
-    "item_category": "Meat",
-    "item_img_url": ""
+    "item_category": "Des Sandwiches"
   },
   {
-    "item_name": "Chicken Tenders",
-    "item_description": "Extra Meats",
+    "item_name": "Gourmet",
+    "item_description": "Indulge in a creamy perfection\u2014chicken cooked with mushrooms and cheddar",
     "item_price": {
-      "single": 8,
-      "combo": null
+      "single": 46.5,
+      "meal": 56.25
     },
-    "item_category": "Meat",
-    "item_img_url": ""
+    "item_category": "Des Sandwiches"
   },
   {
-    "item_name": "Chicken Nuggets",
-    "item_description": "Extra Meats",
+    "item_name": "Poulet Fromage",
+    "item_description": "Grilled chicken breast meets the perfect trio\u2014savory turkey ham, an egg, and gooey melted cheddar",
     "item_price": {
-      "single": 8,
-      "combo": null
+      "single": 48.25,
+      "meal": 58.25
     },
-    "item_category": "Meat",
-    "item_img_url": ""
+    "item_category": "Des Sandwiches"
   },
   {
-    "item_name": "Chicken Breast",
-    "item_description": "Extra Meats",
+    "item_name": "Beef Trio",
+    "item_description": "A true meat lover\u2019s feast\u2014three premium beef patties stacked with turkey ham, egg, and cheddar",
     "item_price": {
-      "single": 8,
-      "combo": null
+      "single": 49.25,
+      "meal": 59.25
     },
-    "item_category": "Meat",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Lamb Merguez",
-    "item_description": "Extra Meats",
-    "item_price": {
-      "single": 8,
-      "combo": null
-    },
-    "item_category": "Meat",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Turkey Ham",
-    "item_description": "Extra Meats",
-    "item_price": {
-      "single": 8,
-      "combo": null
-    },
-    "item_category": "Meat",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Falafel",
-    "item_description": "Extra Meats",
-    "item_price": {
-      "single": 8,
-      "combo": null
-    },
-    "item_category": "Vegetarian",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Egg",
-    "item_description": "Extra Meats",
-    "item_price": {
-      "single": 8,
-      "combo": null
-    },
-    "item_category": "Extra",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Campione",
-    "item_description": "Sauce tomate, double fromage, viande hachée, oignons, oeuf",
-    "item_price": {
-      "single": 49,
-      "combo": null
-    },
-    "item_category": "Pizza",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Oriental",
-    "item_description": "Sauce tomate, double fromage, merguez, champignons, oeuf",
-    "item_price": {
-      "single": 49,
-      "combo": null
-    },
-    "item_category": "Pizza",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Tunisienne",
-    "item_description": "Sauce tomate, thon, double fromage, olives, poivrons, oignons rouges, oeuf",
-    "item_price": {
-      "single": 49,
-      "combo": null
-    },
-    "item_category": "Pizza",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Végétarienne",
-    "item_description": "Sauce tomate, double fromage, champignons, poivrons, oignons, olives",
-    "item_price": {
-      "single": 49,
-      "combo": null
-    },
-    "item_category": "Pizza",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Tandoori",
-    "item_description": "Sauce tomate, double fromage, tranche de poulet tandoori, oignons, pommes de terre",
-    "item_price": {
-      "single": 49,
-      "combo": null
-    },
-    "item_category": "Pizza",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Savoyarde",
-    "item_description": "Crème fraîche, double fromage, jambon, pommes de terre",
-    "item_price": {
-      "single": 49,
-      "combo": null
-    },
-    "item_category": "Pizza",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Chèvre Miel",
-    "item_description": "Crème fraîche, double fromage, fromage de chèvre, miel",
-    "item_price": {
-      "single": 49,
-      "combo": null
-    },
-    "item_category": "Pizza",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Algérienne",
-    "item_description": "Crème fraîche, sauce algérienne, double fromage, chicken curry, poivrons, oignons",
-    "item_price": {
-      "single": 49,
-      "combo": null
-    },
-    "item_category": "Pizza",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Kebab",
-    "item_description": "Crème fraîche, double fromage, viande de kebab, poivrons, oignons, cheddar",
-    "item_price": {
-      "single": 49,
-      "combo": null
-    },
-    "item_category": "Pizza",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Curry",
-    "item_description": "Crème fraîche, double fromage, chicken curry, oignons, pommes de terre",
-    "item_price": {
-      "single": 49,
-      "combo": null
-    },
-    "item_category": "Pizza",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Suprême",
-    "item_description": "Chicken breast, egg, bacon, cheddar, lettuce, tomato, onion, sauce",
-    "item_price": {
-      "single": 42,
-      "combo": 49
-    },
-    "item_category": "Sandwich",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Double Steak",
-    "item_description": "2 steaks, cheddar, lettuce, tomato, onion, sauce",
-    "item_price": {
-      "single": 38,
-      "combo": 45
-    },
-    "item_category": "Sandwich",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Boursin",
-    "item_description": "Chicken boursin, cheese, lettuce, tomato, onion, sauce",
-    "item_price": {
-      "single": 40,
-      "combo": 47
-    },
-    "item_category": "Sandwich",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Curry",
-    "item_description": "Chicken curry, lettuce, tomato, onion, sauce",
-    "item_price": {
-      "single": 40,
-      "combo": 47
-    },
-    "item_category": "Sandwich",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Kebab",
-    "item_description": "Kebab, lettuce, tomato, onion, sauce",
-    "item_price": {
-      "single": 40,
-      "combo": 47
-    },
-    "item_category": "Sandwich",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Tandoori",
-    "item_description": "Chicken Tandoori, lettuce, tomato, onion, sauce",
-    "item_price": {
-      "single": 40,
-      "combo": 47
-    },
-    "item_category": "Sandwich",
-    "item_img_url": ""
-  },
-  {
-    "item_name": "Triple Steak",
-    "item_description": "3 steaks, egg, bacon, cheddar, lettuce, tomato, onion, sauce",
-    "item_price": {
-      "single": 42,
-      "combo": 49
-    },
-    "item_category": "Sandwich",
-    "item_img_url": ""
+    "item_category": "Des Sandwiches"
   },
   {
     "item_name": "Merguez",
-    "item_description": "Merguez, lettuce, tomato, onion, sauce",
+    "item_description": "Bold and flavorful lamb sausage sandwich",
     "item_price": {
-      "single": 45,
-      "combo": 51
+      "single": 49.25,
+      "meal": 59.25
     },
-    "item_category": "Sandwich",
-    "item_img_url": ""
+    "item_category": "Des Sandwiches"
   },
   {
-    "item_name": "Chef",
-    "item_description": "Chicken, mushroom, cheddar, lettuce, tomato, onion, sauce, cream",
+    "item_name": "Medium Taco",
+    "item_description": "Comes with 1 meat, enough if you are hungry",
     "item_price": {
-      "single": 40,
-      "combo": 47
+      "single": 44.5,
+      "meal": 54.5
     },
-    "item_category": "Sandwich",
-    "item_img_url": ""
+    "item_category": "First - Select your Size"
   },
   {
-    "item_name": "Skinny Wrap",
-    "item_description": "Tortilla bread, falafel, onion, lettuce, tomato, and sauce of your choice",
+    "item_name": "Large Taco",
+    "item_description": "Comes with 2 meats, enough if you are verrrry hungry",
     "item_price": {
-      "single": 31,
-      "combo": 41
+      "single": 62.5,
+      "meal": 72.5
     },
-    "item_category": "Sandwich",
-    "item_img_url": ""
+    "item_category": "First - Select your Size"
   },
   {
-    "item_name": "Greek",
-    "item_description": "Romaine lettuce, diced tomato, corn, black olives, waffle pita, feta cheese, algérienne sauce, cucumber",
+    "item_name": "Tenders",
+    "item_description": "",
     "item_price": {
-      "single": 36,
-      "combo": null
+      "single": null,
+      "meal": null
     },
-    "item_category": "Salad",
-    "item_img_url": ""
+    "item_category": "Second - Choose your Meat"
+  },
+  {
+    "item_name": "Nuggets",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Second - Choose your Meat"
+  },
+  {
+    "item_name": "Veal Kebab",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Second - Choose your Meat"
+  },
+  {
+    "item_name": "Chicken Kebab",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Second - Choose your Meat"
+  },
+  {
+    "item_name": "Chicken Breast",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Second - Choose your Meat"
+  },
+  {
+    "item_name": "Merguez",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Second - Choose your Meat"
+  },
+  {
+    "item_name": "Ground Beef",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Second - Choose your Meat"
+  },
+  {
+    "item_name": "Falafel",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Second - Choose your Meat"
+  },
+  {
+    "item_name": "Turkey Ham",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Second - Choose your Meat"
+  },
+  {
+    "item_name": "Mayo",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Third - Choose your Sauce"
+  },
+  {
+    "item_name": "BBQ",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Third - Choose your Sauce"
+  },
+  {
+    "item_name": "Harissa",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Third - Choose your Sauce"
+  },
+  {
+    "item_name": "Ketchup",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Third - Choose your Sauce"
+  },
+  {
+    "item_name": "Mustard",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Third - Choose your Sauce"
+  },
+  {
+    "item_name": "Hot Sauce",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Third - Choose your Sauce"
+  },
+  {
+    "item_name": "Algerienne",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Third - Choose your Sauce"
+  },
+  {
+    "item_name": "Sauce Blanche",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Third - Choose your Sauce"
+  },
+  {
+    "item_name": "Andalouse",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Third - Choose your Sauce"
+  },
+  {
+    "item_name": "Magic Onion",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Third - Choose your Sauce"
+  },
+  {
+    "item_name": "Samourai",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Third - Choose your Sauce"
+  },
+  {
+    "item_name": "Biggy",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Third - Choose your Sauce"
+  },
+  {
+    "item_name": "Nacho Sauce",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Third - Choose your Sauce"
+  },
+  {
+    "item_name": "Tenders",
+    "item_description": "Crispy, golden and juicy, chicken coated with a light batter. Parfait!",
+    "item_price": {
+      "single": 12.0,
+      "meal": null
+    },
+    "item_category": "Sides"
+  },
+  {
+    "item_name": "Nuggets",
+    "item_description": "Bite-sized, crunchy and packed with flavor. A petite indulgence for any craving!",
+    "item_price": {
+      "single": 12.0,
+      "meal": null
+    },
+    "item_category": "Sides"
+  },
+  {
+    "item_name": "Onion Rings",
+    "item_description": "Light and crunchy oniony delights. Might damage your breathe ;D",
+    "item_price": {
+      "single": 12.0,
+      "meal": null
+    },
+    "item_category": "Sides"
+  },
+  {
+    "item_name": "Mozzarella Sticks",
+    "item_description": "Ooey gooey fried cheesy goodness with marinara sauce",
+    "item_price": {
+      "single": 15.5,
+      "meal": null
+    },
+    "item_category": "Sides"
+  },
+  {
+    "item_name": "Greek Salad",
+    "item_description": "Fresh, crisp veggies with feta and a zesty vinaigrette",
+    "item_price": {
+      "single": 20.5,
+      "meal": null
+    },
+    "item_category": "Sides"
+  },
+  {
+    "item_name": "Croque Monsieur",
+    "item_description": "Toasted bread, a hint of mustard, smoky turkey ham and melted cheese, topped with creamy b\u00e9chamel.",
+    "item_price": {
+      "single": 27.5,
+      "meal": null
+    },
+    "item_category": "Sides"
+  },
+  {
+    "item_name": "Regular Frites",
+    "item_description": "Crispy and golden fried to perfection!",
+    "item_price": {
+      "single": 12.0,
+      "meal": null
+    },
+    "item_category": "Frites"
+  },
+  {
+    "item_name": "Large Frites",
+    "item_description": "Crispy and golden fried to perfection but bigger",
+    "item_price": {
+      "single": 18.0,
+      "meal": null
+    },
+    "item_category": "Frites"
+  },
+  {
+    "item_name": "Cheese Fries",
+    "item_description": "French fries with a cheesy sauce",
+    "item_price": {
+      "single": 22.0,
+      "meal": null
+    },
+    "item_category": "Frites"
+  },
+  {
+    "item_name": "Cola",
+    "item_description": "",
+    "item_price": {
+      "single": 8.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Cola Zero",
+    "item_description": "",
+    "item_price": {
+      "single": 8.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Sprite",
+    "item_description": "",
+    "item_price": {
+      "single": 8.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Sprite Zero",
+    "item_description": "",
+    "item_price": {
+      "single": 8.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Fanta Orange",
+    "item_description": "",
+    "item_price": {
+      "single": 8.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Fanta Strawberry",
+    "item_description": "Others",
+    "item_price": {
+      "single": 8.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Lipton (Lemon, peach, lemon zero, peach zero or red fruits)",
+    "item_description": "",
+    "item_price": {
+      "single": 8.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Capri Sun (Orange, Mango or Strawberry)",
+    "item_description": "Special",
+    "item_price": {
+      "single": 8.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Cola (Vanilla or Cherry)",
+    "item_description": "",
+    "item_price": {
+      "single": 15.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Calypso (Kiwi, peach or ocean blue)",
+    "item_description": "",
+    "item_price": {
+      "single": 20.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Red Bull",
+    "item_description": "",
+    "item_price": {
+      "single": 20.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Orangina",
+    "item_description": "",
+    "item_price": {
+      "single": 20.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Boga",
+    "item_description": "",
+    "item_price": {
+      "single": 20.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Oasis",
+    "item_description": "",
+    "item_price": {
+      "single": 20.0,
+      "meal": null
+    },
+    "item_category": "Soft Drinks"
+  },
+  {
+    "item_name": "Salad",
+    "item_description": "",
+    "item_price": {
+      "single": 3.0,
+      "meal": null
+    },
+    "item_category": "Vegetables & Others"
+  },
+  {
+    "item_name": "Tomato",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Vegetables & Others"
+  },
+  {
+    "item_name": "Egg",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Vegetables & Others"
+  },
+  {
+    "item_name": "Onion",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Vegetables & Others"
+  },
+  {
+    "item_name": "Cucumber",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Vegetables & Others"
+  },
+  {
+    "item_name": "Jalapeno",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Vegetables & Others"
+  },
+  {
+    "item_name": "Olives",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Vegetables & Others"
+  },
+  {
+    "item_name": "Bell Peppers",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Vegetables & Others"
+  },
+  {
+    "item_name": "Mayo",
+    "item_description": "Smooth, creamy, and the perfect classic dip for any bite",
+    "item_price": {
+      "single": 4.0,
+      "meal": null
+    },
+    "item_category": "Sauces"
+  },
+  {
+    "item_name": "BBQ",
+    "item_description": "Smoky, sweet, and tangy\u2014your go-to for a bold flavor kick",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Sauces"
+  },
+  {
+    "item_name": "Harissa",
+    "item_description": "A fiery North African chili paste for those who love a spicy twist",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Sauces"
+  },
+  {
+    "item_name": "Ketchup",
+    "item_description": "A timeless favorite\u2014rich, tangy, and always satisfying.",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Sauces"
+  },
+  {
+    "item_name": "Mustard",
+    "item_description": "Sharp and slightly tangy, adding a French bistro touch to your meal.",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Sauces"
+  },
+  {
+    "item_name": "Hot Sauce",
+    "item_description": "Packed with heat and flavor for a piquant punch in every dip.",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Sauces"
+  },
+  {
+    "item_name": "Algerienne",
+    "item_description": "A Franco-alg\u00e9rienne blend of mild spices, tomatoes, and onions\u2014creamy, smoky, and slightly spicy.",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Sauces"
+  },
+  {
+    "item_name": "Sauce Blanche",
+    "item_description": "A mildly garlic-infused, creamy white sauce\u2014smooth, rich, and oh-so-French!",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Sauces"
+  },
+  {
+    "item_name": "Andalouse",
+    "item_description": "A bold mix of mayo, tomato, and spices for a Belgian-inspired flavor.",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Sauces"
+  },
+  {
+    "item_name": "Magic Onion",
+    "item_description": "Creamy with a savory onion twist, perfect for dipping or drizzling!",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Sauces"
+  },
+  {
+    "item_name": "Samourai",
+    "item_description": "A fiery blend of mayo and harissa for those who dare to spice things up.",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Sauces"
+  },
+  {
+    "item_name": "Biggy",
+    "item_description": "A sweet and tangy burger-style sauce that takes any bite to the next level.",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Sauces"
+  },
+  {
+    "item_name": "Nacho Sauce",
+    "item_description": "Wholesome cheesy goodness",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Sauces"
+  },
+  {
+    "item_name": "Boursin",
+    "item_description": "",
+    "item_price": {
+      "single": 6.0,
+      "meal": null
+    },
+    "item_category": "Cheese & Others"
+  },
+  {
+    "item_name": "Vache Quirit",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Cheese & Others"
+  },
+  {
+    "item_name": "Feta Cheese",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Cheese & Others"
+  },
+  {
+    "item_name": "Mozzarella Sticks",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Cheese & Others"
+  },
+  {
+    "item_name": "Mozzarella",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Cheese & Others"
+  },
+  {
+    "item_name": "Cheddar",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Cheese & Others"
+  },
+  {
+    "item_name": "Veal Kebab",
+    "item_description": "",
+    "item_price": {
+      "single": 9.0,
+      "meal": null
+    },
+    "item_category": "Meat"
+  },
+  {
+    "item_name": "Chicken Kebab",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Meat"
+  },
+  {
+    "item_name": "Chicken Nuggets",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Meat"
+  },
+  {
+    "item_name": "Falafel",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Meat"
+  },
+  {
+    "item_name": "Tenders",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Meat"
+  },
+  {
+    "item_name": "Ground Beef",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Meat"
+  },
+  {
+    "item_name": "Turkey Ham",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Meat"
+  },
+  {
+    "item_name": "Merguez",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Meat"
+  },
+  {
+    "item_name": "Chicken Breast",
+    "item_description": "",
+    "item_price": {
+      "single": null,
+      "meal": null
+    },
+    "item_category": "Meat"
   }
 ]

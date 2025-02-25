@@ -4,7 +4,8 @@ import MenuItem from "./MenuItem";
 import axios from "axios";
 import { normalize } from "path";
 
-interface MenuItem {
+export interface menuItem {
+  _id: string;
   item_name: string;
   item_description: string;
   item_price: {
@@ -14,7 +15,7 @@ interface MenuItem {
   item_category: string;
   size?: string;
   sauces?: string[];
-  extra_toppings?: string[];
+  slug: string;
   item_img_url?: string;
 }
 
@@ -23,7 +24,7 @@ interface MenuListProps {
 }
 
 const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [menuItems, setMenuItems] = useState<menuItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Fetch the menu items
@@ -32,8 +33,9 @@ const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
       try {
         const storedItems = localStorage.getItem("MenuItems");
         if (!storedItems) {
-          const res = await fetch("/api/fetchmenuitems", {cache : "no-store"});
-          const data: MenuItem[] = await res.json();
+          const res = await fetch("/api/fetchmenuitems", { cache: "no-store" });
+          const data: menuItem[] = await res.json();
+          console.log(res.json);
           localStorage.setItem("MenuItems", JSON.stringify(data));
           console.log("MenuItems : ", data);
           setMenuItems(data);
@@ -60,9 +62,9 @@ const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
     <div className="container mx-auto mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-10">
       {menuItems
         .filter((item) => item.item_category === item_category)
-        .map((item) => (
-          <MenuItem key={`${item.item_name}-${item.item_category}`} {...item} />
-        ))}
+        .map((item) => {
+          return <MenuItem key={item._id} {...item} />;
+        })}
     </div>
   );
 };

@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "../public/styles/globals.css";
+import { useCart } from "../utils/context/ShoppingCartContext";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface MenuItemProps {
+  _id: string;
   item_name: string;
   item_description: string;
   item_price: {
@@ -11,22 +15,37 @@ interface MenuItemProps {
   item_category: string;
   size?: string;
   sauces?: string[];
-  extra_toppings?: string[];
+  slug: string;
   item_img_url?: string;
 }
 
 const MenuItem: React.FC<MenuItemProps> = ({
+  _id,
   item_name,
   item_description,
   item_price,
   item_category,
   size,
   sauces,
-  extra_toppings,
+  slug,
   item_img_url,
 }) => {
+  const { cartItems, addItem, removeItem, getItem } = useCart();
+  const router = useRouter();
+
+  const handleClick = async () => {
+    try {
+      router.push(`/MenuItems/${slug}-${_id}`);
+    } catch (error) {
+      console.error("Failed to fetch menu item (MenuItem.tsx):", error);
+    }
+  };
+
   return (
-    <div className="border rounded-lg shadow-md hover:shadow-lg overflow-hidden bg-white">
+    <div
+      className="border rounded-lg shadow-md hover:shadow-lg overflow-hidden bg-white"
+      onClick={handleClick}
+    >
       {/* Display Image */}
       {item_img_url ? (
         <img
@@ -56,6 +75,26 @@ const MenuItem: React.FC<MenuItemProps> = ({
               Combo: AED {item_price.combo}{" "}
             </p>
           )}
+        </div>
+        <div>
+          <button
+            className="h-12 w-full rounded-lg bg-KebabGreen text-KebabGold mt-4"
+            onClick={() => {
+              addItem({
+                _id,
+                item_name,
+                item_description,
+                item_price,
+                item_category,
+                size,
+                sauces,
+                slug,
+                item_img_url,
+              });
+            }}
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </div> // Menu Item end
