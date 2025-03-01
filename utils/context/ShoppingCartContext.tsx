@@ -6,30 +6,40 @@ import {
   useState,
   useEffect,
 } from "react";
-import { ShowAddToast, ShowRemoveToast } from "../../components/CustomToast";
+import {
+  ShowAddToast,
+  ShowRemoveToast,
+} from "../../components/UserToast/CustomToast";
+import toast from "react-hot-toast";
 
-import { menuItem } from "../../components/MenuList";
+import { Menu } from "../../components/Menu/MenuList";
 import { useRouter } from "next/navigation";
 
-type CartItem = {
-  id: string;
+export type Extras = {
+  _id: string;
+  item_name: string;
+  item_category: string;
+};
+export type CartItem = {
+  _id: string;
   item_name: string;
   item_description: string;
   item_price: {
     single: number;
-    combo?: number;
+    meal?: number;
   };
   item_category: string;
+  extra_Sauces?: Extras[];
+  extra_Vegetables?: Extras[];
+  extra_Cheese?: Extras[];
   size?: string;
-  extra_toppings?: string[];
   item_img_url?: string;
-
   Quantity: number;
 };
 
 type ShoppingCartContext = {
   CartItems: CartItem[];
-  addItem: (item_id: menuItem) => void;
+  addItem: (item: CartItem) => void;
   removeItem: (item_id: string) => void;
   getItem: (item_id: string) => CartItem | undefined;
   loading: boolean;
@@ -59,52 +69,45 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     setLoading(false);
   }, [cartItems]);
 
-  const addItem = (Item: menuItem) => {
+  const addItem = (Item: CartItem) => {
     if (!Item._id) {
       console.log("ID not provided!");
-
       return;
     }
+
     setCartItems((prev) => {
-      const existingItem = prev.find((item) => item.id === Item._id);
+      const existingItem = prev.find((item) => item._id === Item._id);
       if (!existingItem) {
         return [
           ...prev,
           {
-            id: Item._id,
-            item_name: Item.item_name,
-            item_description: Item.item_description,
-            item_category: Item.item_category,
-            item_price: Item.item_price,
-            size: Item.size,
-            item_img_url: Item.item_img_url,
-            Quantity: 1,
+            ...Item, // ✅ Keep all properties including `_id`
+            Quantity: 1, // ✅ Ensure default Quantity
           },
         ];
       } else {
         return prev.map((item) =>
-          item.id === Item._id
+          item._id === Item._id
             ? { ...item, Quantity: item.Quantity + 1 }
             : item,
         );
       }
     });
-    router.push("/MenuItems");
 
     ShowAddToast(Item.item_name);
   };
 
   const removeItem = (item_id: string) => {
-    const itemToRemove = cartItems.find((item) => item.id === item_id);
+    const itemToRemove = cartItems.find((item) => item._id === item_id);
     if (itemToRemove) {
       ShowRemoveToast(itemToRemove?.item_name);
     }
-    setCartItems((prev) => prev.filter((item) => item.id !== item_id));
+    setCartItems((prev) => prev.filter((item) => item._id !== item_id));
   };
   const decreaseQuantity = (item_id: string) => {
     setCartItems((prev) =>
       prev.map((item) => {
-        if (item.id == item_id) {
+        if (item._id == item_id) {
           return {
             ...item,
             Quantity: item.Quantity == 0 ? 0 : item.Quantity - 1,
@@ -118,7 +121,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
   const increaseQuantity = (item_id: string) => {
     setCartItems((prev) =>
       prev.map((item) =>
-        item.id === item_id ? { ...item, Quantity: item.Quantity + 1 } : item,
+        item._id === item_id ? { ...item, Quantity: item.Quantity + 1 } : item,
       ),
     );
   };
@@ -129,7 +132,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     );
   };
   const getItem = (item_id: string) => {
-    return cartItems.find((item) => item.id === item_id);
+    return cartItems.find((item) => item._id === item_id);
   };
   return (
     <shoppingCartContext.Provider
@@ -155,13 +158,13 @@ export const useCart = () => {
     console.warn("Warning: useCart must be used within CartProvider.");
     return {
       CartItems: [],
-      addItem: () => {},
-      removeItem: () => {},
+      addItem: () => { },
+      removeItem: () => { },
       getItem: () => undefined,
       loading: false,
-      decreaseQuantity: () => {},
-      increaseQuantity: () => {},
-      getTotal: () => {},
+      decreaseQuantity: () => { },
+      increaseQuantity: () => { },
+      getTotal: () => { },
     };
   }
   return cartContext;

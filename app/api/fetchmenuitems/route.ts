@@ -4,20 +4,11 @@ import connectMongodb from "../../../lib/mongodb";
 
 export async function GET(req: NextRequest) {
   await connectMongodb();
-  console.log("🔥 MongoDB Connection Established");
-
-  const count = await MenuItem.countDocuments();
-  console.log("📌 Total menu items in DB:", count);
-
-  const testItem = await MenuItem.findOne();
-  console.log("🛠️ Sample Item: ", testItem);
-  
 
   try {
     const menuItems = await MenuItem.find({});
 
     console.log("✅ Items Fetched - RABIE");
- 
 
     return NextResponse.json(menuItems, { status: 200 });
   } catch (error: any) {

@@ -100,7 +100,7 @@ const Navbar: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="/MenuItems"
+                  href="/menu"
                   className="block py-2 px-3 hover:text-white duration-300 text-KebabGold"
                 >
                   Menu
@@ -124,7 +124,7 @@ const Navbar: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="/Signup"
+                  href="/signup"
                   className={`block py-2 px-3 hover:text-white duration-300 text-KebabGold ${loggedin ? "hidden" : ""}`}
                 >
                   Register
@@ -133,7 +133,7 @@ const Navbar: React.FC = () => {
 
               <li>
                 <a
-                  href="/LogIn"
+                  href="/login"
                   className={`block py-2 px-3 hover:text-white duration-300 text-KebabGold ${loggedin ? "hidden" : ""}`}
                 >
                   Log In
