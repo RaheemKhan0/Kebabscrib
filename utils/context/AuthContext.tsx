@@ -9,9 +9,7 @@ type AuthContextType = {
   checkAuth: () => Promise<void>;
 };
 
-export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined,
-);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined,);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -23,49 +21,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   // ✅ Define checkAuth Function
   const checkAuth = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get("/api/users/fetchuserdata", {
         withCredentials: true, // Ensures cookies are sent
       });
 
       if (data?.user) {
         setUser(data.user);
+        sessionStorage.setItem("user", data?.user);
         setLoggedIn(true);
+        setLoading(false);
+        console.log("LoggedIn : ", loggedin);
       } else {
         setUser(null);
         setLoggedIn(false);
+        setLoading(false);
+        console.log("LoggedIn : ", loggedin);
       }
     } catch (error: any) {
-      if (error.response?.status === 401) {
-        // If unauthorized, try refreshing the token
-        const refreshed = await refreshtoken();
-        if (refreshed) {
-          // Re-attempt fetching user data after refreshing token
-          try {
-            const { data } = await axios.get("/api/users/fetchuserdata", {
-              withCredentials: true,
-            });
-
-            if (data?.user) {
-              setUser(data.user);
-              setLoggedIn(true);
-            } else {
-              setUser(null);
-              setLoggedIn(false);
-            }
-          } catch (error) {
-            setUser(null);
-            setLoggedIn(false);
-          }
-        } else {
-          setUser(null);
-          setLoggedIn(false);
-        }
-      } else {
-        setUser(null);
-        setLoggedIn(false);
-      }
     } finally {
       setLoading(false);
+      console.log("LoggedIn : ", loggedin);
     }
   };
 

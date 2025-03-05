@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const isPublicPath = path === '/LogIn' || path === '/Signup';
+  const isPublicPath = path === '/login' || path === '/signup';
   const token = request.cookies.get('token')?.value || '';
 
   // Redirect logged-in users away from public paths
@@ -13,7 +13,7 @@ export function middleware(request: NextRequest) {
 
   // Redirect unauthenticated users trying to access private paths
   if (!isPublicPath && !token) {
-    return NextResponse.redirect(new URL('/LogIn', request.nextUrl));
+    return NextResponse.redirect(new URL('/login', request.nextUrl));
   }
 
   // Allow access to the requested page
@@ -23,8 +23,8 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     '/profile',
-    '/LogIn',
-    '/Signup',
+    '/login',
+    '/signup',
   ],
 };
 

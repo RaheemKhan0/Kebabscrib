@@ -32,7 +32,7 @@ const kebabscribUserSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-const KebabscribUser =
-  mongoose.models.KebabscribUser || // Check if model is already compiled
-  mongoose.model("KebabscribUser", kebabscribUserSchema);
+
+const KebabscribUser = mongoose.models.KebabscribUser || mongoose.model("KebabscribUser", kebabscribUserSchema)
+
 export default KebabscribUser;

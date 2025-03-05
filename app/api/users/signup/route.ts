@@ -1,13 +1,12 @@
-import connectUserDataBase from "../../../../lib/connectUserDataBase.js";
+import connectMongodb from "../../../../lib/mongodb.js";
 import KebabscribUser from "../../../../model/Kebabscrib_User.js";
 import bcryptjs from "bcrypt";
 import { NextResponse, NextRequest } from "next/server";
 
-connectUserDataBase(); // Ensure this is not redundant if connections are globally handled.
-
 export async function POST(request: NextRequest) {
   try {
     // Parse request body
+    await connectMongodb();
     const reqBody = await request.json();
     const { username, email, password } = reqBody;
 
