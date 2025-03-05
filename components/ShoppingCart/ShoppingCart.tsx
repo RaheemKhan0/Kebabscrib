@@ -15,6 +15,8 @@ const ShoppingCart = () => {
     decreaseQuantity,
     increaseQuantity,
     getTotal,
+    getItemExtraTotal,
+
   } = useCart();
   const router = useRouter();
 
@@ -49,17 +51,23 @@ const ShoppingCart = () => {
         <div className="mx-auto max-w-3xl space-y-4">
           {CartItems.map((item) => (
             <CartItem
-              key={item._id}
+              key={item.cart_id}
               item_name={item.item_name}
               item_description={item.item_description}
               item_price={item.item_price}
               item_category={item.item_category}
               size={item.size}
+              extra_Sauces={item.extra_Sauces}
+              extra_Vegetables={item.extra_Vegetables}
+              extra_Cheese={item.extra_Cheese}
               item_img_url={item.item_img_url}
               quantity={item.Quantity}
-              increaseQuantity={() => increaseQuantity(item._id)}
-              decreaseQuantity={() => decreaseQuantity(item._id)}
-              removeItem={() => removeItem(item._id)}
+              meal={item.meal}
+              increaseQuantity={() => increaseQuantity(item.cart_id)}
+              decreaseQuantity={() => decreaseQuantity(item.cart_id)}
+              removeItem={() => removeItem(item.cart_id)}
+              getItemExtraTotal={() => getItemExtraTotal(item)}
+
             />
           ))}
         </div>

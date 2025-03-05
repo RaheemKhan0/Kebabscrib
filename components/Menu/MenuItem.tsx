@@ -29,7 +29,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
   slug,
   item_img_url,
 }) => {
-  const { cartItems, addItem, removeItem, getItem } = useCart();
+  const { CartItems, addItem, removeItem, getItem } = useCart();
   const router = useRouter();
 
   const handleClick = async () => {

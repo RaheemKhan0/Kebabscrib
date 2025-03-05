@@ -11,21 +11,31 @@ interface MenuItemDetailsProps {
 }
 
 const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
-  const [menuItem, setMenuItem] = useState<CartItem | null>(null);
   const menu = useMenu();
-  const { addItem } = useCart();
-
-  const [meal, setMeal] = useState({
-    single: true,
+  const defaultMenuItem: CartItem = {
+    _id: "default_id",
+    cart_id: "default_cart_id",
+    item_name: "Loading...",
+    item_description: "Fetching item details...",
+    item_price: { single: 0, meal: undefined },
+    item_category: "Uncategorized",
+    extra_Sauces: [],
+    extra_Vegetables: [],
+    extra_Cheese: [],
     meal: false,
-  });
+    size: "Regular",
+    item_img_url: "/public/assets/placeholder.png", // Use a placeholder image
+    Quantity: 1,
+  };
+
+  const [menuItem, setMenuItem] = useState<CartItem>(defaultMenuItem);
+
+  const { addItem, generate_Cart_ID } = useCart();
+
+  const [meal, setMeal] = useState(false);
   const [extraSauce, SetExtraSauces] = useState<Menu[]>([]);
   const [extraCheese, setExtraCheese] = useState<Menu[]>([]);
   const [extraVeggies, setExtraVeggies] = useState<Menu[]>([]);
-
-  useEffect(() => {
-    console.log("Updated Menu Item:", menuItem); // Log outside of setState
-  }, [menuItem]);
 
   const HandleExtraSauce = (item: any) => {
     SetExtraSauces((prev) => {
@@ -36,7 +46,7 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
           : [...prev, item]; // Add if not exists
 
       setMenuItem((prevMenuItem) => ({
-        ...(prevMenuItem ?? {}), //  Ensure `prevMenuItem` exists
+        ...prevMenuItem, //  Ensure `prevMenuItem` exists and right now using a just temporary fix which makes the typescript think that the prevMenuItem is not null which in production grade application may led to the app crashing since the preMenuItem is null
         extra_Sauces: updatedSauces.map((sauce) => {
           return {
             _id: sauce._id, // Correctly returning an object
@@ -45,7 +55,6 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
           };
         }),
       }));
-
 
       return updatedSauces;
     });
@@ -59,7 +68,7 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
           : [...prev, item];
 
       setMenuItem((prevMenuItem) => ({
-        ...prevMenuItem!,
+        ...prevMenuItem,
         extra_Cheese: updatedCheese.map((cheese) => {
           return {
             _id: cheese._id,
@@ -82,13 +91,13 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
           : [...prev, item];
 
       setMenuItem((prevMenuItem) => ({
-        ...prevMenuItem!,
+        ...prevMenuItem,
         extra_Vegetables: updatedVeggies.map((veggie) => {
-          return ({
+          return {
             _id: veggie._id,
             item_name: veggie.item_name,
             item_category: veggie.item_category,
-          })
+          };
         }),
       }));
 
@@ -99,14 +108,29 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
   useEffect(() => {
     const fetchMenuItem = async () => {
       try {
+        console.log("Fetching menu item...");
         const res = await axios.get(`/api/fetchmenuitems/${item_id}`);
-        setMenuItem(res.data.menu_item);
+        const fetchedItem = res.data.menu_item;
+
+        setMenuItem((prevMenuItem) => ({
+          ...(fetchedItem ?? prevMenuItem),
+          cart_id: generate_Cart_ID(fetchedItem) ?? "default_cart_id",
+        }));
       } catch (error) {
         console.log("Failed to fetch menu item details:", error);
       }
     };
-    fetchMenuItem();
-  }, [item_id]);
+
+    if (menuItem._id === "default_id") {
+      fetchMenuItem();
+    } else {
+      setMenuItem((prevMenuItem) => ({
+        ...prevMenuItem,
+        cart_id: generate_Cart_ID(prevMenuItem) ?? "default_cart_id",
+        meal: meal,
+      }));
+    }
+  }, [item_id, extraSauce, extraCheese, extraVeggies, meal]);
 
   if (!menuItem) {
     return <p className="text-center text-xl mt-10">Loading menu item...</p>;
@@ -133,8 +157,8 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
           <>
             <button
               className={`text-lg mt-2 border-2 rounded-full p-3 mr-8 transition-all duration-200
-                ${meal.single ? "bg-KebabGold text-white border-KebabGold" : "bg-white text-black border-black"}`}
-              onClick={() => setMeal({ single: true, meal: false })}
+                ${!meal ? "bg-KebabGold text-white border-KebabGold" : "bg-white text-black border-black"}`}
+              onClick={() => setMeal(false)}
             >
               {menuItem.item_price.single}{" "}
               <span className="font-bold">Single</span>
@@ -142,8 +166,8 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
 
             <button
               className={`text-lg mt-2 border-2 rounded-full p-3 mr-8 transition-all duration-200
-                ${meal.meal ? "bg-KebabGold text-white border-KebabGold" : "bg-white text-black border-black"}`}
-              onClick={() => setMeal({ single: false, meal: true })}
+                ${meal ? "bg-KebabGold text-white border-KebabGold" : "bg-white text-black border-black"}`}
+              onClick={() => setMeal(true)}
             >
               {menuItem.item_price.meal} <span className="font-bold">Meal</span>
             </button>
@@ -205,7 +229,12 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
           </>
         ) : null}
 
-        <button className="bg-KebabGreen hover:bg-KebabGold text-white font-bold py-2 px-6 mt-6 rounded-lg shadow-md mb-10" onClick={() => {addItem(menuItem)}}>
+        <button
+          className="bg-KebabGreen hover:bg-KebabGold text-white font-bold py-2 px-6 mt-6 rounded-lg shadow-md mb-10"
+          onClick={() => {
+            addItem(menuItem);
+          }}
+        >
           Order Now
         </button>
       </div>

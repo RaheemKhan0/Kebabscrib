@@ -1,11 +1,10 @@
 "use client";
 import React, { useState, useContext } from "react";
 import { Dialog } from "@headlessui/react";
-import { AuthContext } from "../utils/context/AuthContext";
+import { useAuth } from "../utils/context/AuthContext";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-// @ts-ignore
 import {
   UserIcon,
   ChevronDownIcon,
@@ -17,8 +16,8 @@ const Navbar: React.FC = () => {
   const [menu, SetMenu] = useState(false);
   const [usermenu, setUserMenu] = useState(false);
 
-  const auth = useContext(AuthContext);
-  const { user, loggedin, loading, checkAuth } = auth;
+  const { user, loggedin, loading, checkAuth } = useAuth();
+  
   const router = useRouter();
   const logout = async () => {
     try {

@@ -24,7 +24,7 @@ export async function GET(
     }
 
     // ✅ Fetch menu item from MongoDB
-    const menu_item = await MenuItem.findById(item_id) // `.lean()` makes response serialization faster
+    const menu_item = await MenuItem.findById(item_id).lean() // `.lean()` makes response serialization faster
 
     if (!menu_item) {
       return NextResponse.json(
