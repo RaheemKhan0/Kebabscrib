@@ -5,6 +5,7 @@ import { useAuth } from "../utils/context/AuthContext";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import LoadingScreen from "./Common/LoadingScreen";
 import {
   UserIcon,
   ChevronDownIcon,
@@ -31,19 +32,7 @@ const Navbar: React.FC = () => {
   };
 
   if (loading) {
-    return (
-      <>
-        <div role="status" className="w-full animate-pulse bg-KebabGreen p-4">
-          <div className="h-2.5 bg-KebabGold rounded-full w-48 mb-4"></div>
-          <div className="h-2 bg-KebabGold rounded-full max-w-[360px] mb-2.5"></div>
-          <div className="h-2 bg-KebabGold rounded-full mb-2.5"></div>
-          <div className="h-2 bg-KebabGold rounded-full max-w-[330px] mb-2.5"></div>
-          <div className="h-2 bg-KebabGold rounded-full max-w-[300px] mb-2.5"></div>
-          <div className="h-2 bg-KebabGold rounded-full max-w-[360px]"></div>
-          <span className="sr-only">Loading...</span>
-        </div>
-      </>
-    );
+    return <LoadingScreen />;
   } else {
     return (
       <nav className="bg-KebabGreen border-b-2 border-b-KebabGold">

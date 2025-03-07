@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useCart } from "../../utils/context/ShoppingCartContext";
 import { useRouter } from "next/navigation";
 import CartItem from "./cartitem";
+import ShoppingCartItem from "./cartitem";
+import LoadingScreen from "../Common/LoadingScreen";
 
 
 const ShoppingCart = () => {
@@ -25,11 +27,7 @@ const ShoppingCart = () => {
   }, [CartItems]);
 
   if (loading) {
-    return (
-      <div className="w-full flex flex-col text-center items-center justify-center flex-grow">
-        <h1 className="font-bold text-xl">Loading</h1>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   if (CartItems.length === 0) {
@@ -50,19 +48,9 @@ const ShoppingCart = () => {
         {/* Cart Items */}
         <div className="mx-auto max-w-3xl space-y-4">
           {CartItems.map((item) => (
-            <CartItem
+            <ShoppingCartItem
               key={item.cart_id}
-              item_name={item.item_name}
-              item_description={item.item_description}
-              item_price={item.item_price}
-              item_category={item.item_category}
-              size={item.size}
-              extra_Sauces={item.extra_Sauces}
-              extra_Vegetables={item.extra_Vegetables}
-              extra_Cheese={item.extra_Cheese}
-              item_img_url={item.item_img_url}
-              quantity={item.Quantity}
-              meal={item.meal}
+              item={item}
               increaseQuantity={() => increaseQuantity(item.cart_id)}
               decreaseQuantity={() => decreaseQuantity(item.cart_id)}
               removeItem={() => removeItem(item.cart_id)}

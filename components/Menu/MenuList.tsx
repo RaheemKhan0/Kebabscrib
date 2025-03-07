@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import MenuItem from "./MenuItem";
 import { useMenu } from "../../utils/context/MenuContext";
+import LoadingScreen from "../Common/LoadingScreen";
 
 export interface Menu {
   _id: string;
@@ -28,7 +29,7 @@ const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
 
   // If menu items are still loading
   if (!menu) {
-    return <p className="text-center mt-10">Loading menu items...</p>;
+    return <LoadingScreen />;
   }
 
   // Render menu items based on the selected category

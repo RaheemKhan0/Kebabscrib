@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Menu } from "./MenuList";
 import { useMenu } from "../../utils/context/MenuContext";
 import { CartItem, useCart } from "../../utils/context/ShoppingCartContext";
+import LoadingScreen from "../Common/LoadingScreen";
 
 interface MenuItemDetailsProps {
   item_id: string;
@@ -132,8 +133,8 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
     }
   }, [item_id, extraSauce, extraCheese, extraVeggies, meal]);
 
-  if (!menuItem) {
-    return <p className="text-center text-xl mt-10">Loading menu item...</p>;
+  if (menuItem.item_name == "Loading...") {
+    return <LoadingScreen />;
   }
 
   return (

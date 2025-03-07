@@ -156,8 +156,8 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         total +
         (item.meal
           ? (item.item_price.meal ?? item.item_price.single + 10)
-          : item.item_price.single) +
-        getItemExtraTotal(item) * item.Quantity,
+          : (item.item_price.single) +
+        getItemExtraTotal(item)) * item.Quantity,
       0,
     );
   };
