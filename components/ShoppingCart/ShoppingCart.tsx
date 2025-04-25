@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useCart } from "../../utils/context/ShoppingCartContext";
+import { useCart } from "@utils/context/ShoppingCartContext";
 import { useRouter } from "next/navigation";
 import CartItem from "./cartitem";
 import ShoppingCartItem from "./cartitem";

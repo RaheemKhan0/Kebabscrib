@@ -1,5 +1,5 @@
 "use client";
-import MenuItemDetails from "../../../components/Menu/MenuItemDetails";
+import MenuItemDetails from "@components/Menu/MenuItemDetails";
 import { useParams } from "next/navigation";
 import React from "react";
 

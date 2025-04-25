@@ -1,5 +1,5 @@
-import connectMongodb from "../../../../lib/mongodb.js";
-import KebabscribUser from "../../../../model/Kebabscrib_User.js";
+import connectMongodb from "@lib/mongodb.js";
+import KebabscribUser from "@model/Kebabscrib_User.js";
 import bcryptjs from "bcrypt";
 import { NextResponse, NextRequest } from "next/server";
 

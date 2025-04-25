@@ -3,8 +3,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Menu } from "./MenuList";
-import { useMenu } from "../../utils/context/MenuContext";
-import { CartItem, useCart } from "../../utils/context/ShoppingCartContext";
+import { useMenu } from "@utils/context/MenuContext";
+import { CartItem, useCart } from "@utils/context/ShoppingCartContext";
 import LoadingScreen from "../Common/LoadingScreen";
 
 interface MenuItemDetailsProps {

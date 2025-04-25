@@ -1,5 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl" : ".",
+    "paths" : {
+      "@model/*": ["model/*"],
+      "@lib/*": ["lib/*"],
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"],
+      "@public/*" : ["public/*"]
+    },
     "target": "ES2017",
     "lib": [
       "dom",
@@ -16,6 +24,10 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "types": [
+      "next-auth"
+    ],
+
     "jsx": "preserve",
     "plugins": [
       {

@@ -1,6 +1,6 @@
 import React from "react";
 import { TrashIcon } from "@heroicons/react/20/solid";
-import { CartItem } from "../../utils/context/ShoppingCartContext";
+import { CartItem } from "@utils/context/ShoppingCartContext";
 
 interface CartItemProps {
 

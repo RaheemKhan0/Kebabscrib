@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./LoadingScreen.module.css";
-import logo from "../../public/assets/KC_Logo_Logomark_green.svg";
+import logo from "@public/assets/KC_Logo_Logomark_green.svg";
 
 const LoadingScreen = () => {
   return (

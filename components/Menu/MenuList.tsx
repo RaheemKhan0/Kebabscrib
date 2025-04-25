@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
 import MenuItem from "./MenuItem";
-import { useMenu } from "../../utils/context/MenuContext";
+import { useMenu } from "@utils/context/MenuContext";
 import LoadingScreen from "../Common/LoadingScreen";
 
 export interface Menu {

@@ -3,27 +3,17 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { AuthContext, useAuth } from "../../utils/context/AuthContext";
+import { signOut } from "next-auth/react";
 
 const Page = () => {
   const router = useRouter();
   const [loadingState, setLoadingState] = useState(false); // Rename to avoid conflict
-  const auth = useContext(AuthContext);
-
-  if (!auth) {
-    return <p>Loading...</p>; // Handle case where context is not available
-  }
-
-  const { user, loggedin, loading, checkAuth } = useAuth(); // Rename loading
 
   const logout = async () => {
     setLoadingState(true);
     try {
-      await axios.get("/api/users/logout", { withCredentials: true });
-
       // Wait for authentication state to update
-      await checkAuth();
-
+      signOut({ redirect: false });
       toast.success("Logout Successful");
 
       // Redirect to home page

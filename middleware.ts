@@ -1,30 +1,29 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-
-export function middleware(request: NextRequest) {
+import { NextRequest, NextResponse } from "next/server";
+import { jwtVerify } from "jose";
+import { getToken } from "next-auth/jwt";
+export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const isPublicPath = path === '/login' || path === '/signup';
-  const token = request.cookies.get('token')?.value || '';
+  const isPublicPath = path === "/login" || path === "/signup";
+
+  const payload = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET,
+  });
+  console.log("Access token : ", payload);
 
   // Redirect logged-in users away from public paths
-  if (isPublicPath && token) {
-    return NextResponse.redirect(new URL('/', request.nextUrl));
+  if (isPublicPath && payload) {
+    return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 
-  // Redirect unauthenticated users trying to access private paths
-  if (!isPublicPath && !token) {
-    return NextResponse.redirect(new URL('/login', request.nextUrl));
+  // Redirect unauthenticated users trying to access protected routes
+  if (!isPublicPath && !payload) {
+    return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
 
-  // Allow access to the requested page
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    '/profile',
-    '/login',
-    '/signup',
-  ],
+  matcher: ["/login", "/signup", "/profile/:path*"],
 };
-

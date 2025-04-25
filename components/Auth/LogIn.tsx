@@ -1,18 +1,16 @@
 "use client";
-import React, { useState, useContext } from "react";
-import axios from "axios";
+import React, { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { AuthContext } from "../../utils/context/AuthContext";
+import { signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const LogIn: React.FC = () => {
   const [remember, setRemember] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const router = useRouter();
-  const auth = useContext(AuthContext);
-
-  const { user, loggedin, loading, checkAuth } = auth;
+  const status = useSession();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = e.target;
@@ -26,35 +24,36 @@ const LogIn: React.FC = () => {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = {
-      email: email,
-      password: password,
-      remember: remember,
-    };
-    try {
-      const request = await axios.post("/api/users/login", formData, {
-        withCredentials: true, 
-      });
-      if (request.status == 200) {
-        await checkAuth();
-        toast.success("Login Successfull");
-        router.push("/profile");
-      } else {
-        toast.error("Login Failed");
-      }
-    } catch (error: any) {
-      if (error.response?.data?.status == 400) {
-        toast.error("Wrong Password");
-        alert(error.response.data.message || "Something went wrong.");
-      } else if (error.request) {
-        console.error("No Response: ", error.request);
-        alert("No response from the server. Please try again later.");
-      } else {
-        console.error("Error: ", error.message);
-        alert("An unexpected error occurred. Please try again.");
-      }
+
+    const res = await signIn(
+      "credentials",
+      {
+        email,
+        password,
+        redirect: false,
+      },
+      {},
+    );
+    if (!res) {
+      toast.error("Something went wrong. Please try again.");
+      return;
+    }
+    if (res.ok) {
+      toast.success("Login Successfull");
+      router.push("/profile");
+    } else if (res.error === "Email is not registered") {
+      toast.error("Email not registered");
+    } else if (res.error == "Password is incorrect") {
+      toast.error("Password is incorrect");
+    } else {
+      toast.error("There was an unexpected Error");
     }
   };
+  useEffect(() => {
+    if (status === "authenticated"){
+      router.push("/profile");
+    }
+  }, [status])
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">

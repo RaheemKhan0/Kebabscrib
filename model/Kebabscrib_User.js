@@ -19,9 +19,10 @@ const kebabscribUserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  isAdmin: {
-    type: Boolean,
-    default: false,
+  role : {
+    type : String,
+    enum: ["admin", "staff", "user"],
+    default: "user",
   },
   forgotPasswordToken: String,
   forgotPasswordTokenExpiry: Date,
