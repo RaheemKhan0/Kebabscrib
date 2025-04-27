@@ -25,7 +25,6 @@ interface MenuListProps {
 
 const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
   const menu = useMenu();
-  console.log(menu);
 
   // If menu items are still loading
   if (!menu) {

@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
         <div className="mb-6 md:mb-0">
           {/* <h2 className="text-2xl text-KebabGold font-bold ">Kebabs Crib</h2> */}
           <img
-            src="/assets/kebabscrib_logo_single.png"
+            src="/assets/KC_Logo.png"
             alt="Kebab's Crib Logo"
             className="h-10 w-auto"
           />

@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useState, useEffect, useContext } from "react";
-import { Menu } from "../../components/Menu/MenuList";
+import { Menu } from "@components/Menu/MenuList";
 
 const MenuContext = createContext<Menu[] | null>(null);
 

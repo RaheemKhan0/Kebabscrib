@@ -9,8 +9,19 @@ module.exports = {
     extend: {
       colors: {
         KebabGreen: "#0C6045",  //"#014421",
-        KebabGold:  "#F7A890"//"#D39D55"
+        KebabGold:  "#F7A890",//"#D39D55"
+        KC_GREEN : "#006244",
+        KC_PEACH : "#f9c89b",
+        EggShell : "#FDF6EC",
+        Sandy : "#ECD9B9",
+        DeepSea : "#2C4C63",
       },
+      fontFamily : {
+        parkinsans : ['Parkinsans', 'sans-serif']
+      },
+      fontSize : {
+        'md-lg': '1.075rem',
+      }
     },
   },
   plugins: [],

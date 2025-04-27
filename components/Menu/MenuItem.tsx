@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../../public/styles/globals.css";
 import { useCart } from "../../utils/context/ShoppingCartContext";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { CldImage } from "next-cloudinary";
 
 interface MenuItemProps {
   _id: string;
@@ -31,6 +33,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
 }) => {
   const { CartItems, addItem, removeItem, getItem } = useCart();
   const router = useRouter();
+  const optimisedUrl = item_img_url?.replace('/upload', '/upload/w_600,q_auto,f_auto');
 
   const handleClick = async () => {
     try {
@@ -46,10 +49,12 @@ const MenuItem: React.FC<MenuItemProps> = ({
       onClick={handleClick}
     >
       {/* Display Image */}
-      {item_img_url ? (
-        <img
-          src={item_img_url}
+      {optimisedUrl ? (
+        <Image
+          src={optimisedUrl}
           alt={item_name}
+          width={500}
+          height={300}
           className="w-full h-48 object-cover"
         />
       ) : (

@@ -11,6 +11,14 @@ export async function middleware(request: NextRequest) {
   });
   console.log("Access token : ", payload);
 
+  if (path.startsWith("/(admin)") && payload?.role !== "admin"){
+    return NextResponse.json({
+      status : 401,
+      error : "only admins"
+    })
+  }
+
+
   // Redirect logged-in users away from public paths
   if (isPublicPath && payload) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
@@ -25,5 +33,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/login", "/signup", "/profile/:path*"],
+  matcher: ["/login", "/signup", "/profile/:path*", "/admin/:path*"],
 };

@@ -10,7 +10,7 @@ const LogIn: React.FC = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const router = useRouter();
-  const status = useSession();
+  const {data : session, status }= useSession();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = e.target;
@@ -50,8 +50,11 @@ const LogIn: React.FC = () => {
     }
   };
   useEffect(() => {
-    if (status === "authenticated"){
+    if (status === "authenticated" && session.user.role == "user"){
       router.push("/profile");
+    } 
+    if (status === "authenticated" && session.user.role == "admin"){
+      router.push("/admin/dashboard");
     }
   }, [status])
 

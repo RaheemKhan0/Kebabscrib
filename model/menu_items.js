@@ -13,9 +13,10 @@ const menuItemsSchema = new mongoose.Schema({
     medium: { type: Boolean, default: false },
     large: { type: Boolean, default: false },
   }, // Optional for items like tacos
-  sauces: { type: [String], required: false }, // Optional for tacos
   item_img_url: { type: String, required: false },
-  slug: { type: String, unique: true, required: true }, // ✅ SEO-friendly URL
+  slug: { type: String, unique: true, required: true },
+  isAvailable : {type : Boolean, required : true},
+  isHidden : {type : Boolean, required : true},
 });
 // **Middleware to Generate Slug Before Saving**
 menuItemsSchema.pre("save", function(next) {

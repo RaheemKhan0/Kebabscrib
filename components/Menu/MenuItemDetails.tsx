@@ -6,6 +6,8 @@ import { Menu } from "./MenuList";
 import { useMenu } from "@utils/context/MenuContext";
 import { CartItem, useCart } from "@utils/context/ShoppingCartContext";
 import LoadingScreen from "../Common/LoadingScreen";
+import { CldImage } from "next-cloudinary";
+import { getOptimizedCloudinaryUrl } from "@utils/middleware/helpers";
 
 interface MenuItemDetailsProps {
   item_id: string;
@@ -37,6 +39,7 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
   const [extraSauce, SetExtraSauces] = useState<Menu[]>([]);
   const [extraCheese, setExtraCheese] = useState<Menu[]>([]);
   const [extraVeggies, setExtraVeggies] = useState<Menu[]>([]);
+  let blurUrl = "/public/assets/placeholder.png";
 
   const HandleExtraSauce = (item: any) => {
     SetExtraSauces((prev) => {
@@ -112,6 +115,11 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
         console.log("Fetching menu item...");
         const res = await axios.get(`/api/fetchmenuitems/${item_id}`);
         const fetchedItem = res.data.menu_item;
+        blurUrl =
+          menuItem.item_img_url?.replace("upload", "upload/w_10,h_10,q_1") ??
+          "@public/assets/placeholder.png";
+        //const optimisedurl = fetchedItem.item_img_url.replace('/upload', '/upload/w_400,h_300,f_auto,q_auto/')
+        //fetchedItem.item_img_url = optimisedurl
 
         setMenuItem((prevMenuItem) => ({
           ...(fetchedItem ?? prevMenuItem),
@@ -141,13 +149,28 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
     <div className="flex flex-col md:flex-row items-center justify-center max-w-full mx-auto mt-16 px-6">
       {/* Image Section */}
       <div className="md:w-1/2 flex items-center justify-center">
-        <Image
-          src={"/assets/placeholder.png"}
-          width={500}
-          height={500}
-          alt={menuItem.item_name}
-          className="rounded-lg shadow-md"
-        />
+        {menuItem.item_img_url ? (
+          <CldImage
+            src={menuItem.item_img_url}
+            width={600}
+            height={400}
+            alt={menuItem.item_name ?? "Item"}
+            placeholder="blur"
+            blurDataURL={menuItem.item_img_url.replace(
+              "upload",
+              'upload/w_10,h_10,e_blur:500,q_10',
+            )}
+            className="rounded-lg shadow-md"
+          />
+        ) : (
+          <Image
+            src="/assets/placeholder.png"
+            width={600}
+            height={400}
+            alt="Placeholder"
+            className="rounded-lg shadow-md"
+          />
+        )}
       </div>
 
       {/* Text Content Section */}
