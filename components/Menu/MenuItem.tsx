@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../../public/styles/globals.css";
-import { useCart } from "../../utils/context/ShoppingCartContext";
+import "@public/styles/globals.css";
+import { useCart } from "@utils/context/ShoppingCartContext";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { CldImage } from "next-cloudinary";

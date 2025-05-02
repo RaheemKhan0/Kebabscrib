@@ -9,8 +9,11 @@ import {
 import {
   ShowAddToast,
   ShowRemoveToast,
-} from "../../components/UserToast/CustomToast";
+} from "@components/UserToast/CustomToast";
 import { useRouter } from "next/navigation";
+import { OrderType } from "types/order";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export type Extras = {
   _id: string;
@@ -37,6 +40,7 @@ export type CartItem = {
   Quantity: number;
 };
 
+
 type ShoppingCartContext = {
   CartItems: CartItem[];
   addItem: (item: CartItem) => void;
@@ -48,6 +52,7 @@ type ShoppingCartContext = {
   generate_Cart_ID: (item: CartItem) => string;
   getTotal: () => number;
   getItemExtraTotal: (item: CartItem) => number;
+  placeOrder :  (customer_order : OrderType) => Promise<void>;
 };
 
 export const shoppingCartContext = createContext<ShoppingCartContext | null>(
@@ -99,13 +104,13 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
           ...prev,
           {
             ...Item,
-            cart_id: newCartID, // ✅ Assign new cart_id
+            cart_id: newCartID,
             Quantity: 1,
           },
         ];
       } else {
         return prev.map((item) =>
-          item.cart_id === newCartID // ✅ Check against `cart_id`, not `_id`
+          item.cart_id === newCartID 
             ? { ...item, Quantity: item.Quantity + 1 }
             : item,
         );
@@ -120,7 +125,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     if (itemToRemove) {
       ShowRemoveToast(itemToRemove.item_name);
     }
-    setCartItems((prev) => prev.filter((item) => item.cart_id !== cart_id)); // ✅ Remove based on `cart_id`
+    setCartItems((prev) => prev.filter((item) => item.cart_id !== cart_id));
   };
 
   const decreaseQuantity = (cart_id: string) => {
@@ -156,11 +161,22 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         total +
         (item.meal
           ? (item.item_price.meal ?? item.item_price.single + 10)
-          : (item.item_price.single) +
-        getItemExtraTotal(item)) * item.Quantity,
+          : item.item_price.single + getItemExtraTotal(item)) *
+        item.Quantity,
       0,
     );
   };
+  const placeOrder = async () => {
+    try {
+      const res = await axios.post("/api/users/order", customer_order);
+      if (res.status == 201){
+        toast.success("Order Placed Successfully!!");
+      }
+    } catch (error) {
+      console.log("Order placing error : ", error);
+      toast.error("There was an error placing your order");
+    }
+  }
 
   const getItem = (cart_id: string) => {
     return cartItems.find((item) => item.cart_id === cart_id);
@@ -179,6 +195,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         generate_Cart_ID,
         getTotal,
         getItemExtraTotal,
+        placeOrder
       }}
     >
       {children}
@@ -201,6 +218,7 @@ export const useCart = () => {
       generate_Cart_ID: () => [],
       getTotal: () => 0,
       getItemExtraTotal: () => 0,
+      placeOrder : () => Promise<void>,
     };
   }
   return cartContext;

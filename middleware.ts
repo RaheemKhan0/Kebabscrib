@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
   });
   console.log("Access token : ", payload);
 
-  if (path.startsWith("/(admin)") && payload?.role !== "admin"){
+  if (path.startsWith("/admin") && payload?.role !== "admin"){
     return NextResponse.json({
       status : 401,
       error : "only admins"

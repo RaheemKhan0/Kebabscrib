@@ -40,7 +40,6 @@ const LogIn: React.FC = () => {
     }
     if (res.ok) {
       toast.success("Login Successfull");
-      router.push("/profile");
     } else if (res.error === "Email is not registered") {
       toast.error("Email not registered");
     } else if (res.error == "Password is incorrect") {

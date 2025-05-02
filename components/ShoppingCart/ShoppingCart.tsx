@@ -1,26 +1,20 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useCart } from "@utils/context/ShoppingCartContext";
-import { useRouter } from "next/navigation";
-import CartItem from "./cartitem";
 import ShoppingCartItem from "./cartitem";
 import LoadingScreen from "../Common/LoadingScreen";
-
 
 const ShoppingCart = () => {
   const {
     CartItems,
-    addItem,
     removeItem,
-    getItem,
     loading,
     decreaseQuantity,
     increaseQuantity,
     getTotal,
     getItemExtraTotal,
-
+    placeOrder,
   } = useCart();
-  const router = useRouter();
 
   useEffect(() => {
     console.log("Updating Cart Items : ", CartItems);
@@ -55,7 +49,6 @@ const ShoppingCart = () => {
               decreaseQuantity={() => decreaseQuantity(item.cart_id)}
               removeItem={() => removeItem(item.cart_id)}
               getItemExtraTotal={() => getItemExtraTotal(item)}
-
             />
           ))}
         </div>

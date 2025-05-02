@@ -1,6 +1,5 @@
 import mongoose, { Schema, models } from "mongoose";
-import slugify from "slugify"; // To generate SEO-friendly slugs
-
+import slugify from "slugify"; 
 const menuItemsSchema = new mongoose.Schema({
   item_name: { type: String, required: true },
   item_description: { type: String, required: false },
@@ -15,7 +14,6 @@ const menuItemsSchema = new mongoose.Schema({
   }, // Optional for items like tacos
   item_img_url: { type: String, required: false },
   slug: { type: String, unique: true, required: true },
-  isAvailable : {type : Boolean, required : true},
   isHidden : {type : Boolean, required : true},
 });
 // **Middleware to Generate Slug Before Saving**

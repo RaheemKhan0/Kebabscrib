@@ -1,9 +1,10 @@
 import React from "react";
 import { TrashIcon } from "@heroicons/react/20/solid";
 import { CartItem } from "@utils/context/ShoppingCartContext";
+import Image from "next/image";
+
 
 interface CartItemProps {
-
   item : CartItem;
   increaseQuantity: () => void;
   decreaseQuantity: () => void;
@@ -18,15 +19,18 @@ const ShoppingCartItem: React.FC<CartItemProps> = ({
   removeItem,
   getItemExtraTotal,
 }) => {
+  const optimisedUrl = item.item_img_url?.replace('/upload', '/upload/w_600,q_auto,f_auto');
   return (
     <div className="max-w-3xl mx-auto rounded-lg border border-gray-700 bg-gray-900 p-4 shadow-md flex items-center justify-between space-x-4 transition-all hover:shadow-lg">
       {/* Item Image */}
       <div className="shrink-0">
-        {item.item_img_url ? (
-          <img
+        {optimisedUrl ? (
+          <Image
             className="h-20 w-20 object-cover rounded-md"
-            src={item.item_img_url}
+            src={optimisedUrl}
             alt={item.item_name}
+            width={100}
+            height={50}
           />
         ) : (
           <div className="h-20 w-20 bg-gray-700 flex items-center justify-center text-gray-400 text-sm font-medium rounded-md">

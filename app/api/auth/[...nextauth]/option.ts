@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import bcrypt from "bcrypt";
 import KebabscribUser from "@model/Kebabscrib_User";
 import connectMongodb from "@lib/mongodb";
