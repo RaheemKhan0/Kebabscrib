@@ -1,9 +1,11 @@
-import React from 'react'
+import PendingOrders from "@components/Admin/Orders/PendingOrders";
 
 const page = () => {
   return (
-    <div>orders</div>
-  )
-}
+    <div className="bg-EggShell">
+      <PendingOrders />
+    </div>
+  );
+};
 
-export default page
+export default page;

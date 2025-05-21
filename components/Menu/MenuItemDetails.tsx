@@ -7,14 +7,13 @@ import { useMenu } from "@utils/context/MenuContext";
 import { CartItem, useCart } from "@utils/context/ShoppingCartContext";
 import LoadingScreen from "../Common/LoadingScreen";
 import { CldImage } from "next-cloudinary";
-import { getOptimizedCloudinaryUrl } from "@utils/middleware/helpers";
 
 interface MenuItemDetailsProps {
   item_id: string;
 }
 
 const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
-  const menu = useMenu();
+  const { menu } = useMenu();
   const defaultMenuItem: CartItem = {
     _id: "default_id",
     cart_id: "default_cart_id",
@@ -158,7 +157,7 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
             placeholder="blur"
             blurDataURL={menuItem.item_img_url.replace(
               "upload",
-              'upload/w_10,h_10,e_blur:500,q_10',
+              "upload/w_10,h_10,e_blur:500,q_10",
             )}
             className="rounded-lg shadow-md"
           />
@@ -202,7 +201,7 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
                 Extra Sauces (Upto 3)
               </h3>
               {menu
-                ?.filter((item) => item.item_category === "Sauce")
+                ?.filter((item) => item.item_category === "Sauce" && !item.isHidden)
                 .map((item) => (
                   <button
                     key={item._id}
@@ -221,7 +220,7 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
                 Extra Cheese (Upto 3)
               </h3>
               {menu
-                ?.filter((item) => item.item_category === "Cheese & Others")
+                ?.filter((item) => item.item_category === "Cheese & Others" && !item.isHidden)
                 .map((item) => (
                   <button
                     key={item._id}
@@ -238,7 +237,7 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
                 Extra Veggies (Upto 3)
               </h3>
               {menu
-                ?.filter((item) => item.item_category === "Vegetables & Others")
+                ?.filter((item) => item.item_category === "Vegetables & Others" && !item.isHidden)
                 .map((item) => (
                   <button
                     key={item._id}

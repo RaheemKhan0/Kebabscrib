@@ -1,13 +1,13 @@
-
 import { Types } from "mongoose";
-import { CartItem } from "./CartItem";
+import { CartItem } from "@utils/context/ShoppingCartContext";
 
 export interface OrderType {
-  _id?: Types.ObjectId;
+  _id? : string,
   customer_name: string;
-  user_id?: Types.ObjectId;
+  email: string;
+  user_id?: string;
   items: CartItem[];
-  total_price: number;
+  total_price: Number;
   status?: "pending" | "preparing" | "completed" | "cancelled";
   isPaid?: boolean;
   note?: string;

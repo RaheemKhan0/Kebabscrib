@@ -52,7 +52,7 @@ type ShoppingCartContext = {
   generate_Cart_ID: (item: CartItem) => string;
   getTotal: () => number;
   getItemExtraTotal: (item: CartItem) => number;
-  placeOrder :  (customer_order : OrderType) => Promise<void>;
+  placeOrder :  (name : string, email : string, id : string) => Promise<void>;
 };
 
 export const shoppingCartContext = createContext<ShoppingCartContext | null>(
@@ -166,11 +166,23 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
       0,
     );
   };
-  const placeOrder = async () => {
+  const placeOrder = async (name : string, email : string, id? : string) => {
+    
     try {
-      const res = await axios.post("/api/users/order", customer_order);
+      const order : OrderType = {
+        user_id : id,
+        customer_name : name,
+        email : email,
+        items : cartItems,
+        total_price : getTotal(),
+        status : "pending",
+        isPaid : true,
+
+      }
+      const res = await axios.post("/api/users/order", order);
       if (res.status == 201){
         toast.success("Order Placed Successfully!!");
+        setCartItems([]);
       }
     } catch (error) {
       console.log("Order placing error : ", error);

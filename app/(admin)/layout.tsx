@@ -1,7 +1,9 @@
 import SessionWrapper from "@components/Auth/SessionWrapper";
 import "@public/styles/globals.css";
 import { Toaster } from "react-hot-toast";
+import { MenuProvider } from "@utils/context/MenuContext";
 import SideBar from "@components/Admin/SideBar";
+import { OrdersProvider } from "@utils/context/OrderContext";
 
 export default function AdminLayout({
   children,
@@ -12,8 +14,14 @@ export default function AdminLayout({
     <html>
       <body className="bg-EggShell">
         <div className="flex">
-         <SideBar /> 
-          <main className="flex-1 p-6 bg-gray-100">{children}</main>
+          <MenuProvider>
+            <OrdersProvider>
+              <Toaster />
+                <SideBar />
+                <main className="flex-1 p-6">{children}</main>
+
+            </OrdersProvider>
+          </MenuProvider>
         </div>
       </body>
     </html>

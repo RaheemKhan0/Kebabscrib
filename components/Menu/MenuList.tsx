@@ -14,9 +14,9 @@ export interface Menu {
   };
   item_category: string;
   size?: string;
-  sauces?: string[];
   slug: string;
   item_img_url?: string;
+  isHidden: boolean;
 }
 
 interface MenuListProps {
@@ -24,7 +24,7 @@ interface MenuListProps {
 }
 
 const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
-  const menu = useMenu();
+  const { menu } = useMenu();
 
   // If menu items are still loading
   if (!menu) {
@@ -35,7 +35,7 @@ const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
   return (
     <div className="container mx-auto mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-10">
       {menu
-        .filter((item) => item.item_category === item_category)
+        .filter((item) => item.item_category === item_category && !item.isHidden)
         .map((item) => {
           return <MenuItem key={item._id} {...item} />;
         })}
