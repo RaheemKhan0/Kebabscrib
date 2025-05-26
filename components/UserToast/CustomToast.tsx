@@ -1,5 +1,6 @@
 import { toast } from "react-hot-toast";
 import { CheckCircleIcon, TrashIcon } from "@heroicons/react/20/solid";
+import "@public/styles/globals.css";
 
 export const ShowAddToast = (itemName: string) => {
   toast.success(

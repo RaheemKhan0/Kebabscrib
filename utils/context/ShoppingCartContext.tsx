@@ -14,16 +14,18 @@ import { useRouter } from "next/navigation";
 import { OrderType } from "types/order";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Menu } from "@components/Menu/MenuList";
 
 export type Extras = {
   _id: string;
   item_name: string;
   item_category: string;
+  item_price: Number;
 };
 
 export type CartItem = {
   _id: string;
-  cart_id: string;
+  cart_id?: string;
   item_name: string;
   item_description: string;
   item_price: {
@@ -34,12 +36,16 @@ export type CartItem = {
   extra_Sauces?: Extras[];
   extra_Vegetables?: Extras[];
   extra_Cheese?: Extras[];
-  meal: boolean;
-  size?: string;
+  tacoSauce?: Extras;
+  tacoMeats?: Menu[];
+  size?: "Medium" | "Large";
+  meal : boolean;
+  extraMeat?: string;
+  mealdrink ?: Menu;
+  mealsauce ?: Extras; 
   item_img_url?: string;
   Quantity: number;
 };
-
 
 type ShoppingCartContext = {
   CartItems: CartItem[];
@@ -52,12 +58,10 @@ type ShoppingCartContext = {
   generate_Cart_ID: (item: CartItem) => string;
   getTotal: () => number;
   getItemExtraTotal: (item: CartItem) => number;
-  placeOrder :  (name : string, email : string, id : string) => Promise<void>;
+  placeOrder: (name: string, email: string, id: string) => Promise<void>;
 };
 
-export const shoppingCartContext = createContext<ShoppingCartContext | null>(
-  null,
-);
+export const shoppingCartContext = createContext<ShoppingCartContext | null>(null);
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -70,13 +74,12 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     }
     return [];
   });
-
-  useEffect(() => {
+   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
     setLoading(false);
   }, [cartItems]);
 
-  const generate_Cart_ID = (item: CartItem) => {
+  const generate_Cart_ID = (item: CartItem) : string => {
     return [
       item._id,
       item.extra_Sauces?.length ? JSON.stringify(item.extra_Sauces) : null,
@@ -85,6 +88,8 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         ? JSON.stringify(item.extra_Vegetables)
         : null,
       item.meal ? "meal" : null,
+      item.mealdrink ? item.mealdrink : "",
+      item.mealsauce ? item.mealsauce : "",
     ]
       .filter(Boolean)
       .join("-");
@@ -96,6 +101,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
       return;
     }
     const newCartID = generate_Cart_ID(Item);
+  
 
     setCartItems((prev) => {
       const existingItem = prev.find((item) => item.cart_id === newCartID);
@@ -110,7 +116,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         ];
       } else {
         return prev.map((item) =>
-          item.cart_id === newCartID 
+          item.cart_id === newCartID
             ? { ...item, Quantity: item.Quantity + 1 }
             : item,
         );
@@ -160,27 +166,25 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
       (total, item) =>
         total +
         (item.meal
-          ? (item.item_price.meal ?? item.item_price.single + 10)
+          ? (item.item_price.meal ?? item.item_price.single + 10 + getItemExtraTotal(item))
           : item.item_price.single + getItemExtraTotal(item)) *
-        item.Quantity,
+          item.Quantity,
       0,
     );
   };
-  const placeOrder = async (name : string, email : string, id? : string) => {
-    
+  const placeOrder = async (name: string, email: string, id?: string) => {
     try {
-      const order : OrderType = {
-        user_id : id,
-        customer_name : name,
-        email : email,
-        items : cartItems,
-        total_price : getTotal(),
-        status : "pending",
-        isPaid : true,
-
-      }
+      const order: OrderType = {
+        user_id: id,
+        customer_name: name,
+        email: email,
+        items: cartItems,
+        total_price: getTotal(),
+        status: "pending",
+        isPaid: true,
+      };
       const res = await axios.post("/api/users/order", order);
-      if (res.status == 201){
+      if (res.status == 201) {
         toast.success("Order Placed Successfully!!");
         setCartItems([]);
       }
@@ -188,7 +192,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
       console.log("Order placing error : ", error);
       toast.error("There was an error placing your order");
     }
-  }
+  };
 
   const getItem = (cart_id: string) => {
     return cartItems.find((item) => item.cart_id === cart_id);
@@ -207,7 +211,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         generate_Cart_ID,
         getTotal,
         getItemExtraTotal,
-        placeOrder
+        placeOrder,
       }}
     >
       {children}
@@ -221,16 +225,16 @@ export const useCart = () => {
     console.warn("Warning: useCart must be used within CartProvider.");
     return {
       CartItems: [],
-      addItem: () => { },
-      removeItem: () => { },
+      addItem: () => {},
+      removeItem: () => {},
       getItem: () => undefined,
       loading: false,
-      decreaseQuantity: () => { },
-      increaseQuantity: () => { },
+      decreaseQuantity: () => {},
+      increaseQuantity: () => {},
       generate_Cart_ID: () => [],
       getTotal: () => 0,
       getItemExtraTotal: () => 0,
-      placeOrder : () => Promise<void>,
+      placeOrder: () => Promise<void>,
     };
   }
   return cartContext;

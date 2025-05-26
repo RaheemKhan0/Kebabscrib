@@ -3,13 +3,12 @@ import { TrashIcon } from "@heroicons/react/20/solid";
 import { CartItem } from "@utils/context/ShoppingCartContext";
 import Image from "next/image";
 
-
 interface CartItemProps {
-  item : CartItem;
+  item: CartItem;
   increaseQuantity: () => void;
   decreaseQuantity: () => void;
   removeItem: () => void;
-  getItemExtraTotal: (item : CartItem) => number;
+  getItemExtraTotal: (item: CartItem) => number;
 }
 
 const ShoppingCartItem: React.FC<CartItemProps> = ({
@@ -19,7 +18,11 @@ const ShoppingCartItem: React.FC<CartItemProps> = ({
   removeItem,
   getItemExtraTotal,
 }) => {
-  const optimisedUrl = item.item_img_url?.replace('/upload', '/upload/w_600,q_auto,f_auto');
+  const optimisedUrl = item.item_img_url?.replace(
+    "/upload",
+    "/upload/w_600,q_auto,f_auto",
+  );
+  console.log("cart Taco Item : " , item);
   return (
     <div className="max-w-3xl mx-auto rounded-lg border border-gray-700 bg-gray-900 p-4 shadow-md flex items-center justify-between space-x-4 transition-all hover:shadow-lg">
       {/* Item Image */}
@@ -43,7 +46,9 @@ const ShoppingCartItem: React.FC<CartItemProps> = ({
       <div className="flex-1">
         <h3 className="text-lg font-semibold text-white">{item.item_name}</h3>
         <p className="text-sm text-gray-400">{item.item_description}</p>
-        <p className="text-sm text-gray-500 capitalize mt-1">{item.item_category}</p>
+        <p className="text-sm text-gray-500 capitalize mt-1">
+          {item.item_category}
+        </p>
         {/* Price Section - Show Based on `meal` Selection */}
         <div className="mt-2">
           <p className="text-base font-bold text-white">
@@ -64,6 +69,19 @@ const ShoppingCartItem: React.FC<CartItemProps> = ({
       {/* Extras Section */}
       <div className="flex flex-col text-sm text-gray-400 space-y-1">
         {/* Extra Sauces */}
+        {item.meal && item.mealdrink && (
+          <p>
+            <span className="text-gray-300 font-semibold">Meal Drink:</span>{" "}
+            {item.mealdrink.item_name}
+          </p>
+        )}
+        {item.meal && item.mealsauce && (
+          <p>
+            <span className="text-gray-300 font-semibold">Meal Sauce:</span>{" "}
+            {item.mealsauce.item_name}
+          </p>
+        )}
+
         {item.extra_Sauces && item.extra_Sauces.length > 0 && (
           <p>
             <span className="text-gray-300 font-semibold">Extra Sauces:</span>{" "}

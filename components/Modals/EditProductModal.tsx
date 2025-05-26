@@ -1,5 +1,5 @@
 "use client";
-
+import toast from "react-hot-toast";
 import { useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { Menu } from "@components/Menu/MenuList";
@@ -37,7 +37,6 @@ const EditProductModal: React.FC<EditProductModalProps> = ({
         const res = await axios.post("/api/admin/getitem", { id });
         if (res.status === 200) {
           const fetched = res.data.item;
-          console.log("fetched Item : ", fetched);
           setEditItem(fetched);
           setItemName(fetched.item_name);
           setItemDescription(fetched.item_description);
@@ -59,14 +58,24 @@ const EditProductModal: React.FC<EditProductModalProps> = ({
   }, [id, isOpen]);
 
   const handleSubmit = async () => {
-    setSubmitting(true);
     const data = new FormData();
+    if (
+      !item_name ||
+      !item_description ||
+      !item_price.single ||
+      !item_category
+    ) {
+      toast.error("Please fill all the fields");
+      return;
+    }
+    data.append("id", id);
     data.append("item_name", item_name);
     data.append("item_description", item_description);
     data.append("item_price_single", item_price.single);
     if (item_price.meal) data.append("item_price_combo", item_price.meal);
     data.append("item_category", item_category);
     if (image) data.append("image", image);
+    setSubmitting(true);
 
     await onSubmit(data);
     onClose();
@@ -81,7 +90,7 @@ const EditProductModal: React.FC<EditProductModalProps> = ({
     >
       <div className="flex items-center justify-center min-h-screen px-4">
         <Dialog.Panel className="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg">
-          {loading ? (
+          {loading || submitting ? (
             <div className="flex flex-col items-center justify-center py-12">
               <svg
                 aria-hidden="true"

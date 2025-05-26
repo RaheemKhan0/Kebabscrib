@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { CartItem } from "@utils/context/ShoppingCartContext";
 
 const orderSchema = new mongoose.Schema(
   {

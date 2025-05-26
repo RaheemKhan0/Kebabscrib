@@ -15,8 +15,8 @@ export async function POST(req: NextRequest) {
     }
 
     const reqBody = await req.json();
-    const {  id } = reqBody;
-    console.log("id : " , id);
+    const { id } = reqBody;
+    console.log("id : ", id);
     if (!id) {
       return NextResponse.json({
         error: "No item provided",

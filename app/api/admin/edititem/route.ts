@@ -10,12 +10,14 @@ export async function PATCH(req: NextRequest) {
       req: req,
       secret: process.env.NEXTAUTH_SECRET,
     });
+    console.log("Edit item route ");
 
     if (payload?.role !== "admin") {
       return NextResponse.json({ error: "Not Authorised!" }, { status: 401 });
     }
 
     const formData = await req.formData();
+    console.log("form data : ", formData);
 
     const file = formData.get("image") as File | null;
     const itemName = formData.get("item_name") as string;
@@ -48,7 +50,7 @@ export async function PATCH(req: NextRequest) {
         item_description: itemDescription,
         item_price: {
           single: parseFloat(item_Price_single),
-          combo: item_Price_combo ? parseFloat(item_Price_combo) : undefined,
+          meal: item_Price_combo ? parseFloat(item_Price_combo) : undefined,
         },
         item_category: itemCategory,
         item_img_url: imageUrl,
@@ -62,4 +64,5 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
   }
 }
+
 
