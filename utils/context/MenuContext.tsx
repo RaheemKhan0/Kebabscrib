@@ -24,6 +24,7 @@ export const MenuProvider: React.FC<{ children: React.ReactNode }> = ({
     isLoading,
     mutate,
   } = useSWR<Menu[] | []>("/api/fetchmenuitems", fetcher);
+  console.log("Menu : ", menu);
   
   const deleteItem = async (id: string) => {
     try {

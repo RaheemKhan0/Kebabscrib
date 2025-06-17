@@ -8,7 +8,7 @@ import SessionWrapper from "@components/Auth/SessionWrapper";
 export const metadata = {
   title: "Kebabscrib",
   description:
-    "Kebabscrib is a food delivery service that delivers food to your doorstep.",
+    "Kebabscrib is a french Restaurant",
 };
 
 

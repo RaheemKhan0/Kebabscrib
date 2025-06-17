@@ -6,10 +6,10 @@ import LoadingScreen from "@components/Common/LoadingScreen";
 import CompletedItem from "./CompletedItem";
 
 const PendingOrders = () => {
-  const { orders, loading } = useOrder();
+  const { orders, loading, isLoading } = useOrder();
   const [view, setView] = useState<"pending" | "completed">("pending");
 
-  if (loading) {
+  if (loading || isLoading) {
     return <LoadingScreen />;
   }
 
@@ -51,14 +51,15 @@ const PendingOrders = () => {
             view === "pending" ? (
               <PendingItem
                 key={order._id?.toString()}
-                customerName={order.customer_name}
+                customerName={order.customer_name ?? ""}
                 items={order.items}
                 _id={order._id}
+                createdAt={order.createdAt}
               />
             ) : (
               <CompletedItem
                 key={order._id?.toString()}
-                customerName={order.customer_name}
+                customerName={order.customer_name ?? ""}
                 items={order.items}
                 total_price={order.total_price}
                 updatedAt={order.updatedAt}

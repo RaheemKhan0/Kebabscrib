@@ -2,25 +2,23 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 interface props {
-  onClose : () => void,
-  onSubmit : (name : string, email : string) => void
+  onClose: () => void;
+  onSubmit: (email: string) => void;
 }
 
-const GuestDetails = ({ onClose, onSubmit } : props) => {
-  const [name, setName] = useState("");
+const GuestDetails = ({ onClose, onSubmit }: props) => {
   const [email, setEmail] = useState("");
 
   const handleSubmit = () => {
-    if (!name.trim()) {
-      toast.error("Name is required");
+    if (!email.trim()) {
+      toast.error("Email is required");
       return;
     }
 
     // Optionally validate email pattern here
-    onSubmit( name, email );
+    onSubmit(email);
     onClose(); // close modal
   };
-
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
@@ -38,16 +36,8 @@ const GuestDetails = ({ onClose, onSubmit } : props) => {
 
         <div className="space-y-4">
           <input
-            type="text"
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full p-2 border rounded bg-gray-100"
-          />
-
-          <input
             type="email"
-            placeholder="Email (optional)"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full p-2 border rounded bg-gray-100"

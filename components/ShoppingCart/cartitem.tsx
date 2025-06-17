@@ -22,7 +22,7 @@ const ShoppingCartItem: React.FC<CartItemProps> = ({
     "/upload",
     "/upload/w_600,q_auto,f_auto",
   );
-  console.log("cart Taco Item : " , item);
+  console.log("cart Taco Item : ", item);
   return (
     <div className="max-w-3xl mx-auto rounded-lg border border-gray-700 bg-gray-900 p-4 shadow-md flex items-center justify-between space-x-4 transition-all hover:shadow-lg">
       {/* Item Image */}
@@ -69,6 +69,25 @@ const ShoppingCartItem: React.FC<CartItemProps> = ({
       {/* Extras Section */}
       <div className="flex flex-col text-sm text-gray-400 space-y-1">
         {/* Extra Sauces */}
+        {item.tacoMeats && (
+          <p>
+            <span className="text-gray-300 font-semibold">Taco Meat:  </span>
+            {item.tacoMeats.map((item) => item.item_name).join(",")}
+          </p>
+        )}
+        {item.extraMeat && (
+          <p>
+            <span className="text-gray-300 font-semibold">Extra Meat:  </span>
+            {item.extraMeat.item_name}
+          </p>
+        )}
+        {item.tacoSauce && (
+          <p>
+            <span className="text-gray-300 font-semibold">Taco Sauce:   </span>
+            {item.tacoSauce.item_name}
+          </p>
+        )}
+
         {item.meal && item.mealdrink && (
           <p>
             <span className="text-gray-300 font-semibold">Meal Drink:</span>{" "}

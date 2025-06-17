@@ -8,7 +8,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        KebabGreen: "#0C6045",  //"#014421",
+        KebabGreen: "#0C6045",
+        KebabGreenLight: "#178563",
+        KebabGreenDark: "#084733",
         KebabGold:  "#F7A890",//"#D39D55"
         KC_GREEN : "#006244",
         KC_PEACH : "#f9c89b",

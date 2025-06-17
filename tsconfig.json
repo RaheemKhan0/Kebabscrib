@@ -1,12 +1,25 @@
 {
   "compilerOptions": {
-    "baseUrl" : ".",
-    "paths" : {
-      "@model/*": ["model/*"],
-      "@lib/*": ["lib/*"],
-      "@components/*": ["components/*"],
-      "@utils/*": ["utils/*"],
-      "@public/*" : ["public/*"]
+    "baseUrl": ".",
+    "paths": {
+      "@model/*": [
+        "model/*"
+      ],
+      "@lib/*": [
+        "lib/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@public/*": [
+        "public/*"
+      ],
+      "@/*": [
+        "./app/*"
+      ]
     },
     "target": "ES2017",
     "lib": [
@@ -27,7 +40,6 @@
     "types": [
       "next-auth"
     ],
-
     "jsx": "preserve",
     "plugins": [
       {

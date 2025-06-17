@@ -2,23 +2,79 @@ import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema(
   {
-    customer_id : {type : mongoose.Types.ObjectId , required : false},
-    customer_name: { type: String, required: true },
-    email : {type: String , required : true},
-    user_id: { type: mongoose.Schema.Types.ObjectId, ref: "KebabscribUser", required : false },
-    items: { type: [CartItem], required: true },
+    stripe_session_id: { type: String, required: false },
+    customer_id: { type: String, required: false },
+    customer_name: { type: String, required: false },
+    email: { type: String, required: false },
+    phone: { type: String, required: false },
+    user_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "KebabscribUser",
+      required: false,
+    },
+    items: [
+      {
+        _id: { type: String, required: true },
+        item_name: { type: String, required: true },
+        item_description: { type: String }, // optional
+        item_price: { type: Number, required: true },
+        item_category: { type: String, required: true },
+        extra_Sauces: [
+          {
+            item_name: { type: String, required: true },
+            item_price: { type: Number, required: true },
+          },
+        ],
+        extra_Vegetables: [
+          {
+            item_name: { type: String, required: true },
+            item_price: { type: Number, required: true },
+          },
+        ],
+        extra_Cheese: [
+          {
+            item_name: { type: String, required: true },
+            item_price: { type: Number, required: true },
+          },
+        ],
+        extraMeat: {
+          item_name: { type: String },
+          item_price: { type: Number },
+        },
+        mealdrink: {
+          item_name: { type: String },
+          item_price: { type: Number },
+        },
+        mealsauce: {
+          item_name: { type: String },
+          item_price: { type: Number },
+        },
+        size: { type: String, enum: ["Medium", "Large"] },
+        meal: { type: Boolean, required: true },
+        item_img_url: { type: String },
+        Quantity: { type: Number, required: true },
+      },
+    ],
     total_price: { type: Number, required: true },
     status: {
       type: String,
-      enum: ["pending", "preparing", "completed", "cancelled"],
+      enum: ["draft", "pending", "completed"],
       default: "pending",
     },
-    isPaid: { type: Boolean, default: false },
-    note: { type: String }, // Optional customer note
+    note: { type: String },
+    isPaid: {
+      type: Boolean,
+      default: false,
+    },
+    createdAt: Date,
   },
   {
     timestamps: true, // Adds createdAt and updatedAt
   },
+);
+orderSchema.index(
+  { createdAt: 1 },
+  { expireAfterSeconds: 900, partialFilterExpression: { status: "draft" } },
 );
 
 const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);

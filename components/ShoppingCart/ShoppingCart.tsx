@@ -1,11 +1,14 @@
 "use client";
+import axios from "axios";
+import { OrderType } from "types/order";
 import React, { useState } from "react";
 import { useCart } from "@utils/context/ShoppingCartContext";
 import ShoppingCartItem from "./cartitem";
 import LoadingScreen from "../Common/LoadingScreen";
 import { useSession } from "next-auth/react";
 import ContinueAsGuest from "@components/Modals/ContinueAsGuest";
-import GuestDetails from "@components/Modals/GuestDetails";
+import { useRouter } from "next/navigation";
+import { formatOrderItems } from "@utils/middleware/helpers";
 
 const ShoppingCart = () => {
   const {
@@ -16,19 +19,51 @@ const ShoppingCart = () => {
     increaseQuantity,
     getTotal,
     getItemExtraTotal,
-    placeOrder,
   } = useCart();
   const { data: session, status } = useSession();
   const [showModal, setShowModal] = useState(false);
-  const [showGuestDetailsModal, setGuestDetailsModal] = useState(false);
-  const handleCheckout = () => {
+  const router = useRouter();
+
+  const handleCheckout = async () => {
     if (status === "unauthenticated") {
       setShowModal(true);
       return;
     }
-    if (session) {
-      console.log("Placing order for the logged in user : " , session.user)
-      placeOrder(session?.user.user_name, session?.user.email, session.user._id);
+    if (status === "authenticated") {
+      try {
+        const draftOrder: OrderType = {
+          user_id: session?.user._id,
+          items: formatOrderItems(CartItems),
+          total_price: getTotal(),
+          status: "draft",
+        };
+
+        const newOrder = await axios.post(
+          "/api/users/order/createdraftorder",
+          draftOrder,
+        );
+        router.push(`checkout/details?orderID=${newOrder.data.newOrder._id}`);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  const onGuestClick = async () => {
+    try {
+      const draftOrder: OrderType = {
+        items: formatOrderItems(CartItems),
+        total_price: getTotal(),
+        status: "draft",
+      };
+
+      const newOrder = await axios.post(
+        "/api/users/order/createdraftorder",
+        draftOrder,
+      );
+      router.push(`/checkout/details?orderID=${newOrder.data.newOrder._id}`);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -42,68 +77,50 @@ const ShoppingCart = () => {
         <h1 className="font-bold text-xl">Your cart is empty</h1>
       </div>
     );
-  } else {
-    return (
-      <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
-        <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-            Shopping Cart
-          </h2>
-        </div>{" "}
-        {showModal && (
-          <ContinueAsGuest
-            onClose={() => {
-              setShowModal(false);
-            }}
-            onGuestClick={() => {
-              setShowModal(false);
-              setGuestDetailsModal(true);
-            }}
-          />
-        )}
-        {showGuestDetailsModal && (
-          <GuestDetails
-            onClose={() => {
-              setGuestDetailsModal(false);
-            }}
-            onSubmit={(name, email) => {
-              placeOrder(name, email);
-            }}
-          />
-        )}
-        {/* Cart Items */}
-        <div className="mx-auto max-w-3xl space-y-4">
-          {CartItems.map((item) => (
-            <ShoppingCartItem
-              key={item.cart_id}
-              item={item}
-              increaseQuantity={() => increaseQuantity(item.cart_id)}
-              decreaseQuantity={() => decreaseQuantity(item.cart_id)}
-              removeItem={() => removeItem(item.cart_id)}
-              getItemExtraTotal={() => getItemExtraTotal(item)}
-            />
-          ))}
-        </div>
-        {/* Total Price Section */}
-        <div className="mx-auto max-w-3xl px-4 py-6 mt-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Total:
-          </h3>
-          <p className="text-xl font-bold text-gray-900 dark:text-white">
-            AED {getTotal()}
-          </p>
-        </div>
-        <button
-          onClick={() => {
-            handleCheckout();
-          }} // <-- Your function
-          className="w-full bg-green-700 text-white text-lg font-semibold py-3 rounded-lg hover:bg-green-800 transition-colors duration-200"
-        >
-          Proceed to Checkout
-        </button>
-      </section>
-    );
   }
-};
 
+  return (
+    <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+      <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
+          Shopping Cart
+        </h2>
+      </div>
+      {showModal && (
+        <ContinueAsGuest
+          onClose={() => setShowModal(false)}
+          onGuestClick={onGuestClick}
+        />
+      )}
+      {/* Cart Items */}
+      <div className="mx-auto max-w-3xl space-y-4">
+        {CartItems.map((item) => (
+          <ShoppingCartItem
+            key={item.cart_id}
+            item={item}
+            increaseQuantity={() => increaseQuantity(item.cart_id ?? "")}
+            decreaseQuantity={() => decreaseQuantity(item.cart_id ?? "")}
+            removeItem={() => removeItem(item.cart_id ?? "")}
+            getItemExtraTotal={() => getItemExtraTotal(item)}
+          />
+        ))}
+      </div>
+      {/* Total Price Section */}
+      <div className="mx-auto max-w-3xl px-4 py-6 mt-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          Total:
+        </h3>
+        <p className="text-xl font-bold text-gray-900 dark:text-white">
+          AED {getTotal()}
+        </p>
+      </div>
+      <button
+        onClick={handleCheckout}
+        className="w-full bg-green-700 text-white text-lg font-semibold py-3 rounded-lg hover:bg-green-800 transition-colors duration-200"
+      >
+        Proceed to Checkout
+      </button>
+    </section>
+  );
+};
 export default ShoppingCart;

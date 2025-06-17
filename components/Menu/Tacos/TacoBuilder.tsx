@@ -17,7 +17,7 @@ const TacoBuilder: React.FC = () => {
   const [meal, setMeal] = useState(false);
   const [size, setSize] = useState<"Medium" | "Large">("Medium");
   const [baseMeats, setBaseMeats] = useState<Menu[]>([]);
-  const [extraMeat, setExtraMeat] = useState<Menu | null>(null);
+  const [extraMeat, setExtraMeat] = useState<Extras | null>(null);
   const [sauces, setSauces] = useState<Menu[]>([]);
   const [cheeses, setCheeses] = useState<Menu[]>([]);
   const [vegetables, setVegetables] = useState<Menu[]>([]);
@@ -42,11 +42,12 @@ const TacoBuilder: React.FC = () => {
         meal:  size === "Medium"? mediumTaco?.item_price.meal ?? 55.5 : largeTaco?.item_price.single ?? 72.5,
       },
       item_category: "Taco",
-      size,
+      size : size,
       extra_Sauces: sauces,
       extra_Cheese: cheeses,
       meal: meal,
       extra_Vegetables: vegetables,
+      extraMeat : extraMeat ?? undefined,
       mealdrink: mealDrink,
       mealsauce: mealSauce,
       tacoMeats: baseMeats,
@@ -195,13 +196,6 @@ const TacoBuilder: React.FC = () => {
     </div>
   );
 
-  const buildTaco = (tacoItem: CartItem | undefined) => {
-    if (!tacoItem) {
-      toast.error("please select your options");
-      return;
-    }
-    addItem(tacoItem);
-  };
 
   return (
     <div className="p-6">

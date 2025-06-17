@@ -4,15 +4,25 @@ interface Props {
   _id: string | undefined;
   customerName: string;
   items: CartItem[];
+  createdAt : any;
 }
 
-const PendingItem = ({ customerName, items, _id }: Props) => {
+const PendingItem = ({ customerName, items, _id , createdAt}: Props) => {
   const { completeorder } = useOrder();
+    const formattedDate = createdAt
+    ? new Date(createdAt).toLocaleString("en-GB", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      })
+    : "Unknown date";
 
   return (
     <div className="bg-white font-parkinsans rounded-xl shadow-md p-6 w-full h-full flex flex-col justify-between">
       {/* Customer Name */}
-      <h3 className="text-2xl font-bold text-KC_GREEN mb-4">{customerName}</h3>
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-bold text-KC_GREEN">{customerName}</h2>
+        <p className="text-sm text-gray-500">{formattedDate}</p>
+      </div>
 
       {/* Items */}
       <div className="flex flex-col justify-start">
@@ -30,10 +40,30 @@ const PendingItem = ({ customerName, items, _id }: Props) => {
               </p>
 
               <div className="ml-4 mt-1 text-sm text-gray-700 space-y-1">
-                {/* Sauces */}
-                {item.extra_Sauces && (
+                {item.tacoSauce && (
                   <p>
-                    <span className="font-medium">Sauces:</span>{" "}
+                    <span className="font-medium">Taco Sauce: </span>{" "}
+                    {item.tacoSauce.item_name}
+                  </p>
+                )}
+                {item.tacoMeats && item.tacoMeats.length > 0 && (
+                  <p>
+                    <span className="font-medium">Taco Meats: </span>{" "}
+                    {item.tacoMeats
+                      .map((sauce) => sauce.item_name)
+                      .join(", ")}
+                  </p>
+                )}
+                {item.extraMeat && (
+                  <p>
+                    <span className="font-medium">Extra Meat:</span>{" "}
+                    {item.extraMeat.item_name}
+                  </p>
+                )}
+                {/* Sauces */}
+                {item.extra_Sauces && item.extra_Sauces.length > 0 && (
+                  <p>
+                    <span className="font-medium">Extra Sauces:</span>{" "}
                     {item.extra_Sauces
                       .map((sauce) => sauce.item_name)
                       .join(", ")}
@@ -41,9 +71,9 @@ const PendingItem = ({ customerName, items, _id }: Props) => {
                 )}
 
                 {/* Cheese */}
-                {item.extra_Cheese && (
+                {item.extra_Cheese && item.extra_Cheese.length > 0 && (
                   <p>
-                    <span className="font-medium">Cheese:</span>{" "}
+                    <span className="font-medium">Extra Cheese:</span>{" "}
                     {item.extra_Cheese
                       .map((cheese) => cheese.item_name)
                       .join(", ")}
@@ -51,9 +81,9 @@ const PendingItem = ({ customerName, items, _id }: Props) => {
                 )}
 
                 {/* Vegetables */}
-                {item.extra_Vegetables && (
+                {item.extra_Vegetables && item.extra_Vegetables.length > 0 && (
                   <p>
-                    <span className="font-medium">Vegetables:</span>{" "}
+                    <span className="font-medium">Extra Vegetables:</span>{" "}
                     {item.extra_Vegetables
                       .map((veg) => veg.item_name)
                       .join(", ")}

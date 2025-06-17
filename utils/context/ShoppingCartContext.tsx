@@ -15,12 +15,15 @@ import { OrderType } from "types/order";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Menu } from "@components/Menu/MenuList";
+import Stripe from "stripe";
 
 export type Extras = {
   _id: string;
   item_name: string;
   item_category: string;
-  item_price: Number;
+  item_price: {
+    single : number
+  };
 };
 
 export type CartItem = {
@@ -39,10 +42,10 @@ export type CartItem = {
   tacoSauce?: Extras;
   tacoMeats?: Menu[];
   size?: "Medium" | "Large";
-  meal : boolean;
-  extraMeat?: string;
-  mealdrink ?: Menu;
-  mealsauce ?: Extras; 
+  meal: boolean;
+  extraMeat?: Extras;
+  mealdrink?: Menu;
+  mealsauce?: Extras;
   item_img_url?: string;
   Quantity: number;
 };
@@ -58,10 +61,14 @@ type ShoppingCartContext = {
   generate_Cart_ID: (item: CartItem) => string;
   getTotal: () => number;
   getItemExtraTotal: (item: CartItem) => number;
-  placeOrder: (name: string, email: string, id: string) => Promise<void>;
+  placeOrder: (name: string, email: string, id?: string) => Promise<void>;
+  formatItemForStripe: () => Stripe.Checkout.SessionCreateParams.LineItem[];
+  clearCart: () => void;
 };
 
-export const shoppingCartContext = createContext<ShoppingCartContext | null>(null);
+export const shoppingCartContext = createContext<ShoppingCartContext | null>(
+  null,
+);
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -74,12 +81,12 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     }
     return [];
   });
-   useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
     setLoading(false);
   }, [cartItems]);
 
-  const generate_Cart_ID = (item: CartItem) : string => {
+  const generate_Cart_ID = (item: CartItem): string => {
     return [
       item._id,
       item.extra_Sauces?.length ? JSON.stringify(item.extra_Sauces) : null,
@@ -94,6 +101,9 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
       .filter(Boolean)
       .join("-");
   };
+  const clearCart = () => {
+    setCartItems([]);
+  };
 
   const addItem = (Item: CartItem) => {
     if (!Item._id) {
@@ -101,7 +111,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
       return;
     }
     const newCartID = generate_Cart_ID(Item);
-  
 
     setCartItems((prev) => {
       const existingItem = prev.find((item) => item.cart_id === newCartID);
@@ -134,7 +143,8 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     setCartItems((prev) => prev.filter((item) => item.cart_id !== cart_id));
   };
 
-  const decreaseQuantity = (cart_id: string) => {
+  const decreaseQuantity = (cart_id: string | undefined) => {
+    if (!cart_id) return;
     setCartItems((prev) =>
       prev.map((item) =>
         item.cart_id === cart_id
@@ -155,10 +165,22 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const getItemExtraTotal = (item: CartItem) => {
-    const TotalVegetables = (item.extra_Vegetables?.length ?? 0) * 3;
-    const TotalSauces = (item.extra_Sauces?.length ?? 0) * 4;
-    const TotalCheese = (item.extra_Cheese?.length ?? 0) * 6;
-    return TotalVegetables + TotalSauces + TotalCheese;
+    const TotalVegetables =
+      item.extra_Vegetables?.reduce((sum, v) => sum + (v.item_price ?? 0), 0) ??
+      0;
+
+    const TotalSauces =
+      item.extra_Sauces?.reduce((sum, s) => sum + (s.item_price ?? 0), 0) ?? 0;
+
+    const TotalCheese =
+      item.extra_Cheese?.reduce((sum, c) => sum + (c.item_price ?? 0), 0) ?? 0;
+
+    return (
+      TotalVegetables +
+      TotalSauces +
+      TotalCheese +
+      (item.extraMeat?.item_price ?? 0)
+    );
   };
 
   const getTotal = () => {
@@ -166,11 +188,27 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
       (total, item) =>
         total +
         (item.meal
-          ? (item.item_price.meal ?? item.item_price.single + 10 + getItemExtraTotal(item))
+          ? (item.item_price.meal ??
+            item.item_price.single + 10 + getItemExtraTotal(item))
           : item.item_price.single + getItemExtraTotal(item)) *
           item.Quantity,
       0,
     );
+  };
+
+  const formatItemForStripe = () => {
+    return cartItems.map((item) => ({
+      price_data: {
+        currency: "aed",
+        product_data: { name: item.item_name },
+        unit_amount:
+          (item.meal
+            ? (item.item_price.meal ?? item.item_price.single + 10) +
+              getItemExtraTotal(item)
+            : item.item_price.single + getItemExtraTotal(item)) * 100,
+      },
+      quantity: item.Quantity,
+    }));
   };
   const placeOrder = async (name: string, email: string, id?: string) => {
     try {
@@ -212,6 +250,8 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         getTotal,
         getItemExtraTotal,
         placeOrder,
+        formatItemForStripe,
+        clearCart
       }}
     >
       {children}
@@ -231,11 +271,14 @@ export const useCart = () => {
       loading: false,
       decreaseQuantity: () => {},
       increaseQuantity: () => {},
-      generate_Cart_ID: () => [],
+      generate_Cart_ID: () => "",
       getTotal: () => 0,
       getItemExtraTotal: () => 0,
-      placeOrder: () => Promise<void>,
+      placeOrder: async () => {},
+      formatItemForStripe: () => [],
+      clearCart: () => {},
     };
   }
   return cartContext;
 };
+
