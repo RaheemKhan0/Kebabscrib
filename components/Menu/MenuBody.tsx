@@ -50,9 +50,9 @@ const MenuBody: React.FC = () => {
   };
   // bg-[#006244]
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mt-24 px-4 sm:px-8 lg:px-20 w-full max-w-screen-xl mx-auto">
       {/* Nav Bar */}
-      <nav className="flex justify-center items-center gap-4 px-6 py-2 mt-6 mb-4">
+      <nav className="hidden sm:flex justify-center items-center gap-4 px-6 py-2 mt-6 mb-4">
         {(["Sandwiches", "Sides", "Drinks"] as (keyof CheckedItems)[]).map(
           (category) => (
             <button
@@ -66,13 +66,26 @@ const MenuBody: React.FC = () => {
           ),
         )}
         <button
-          className="flex items-center px-4 py-2 rounded-full border border-[#006244] bg-[#FDF6EC] text-[#006244] font-semibold text-md shadow hover:shadow-md transition"
+          className="hidden sm:flex items-center px-4 py-2 rounded-full border border-[#006244] bg-[#F4CF4B] text-[#006244] font-semibold text-md shadow hover:shadow-md transition"
           onClick={() => router.push("/customtaco")}
         >
           <ArrowLeftIcon className="h-5 w-5 mr-2" />
           Make Taco
         </button>
       </nav>
+      {/* Mobile dropdown nav */}
+      <div className="flex sm:hidden justify-center mt-4 rounded-md">
+        <select
+          onChange={(e) =>
+            handleCheckboxChange(e.target.value as keyof CheckedItems)
+          }
+          className="p-2 rounded border text-sm text-[#390F00]"
+        >
+          <option value="Sandwiches">Sandwiches</option>
+          <option value="Sides">Sides</option>
+          <option value="Drinks">Drinks</option>
+        </select>
+      </div>
       {/* Conditional Divs Based on Checkboxes */}
       <div className="mt-10 space-y-6 w-full mx-auto">
         {checkedItems.Sandwiches && (

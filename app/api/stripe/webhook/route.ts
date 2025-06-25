@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import { sendOrderReceiptEmail } from "@lib/emails/sendEmail";
 import Stripe from "stripe";
 import connectMongodb from "@lib/mongodb";
 import Order from "@model/orders";
+import KebabscribUser from "@model/Kebabscrib_User";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2025-04-30.basil",
@@ -79,6 +81,20 @@ export async function POST(req: NextRequest) {
       },
       { new: true },
     );
+    const updateUserOrders = await KebabscribUser.findOneAndUpdate(
+      updated.user_id,
+      {
+       $push: {orders : orderID} 
+      },
+      {
+        new : true
+      }
+    );
+    console.log("updated user's order : ", updateUserOrders)
+
+    console.log("updated order : ", updated);
+    await sendOrderReceiptEmail(updated);
+
     console.log("Order Updated successfully in webhook : ", updated);
 
     if (!updated) {

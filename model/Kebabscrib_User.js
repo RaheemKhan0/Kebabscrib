@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Order from "./orders";
 
 const kebabscribUserSchema = new mongoose.Schema({
   user_name: {
@@ -19,21 +20,29 @@ const kebabscribUserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  role : {
-    type : String,
+  role: {
+    type: String,
     enum: ["admin", "staff", "user"],
     default: "user",
   },
-  forgotPasswordToken: String,
-  forgotPasswordTokenExpiry: Date,
-  verifyToken: String,
-  verifyTokenExpiry: Date,
+  verified: {
+    type: Boolean,
+    default: false,
+  },
   lastlogin: {
     type: Date,
     default: Date.now,
   },
+  orders : [
+    {
+      type : mongoose.Schema.Types.ObjectId,
+      ref : Order
+    }
+  ]
 });
 
-const KebabscribUser = mongoose.models.KebabscribUser || mongoose.model("KebabscribUser", kebabscribUserSchema)
+const KebabscribUser =
+  mongoose.models.KebabscribUser ||
+  mongoose.model("KebabscribUser", kebabscribUserSchema);
 
 export default KebabscribUser;

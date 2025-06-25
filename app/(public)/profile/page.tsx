@@ -1,6 +1,5 @@
 "use client";
-import React, { useState, useContext } from "react";
-import axios from "axios";
+import { useState} from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { signOut } from "next-auth/react";

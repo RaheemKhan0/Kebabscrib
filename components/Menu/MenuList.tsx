@@ -41,7 +41,7 @@ const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
 
   // Render menu items based on the selected category
   return (
-    <div className="container mx-auto mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-10">
+    <div className="container mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-10">
       {itemsWithBanner.map((item) => {
         if ("_id" in item && item._id === "taco-banner") {
           return <TacoBuilderBanner key="taco-banner" />;

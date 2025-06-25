@@ -7,11 +7,11 @@ const TacoBuilderBanner: React.FC = () => {
   const router = useRouter();
 
   return (
-    <div className="relative w-full p-4 border-2 border-dashed border-KebabGreen rounded-xl shadow-sm flex flex-col items-center justify-center bg-[#FFF9F1] hover:shadow-md transition-all">
+    <div className="relative w-full max-w-xs mx-auto sm:max-w-sm md:max-w-md p-4 border-2 border-dashed border-KebabGreen rounded-xl shadow-sm flex flex-col items-center justify-center bg-[#FFF9F1] hover:shadow-md transition-all">
       {/* Taco Image */}
       <div className="w-14 h-14 mb-4">
         <Image
-          src="/assets/Taco.png"
+          src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1750581513/Taco_zteqij.png"
           alt="Taco Icon"
           width={56}
           height={56}

@@ -45,6 +45,7 @@ export const authOptions: NextAuthOptions = {
         token.role = user.role;
         token.user_name = user.user_name;
         token.email = user.email;
+        token.verified = user.verified;  
       }
       return token;
     },
@@ -54,6 +55,7 @@ export const authOptions: NextAuthOptions = {
       session.user.role = token.role;
       session.user.user_name = token.user_name;
       session.user.email = token.email;
+      session.user.verified = token.verified;
       return session;
     },
   }, 

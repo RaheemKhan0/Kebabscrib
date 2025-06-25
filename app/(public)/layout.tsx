@@ -7,10 +7,8 @@ import { MenuProvider } from "@utils/context/MenuContext";
 import SessionWrapper from "@components/Auth/SessionWrapper";
 export const metadata = {
   title: "Kebabscrib",
-  description:
-    "Kebabscrib is a french Restaurant",
+  description: "Kebabscrib is a french Restaurant",
 };
-
 
 export default function RootLayout({
   children,
@@ -21,8 +19,19 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@457&display=swap" rel="stylesheet" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@457&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body className="bg-EggShell grid grid-rows-[auto,1fr,auto] min-h-screen">
         <SessionWrapper>
@@ -37,5 +46,5 @@ export default function RootLayout({
         </SessionWrapper>
       </body>
     </html>
-  );}
-
+  );
+}

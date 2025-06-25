@@ -9,6 +9,7 @@ declare module "next-auth" {
       role: string;
       email: string;
       user_name: string;
+      verified : boolean;
     };
   }
 
@@ -17,6 +18,7 @@ declare module "next-auth" {
     role: string;
     email: string;
     user_name: string;
+    verified : boolean;
   }
 }
 
@@ -26,6 +28,7 @@ declare module "next-auth/jwt" {
     role: string;
     email: string;
     user_name: string;
+    verified : boolean;
   }
 }
 

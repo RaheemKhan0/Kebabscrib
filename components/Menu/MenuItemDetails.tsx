@@ -201,7 +201,7 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center max-w-full mx-auto mt-16 px-6">
+    <div className="flex flex-col md:flex-row items-center justify-center max-w-full mx-auto mt-32 px-6">
       {/* Image Section */}
       <div className="md:w-1/2 flex items-center justify-center">
         {menuItem.item_img_url ? (

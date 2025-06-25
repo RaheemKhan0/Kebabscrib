@@ -9,6 +9,8 @@ import { useSession } from "next-auth/react";
 import ContinueAsGuest from "@components/Modals/ContinueAsGuest";
 import { useRouter } from "next/navigation";
 import { formatOrderItems } from "@utils/middleware/helpers";
+import VerifyModal from "@components/Modals/VerifyModal";
+import toast from "react-hot-toast";
 
 const ShoppingCart = () => {
   const {
@@ -22,11 +24,18 @@ const ShoppingCart = () => {
   } = useCart();
   const { data: session, status } = useSession();
   const [showModal, setShowModal] = useState(false);
+  const [showVerifyModal, setShowVerifyModal] = useState(false);
+  const [skipVerification, setSkipVerification] = useState(false);
   const router = useRouter();
+  const [verifyModalLoading, setVerifyModalLoading] = useState(false);
 
   const handleCheckout = async () => {
     if (status === "unauthenticated") {
       setShowModal(true);
+      return;
+    }
+    if (!session?.user.verified && !skipVerification) {
+      setShowVerifyModal(true);
       return;
     }
     if (status === "authenticated") {
@@ -45,6 +54,23 @@ const ShoppingCart = () => {
         router.push(`checkout/details?orderID=${newOrder.data.newOrder._id}`);
       } catch (error) {
         console.error(error);
+      }
+    }
+  };
+  const onVerify = async () => {
+    try {
+      setVerifyModalLoading(true);
+      const res = await axios.post("/api/users/resend-verify-email");
+      if (res.status === 200) {
+        toast.success("verification email successfully sent");
+        setSkipVerification(true);
+      }
+      setVerifyModalLoading(false);
+    } catch (error : any) {
+      setSkipVerification(true);
+      setVerifyModalLoading(false);
+      if (error.response.status === 429) {
+        toast.error(error.response?.data?.error);
       }
     }
   };
@@ -90,6 +116,33 @@ const ShoppingCart = () => {
         <ContinueAsGuest
           onClose={() => setShowModal(false)}
           onGuestClick={onGuestClick}
+        />
+      )}
+      {showVerifyModal && (
+        <VerifyModal
+          loading = {verifyModalLoading}
+          onClose={() => setShowVerifyModal(false)}
+          onSkip={async () => {
+            setSkipVerification(true);
+            try {
+              const draftOrder: OrderType = {
+                items: formatOrderItems(CartItems),
+                total_price: getTotal(),
+                status: "draft",
+              };
+
+              const newOrder = await axios.post(
+                "/api/users/order/createdraftorder",
+                draftOrder,
+              );
+              router.push(
+                `/checkout/details?orderID=${newOrder.data.newOrder._id}`,
+              );
+            } catch (error) {
+              console.error(error);
+            }
+          }}
+          onVerify={onVerify}
         />
       )}
       {/* Cart Items */}

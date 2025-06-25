@@ -1,14 +1,15 @@
 import React from "react";
-import { FaInstagram, FaFacebookF, FaTwitter } from "react-icons/fa";
+import { FaInstagram, FaFacebookF} from "react-icons/fa";
+import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-KebabGreen text-white py-8 border-t-2 border-t-KebabGold">
+    <footer className="bg-KC_GREEN text-white py-8 border-t-2 border-t-KebabGold">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <div className="mb-6 md:mb-0">
           {/* <h2 className="text-2xl text-KebabGold font-bold ">Kebabs Crib</h2> */}
           <img
-            src="/assets/KC_Logo.png"
+            src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1750239647/KC_Logo_Combination_stacked_green_epqs9c.png"
             alt="Kebab's Crib Logo"
             className="h-10 w-auto"
           />
@@ -34,17 +35,7 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
               >
                 <FaFacebookF className="text-KebabGold hover:text-white text-3xl transition-colors duration-300" />
-              </a>
-                            
-                            {/* <div className="mt-8">
-                                <h3 className="text-lg font-s+
-                                emibold">Find Us</h3>
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509307!2d144.9537363155049!3d-37.81720997975195"
-                                    width="100%" height="300" loading="lazy" className="rounded-md"
-                                ></iframe>
-                            </div> */}
-                            
+              </a>           
             </div>
           </div>
         </div>

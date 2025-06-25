@@ -198,7 +198,7 @@ const TacoBuilder: React.FC = () => {
 
 
   return (
-    <div className="p-6">
+    <div className="p-6 mt-24">
       <h1 className="text-4xl font-extrabold mb-6 text-KebabGreen tracking-tight text-center">
         🌮 Build Your Dream Taco!
       </h1>
