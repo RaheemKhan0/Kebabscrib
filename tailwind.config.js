@@ -19,7 +19,8 @@ module.exports = {
         EggShell: "#FDF6EC",
         Sandy: "#ECD9B9",
         DeepSea: "#2C4C63",
-        KC_RED : "#750F04"
+        KC_RED: "#750F04",
+        KC_Lemon: "#FFFD75"
       },
       fontFamily: {
         parkinsans: ["Parkinsans", "sans-serif"],

@@ -4,6 +4,7 @@ import { OrderType } from "types/order";
 import { OrderReceipt } from "@components/Emails/OrderRecieptEmail";
 import ForgottenPasswordEmail from "@components/Emails/ForgottenPasswordEmail";
 import VerificationEmail from "@components/Emails/VerificationEmail";
+import ContactUsEmail from "@components/Emails/ContactUsEmail";
 
 export async function sendOrderReceiptEmail(order: OrderType) {
   const html = await render(<OrderReceipt order={order} />);
@@ -42,4 +43,20 @@ export async function sendVerificationEmail(
     html,
   });
   console.log("forgotten email : ", result);
+}
+
+export async function sendContactEmail(
+  name: string,
+  email: string,
+  message: string,
+) {
+  const html = await render(
+    <ContactUsEmail name={name} email={email} message={message}/>
+  );
+  await resend.emails.send({
+    from: "onboarding@resend.dev",
+    to: "onboarding@resend.dev",
+    subject: `New Contact Message from ${name}`,
+    html,
+  });
 }

@@ -38,7 +38,7 @@ export default function CheckoutForm({
     if (!name || !email) {
       toast.error("please make sure to fill the checkout details first");
       router.push("/checkout/details");
-      return
+      return;
     }
 
     const cardElement = elements.getElement(CardElement);
@@ -65,42 +65,48 @@ export default function CheckoutForm({
         // Optional → call your API to mark order complete if needed
 
         // Redirect to success page
-        router.push(`/ordersuccessful?orderID=${encodeURIComponent(order._id ?? "")}`);
+        router.push(
+          `/ordersuccessful?orderID=${encodeURIComponent(order._id ?? "")}`,
+        );
       }
     }
   };
 
   // Render
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 m-14 lg:m-4">
+    <div className="flex flex-col items-center justify-center w-full min-h-screen p-6 lg:p-10 bg-EggShell">
       {/* Title */}
-      <h1 className="text-4xl font-extrabold text-Sandy mb-6 text-center">
+      <h1 className="text-4xl font-extrabold text-KC_GREEN mb-4 text-center">
         Complete your payment
       </h1>
 
       {/* Total Price */}
-      <p className="text-3xl font-bold text-white mb-8">AED {getTotal()} </p>
+      <p className="text-3xl font-bold text-KC_BROWN mb-10">AED {getTotal()}</p>
 
-      {/* Main content box */}
-      {/* Main content box */}
-      <div className="flex flex-col md:flex-row max-w-5xl w-full bg-none space-y-6 md:space-y-0 md:space-x-6">
-        {/* Order Summary */}
-        <div className="md:w-1/2 w-full bg-[#0C6045] text-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-semibold mb-4">Items</h2>
+      {/* Main Section */}
+      <div className="flex flex-col md:flex-row max-w-6xl w-full space-y-6 md:space-y-0 md:space-x-6">
+        {/* Order Summary - Made Bigger */}
+        <div className="md:w-3/5 w-full bg-KC_GREEN text-white p-8 rounded-lg shadow-xl">
+          <h2 className="text-2xl font-bold mb-6 text-KC_Yellow">
+            Order Summary
+          </h2>
+
           {order.items.length === 0 ? (
-            <p className="text-gray-300">Loading items...</p>
+            <p className="text-KC_Yellow/80">Loading items...</p>
           ) : (
             order.items.map((item) => (
-              <div key={item._id} className="flex items-center space-x-4 mb-4">
+              <div key={item._id} className="flex items-center space-x-5 mb-5">
                 <img
                   src={item.item_img_url}
                   alt={item.item_name}
-                  className="w-14 h-14 object-cover rounded"
+                  className="w-20 h-20 object-cover rounded-lg border border-KC_Yellow"
                 />
-                <div>
-                  <p className="font-semibold">{item.item_name}</p>
-                  <p className="text-sm text-gray-200">Qty: {item.Quantity}</p>
-                  <p className="text-sm text-gray-200">
+                <div className="flex flex-col">
+                  <p className="font-semibold text-white text-lg">
+                    {item.item_name}
+                  </p>
+                  <p className="text-sm text-white/80">Qty: {item.Quantity}</p>
+                  <p className="text-sm text-KC_Yellow">
                     Price: AED {item.item_price.single}
                   </p>
                 </div>
@@ -109,40 +115,42 @@ export default function CheckoutForm({
           )}
         </div>
 
-        {/* Payment Form */}
+        {/* Payment Form - Enlarged Card Input */}
         <form
           onSubmit={handleSubmit}
-          className="md:w-1/2 w-full space-y-4 p-6 bg-white rounded-lg shadow-lg border border-gray-200"
+          className="md:w-2/5 w-full p-8 bg-white rounded-lg shadow-xl border border-gray-200 space-y-6"
         >
-          <h2 className="text-xl font-bold mb-4 text-gray-900">
-            Complete Your Payment
+          <h2 className="text-2xl font-bold text-KC_GREEN mb-3">
+            Payment Details
           </h2>
 
-          <CardElement
-            options={{
-              style: {
-                base: {
-                  fontSize: "16px",
-                  color: "#32325d",
-                  "::placeholder": {
-                    color: "#aab7c4",
-                  },
-                },
-                invalid: {
-                  color: "#fa755a",
-                  iconColor: "#fa755a",
-                },
-              },
-              hidePostalCode: true,
-            }}
-          />
+            <div className="p-4 border border-gray-300 rounded-md bg-gray-50 w-full">
+                <CardElement
+                  options={{
+                    style: {
+                      base: {
+                        fontSize: "20px",
+                        color: "#1e293b",
+                        "::placeholder": {
+                          color: "#94a3b8",
+                        },
+                      },
+                      invalid: {
+                        color: "#dc2626",
+                        iconColor: "#dc2626",
+                      },
+                    },
+                    hidePostalCode: true,
+                  }}
+                />
+              </div>
 
-          {error && <p className="text-red-500">{error}</p>}
+          {error && <p className="text-red-600 text-sm">{error}</p>}
 
           <button
             type="submit"
             disabled={!stripe || isProcessing}
-            className="w-full bg-KebabGreen text-white text-lg font-semibold py-3 rounded-lg hover:bg-KebabGreenDark transition-colors duration-200"
+            className="w-full bg-KC_Yellow text-KC_GREEN font-bold py-3 rounded-lg hover:bg-yellow-400 hover:text-KC_BROWN transition-all duration-200 shadow-md disabled:opacity-60"
           >
             {isProcessing ? "Processing..." : "Pay Now"}
           </button>

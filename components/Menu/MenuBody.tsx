@@ -79,7 +79,7 @@ const MenuBody: React.FC = () => {
           onChange={(e) =>
             handleCheckboxChange(e.target.value as keyof CheckedItems)
           }
-          className="p-2 rounded border text-sm text-[#390F00]"
+          className="p-2 rounded-md bg-KC_Yellow border text-sm text-[#390F00]"
         >
           <option value="Sandwiches">Sandwiches</option>
           <option value="Sides">Sides</option>

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'keen-slider/keen-slider.min.css';
 
 .hover:shadow-lg {
   transition: all 0.3s;
@@ -8,7 +9,7 @@
 }
 
 .background {
-  background-image: url("https://res.cloudinary.com/dpqto9jrm/image/upload/v1745680512/Classic_Poulet_mlotuw.jpg");
+  background-image: url("https://res.cloudinary.com/dpqto9jrm/image/upload/v1751115739/Untitled_design_spfunf.png");
   background-color: black;
   height: 70vh;
   position: relative;

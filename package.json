@@ -21,6 +21,7 @@
     "headlessui": "^0.0.0",
     "jose": "^6.0.10",
     "jsonwebtoken": "^9.0.2",
+    "keen-slider": "^6.8.6",
     "mongoose": "^8.8.4",
     "next": "^15.1.5",
     "next-auth": "^4.24.11",

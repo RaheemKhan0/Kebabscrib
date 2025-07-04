@@ -33,7 +33,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-EggShell grid grid-rows-[auto,1fr,auto] min-h-screen">
+      <body className="bg-EggShell grid grid-rows-[auto,1fr,auto] min-h-screen overflow-x-hidden">
         <SessionWrapper>
           <MenuProvider>
             <CartProvider>

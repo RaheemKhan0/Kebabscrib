@@ -32,7 +32,7 @@ const ForgottenPassword = () => {
       if (err.response.status === 404) {
         toast.error("User not found");
       } else if (err.response.status == 429) {
-          toast.error(err.response?.data?.error);
+        toast.error(err.response?.data?.error);
       } else {
         toast.error(
           err?.response?.data?.error || "Something went wrong. Try again.",
@@ -44,12 +44,12 @@ const ForgottenPassword = () => {
   };
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 p-6">
-        <h1 className="text-2xl font-bold mb-4 text-center text-KebabGreen">
+    <section className="bg-EggShell min-h-screen flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-md bg-white border border-KC_GREEN rounded-xl shadow-md p-8">
+        <h1 className="text-2xl font-bold text-center text-KC_GREEN mb-4">
           Forgot Your Password?
         </h1>
-        <p className="text-center text-gray-600 dark:text-gray-300 text-sm mb-6">
+        <p className="text-center text-KC_GREEN/80 text-sm mb-6">
           Enter your registered email and we’ll send you a reset link.
         </p>
 
@@ -57,7 +57,7 @@ const ForgottenPassword = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 dark:text-white mb-1"
+              className="block text-sm font-medium text-KC_GREEN mb-1"
             >
               Email Address
             </label>
@@ -65,7 +65,7 @@ const ForgottenPassword = () => {
               type="email"
               id="email"
               name="email"
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-KebabGreen"
+              className="w-full px-4 py-2 rounded-md border border-KC_GREEN bg-white text-KC_GREEN focus:outline-none focus:ring-2 focus:ring-KC_GREEN"
               placeholder="name@company.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -76,7 +76,7 @@ const ForgottenPassword = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-KebabGreen hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+            className="w-full bg-KC_GREEN text-white font-semibold py-2.5 rounded-md hover:bg-KC_GREEN/90 transition duration-200"
           >
             {loading ? "Sending..." : "Send Reset Link"}
           </button>

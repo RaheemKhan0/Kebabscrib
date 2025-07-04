@@ -1,12 +1,18 @@
 "use client";
 import React, { useState } from "react";
-import { Dialog } from "@headlessui/react";
+import {
+  Dialog,
+  DialogPanel,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import LoadingScreen from "./Common/LoadingScreen";
 import { UserIcon, ShoppingCartIcon } from "@heroicons/react/20/solid";
 import toast from "react-hot-toast";
+import { Fragment } from "react";
 
 const Navbar: React.FC = () => {
   const [menu, SetMenu] = useState(false);
@@ -62,15 +68,7 @@ const Navbar: React.FC = () => {
               </li>
               <li>
                 <a
-                  href="#"
-                  className="py-2 px-3 duration-300 hover:text-Light_Peach"
-                >
-                  Catering
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
+                  href="/contactus"
                   className="py-2 px-3 duration-300 hover:text-Light_Peach"
                 >
                   Contact Us
@@ -160,7 +158,7 @@ const Navbar: React.FC = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => SetMenu(true)}
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-KebabGold rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-KC_GREEN rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200"
           >
             <span className="sr-only">Open main menu</span>
             <svg
@@ -179,58 +177,196 @@ const Navbar: React.FC = () => {
             </svg>
           </button>
         </div>
-
         {/* Mobile Dialog Menu */}
-        <Dialog
-          open={menu}
-          onClose={() => SetMenu(false)}
-          className="relative z-50"
-        >
-          <div
-            className="fixed inset-0 bg-black bg-opacity-30"
-            aria-hidden="true"
-          />
-
-          <div className="fixed inset-0 flex items-center justify-center">
-            <div
-              className={`w-screen h-screen max-w-md bg-KebabGreen shadow-lg p-6 transform transition-transform duration-300 ease-in-out ${menu ? "translate-x-0" : "translate-x-full"}`}
+        <Transition show={menu} as={Fragment}>
+          <Dialog
+            as="div"
+            className="relative z-50"
+            onClose={() => SetMenu(false)}
+          >
+            {/* Backdrop */}
+            <TransitionChild
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
             >
-              <ul className="mt-[20%] space-y-4">
-                {["Home", "Menu", "Catering", "ContactUs"].map((item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
-                      className="block text-lg text-KebabGold hover:text-KebabGold duration-300 border-b-[5px] border-b-KebabGold"
-                      onClick={() => SetMenu(false)}
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <button
-                onClick={() => SetMenu(false)}
-                className="absolute top-4 left-4 text-KebabGold"
+              <div className="fixed inset-0 bg-black bg-opacity-30" />
+            </TransitionChild>
+
+            {/* Panel */}
+            <div className="fixed inset-0 flex justify-end">
+              <TransitionChild
+                as={Fragment}
+                enter="transform transition ease-out duration-300"
+                enterFrom="translate-x-full"
+                enterTo="translate-x-0"
+                leave="transform transition ease-in duration-200"
+                leaveFrom="translate-x-0"
+                leaveTo="translate-x-full"
               >
-                <span className="sr-only">Close</span>
-                <svg
-                  className="w-6 h-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
+                <DialogPanel className="w-full max-w-xs bg-EggShell p-6 h-full shadow-xl relative">
+                  <button
+                    onClick={() => SetMenu(false)}
+                    className="absolute top-4 left-4 text-KC_GREEN"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="size-10"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                      />
+                    </svg>
+                  </button>
+
+                  <ul className="mt-20 space-y-4">
+                    {[
+                      { name: "Home", path: "/" },
+                      { name: "Menu", path: "/menu" },
+                      { name: "Contact Us", path: "/contactus" },
+                    ].map((item) => (
+                      <li key={item.name}>
+                        <a
+                          href={item.path}
+                          className="relative group block text-lg text-KC_GREEN"
+                          onClick={() => SetMenu(false)}
+                        >
+                          <span className="relative z-10">{item.name}</span>
+                          <span
+                            className="absolute left-1/2 bottom-0 h-[2px] w-0 bg-KC_GREEN transition-all duration-300 group-hover:w-10 group-hover:left-0"
+                            style={{ transform: "translateY(6px)" }}
+                          />
+                        </a>
+                      </li>
+                    ))}
+                    {status === "authenticated" ? (
+                      <Menu
+                        as="div"
+                        className="absolute inline-block text-left top-0.5 right-4"
+                      >
+                        <div>
+                          <MenuButton className="inline-flex items-center justify-center gap-x-1.5 rounded-full bg-KebabGreen p-2 ring-2 ring-KC_PEACH shadow-lg hover:ring-KC_PEACH/80 hover:bg-KebabGreen/90 transition duration-300">
+                            <UserIcon className="h-6 w-6 text-KC_PEACH" />
+                          </MenuButton>
+                        </div>
+                        <MenuItems className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-none">
+                          <div className="py-1">
+                            <MenuItem>
+                              {({ active }) => (
+                                <button
+                                  onClick={() => {
+                                    SetMenu(false);
+                                    router.push("/profile");
+                                  }}
+                                  className={`block px-4 py-2 text-sm w-full text-left ${active ? "bg-gray-100 text-gray-900" : "text-gray-700"}`}
+                                >
+                                  Account Settings
+                                </button>
+                              )}
+                            </MenuItem>
+                            <MenuItem>
+                              {({ active }) => (
+                                <button
+                                  onClick={() => {
+                                    SetMenu(false);
+                                    router.push("/support");
+                                  }}
+                                  className={`block px-4 py-2 text-sm w-full text-left ${active ? "bg-gray-100 text-gray-900" : "text-gray-700"}`}
+                                >
+                                  Support
+                                </button>
+                              )}
+                            </MenuItem>
+                            <MenuItem>
+                              {({ active }) => (
+                                <button
+                                  onClick={() => {
+                                    SetMenu(false);
+                                    router.push("/license");
+                                  }}
+                                  className={`block px-4 py-2 text-sm w-full text-left ${active ? "bg-gray-100 text-gray-900" : "text-gray-700"}`}
+                                >
+                                  License
+                                </button>
+                              )}
+                            </MenuItem>
+                            <MenuItem>
+                              {({ active }) => (
+                                <button
+                                  onClick={() => {
+                                    SetMenu(false);
+                                    logout();
+                                  }}
+                                  className={`block px-4 py-2 text-sm w-full text-left ${active ? "bg-red-100 text-red-700" : "text-red-600"}`}
+                                >
+                                  Sign out
+                                </button>
+                              )}
+                            </MenuItem>
+                          </div>
+                        </MenuItems>
+                      </Menu>
+                    ) : (
+                      <>
+                        <li>
+                          <a
+                            href="/signup"
+                            className="relative group block text-lg text-KC_GREEN"
+                            onClick={() => SetMenu(false)}
+                          >
+                            <span className="relative z-10">Signup</span>
+                            <span
+                              className="absolute left-1/2 bottom-0 h-[2px] w-0 bg-KC_GREEN transition-all duration-300 group-hover:w-10 group-hover:left-0"
+                              style={{ transform: "translateY(6px)" }}
+                            />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="/login"
+                            className="relative group block text-lg text-KC_GREEN"
+                            onClick={() => SetMenu(false)}
+                          >
+                            <span className="relative z-10">Login</span>
+                            <span
+                              className="absolute left-1/2 bottom-0 h-[2px] w-0 bg-KC_GREEN transition-all duration-300 group-hover:w-10 group-hover:left-0"
+                              style={{ transform: "translateY(6px)" }}
+                            />
+                          </a>
+                        </li>
+                      </>
+                    )}
+                    <li>
+                      <a
+                        href="/cart"
+                        onClick={() => SetMenu(false)}
+                        className="relative group block text-lg text-KC_GREEN"
+                      >
+                        <span className="relative z-10 flex items-center gap-2">
+                          <ShoppingCartIcon className="h-6 w-6 text-KC_GREEN " />
+                        </span>
+                        <span
+                          className="absolute left-1/2 bottom-0 h-[2px] w-0 bg-KC_GREEN transition-all duration-300 group-hover:w-10 group-hover:left-0"
+                          style={{ transform: "translateY(6px)" }}
+                        />
+                      </a>
+                    </li>
+                  </ul>
+                </DialogPanel>
+              </TransitionChild>
             </div>
-          </div>
-        </Dialog>
+          </Dialog>
+        </Transition>{" "}
       </nav>
     );
   }

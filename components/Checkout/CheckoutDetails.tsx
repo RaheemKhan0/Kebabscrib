@@ -86,41 +86,41 @@ export default function CheckoutDetailsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-KebabGreenDark via-KebabGreen to-KebabGreen flex flex-col items-center justify-center px-4">
-      <h1 className="text-3xl font-bold text-white mb-6">
+    <div className="min-h-screen bg-EggShell flex flex-col items-center justify-center px-4 py-12">
+      <h1 className="text-3xl font-bold text-KC_GREEN mb-6 text-center">
         Enter Checkout Details
       </h1>
       <form
         onSubmit={handleContinue}
-        className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full space-y-4"
+        className="bg-white p-6 md:p-8 rounded-xl shadow-2xl border border-KC_GREEN max-w-md w-full space-y-5"
       >
         <input
           type="text"
           placeholder="Full Name"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-KC_GREEN text-KC_GREEN font-medium"
           value={customerName}
           onChange={(e) => setCustomerName(e.target.value)}
         />
         <input
           type="email"
           placeholder="Email"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-KC_GREEN text-KC_GREEN font-medium"
           value={customerEmail}
           onChange={(e) => setCustomerEmail(e.target.value)}
         />
         <input
           type="tel"
           placeholder="Phone (optional)"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-KC_GREEN text-KC_GREEN font-medium"
           value={customerPhone}
           onChange={(e) => setCustomerPhone(e.target.value)}
         />
 
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        {error && <p className="text-red-600 text-sm">{error}</p>}
 
         <button
           type="submit"
-          className="w-full bg-green-700 text-white font-semibold py-3 rounded-lg hover:bg-green-800 transition"
+          className="w-full bg-KC_Yellow text-KC_GREEN font-bold py-3 rounded-lg hover:bg-yellow-400 hover:text-KC_BROWN transition-all duration-200 shadow-md"
         >
           Continue to Payment
         </button>

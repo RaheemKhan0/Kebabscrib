@@ -71,7 +71,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-KebabGreenDark via-KebabGreen to-KebabGreen">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-EggShell">
       <img
         src="/assets/KC_Logo.png"
         alt="Kebab's Crib Logo"
