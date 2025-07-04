@@ -1,13 +1,14 @@
 "use client";
-import { useState } from "react";
+import { ArrowLeftIcon } from "@heroicons/react/20/solid";
+import { useEffect, useState } from "react";
 import MenuList from "./MenuList";
-
+import { useRouter } from "next/navigation";
 
 // Define the type for the state object with correct keys
 type CheckedItems = {
   Sandwiches: boolean;
   Sides: boolean;
-  Sauces: boolean;
+  Drinks: boolean;
 };
 
 // Component
@@ -16,77 +17,95 @@ const MenuBody: React.FC = () => {
   const [checkedItems, setCheckedItems] = useState<CheckedItems>({
     Sandwiches: true,
     Sides: true,
-    Sauces: true,
+    Drinks: true,
   });
+  const router = useRouter();
+  useEffect(() => {
+    console.log("New State : ", checkedItems);
+  }, [checkedItems]);
 
   // Handle checkbox changes with the correct type
   const handleCheckboxChange = (item: keyof CheckedItems) => {
-    setCheckedItems((prev: CheckedItems) => ({
-      ...prev,
-      [item]: !prev[item], // Toggle the checkbox value
-    }));
+    const isOnlyThisSelected =
+      Object.entries(checkedItems).filter(([_, value]) => value).length === 1 &&
+      checkedItems[item];
+
+    if (isOnlyThisSelected) {
+      // Reset to show all
+      setCheckedItems({
+        Sandwiches: true,
+        Sides: true,
+        Drinks: true,
+      });
+    } else {
+      // Show only the selected one
+      const newState: CheckedItems = {
+        Sandwiches: false,
+        Sides: false,
+        Drinks: false,
+      };
+      newState[item] = true;
+      setCheckedItems(newState);
+    }
   };
-
+  // bg-[#006244]
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mt-24 px-4 sm:px-8 lg:px-20 w-full max-w-screen-xl mx-auto">
       {/* Nav Bar */}
-      <nav className="bg-KebabGreen text-KebabGold p-2 w-1/2 mx-auto mt-5 rounded-full sticky top-0 z-50 shadow-lg">
-        <div className="container mx-auto flex justify-center space-x-10 items-center">
-          {/* Sandwich Checkbox */}
-          <div className="flex items-center space-x-2">
-            <label
-              htmlFor="Sandwich"
-              className={`cursor-pointer ${checkedItems.Sandwiches
-                  ? "text-yellow-400"
-                  : "hover:text-yellow-400"
-                }`}
+      <nav className="hidden sm:flex justify-center items-center gap-4 px-6 py-2 mt-6 mb-4">
+        {(["Sandwiches", "Sides", "Drinks"] as (keyof CheckedItems)[]).map(
+          (category) => (
+            <button
+              key={category}
+              onClick={() => handleCheckboxChange(category)}
+              className={`px-10 py-1 rounded-md font-medium text-[#390F00] transition-all duration-200  
+        ${checkedItems[category] ? "bg-[#F4CF4B]  shadow" : ""}`}
             >
-              Sandwich
-            </label>
-            <input
-              type="checkbox"
-              id="Sandwich"
-              checked={checkedItems.Sandwiches}
-              onChange={() => handleCheckboxChange("Sandwiches")}
-            />
-          </div>
-
-          {/* Sides Checkbox */}
-          <div className="flex items-center space-x-2">
-            <label
-              htmlFor="extras"
-              className={`cursor-pointer ${checkedItems.Sides ? "text-yellow-400" : "hover:text-yellow-400"
-                }`}
-            >
-              Sides
-            </label>
-            <input
-              type="checkbox"
-              id="extras"
-              checked={checkedItems.Sides}
-              onChange={() => handleCheckboxChange("Sides")}
-            />
-          </div>
-        </div>
+              {category}
+            </button>
+          ),
+        )}
+        <button
+          className="hidden sm:flex items-center px-4 py-2 rounded-full border border-[#006244] bg-[#F4CF4B] text-[#006244] font-semibold text-md shadow hover:shadow-md transition"
+          onClick={() => router.push("/customtaco")}
+        >
+          <ArrowLeftIcon className="h-5 w-5 mr-2" />
+          Make Taco
+        </button>
       </nav>
-
+      {/* Mobile dropdown nav */}
+      <div className="flex sm:hidden justify-center mt-4 rounded-md">
+        <select
+          onChange={(e) =>
+            handleCheckboxChange(e.target.value as keyof CheckedItems)
+          }
+          className="p-2 rounded-md bg-KC_Yellow border text-sm text-[#390F00]"
+        >
+          <option value="Sandwiches">Sandwiches</option>
+          <option value="Sides">Sides</option>
+          <option value="Drinks">Drinks</option>
+        </select>
+      </div>
       {/* Conditional Divs Based on Checkboxes */}
       <div className="mt-10 space-y-6 w-full mx-auto">
         {checkedItems.Sandwiches && (
-          <div className="p-4 border rounded-lg shadow-lg bg-white">
-            <h2 className="text-2xl font-bold">Des Sandwiches</h2>
+          <div className="p-4 ">
             <MenuList item_category="Des Sandwiches" />
           </div>
         )}
 
         {checkedItems.Sides && (
-          <div className="p-4 border rounded-lg shadow-lg bg-white">
-            <h2 className="text-2xl font-bold">Sides Section</h2>
+          <div className="p-4">
             <MenuList item_category="Sides" />
           </div>
         )}
-
-     
+        {checkedItems.Drinks && (
+          <div className="p-4">
+            <MenuList item_category="Soft Drinks"></MenuList>
+            <MenuList item_category="Drinks"></MenuList>
+            <MenuList item_category="Special Drinks"></MenuList>
+          </div>
+        )}
       </div>
     </div>
   );

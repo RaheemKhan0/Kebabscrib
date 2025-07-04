@@ -1,57 +1,42 @@
 import React from "react";
 import { TrashIcon } from "@heroicons/react/20/solid";
-import { Extras } from "../../utils/context/ShoppingCartContext";
+import { CartItem } from "@utils/context/ShoppingCartContext";
+import Image from "next/image";
 
 interface CartItemProps {
-  item_name: string;
-  item_description: string;
-  item_price: {
-    single: number;
-    meal?: number;
-  };
-  item_category: string;
-  size?: string;
-  extra_Sauces?: Extras[];
-  extra_Vegetables?: Extras[];
-  extra_Cheese?: Extras[];
-  item_img_url?: string;
-  quantity: number;
-  meal: boolean;
+  item: CartItem;
   increaseQuantity: () => void;
   decreaseQuantity: () => void;
   removeItem: () => void;
-  getItemExtraTotal: () => number;
+  getItemExtraTotal: (item: CartItem) => number;
 }
 
-const CartItem: React.FC<CartItemProps> = ({
-  item_name,
-  item_description,
-  item_price,
-  item_category,
-  size,
-  extra_Sauces,
-  extra_Cheese,
-  extra_Vegetables,
-  item_img_url,
-  quantity,
-  meal,
+const ShoppingCartItem: React.FC<CartItemProps> = ({
+  item,
   increaseQuantity,
   decreaseQuantity,
   removeItem,
   getItemExtraTotal,
 }) => {
+  const optimisedUrl = item.item_img_url?.replace(
+    "/upload",
+    "/upload/w_600,q_auto,f_auto"
+  );
+
   return (
-    <div className="max-w-3xl mx-auto rounded-lg border border-gray-700 bg-gray-900 p-4 shadow-md flex items-center justify-between space-x-4 transition-all hover:shadow-lg">
+    <div className="max-w-3xl mx-auto rounded-lg border border-KC_GREEN bg-white p-4 shadow-md flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0 sm:space-x-4 transition-all hover:shadow-lg">
       {/* Item Image */}
       <div className="shrink-0">
-        {item_img_url ? (
-          <img
+        {optimisedUrl ? (
+          <Image
             className="h-20 w-20 object-cover rounded-md"
-            src={item_img_url}
-            alt={item_name}
+            src={optimisedUrl}
+            alt={item.item_name}
+            width={100}
+            height={50}
           />
         ) : (
-          <div className="h-20 w-20 bg-gray-700 flex items-center justify-center text-gray-400 text-sm font-medium rounded-md">
+          <div className="h-20 w-20 bg-KC_GREEN/10 flex items-center justify-center text-KC_GREEN text-sm font-medium rounded-md">
             No Image
           </div>
         )}
@@ -59,86 +44,125 @@ const CartItem: React.FC<CartItemProps> = ({
 
       {/* Item Info */}
       <div className="flex-1">
-        <h3 className="text-lg font-semibold text-white">{item_name}</h3>
-        <p className="text-sm text-gray-400">{item_description}</p>
-        <p className="text-sm text-gray-500 capitalize mt-1">{item_category}</p>
-        {/* Price Section - Show Based on `meal` Selection */}
+        <h3 className="text-lg font-semibold text-KC_GREEN">
+          {item.item_name}
+        </h3>
+        <p className="text-sm text-KC_GREEN/70">{item.item_description}</p>
+        <p className="text-sm text-KC_GREEN/60 capitalize mt-1">
+          {item.item_category}
+        </p>
         <div className="mt-2">
-          <p className="text-base font-bold text-white">
-            {meal && item_price?.meal ? (
+          <p className="text-base font-bold text-KC_GREEN">
+            {item.meal && item.item_price?.meal ? (
               <>
-                AED {item_price.meal}{" "}
-                <span className="text-sm text-gray-400">(Meal)</span>
+                AED {item.item_price.meal + getItemExtraTotal(item)}{" "}
+                <span className="text-sm font-normal text-KC_GREEN/60">
+                  (Meal)
+                </span>
               </>
             ) : (
               <>
-                AED {item_price.single}{" "}
-                <span className="text-sm text-gray-400">(Single)</span>
+                AED {item.item_price.single + getItemExtraTotal(item)}{" "}
+                <span className="text-sm font-normal text-KC_GREEN/60">
+                  (Single)
+                </span>
               </>
             )}
           </p>
         </div>
+
+        {/* Extras */}
+        <div className="text-sm text-KC_GREEN/70 space-y-1 mt-2">
+          {item.tacoMeats && (
+            <p>
+              <span className="font-semibold text-KC_GREEN">Taco Meat:</span>{" "}
+              {item.tacoMeats.map((i) => i.item_name).join(", ")}
+            </p>
+          )}
+          {item.extraMeat && (
+            <p>
+              <span className="font-semibold text-KC_GREEN">Extra Meat:</span>{" "}
+              {item.extraMeat.item_name}
+            </p>
+          )}
+          {item.tacoSauce && (
+            <p>
+              <span className="font-semibold text-KC_GREEN">Taco Sauce:</span>{" "}
+              {item.tacoSauce.item_name}
+            </p>
+          )}
+          {item.meal && item.mealdrink && (
+            <p>
+              <span className="font-semibold text-KC_GREEN">Meal Drink:</span>{" "}
+              {item.mealdrink.item_name}
+            </p>
+          )}
+          {item.meal && item.mealsauce && (
+            <p>
+              <span className="font-semibold text-KC_GREEN">Meal Sauce:</span>{" "}
+              {item.mealsauce.item_name}
+            </p>
+          )}
+          {item.extra_Sauces?.length > 0 && (
+            <p>
+              <span className="font-semibold text-KC_GREEN">
+                Extra Sauces:
+              </span>{" "}
+              {item.extra_Sauces.map((s) => s.item_name).join(", ")}
+            </p>
+          )}
+          {item.extra_Cheese?.length > 0 && (
+            <p>
+              <span className="font-semibold text-KC_GREEN">
+                Extra Cheese:
+              </span>{" "}
+              {item.extra_Cheese.map((c) => c.item_name).join(", ")}
+            </p>
+          )}
+          {item.extra_Vegetables?.length > 0 && (
+            <p>
+              <span className="font-semibold text-KC_GREEN">
+                Extra Vegetables:
+              </span>{" "}
+              {item.extra_Vegetables.map((v) => v.item_name).join(", ")}
+            </p>
+          )}
+        </div>
       </div>
-      {/* Extras Section */}
-      <div className="flex flex-col text-sm text-gray-400 space-y-1">
-        {/* Extra Sauces */}
-        {extra_Sauces && extra_Sauces.length > 0 && (
-          <p>
-            <span className="text-gray-300 font-semibold">Extra Sauces:</span>{" "}
-            {extra_Sauces.map((sauce) => sauce.item_name).join(", ")}
-          </p>
-        )}
 
-        {/* Extra Cheese */}
-        {extra_Cheese && extra_Cheese.length > 0 && (
-          <p>
-            <span className="text-gray-300 font-semibold">Extra Cheese:</span>{" "}
-            {extra_Cheese.map((cheese) => cheese.item_name).join(", ")}
-          </p>
-        )}
-
-        {/* Extra Vegetables */}
-        {extra_Vegetables && extra_Vegetables.length > 0 && (
-          <p>
-            <span className="text-gray-300 font-semibold">
-              Extra Vegetables:
-            </span>{" "}
-            {extra_Vegetables.map((veggie) => veggie.item_name).join(", ")}
-          </p>
-        )}
-      </div>
-
-      {/* Quantity Controls */}
-      <div className="flex items-center space-x-3">
-        {/* Trash Icon - Styled for dark theme */}
+      {/* Quantity & Controls */}
+      <div className="flex sm:flex-col items-center gap-2 sm:gap-3">
         <button
           type="button"
-          className="h-9 w-9 flex items-center justify-center rounded-md bg-gray-800 hover:bg-gray-700 transition-all p-2"
           onClick={removeItem}
+          className="h-9 w-9 flex items-center justify-center rounded-md bg-KC_GREEN/10 hover:bg-KC_GREEN/20 transition p-2"
         >
-          <TrashIcon className="h-5 w-5 text-gray-400 hover:text-red-500 transition-all" />
+          <TrashIcon className="h-5 w-5 text-red-500" />
         </button>
 
-        <button
-          type="button"
-          onClick={decreaseQuantity}
-          className="h-9 w-9 flex items-center justify-center border border-gray-600 rounded-md bg-gray-800 hover:bg-gray-700 transition-all"
-        >
-          <span className="text-xl font-bold text-gray-300">−</span>
-        </button>
+        <div className="flex items-center space-x-2">
+          <button
+            type="button"
+            onClick={decreaseQuantity}
+            className="h-8 w-8 flex items-center justify-center border border-KC_GREEN text-KC_GREEN rounded-md"
+          >
+            −
+          </button>
 
-        <span className="text-lg font-medium text-white">{quantity}</span>
+          <span className="text-md font-medium text-KC_GREEN">
+            {item.Quantity}
+          </span>
 
-        <button
-          type="button"
-          onClick={increaseQuantity}
-          className="h-9 w-9 flex items-center justify-center border border-gray-600 rounded-md bg-gray-800 hover:bg-gray-700 transition-all"
-        >
-          <span className="text-xl font-bold text-gray-300">+</span>
-        </button>
+          <button
+            type="button"
+            onClick={increaseQuantity}
+            className="h-8 w-8 flex items-center justify-center border border-KC_GREEN text-KC_GREEN rounded-md"
+          >
+            +
+          </button>
+        </div>
       </div>
     </div>
   );
 };
-
-export default CartItem;
+export default ShoppingCartItem;

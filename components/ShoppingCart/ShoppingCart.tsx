@@ -1,89 +1,181 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useCart } from "../../utils/context/ShoppingCartContext";
+import axios from "axios";
+import { OrderType } from "types/order";
+import React, { useState } from "react";
+import { useCart } from "@utils/context/ShoppingCartContext";
+import ShoppingCartItem from "./cartitem";
+import LoadingScreen from "../Common/LoadingScreen";
+import { useSession } from "next-auth/react";
+import ContinueAsGuest from "@components/Modals/ContinueAsGuest";
 import { useRouter } from "next/navigation";
-import CartItem from "./cartitem";
-
+import { formatOrderItems } from "@utils/middleware/helpers";
+import VerifyModal from "@components/Modals/VerifyModal";
+import toast from "react-hot-toast";
+import EmptyCart from "./EmptyCart";
 
 const ShoppingCart = () => {
   const {
     CartItems,
-    addItem,
     removeItem,
-    getItem,
     loading,
     decreaseQuantity,
     increaseQuantity,
     getTotal,
     getItemExtraTotal,
-
   } = useCart();
+  const { data: session, status } = useSession();
+  const [showModal, setShowModal] = useState(false);
+  const [showVerifyModal, setShowVerifyModal] = useState(false);
+  const [skipVerification, setSkipVerification] = useState(false);
   const router = useRouter();
+  const [verifyModalLoading, setVerifyModalLoading] = useState(false);
 
-  useEffect(() => {
-    console.log("Updating Cart Items : ", CartItems);
-  }, [CartItems]);
+  const handleCheckout = async () => {
+    if (status === "unauthenticated") {
+      setShowModal(true);
+      return;
+    }
+    if (!session?.user.verified && !skipVerification) {
+      setShowVerifyModal(true);
+      return;
+    }
+    if (status === "authenticated") {
+      try {
+        const draftOrder: OrderType = {
+          user_id: session?.user._id,
+          items: formatOrderItems(CartItems),
+          total_price: getTotal(),
+          status: "draft",
+        };
+
+        const newOrder = await axios.post(
+          "/api/users/order/createdraftorder",
+          draftOrder,
+        );
+        router.push(`checkout/details?orderID=${newOrder.data.newOrder._id}`);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+  const onVerify = async () => {
+    try {
+      setVerifyModalLoading(true);
+      const res = await axios.post("/api/users/resend-verify-email");
+      if (res.status === 200) {
+        toast.success("verification email successfully sent");
+        setSkipVerification(true);
+      }
+      setVerifyModalLoading(false);
+    } catch (error: any) {
+      setSkipVerification(true);
+      setVerifyModalLoading(false);
+      if (error.response.status === 429) {
+        toast.error(error.response?.data?.error);
+      }
+    }
+  };
+
+  const onGuestClick = async () => {
+    try {
+      const draftOrder: OrderType = {
+        items: formatOrderItems(CartItems),
+        total_price: getTotal(),
+        status: "draft",
+      };
+
+      const newOrder = await axios.post(
+        "/api/users/order/createdraftorder",
+        draftOrder,
+      );
+      router.push(`/checkout/details?orderID=${newOrder.data.newOrder._id}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (loading) {
-    return (
-      <div className="w-full flex flex-col text-center items-center justify-center flex-grow">
-        <h1 className="font-bold text-xl">Loading</h1>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   if (CartItems.length === 0) {
-    return (
-      <div className="w-full flex flex-col text-center items-center justify-center flex-grow">
-        <h1 className="font-bold text-xl">Your cart is empty</h1>
-      </div>
-    );
-  } else {
-    return (
-      <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
-        <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-            Shopping Cart
-          </h2>
-        </div>
-
-        {/* Cart Items */}
-        <div className="mx-auto max-w-3xl space-y-4">
-          {CartItems.map((item) => (
-            <CartItem
-              key={item.cart_id}
-              item_name={item.item_name}
-              item_description={item.item_description}
-              item_price={item.item_price}
-              item_category={item.item_category}
-              size={item.size}
-              extra_Sauces={item.extra_Sauces}
-              extra_Vegetables={item.extra_Vegetables}
-              extra_Cheese={item.extra_Cheese}
-              item_img_url={item.item_img_url}
-              quantity={item.Quantity}
-              meal={item.meal}
-              increaseQuantity={() => increaseQuantity(item.cart_id)}
-              decreaseQuantity={() => decreaseQuantity(item.cart_id)}
-              removeItem={() => removeItem(item.cart_id)}
-              getItemExtraTotal={() => getItemExtraTotal(item)}
-
-            />
-          ))}
-        </div>
-
-        {/* Total Price Section */}
-        <div className="mx-auto max-w-3xl px-4 py-6 mt-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Total:
-          </h3>
-          <p className="text-xl font-bold text-gray-900 dark:text-white">
-            AED {getTotal()}
-          </p>
-        </div>
-      </section>
-    );
+    return <EmptyCart />;
   }
-};
 
+  return (
+    <section className="bg-EggShell py-12 antialiased">
+      <div className="mx-auto max-w-screen-xl px-4 mt-16">
+        <h2 className="text-2xl font-bold text-KC_GREEN text-center sm:text-3xl mb-6">
+          Shopping Cart
+        </h2>
+      </div>
+
+      {showModal && (
+        <ContinueAsGuest
+          onClose={() => setShowModal(false)}
+          onGuestClick={onGuestClick}
+        />
+      )}
+
+      {showVerifyModal && (
+        <VerifyModal
+          loading={verifyModalLoading}
+          onClose={() => setShowVerifyModal(false)}
+          onSkip={async () => {
+            setSkipVerification(true);
+            try {
+              const draftOrder: OrderType = {
+                items: formatOrderItems(CartItems),
+                total_price: getTotal(),
+                status: "draft",
+              };
+
+              const newOrder = await axios.post(
+                "/api/users/order/createdraftorder",
+                draftOrder,
+              );
+
+              router.push(
+                `/checkout/details?orderID=${newOrder.data.newOrder._id}`,
+              );
+            } catch (error) {
+              console.error(error);
+            }
+          }}
+          onVerify={onVerify}
+        />
+      )}
+
+      {/* Cart Items */}
+      <div className="mx-auto max-w-3xl px-4 space-y-4">
+        {CartItems.map((item) => (
+          <ShoppingCartItem
+            key={item.cart_id}
+            item={item}
+            increaseQuantity={() => increaseQuantity(item.cart_id ?? "")}
+            decreaseQuantity={() => decreaseQuantity(item.cart_id ?? "")}
+            removeItem={() => removeItem(item.cart_id ?? "")}
+            getItemExtraTotal={() => getItemExtraTotal(item)}
+          />
+        ))}
+      </div>
+
+      {/* Total Price Section */}
+      <div className="mx-auto max-w-3xl px-4 py-6 mt-8 bg-white border border-KC_GREEN rounded-lg shadow-md flex justify-between items-center">
+        <h3 className="text-lg font-semibold text-KC_GREEN">Total:</h3>
+        <p className="text-xl font-bold text-KC_GREEN">AED {getTotal()}</p>
+      </div>
+
+      {/* Checkout Button */}
+      <div className="mx-auto max-w-3xl px-4 mt-6">
+        <button
+          onClick={handleCheckout}
+          className="w-full bg-KC_GREEN text-white text-lg font-semibold py-3 rounded-lg hover:bg-KC_GREEN/90 transition-colors duration-200"
+        >
+          Proceed to Checkout
+        </button>
+      </div>
+    </section>
+  );
+};
 export default ShoppingCart;

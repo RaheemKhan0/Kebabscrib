@@ -1,7 +1,9 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
 import MenuItem from "./MenuItem";
-import { useMenu } from "../../utils/context/MenuContext";
+import { useMenu } from "@utils/context/MenuContext";
+import LoadingScreen from "../Common/LoadingScreen";
+import TacoBuilderBanner from "./Tacos/TacoBuilderBanner";
 
 export interface Menu {
   _id: string;
@@ -13,9 +15,9 @@ export interface Menu {
   };
   item_category: string;
   size?: string;
-  sauces?: string[];
   slug: string;
   item_img_url?: string;
+  isHidden: boolean;
 }
 
 interface MenuListProps {
@@ -23,22 +25,29 @@ interface MenuListProps {
 }
 
 const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
-  const menu = useMenu();
-  console.log(menu);
+  const { menu } = useMenu();
 
   // If menu items are still loading
   if (!menu) {
-    return <p className="text-center mt-10">Loading menu items...</p>;
+    return <LoadingScreen />;
   }
+  const filteredItems = menu.filter(
+    (item) => item.item_category === item_category && !item.isHidden,
+  );
+  const itemsWithBanner =
+    item_category === "Des Sandwiches"
+      ? [{ _id: "taco-banner" },...filteredItems] // Placeholder object
+      : filteredItems;
 
   // Render menu items based on the selected category
   return (
-    <div className="container mx-auto mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-10">
-      {menu
-        .filter((item) => item.item_category === item_category)
-        .map((item) => {
-          return <MenuItem key={item._id} {...item} />;
-        })}
+    <div className="container mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-10">
+      {itemsWithBanner.map((item) => {
+        if ("_id" in item && item._id === "taco-banner") {
+          return <TacoBuilderBanner key="taco-banner" />;
+        }
+        return <MenuItem key={item._id} {...(item as Menu)} />;
+      })}
     </div>
   );
 };

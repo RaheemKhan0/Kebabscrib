@@ -3,15 +3,20 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Menu } from "./MenuList";
-import { useMenu } from "../../utils/context/MenuContext";
-import { CartItem, useCart } from "../../utils/context/ShoppingCartContext";
+import { useMenu } from "@utils/context/MenuContext";
+import { CartItem, useCart } from "@utils/context/ShoppingCartContext";
+import LoadingScreen from "../Common/LoadingScreen";
+import { CldImage } from "next-cloudinary";
+import DrinkSelectionModal from "@components/Modals/DrinkSelection";
+import SauceSelectionModal from "@components/Modals/SauceSelection";
+import toast from "react-hot-toast";
 
 interface MenuItemDetailsProps {
   item_id: string;
 }
 
 const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
-  const menu = useMenu();
+  const { menu } = useMenu();
   const defaultMenuItem: CartItem = {
     _id: "default_id",
     cart_id: "default_cart_id",
@@ -23,19 +28,73 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
     extra_Vegetables: [],
     extra_Cheese: [],
     meal: false,
-    size: "Regular",
     item_img_url: "/public/assets/placeholder.png", // Use a placeholder image
     Quantity: 1,
   };
 
+  const [openDrinkSelection, setDrinkSelection] = useState(false);
+  const [openSauceSelection, setSauceSelection] = useState(false);
   const [menuItem, setMenuItem] = useState<CartItem>(defaultMenuItem);
 
   const { addItem, generate_Cart_ID } = useCart();
+
+  const closeSauceSelection = () => {
+    setMenuItem((prev) => {
+      return {
+        ...prev,
+        mealdrink: undefined,
+      };
+    });
+    setSauceSelection(false);
+  };
+    const closeDrinkSelection = () => {
+    setMenuItem((prev) => {
+      return {
+        ...prev,
+        mealdrink: undefined,
+      };
+    });
+    setDrinkSelection(false);
+  };
+
+  const handleAddToCart = () => {
+    if (menuItem.meal && !menuItem.mealdrink) {
+      setDrinkSelection(true);
+      console.log("Drink modal activated");
+      return;
+    }
+    if (menuItem.meal && !menuItem.mealsauce){
+      setSauceSelection(true);
+      return;
+    }
+    addItem(menuItem);
+  };
+
+  const onDrinkSelectionSubmit = (selectedDrink: Menu | null) => {
+    if (!selectedDrink) {
+      toast.error("Please select your drink");
+      return;
+    }
+    setMenuItem((prev) => {
+      return { ...prev, mealdrink: selectedDrink };
+    });
+    setDrinkSelection(false);
+    handleAddToCart(); 
+  };
+
+  const onSauceSelectionSubmit = (selectedSauce: Menu | null) => {
+    if (!selectedSauce) return;
+    setMenuItem((prev) => {
+      return { ...prev, mealsauce: selectedSauce };
+    });
+    handleAddToCart();
+  };
 
   const [meal, setMeal] = useState(false);
   const [extraSauce, SetExtraSauces] = useState<Menu[]>([]);
   const [extraCheese, setExtraCheese] = useState<Menu[]>([]);
   const [extraVeggies, setExtraVeggies] = useState<Menu[]>([]);
+  let blurUrl = "/public/assets/placeholder.png";
 
   const HandleExtraSauce = (item: any) => {
     SetExtraSauces((prev) => {
@@ -111,6 +170,11 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
         console.log("Fetching menu item...");
         const res = await axios.get(`/api/fetchmenuitems/${item_id}`);
         const fetchedItem = res.data.menu_item;
+        blurUrl =
+          menuItem.item_img_url?.replace("upload", "upload/w_10,h_10,q_1") ??
+          "@public/assets/placeholder.png";
+        //const optimisedurl = fetchedItem.item_img_url.replace('/upload', '/upload/w_400,h_300,f_auto,q_auto/')
+        //fetchedItem.item_img_url = optimisedurl
 
         setMenuItem((prevMenuItem) => ({
           ...(fetchedItem ?? prevMenuItem),
@@ -132,22 +196,51 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
     }
   }, [item_id, extraSauce, extraCheese, extraVeggies, meal]);
 
-  if (!menuItem) {
-    return <p className="text-center text-xl mt-10">Loading menu item...</p>;
+  if (menuItem.item_name == "Loading...") {
+    return <LoadingScreen />;
   }
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center max-w-full mx-auto mt-16 px-6">
+    <div className="flex flex-col md:flex-row items-center justify-center max-w-full mx-auto mt-32 px-6">
       {/* Image Section */}
       <div className="md:w-1/2 flex items-center justify-center">
-        <Image
-          src={"/assets/placeholder.png"}
-          width={500}
-          height={500}
-          alt={menuItem.item_name}
-          className="rounded-lg shadow-md"
-        />
+        {menuItem.item_img_url ? (
+          <CldImage
+            src={menuItem.item_img_url}
+            width={600}
+            height={400}
+            alt={menuItem.item_name ?? "Item"}
+            placeholder="blur"
+            blurDataURL={menuItem.item_img_url.replace(
+              "upload",
+              "upload/w_10,h_10,e_blur:500,q_10",
+            )}
+            className="rounded-lg shadow-md"
+          />
+        ) : (
+          <Image
+            src="/assets/placeholder.png"
+            width={600}
+            height={400}
+            alt="Placeholder"
+            className="rounded-lg shadow-md"
+          />
+        )}
       </div>
+      {openDrinkSelection && (
+        <DrinkSelectionModal
+          isOpen={openDrinkSelection}
+          onClose={closeDrinkSelection}
+          onSubmit={onDrinkSelectionSubmit}
+        />
+      )}
+      {openSauceSelection && (
+        <SauceSelectionModal
+          isOpen={openSauceSelection}
+          onClose={closeSauceSelection}
+          onSubmit={onSauceSelectionSubmit}
+        />
+      )}
 
       {/* Text Content Section */}
       <div className="md:w-1/2 md:ml-10 text-center md:text-left">
@@ -178,7 +271,9 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
                 Extra Sauces (Upto 3)
               </h3>
               {menu
-                ?.filter((item) => item.item_category === "Sauce")
+                ?.filter(
+                  (item) => item.item_category === "Sauce" && !item.isHidden,
+                )
                 .map((item) => (
                   <button
                     key={item._id}
@@ -197,7 +292,10 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
                 Extra Cheese (Upto 3)
               </h3>
               {menu
-                ?.filter((item) => item.item_category === "Cheese & Others")
+                ?.filter(
+                  (item) =>
+                    item.item_category === "Cheese & Others" && !item.isHidden,
+                )
                 .map((item) => (
                   <button
                     key={item._id}
@@ -214,7 +312,11 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
                 Extra Veggies (Upto 3)
               </h3>
               {menu
-                ?.filter((item) => item.item_category === "Vegetables & Others")
+                ?.filter(
+                  (item) =>
+                    item.item_category === "Vegetables & Others" &&
+                    !item.isHidden,
+                )
                 .map((item) => (
                   <button
                     key={item._id}
@@ -232,10 +334,10 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
         <button
           className="bg-KebabGreen hover:bg-KebabGold text-white font-bold py-2 px-6 mt-6 rounded-lg shadow-md mb-10"
           onClick={() => {
-            addItem(menuItem);
+            handleAddToCart();
           }}
         >
-          Order Now
+          Add to Cart
         </button>
       </div>
     </div>

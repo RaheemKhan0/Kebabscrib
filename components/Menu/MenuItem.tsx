@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import "../../public/styles/globals.css";
-import { useCart } from "../../utils/context/ShoppingCartContext";
+import "@public/styles/globals.css";
+import { useCart } from "@utils/context/ShoppingCartContext";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface MenuItemProps {
   _id: string;
@@ -18,6 +18,8 @@ interface MenuItemProps {
   item_img_url?: string;
 }
 
+import { useState } from "react";
+
 const MenuItem: React.FC<MenuItemProps> = ({
   _id,
   item_name,
@@ -29,27 +31,31 @@ const MenuItem: React.FC<MenuItemProps> = ({
   slug,
   item_img_url,
 }) => {
-  const { CartItems, addItem, removeItem, getItem } = useCart();
+  const { addItem } = useCart();
   const router = useRouter();
+  const [showFull, setShowFull] = useState(false);
 
-  const handleClick = async () => {
-    try {
-      router.push(`/menu/${slug}-${_id}`);
-    } catch (error) {
-      console.error("Failed to fetch menu item (MenuItem.tsx):", error);
-    }
-  };
+  const isLong = item_description.length > 120; // Customize this limit
+
+  const handleClick = () => router.push(`/menu/${slug}-${_id}`);
+
+  const optimisedUrl = item_img_url?.replace(
+    "/upload",
+    "/upload/w_600,q_auto,f_auto",
+  );
 
   return (
     <div
-      className="border rounded-lg shadow-md hover:shadow-lg overflow-hidden bg-white"
+      className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-full mx-auto flex flex-col justify-between border rounded-lg shadow-md hover:shadow-lg overflow-hidden bg-white h-full"
       onClick={handleClick}
     >
-      {/* Display Image */}
-      {item_img_url ? (
-        <img
-          src={item_img_url}
+      {/* Image */}
+      {optimisedUrl ? (
+        <Image
+          src={optimisedUrl}
           alt={item_name}
+          width={500}
+          height={300}
           className="w-full h-48 object-cover"
         />
       ) : (
@@ -58,45 +64,65 @@ const MenuItem: React.FC<MenuItemProps> = ({
         </div>
       )}
 
-      <div className="p-4">
-        {/* item_name and item_category */}
-        <h1 className="text 2xl font-bold"> {item_name} </h1>
-        <p className="text-sm text-gray-500 capitalize">{item_category}</p>
-
-        {/* Item Description */}
-        <p className="text-gray-700 mt-2">{item_description}</p>
-
-        {/* Price */}
-        <div className="mt-4">
-          <p className="text-lg font-bold">Price: AED {item_price.single} </p>
-          {item_price.combo && (
-            <p className="text-sm text-gray-500">
-              Combo: AED {item_price.combo}{" "}
-            </p>
-          )}
-        </div>
+      {/* Content */}
+      <div className="flex flex-col flex-grow justify-between p-4">
         <div>
-          <button
-            className="h-12 w-full rounded-lg bg-KebabGreen text-KebabGold mt-4"
-            onClick={() => {
-              addItem({
-                _id,
-                item_name,
-                item_description,
-                item_price,
-                item_category,
-                size,
-                sauces,
-                slug,
-                item_img_url,
-              });
-            }}
+          <h1 className="text-2xl font-bold">{item_name}</h1>
+          <p className="text-sm text-gray-500 capitalize">{item_category}</p>
+
+          {/* Description with toggle */}
+          <p
+            className={`text-gray-700 mt-2 ${!showFull ? "line-clamp-2" : ""}`}
           >
-            Add to Cart
-          </button>
+            {item_description}
+          </p>
+
+          {/* Toggle Button */}
+          {isLong && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent click from routing
+                setShowFull(!showFull);
+              }}
+              className="text-sm text-KC_PEACH mt-1 hover:underline"
+            >
+              {showFull ? "Less Details" : "More Details"}
+            </button>
+          )}
+
+          {/* Price */}
+          <div className="mt-4">
+            <p className="text-lg font-bold">Price: AED {item_price.single}</p>
+            {item_price.combo && (
+              <p className="text-sm text-gray-500">
+                Combo: AED {item_price.combo}
+              </p>
+            )}
+          </div>
         </div>
+
+        {/* Add to Cart */}
+        <button
+          className="h-12 w-full rounded-lg bg-KC_Yellow text-KebabGreen font-bold  mt-4"
+          onClick={(e) => {
+            e.stopPropagation();
+            addItem({
+              _id,
+              item_name,
+              item_description,
+              item_price,
+              item_category,
+              size,
+              sauces,
+              slug,
+              item_img_url,
+            });
+          }}
+        >
+          Add to Cart
+        </button>
       </div>
-    </div> // Menu Item end
+    </div>
   );
 };
 
