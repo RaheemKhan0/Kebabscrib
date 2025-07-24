@@ -24,13 +24,15 @@ const ResetPasswordPage = () => {
     setToken(t);
     const verifytoken = async () => {
       try {
-        const res = await axios.post("/api/users/verify-reset-token", { token : t });
+        const res = await axios.post("/api/users/verify-reset-token", {
+          token: t,
+        });
         if (res.data.valid) {
           setVerified(true);
-          setLoading(false)
+          setLoading(false);
         }
       } catch (error) {
-        console.log("Error : ", error)
+        console.log("Error : ", error);
         setLoading(false);
         setVerified(false);
       }
@@ -59,7 +61,7 @@ const ResetPasswordPage = () => {
       if (!res.ok) throw new Error(data || "Something went wrong.");
 
       toast.success("Password reset successful.");
-      router.push("/logIn");
+      router.push("/login");
     } catch (err: any) {
       setError(err.message || "Something went wrong.");
     } finally {
@@ -73,49 +75,50 @@ const ResetPasswordPage = () => {
     return <NotFound />;
   }
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700 p-6">
-        <h1 className="text-2xl font-bold mb-4 text-center text-KebabGreen">
+    <section className="bg-EggShell min-h-screen flex items-center justify-center px-4 py-8">
+      <div className="w-full max-w-md rounded-2xl shadow-xl border border-KCPeach/30 bg-white p-6">
+        {/* Title — keep KC_Green */}
+        <h1 className="text-2xl font-bold mb-4 text-center text-KC_GREEN font-parkinsans">
           Reset Your Password
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-5">
+          {/* New Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
+            <label className="block text-sm font-medium text-KC_GREEN mb-1">
               New Password
             </label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-KebabGreen"
+              className="w-full px-4 py-2 rounded-lg border border-KC_GREEN bg-gray-50 text-gray-900 focus:ring-2 focus:ring-KC_GREEN focus:border-KC_GREEN"
               required
             />
           </div>
 
+          {/* Confirm Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
+            <label className="block text-sm font-medium text-KC_GREEN mb-1">
               Confirm Password
             </label>
             <input
               type="password"
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-KebabGreen"
+              className="w-full px-4 py-2 rounded-lg border border-KC_GREEN bg-gray-50 text-gray-900 focus:ring-2 focus:ring-KC_GREEN focus:border-KC_GREEN"
               required
             />
           </div>
 
-          {error && (
-            <p className="text-red-600 dark:text-red-400 text-sm font-medium">
-              {error}
-            </p>
-          )}
+          {/* Error Message */}
+          {error && <p className="text-red-500 text-sm font-medium">{error}</p>}
 
+          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-KebabGreen hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+            className="w-full bg-KC_GREEN text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-white hover:text-KC_GREEN transition duration-300"
           >
             {loading ? "Resetting..." : "Reset Password"}
           </button>

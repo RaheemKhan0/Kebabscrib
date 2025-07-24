@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
     });
 
     const resetUrl = `${req.nextUrl.origin}/reset-password?token=${token}`;
-    await sendForgottenPasswordEmail(resetUrl);
+    await sendForgottenPasswordEmail(resetUrl, email);
 
     return NextResponse.json({ message: "Reset email sent" }, { status: 200 });
   } catch (err) {

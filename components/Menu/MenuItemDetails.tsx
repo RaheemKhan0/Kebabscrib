@@ -47,7 +47,7 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
     });
     setSauceSelection(false);
   };
-    const closeDrinkSelection = () => {
+  const closeDrinkSelection = () => {
     setMenuItem((prev) => {
       return {
         ...prev,
@@ -63,7 +63,7 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
       console.log("Drink modal activated");
       return;
     }
-    if (menuItem.meal && !menuItem.mealsauce){
+    if (menuItem.meal && !menuItem.mealsauce) {
       setSauceSelection(true);
       return;
     }
@@ -79,7 +79,7 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
       return { ...prev, mealdrink: selectedDrink };
     });
     setDrinkSelection(false);
-    handleAddToCart(); 
+    handleAddToCart();
   };
 
   const onSauceSelectionSubmit = (selectedSauce: Menu | null) => {
@@ -111,6 +111,9 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
             _id: sauce._id, // Correctly returning an object
             item_name: sauce.item_name,
             item_category: sauce.item_category,
+            item_price: {
+              single: sauce.item_price.single,
+            },
           };
         }),
       }));
@@ -133,6 +136,9 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
             _id: cheese._id,
             item_name: cheese.item_name,
             item_category: cheese.item_category,
+            item_price: {
+              single: cheese.item_price.single,
+            },
           };
         }),
       }));
@@ -156,6 +162,9 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
             _id: veggie._id,
             item_name: veggie.item_name,
             item_category: veggie.item_category,
+            item_price: {
+              single: veggie.item_price.single,
+            },
           };
         }),
       }));

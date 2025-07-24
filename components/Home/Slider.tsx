@@ -84,17 +84,7 @@ export default function BannerSlider() {
         →
       </button>
 
-      {/* Dots */}
-      <div className="absolute bottom-6 w-full flex justify-center gap-2 z-30">
-        {banners.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => instanceRef.current?.moveToIdx(idx)}
-            className={`w-3 h-3 rounded-full transition ${currentSlide === idx ? "bg-KCPeach" : "bg-white/60"
-              }`}
-          />
-        ))}
-      </div>
+    
     </div>
   );
 }

@@ -166,20 +166,20 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
 
   const getItemExtraTotal = (item: CartItem) => {
     const TotalVegetables =
-      item.extra_Vegetables?.reduce((sum, v) => sum + (v.item_price ?? 0), 0) ??
+      item.extra_Vegetables?.reduce((sum, v) => sum + (v.item_price.single ?? 0), 0) ??
       0;
 
     const TotalSauces =
-      item.extra_Sauces?.reduce((sum, s) => sum + (s.item_price ?? 0), 0) ?? 0;
+      item.extra_Sauces?.reduce((sum, s) => sum + (s.item_price.single ?? 0), 0) ?? 0;
 
     const TotalCheese =
-      item.extra_Cheese?.reduce((sum, c) => sum + (c.item_price ?? 0), 0) ?? 0;
+      item.extra_Cheese?.reduce((sum, c) => sum + (c.item_price.single ?? 0), 0) ?? 0;
 
     return (
       TotalVegetables +
       TotalSauces +
       TotalCheese +
-      (item.extraMeat?.item_price ?? 0)
+      (item.extraMeat?.item_price.single ?? 0)
     );
   };
 

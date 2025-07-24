@@ -20,7 +20,7 @@ const ShoppingCartItem: React.FC<CartItemProps> = ({
 }) => {
   const optimisedUrl = item.item_img_url?.replace(
     "/upload",
-    "/upload/w_600,q_auto,f_auto"
+    "/upload/w_600,q_auto,f_auto",
   );
 
   return (
@@ -105,17 +105,13 @@ const ShoppingCartItem: React.FC<CartItemProps> = ({
           )}
           {item.extra_Sauces?.length > 0 && (
             <p>
-              <span className="font-semibold text-KC_GREEN">
-                Extra Sauces:
-              </span>{" "}
+              <span className="font-semibold text-KC_GREEN">Extra Sauces:</span>{" "}
               {item.extra_Sauces.map((s) => s.item_name).join(", ")}
             </p>
           )}
           {item.extra_Cheese?.length > 0 && (
             <p>
-              <span className="font-semibold text-KC_GREEN">
-                Extra Cheese:
-              </span>{" "}
+              <span className="font-semibold text-KC_GREEN">Extra Cheese:</span>{" "}
               {item.extra_Cheese.map((c) => c.item_name).join(", ")}
             </p>
           )}
