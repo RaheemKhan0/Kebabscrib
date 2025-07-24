@@ -52,7 +52,7 @@ const VerifyEmailPage = () => {
     return <NotFound />;
   }
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-50 dark:bg-gray-900 px-4">
+    <div className="flex items-center justify-center h-screen bg-EggShell px-4">
       <div className="text-center">
         {status === "loading" && (
           <p className="text-lg">Verifying your email...</p>

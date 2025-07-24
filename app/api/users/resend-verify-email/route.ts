@@ -45,8 +45,8 @@ export async function POST(req: NextRequest) {
     existingToken.lastSentAt = now;
     await existingToken.save();
 
-    const verificationLink = `${req.nextUrl.origin}/verify-email?token=${existingToken.token}`;
-    await sendVerificationEmail(user.email, verificationLink);
+    const verificationLink = `${req.nextUrl.origin}/verifyemail?token=${existingToken.token}`;
+    await sendVerificationEmail(session.user.user_name, verificationLink, user.email);
 
     return NextResponse.json({ message: "Verification email re-sent" }, { status: 200 });
   }
@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
   });
 
   const verificationLink = `${req.nextUrl.origin}/verify-email?token=${token}`;
-  await sendVerificationEmail(user.email, verificationLink);
+  await sendVerificationEmail(user.email, verificationLink, session.user.email);
 
   return NextResponse.json({ message: "Verification email sent" }, { status: 200 });
 }

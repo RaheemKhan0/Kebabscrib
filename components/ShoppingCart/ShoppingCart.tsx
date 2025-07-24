@@ -78,6 +78,7 @@ const ShoppingCart = () => {
 
   const onGuestClick = async () => {
     try {
+      console.log("formating CartItems : ", CartItems);
       const draftOrder: OrderType = {
         items: formatOrderItems(CartItems),
         total_price: getTotal(),
