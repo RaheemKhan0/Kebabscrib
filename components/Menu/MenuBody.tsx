@@ -18,8 +18,8 @@ const MenuBody: React.FC = () => {
   // Initialize state with correct keys
   const [checkedItems, setCheckedItems] = useState<CheckedItems>({
     Sandwiches: true,
-    Sides: true,
-    Drinks: true,
+    Sides: false,
+    Drinks: false,
   });
   const { menu } = useMenu();
   const router = useRouter();
@@ -37,8 +37,8 @@ const MenuBody: React.FC = () => {
       // Reset to show all
       setCheckedItems({
         Sandwiches: true,
-        Sides: true,
-        Drinks: true,
+        Sides: false,
+        Drinks: false,
       });
     } else {
       // Show only the selected one

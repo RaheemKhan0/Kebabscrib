@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { jwtVerify } from "jose";
 import { getToken } from "next-auth/jwt";
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;

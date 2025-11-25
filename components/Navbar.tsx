@@ -13,6 +13,8 @@ import LoadingScreen from "./Common/LoadingScreen";
 import { UserIcon, ShoppingCartIcon } from "@heroicons/react/20/solid";
 import toast from "react-hot-toast";
 import { Fragment } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const Navbar: React.FC = () => {
   const [menu, SetMenu] = useState(false);
@@ -30,11 +32,29 @@ const Navbar: React.FC = () => {
     }
   };
 
+  useGSAP(() => {
+    gsap.fromTo(
+      ".navbar",
+      {
+        y: -100,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+      },
+      {
+        y: 0,
+        opacity: 1,
+      },
+    );
+  }, []);
+
   if (status == "loading") {
-    return <LoadingScreen />;
+    <div className="fixed inset-0 z-[9999] bg-white flex items-center justify-center overflow-hidden">
+      <LoadingScreen />
+    </div>;
   } else {
     return (
-      <nav className="absolute top-0 left-0 w-full z-50 text-white">
+      <nav className="navbar absolute top-0 left-0 w-full z-50 text-white">
         <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
           {/* Left: Logo */}
           <div className="flex-shrink-0">

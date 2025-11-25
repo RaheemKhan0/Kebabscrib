@@ -5,7 +5,7 @@ const EmptyCart = () => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[70vh] px-4 text-center bg-EggShell">
+    <div className="flex flex-col items-center justify-center min-h-[90vh] px-4 text-center bg-EggShell">
       {/* Icon */}
       <div className="bg-KC_GREEN rounded-full p-4 mb-6">
         <ShoppingBagIcon className="w-12 h-12 text-KC_Yellow" />
