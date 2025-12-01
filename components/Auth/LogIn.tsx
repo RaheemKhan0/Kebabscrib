@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { signIn } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import Link from "next/link";
 
 const LogIn: React.FC = () => {
   const [remember, setRemember] = useState(false);
@@ -49,13 +49,19 @@ const LogIn: React.FC = () => {
     }
   };
   useEffect(() => {
-    if (status === "authenticated" && session.user.role == "user") {
-      router.push("/profile");
+    if (status !== "authenticated" || !session?.user) {
+      return;
     }
-    if (status === "authenticated" && session.user.role == "admin") {
+
+    if (session.user.role === "user") {
+      router.push("/profile");
+      return;
+    }
+
+    if (session.user.role === "admin") {
       router.push("/admin/dashboard");
     }
-  }, [status]);
+  }, [router, session, status]);
 
   return (
     <section className="bg-EggShell min-h-screen flex items-center justify-center px-4 py-12">
@@ -118,12 +124,12 @@ const LogIn: React.FC = () => {
               <span className="ml-2 text-sm text-KC_GREEN">Remember me</span>
             </label>
 
-            <a
+            <Link
               href="/forgot-password"
               className="text-sm font-medium text-KC_GREEN hover:underline"
             >
               Forgot password?
-            </a>
+            </Link>
           </div>
 
           {/* Submit Button */}
@@ -137,9 +143,9 @@ const LogIn: React.FC = () => {
           {/* Sign up Link */}
           <p className="text-center text-sm text-KC_GREEN">
             Don’t have an account yet?{" "}
-            <a href="/signup" className="font-semibold hover:underline">
+            <Link href="/signup" className="font-semibold hover:underline">
               Sign up
-            </a>
+            </Link>
           </p>
         </form>
       </div>

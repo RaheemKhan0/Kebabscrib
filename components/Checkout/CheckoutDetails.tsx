@@ -9,45 +9,47 @@ import axios from "axios";
 export default function CheckoutDetailsPage() {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [customerName, setCustomerName] = useState("");
-  const [customerEmail, setCustomerEmail] = useState("");
+  const [customerNameOverride, setCustomerNameOverride] = useState<string | null>(null);
+  const [customerEmailOverride, setCustomerEmailOverride] = useState<string | null>(null);
   const [customerPhone, setCustomerPhone] = useState("");
   const searchparams = useSearchParams();
   const orderID = searchparams.get("orderID");
-  const [noorder, setNoOrder] = useState(false);
+  const [noorder, setNoOrder] = useState(!orderID);
   const [loading, setLoading] = useState(false);
   const [order, setOrder] = useState<OrderType | null>(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    console.log("session : ", session);
-    if (status === "authenticated") {
-      setCustomerEmail(session.user.email);
-      setCustomerName(session.user.user_name);
+    if (!orderID) {
+      return;
     }
+    let isMounted = true;
+
     const fetchorder = async () => {
-      if (!orderID) {
-        setNoOrder(true);
-        return;
-      }
       setLoading(true);
       try {
         const res = await axios.post(`/api/users/order/getorder`, {
-          orderID: orderID,
+          orderID,
         });
+        if (!isMounted) {
+          return;
+        }
         if (res.data.order) {
           setOrder(res.data.order);
         }
         setLoading(false);
       } catch (error: any) {
-        const status = error.response?.status;
+        if (!isMounted) {
+          return;
+        }
+        const statusCode = error.response?.status;
         const message = error.response?.data?.error;
 
-        if (status === 404) {
+        if (statusCode === 404) {
           setNoOrder(true);
           setError("Order not found.");
         } else if (
-          status === 400 &&
+          statusCode === 400 &&
           message === "Invalid or missing order ID"
         ) {
           setNoOrder(true);
@@ -59,18 +61,28 @@ export default function CheckoutDetailsPage() {
         setLoading(false);
       }
     };
+
     fetchorder();
-  }, [session]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [orderID]);
+
+  const resolvedCustomerName =
+    customerNameOverride ?? session?.user?.user_name ?? "";
+  const resolvedCustomerEmail =
+    customerEmailOverride ?? session?.user?.email ?? "";
 
   const handleContinue = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!customerName || !customerEmail) {
+    if (!resolvedCustomerName || !resolvedCustomerEmail) {
       setError("Name and email are required.");
       return;
     }
     router.push(
-      `/checkout/payment?name=${encodeURIComponent(customerName)}&email=${encodeURIComponent(
-        customerEmail,
+      `/checkout/payment?name=${encodeURIComponent(resolvedCustomerName)}&email=${encodeURIComponent(
+        resolvedCustomerEmail,
       )}&phone=${encodeURIComponent(customerPhone)}&orderID=${encodeURIComponent(orderID ?? "")}`,
     );
   };
@@ -98,15 +110,15 @@ export default function CheckoutDetailsPage() {
           type="text"
           placeholder="Full Name"
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-KC_GREEN text-KC_GREEN font-medium"
-          value={customerName}
-          onChange={(e) => setCustomerName(e.target.value)}
+          value={resolvedCustomerName}
+          onChange={(e) => setCustomerNameOverride(e.target.value)}
         />
         <input
           type="email"
           placeholder="Email"
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-KC_GREEN text-KC_GREEN font-medium"
-          value={customerEmail}
-          onChange={(e) => setCustomerEmail(e.target.value)}
+          value={resolvedCustomerEmail}
+          onChange={(e) => setCustomerEmailOverride(e.target.value)}
         />
         <input
           type="tel"

@@ -35,6 +35,7 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
   const [openDrinkSelection, setDrinkSelection] = useState(false);
   const [openSauceSelection, setSauceSelection] = useState(false);
   const [menuItem, setMenuItem] = useState<CartItem>(defaultMenuItem);
+  const isDefaultItem = menuItem._id === "default_id";
 
   const { addItem, generate_Cart_ID } = useCart();
 
@@ -94,7 +95,6 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
   const [extraSauce, SetExtraSauces] = useState<Menu[]>([]);
   const [extraCheese, setExtraCheese] = useState<Menu[]>([]);
   const [extraVeggies, setExtraVeggies] = useState<Menu[]>([]);
-  let blurUrl = "/public/assets/placeholder.png";
 
   const HandleExtraSauce = (item: any) => {
     SetExtraSauces((prev) => {
@@ -174,36 +174,44 @@ const MenuItemDetails: React.FC<MenuItemDetailsProps> = ({ item_id }) => {
   };
 
   useEffect(() => {
-    const fetchMenuItem = async () => {
-      try {
-        console.log("Fetching menu item...");
-        const res = await axios.get(`/api/fetchmenuitems/${item_id}`);
-        const fetchedItem = res.data.menu_item;
-        blurUrl =
-          menuItem.item_img_url?.replace("upload", "upload/w_10,h_10,q_1") ??
-          "@public/assets/placeholder.png";
-        //const optimisedurl = fetchedItem.item_img_url.replace('/upload', '/upload/w_400,h_300,f_auto,q_auto/')
-        //fetchedItem.item_img_url = optimisedurl
+    if (isDefaultItem) {
+      const fetchMenuItem = async () => {
+        try {
+          console.log("Fetching menu item...");
+          const res = await axios.get(`/api/fetchmenuitems/${item_id}`);
+          const fetchedItem = res.data.menu_item;
 
-        setMenuItem((prevMenuItem) => ({
-          ...(fetchedItem ?? prevMenuItem),
-          cart_id: generate_Cart_ID(fetchedItem) ?? "default_cart_id",
-        }));
-      } catch (error) {
-        console.log("Failed to fetch menu item details:", error);
-      }
-    };
+          setMenuItem((prevMenuItem) => ({
+            ...(fetchedItem ?? prevMenuItem),
+            cart_id: generate_Cart_ID(fetchedItem) ?? "default_cart_id",
+          }));
+        } catch (error) {
+          console.log("Failed to fetch menu item details:", error);
+        }
+      };
 
-    if (menuItem._id === "default_id") {
       fetchMenuItem();
-    } else {
+      return;
+    }
+
+    const frame = requestAnimationFrame(() => {
       setMenuItem((prevMenuItem) => ({
         ...prevMenuItem,
         cart_id: generate_Cart_ID(prevMenuItem) ?? "default_cart_id",
-        meal: meal,
+        meal,
       }));
-    }
-  }, [item_id, extraSauce, extraCheese, extraVeggies, meal]);
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [
+    item_id,
+    extraSauce,
+    extraCheese,
+    extraVeggies,
+    meal,
+    generate_Cart_ID,
+    isDefaultItem,
+  ]);
 
   if (menuItem.item_name == "Loading...") {
     return <LoadingScreen />;

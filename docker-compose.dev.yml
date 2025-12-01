@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: kebabscrib-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/kebabscrib
+      MONGODB_USERS_URI: mongodb://mongo:27017/kebabscrib_users
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6
+    container_name: mongodb-dev
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+

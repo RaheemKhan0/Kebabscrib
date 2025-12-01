@@ -1,6 +1,7 @@
 "use client";
 import { OrderType } from "types/order";
 import React, { useEffect } from "react";
+import Image from "next/image";
 
 type Props = {
   order: OrderType;
@@ -38,7 +39,7 @@ export default function OrderSuccessful({ order }: Props) {
           </div>
           <div>
             <h3 className="font-medium">Order Time:</h3>
-            <p>{new Date(order.createdAt).toLocaleString()}</p>
+            <p>{new Date(order?.createdAt).toLocaleString()}</p>
           </div>
         </div>
 
@@ -46,9 +47,11 @@ export default function OrderSuccessful({ order }: Props) {
         <div className="space-y-4 max-h-60 overflow-y-auto pr-2">
           {order.items.map((item, index) => (
             <div key={index} className="flex gap-4 items-center">
-              <img
-                src={item.item_img_url}
+              <Image
+                src={item.item_img_url ?? "/assets/KC_Logo_Logomark_green.svg"}
                 alt={item.item_name}
+                width={64}
+                height={64}
                 className="w-16 h-16 object-cover rounded"
               />
               <div>

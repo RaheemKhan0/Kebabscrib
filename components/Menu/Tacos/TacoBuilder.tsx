@@ -55,7 +55,6 @@ const TacoBuilder: React.FC = () => {
       Quantity: 1,
     };
   }, [
-    menu,
     size,
     meal,
     baseMeats,
@@ -66,6 +65,8 @@ const TacoBuilder: React.FC = () => {
     mealDrink,
     mealSauce,
     tacoSauce,
+    mediumTaco,
+    largeTaco,
   ]);
 
   const handleAddToCart = () => {

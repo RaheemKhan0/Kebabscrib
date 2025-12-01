@@ -7,10 +7,11 @@ const Footer: React.FC = () => {
     <footer className="bg-KC_GREEN text-white py-8 border-t-2 border-t-KebabGold">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <div className="mb-6 md:mb-0">
-          {/* <h2 className="text-2xl text-KebabGold font-bold ">Kebabs Crib</h2> */}
-          <img
+          <Image
             src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1750239647/KC_Logo_Combination_stacked_green_epqs9c.png"
             alt="Kebab's Crib Logo"
+            width={160}
+            height={40}
             className="h-10 w-auto"
           />
           <p className="mt-2 text-sm text-KebabGold">

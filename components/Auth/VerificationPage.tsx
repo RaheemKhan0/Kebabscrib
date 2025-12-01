@@ -12,16 +12,14 @@ const VerifyEmailPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [isverifytoken, setIsVerifyToken] = useState(true);
+  const verifytoken = searchParams.get("token");
 
   useEffect(() => {
-    const verifytoken = searchParams.get("token");
     if (!verifytoken) {
-      setStatus("error");
-      setIsVerifyToken(false);
-      setLoading(false);
       return;
     }
+
+    let isMounted = true;
 
     const verifyemail = async () => {
       try {
@@ -29,27 +27,38 @@ const VerifyEmailPage = () => {
           verifytoken,
         });
 
-        if (res.status == 200) {
+        if (!isMounted) {
+          return;
+        }
+
+        if (res.status === 200) {
           setStatus("success");
         }
 
-        // Optional: redirect after delay
         setTimeout(() => router.push("/"), 3000);
         setLoading(false);
       } catch {
+        if (!isMounted) {
+          return;
+        }
         setStatus("error");
         setLoading(false);
       }
     };
 
     verifyemail();
-  }, [searchParams, router]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [router, verifytoken]);
+
+  if (!verifytoken) {
+    return <NotFound />;
+  }
 
   if (loading) {
     return <LoadingScreen />;
-  }
-  if (!isverifytoken) {
-    return <NotFound />;
   }
   return (
     <div className="flex items-center justify-center h-screen bg-EggShell px-4">

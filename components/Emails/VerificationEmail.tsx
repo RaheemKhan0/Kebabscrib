@@ -50,7 +50,7 @@ const VerificationEmail = ({ username = "there", verifyUrl }: VerificationEmailP
         </Link>
 
         <Text style={{ fontSize: "14px", color: "#555" }}>
-          If you didn't create an account, you can safely ignore this email.
+          If you didn&apos;t create an account, you can safely ignore this email.
         </Text>
       </Container>
     </Html>
@@ -58,4 +58,3 @@ const VerificationEmail = ({ username = "there", verifyUrl }: VerificationEmailP
 };
 
 export default VerificationEmail;
-
