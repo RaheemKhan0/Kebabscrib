@@ -21,7 +21,7 @@ const ContinueAsGuest = ({ onClose, onGuestClick }: Props) => {
           ×
         </button>
         <h2 className="text-2xl font-bold mb-4 mt-3 text-center text-KC_GREEN">
-          You're not logged in
+          You&apos;re not logged in
         </h2>
         <p className="text-center mb-6 text-gray-700 font-medium">
           Would you like to log in or continue as a guest?

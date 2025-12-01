@@ -10,49 +10,67 @@ import { useCart } from "@utils/context/ShoppingCartContext";
 export default function SuccessPage() {
   const searchparams = useSearchParams();
   const orderID = searchparams.get("orderID");
-  const [loading, setLoading] = useState(true);
+  const hasOrderId = Boolean(orderID);
+  const [loading, setLoading] = useState(hasOrderId);
   const [order, setOrder] = useState<OrderType | null>(null);
-  const [noorder, setNoOrder] = useState(false);
+  const [noorder, setNoOrder] = useState(!hasOrderId);
   const { clearCart } = useCart();
 
   useEffect(() => {
     if (!orderID) {
-      setNoOrder(true);
-      setLoading(false);
       return;
     }
 
     let attempts = 0;
     const maxAttempts = 10;
+    let timeout: NodeJS.Timeout | null = null;
+    let cancelled = false;
 
     const pollOrder = async () => {
       try {
         const res = await axios.post(`/api/users/order/getorder`, { orderID });
         const fetchedOrder = res.data.order;
 
+        if (cancelled) {
+          return;
+        }
+
         if (fetchedOrder.isPaid) {
           setOrder(fetchedOrder);
           setLoading(false);
         } else {
-          attempts++;
+          attempts += 1;
           if (attempts < maxAttempts) {
-            setTimeout(pollOrder, 2000); // try again in 2 seconds
+            timeout = setTimeout(pollOrder, 2000);
           } else {
-            setOrder(fetchedOrder); // even if unpaid after 10 tries, show it
+            setOrder(fetchedOrder);
             setLoading(false);
           }
         }
-      } catch (error) {
+      } catch {
+        if (cancelled) {
+          return;
+        }
         setNoOrder(true);
         setLoading(false);
       }
     };
 
     pollOrder();
-    if (order && order.isPaid) {
+
+    return () => {
+      cancelled = true;
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+  }, [orderID]);
+
+  useEffect(() => {
+    if (order?.isPaid) {
       clearCart();
     }
-  }, []);
+  }, [clearCart, order]);
   if (loading) {
     return <LoadingScreen />;
   }

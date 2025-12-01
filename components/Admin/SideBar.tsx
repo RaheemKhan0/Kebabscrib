@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { SideBarButton } from "./Buttons/SideBarButton";
 import {
@@ -33,13 +35,16 @@ const SideBar = () => {
         className={`fixed top-0 left-0 h-screen w-64 bg-KC_GREEN text-KC_PEACH z-40 transform transition-transform duration-300 ease-in-out
   ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 md:fixed mr-10`}
       >
-        <a href="/admin/dashboard" className="block py-6 px-4">
-          <img
+        <Link href="/admin/dashboard" className="block py-6 px-4">
+          <Image
             src="/assets/KC_Logo_admin.png"
             alt="Kebab's Crib Logo"
+            width={144}
+            height={120}
+            priority
             className="h-30 w-36 mx-auto"
           />
-        </a>
+        </Link>
 
         <nav className="p-6 space-y-4 mt-5">
           <SideBarButton

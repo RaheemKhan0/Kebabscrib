@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/all";
 import { useGsapPlugins } from "@utils/customhooks/useGsapPlugins";
+import Link from "next/link";
 
 const Hero = () => {
   useGsapPlugins();
@@ -105,7 +106,7 @@ const Hero = () => {
               fontSize: "clamp(2.5rem, 8vw, 6rem)",
             }}
           >
-            Kebab's Crib
+            Kebab&apos;s Crib
           </h1>
 
           <p
@@ -116,7 +117,7 @@ const Hero = () => {
             flavors—crafted with love and fire, straight from our grill.
           </p>
 
-          <a
+          <Link
             ref={buttonRef}
             href="/menu"
             className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-KC_Yellow text-KC_GREEN rounded-full text-sm sm:text-base md:text-lg font-semibold shadow-md 
@@ -134,7 +135,7 @@ const Hero = () => {
                 clipRule="evenodd"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
 

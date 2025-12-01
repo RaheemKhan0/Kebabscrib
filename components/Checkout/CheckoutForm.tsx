@@ -2,10 +2,11 @@
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCart } from "@utils/context/ShoppingCartContext";
 import { useSearchParams } from "next/navigation";
 import { OrderType } from "types/order";
+import Image from "next/image";
 
 export default function CheckoutForm({
   clientSecret,
@@ -96,9 +97,13 @@ export default function CheckoutForm({
           ) : (
             order.items.map((item) => (
               <div key={item._id} className="flex items-center space-x-5 mb-5">
-                <img
-                  src={item.item_img_url}
+                <Image
+                  src={
+                    item.item_img_url ?? "/assets/KC_Logo_Logomark_green.svg"
+                  }
                   alt={item.item_name}
+                  width={80}
+                  height={80}
                   className="w-20 h-20 object-cover rounded-lg border border-KC_Yellow"
                 />
                 <div className="flex flex-col">

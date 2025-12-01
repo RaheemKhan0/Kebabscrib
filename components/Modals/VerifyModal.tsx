@@ -16,7 +16,7 @@ const VerifyModal = ({ onClose, onSkip, onVerify, loading }: Props) => {
           ×
         </button>
         <h2 className="text-2xl font-bold mb-4 mt-3 text-center text-KC_GREEN">
-          You're not verified
+          You&apos;re not verified
         </h2>
         <p className="text-center mb-6 text-gray-700 font-medium">
           Please verify your email before continuing.

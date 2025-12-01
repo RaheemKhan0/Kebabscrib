@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function NotFound() {
   return (
     <section className="flex flex-col items-center justify-center h-screen bg-gray-100 dark:bg-gray-900 px-4">
@@ -7,16 +9,15 @@ export default function NotFound() {
           Page Not Found
         </p>
         <p className="text-gray-600 dark:text-gray-400 mb-6">
-          The page you're looking for doesn't exist or may have expired.
+          The page you&apos;re looking for doesn&apos;t exist or may have expired.
         </p>
-        <a
+        <Link
           href="/"
           className="inline-block px-6 py-3 bg-KebabGreen text-white font-medium rounded-lg hover:bg-green-700 transition"
         >
           Go back home
-        </a>
+        </Link>
       </div>
     </section>
   );
 }
-

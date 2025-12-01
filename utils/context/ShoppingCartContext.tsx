@@ -81,10 +81,15 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     }
     return [];
   });
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
-    setLoading(false);
   }, [cartItems]);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setLoading(false));
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   const generate_Cart_ID = (item: CartItem): string => {
     return [
@@ -281,4 +286,3 @@ export const useCart = () => {
   }
   return cartContext;
 };
-

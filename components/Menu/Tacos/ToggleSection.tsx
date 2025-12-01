@@ -17,17 +17,31 @@ const ToggleSection: React.FC<ToggleSectionProps> = ({
   const [height, setHeight] = useState<string | number>(initiallyOpen ? "auto" : 0);
 
   useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout> | null = null;
+    let frame: number | null = null;
+
     if (open) {
       const scrollHeight = contentRef.current?.scrollHeight ?? 0;
-      setHeight(scrollHeight);
-      // Wait for transition, then reset to auto to allow dynamic height content
-      const timeout = setTimeout(() => setHeight("auto"), 300);
-      return () => clearTimeout(timeout);
+      frame = requestAnimationFrame(() => {
+        setHeight(scrollHeight);
+        timeout = window.setTimeout(() => setHeight("auto"), 300);
+      });
     } else {
-      setHeight(contentRef.current?.scrollHeight ?? 0);
-      // Trigger height to 0 after a tiny delay for animation
-      requestAnimationFrame(() => setHeight(0));
+      const currentHeight = contentRef.current?.scrollHeight ?? 0;
+      frame = requestAnimationFrame(() => {
+        setHeight(currentHeight);
+        requestAnimationFrame(() => setHeight(0));
+      });
     }
+
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      if (frame) {
+        cancelAnimationFrame(frame);
+      }
+    };
   }, [open]);
 
   return (
@@ -52,4 +66,3 @@ const ToggleSection: React.FC<ToggleSectionProps> = ({
 };
 
 export default ToggleSection;
-

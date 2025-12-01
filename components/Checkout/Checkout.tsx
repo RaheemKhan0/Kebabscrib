@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import { OrderType } from "types/order";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 const stripePromise = getStripe();
 
@@ -72,10 +73,13 @@ export default function CheckoutPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-EggShell">
-      <img
+      <Image
         src="/assets/KC_Logo.png"
         alt="Kebab's Crib Logo"
-        className="h-20 w-36 absolute top-1 "
+        width={144}
+        height={80}
+        priority
+        className="h-20 w-36 absolute top-1"
       />
 
       {clientSecret && order ? (

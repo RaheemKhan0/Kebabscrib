@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import {
   Dialog,
   DialogPanel,
@@ -12,9 +12,10 @@ import { signOut, useSession } from "next-auth/react";
 import LoadingScreen from "./Common/LoadingScreen";
 import { UserIcon, ShoppingCartIcon } from "@heroicons/react/20/solid";
 import toast from "react-hot-toast";
-import { Fragment } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Link from "next/link";
+import Image from "next/image";
 
 const Navbar: React.FC = () => {
   const [menu, SetMenu] = useState(false);
@@ -58,41 +59,44 @@ const Navbar: React.FC = () => {
         <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
           {/* Left: Logo */}
           <div className="flex-shrink-0">
-            <a href="/" className="flex items-center space-x-3">
-              <img
+            <Link href="/" className="flex items-center space-x-3">
+              <Image
                 src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1750239647/KC_Logo_Combination_stacked_green_epqs9c.png"
                 alt="Kebab's Crib Logo"
+                width={144}
+                height={80}
+                priority
                 className="h-20 w-36"
               />
-            </a>
+            </Link>
           </div>
 
           {/* Center: Navigation Links */}
           <div className="hidden md:flex justify-center flex-1">
             <ul className="flex space-x-8 font-medium font-parkinsans text-md-lg  text-KebabGreen">
               <li>
-                <a
+                <Link
                   href="/"
                   className="py-2 px-3 duration-300 hover:text-Light_Peach"
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/menu"
                   className="py-2 px-3 duration-300 hover:text-Light_Peach"
                 >
                   Menu
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/contactus"
                   className="py-2 px-3 duration-300 hover:text-Light_Peach"
                 >
                   Contact Us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -101,18 +105,18 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center gap-4 text-md-lg font-parkinsans">
             {status !== "authenticated" && (
               <>
-                <a
+                <Link
                   href="/signup"
                   className="py-2 px-3 hover:text-Light_Peach duration-300 text-KebabGreen"
                 >
                   Register
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/login"
                   className="py-2 px-3 hover:text-Light_Peach duration-300 text-KebabGreen"
                 >
                   Log In
-                </a>
+                </Link>
               </>
             )}
 
@@ -170,9 +174,9 @@ const Navbar: React.FC = () => {
               </Menu>
             )}
 
-            <a href="/cart" className="px-4 py-2">
+            <Link href="/cart" className="px-4 py-2">
               <ShoppingCartIcon className="h-6 w-6 text-KC_GREEN hover:text-Light_Peach duration-300" />
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -256,7 +260,7 @@ const Navbar: React.FC = () => {
                       { name: "Contact Us", path: "/contactus" },
                     ].map((item) => (
                       <li key={item.name}>
-                        <a
+                        <Link
                           href={item.path}
                           className="relative group block text-lg text-KC_GREEN"
                           onClick={() => SetMenu(false)}
@@ -266,7 +270,7 @@ const Navbar: React.FC = () => {
                             className="absolute left-1/2 bottom-0 h-[2px] w-0 bg-KC_GREEN transition-all duration-300 group-hover:w-10 group-hover:left-0"
                             style={{ transform: "translateY(6px)" }}
                           />
-                        </a>
+                        </Link>
                       </li>
                     ))}
                     {status === "authenticated" ? (
@@ -339,7 +343,7 @@ const Navbar: React.FC = () => {
                     ) : (
                       <>
                         <li>
-                          <a
+                          <Link
                             href="/signup"
                             className="relative group block text-lg text-KC_GREEN"
                             onClick={() => SetMenu(false)}
@@ -349,10 +353,10 @@ const Navbar: React.FC = () => {
                               className="absolute left-1/2 bottom-0 h-[2px] w-0 bg-KC_GREEN transition-all duration-300 group-hover:w-10 group-hover:left-0"
                               style={{ transform: "translateY(6px)" }}
                             />
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a
+                          <Link
                             href="/login"
                             className="relative group block text-lg text-KC_GREEN"
                             onClick={() => SetMenu(false)}
@@ -362,12 +366,12 @@ const Navbar: React.FC = () => {
                               className="absolute left-1/2 bottom-0 h-[2px] w-0 bg-KC_GREEN transition-all duration-300 group-hover:w-10 group-hover:left-0"
                               style={{ transform: "translateY(6px)" }}
                             />
-                          </a>
+                          </Link>
                         </li>
                       </>
                     )}
                     <li>
-                      <a
+                      <Link
                         href="/cart"
                         onClick={() => SetMenu(false)}
                         className="relative group block text-lg text-KC_GREEN"
@@ -379,7 +383,7 @@ const Navbar: React.FC = () => {
                           className="absolute left-1/2 bottom-0 h-[2px] w-0 bg-KC_GREEN transition-all duration-300 group-hover:w-10 group-hover:left-0"
                           style={{ transform: "translateY(6px)" }}
                         />
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </DialogPanel>

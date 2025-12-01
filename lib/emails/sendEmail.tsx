@@ -18,7 +18,7 @@ export async function sendOrderReceiptEmail(order: OrderType) {
     html,
   });
   console.log("email result : ", result);
-}\
+}
 
 export async function sendForgottenPasswordEmail(resetUrl: string, email : string) {
   const html = await render(<ForgottenPasswordEmail resetUrl={resetUrl} />);

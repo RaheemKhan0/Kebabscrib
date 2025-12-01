@@ -35,7 +35,7 @@ const ContactUs: React.FC = () => {
         Contact Us
       </h2>
       <p className="text-center max-w-xl text-KC_GREEN mb-10">
-        Have a question, feedback or a complaint? Reach out to us and we'll get
+        Have a question, feedback or a complaint? Reach out to us and we&apos;ll get
         back to you soon!
       </p>
 
