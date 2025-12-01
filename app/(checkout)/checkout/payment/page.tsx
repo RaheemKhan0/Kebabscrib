@@ -1,5 +1,8 @@
 import CheckoutPage from "@components/Checkout/Checkout";
-const page = () => {
+import { connection } from 'next/server'
+
+const page = async () => {
+  await connection();
   return <CheckoutPage />;
 };
 

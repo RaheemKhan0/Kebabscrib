@@ -74,50 +74,52 @@ export const formatItemForStripe = (cartItems: CartItem[]) => {
   }));
 };
 
-export function formatOrderItems(cartItems: CartItem[]) {
+export function formatOrderItems(cartItems: CartItem[]): CartItem[] {
   return cartItems.map((item) => ({
-    _id: item._id,
-    item_name: item.item_name,
-    item_description: item.item_description,
-    item_price: item.meal ? item.item_price.meal : item.item_price.single,
-    item_category: item.item_category,
+    ...item,
+    item_price: {
+      single: item.item_price.single,
+      ...(item.item_price.meal !== undefined && {
+        meal: item.item_price.meal,
+      }),
+    },
     extra_Sauces:
       item.extra_Sauces?.map((sauce) => ({
-        item_name: sauce.item_name,
-        item_price: sauce.item_price.single,
-        item_category: sauce.item_category,
-        _id: sauce._id,
+        ...sauce,
+        item_price: {
+          single: sauce.item_price.single,
+        },
       })) ?? [],
     extra_Vegetables:
       item.extra_Vegetables?.map((veg) => ({
-        item_name: veg.item_name,
-        item_price: veg.item_price.single,
-        item_category: veg.item_category,
-        _id: veg._id,
+        ...veg,
+        item_price: {
+          single: veg.item_price.single,
+        },
       })) ?? [],
     extra_Cheese:
       item.extra_Cheese?.map((cheese) => ({
-        item_name: cheese.item_name,
-        item_price: cheese.item_price.single,
-        item_category: cheese.item_category,
-        _id: cheese._id,
+        ...cheese,
+        item_price: {
+          single: cheese.item_price.single,
+        },
       })) ?? [],
     extraMeat: item.extraMeat
       ? {
-          item_name: item.extraMeat.item_name,
-          item_price: item.extraMeat.item_price.single, //  Fix here
+          ...item.extraMeat,
+          item_price: { single: item.extraMeat.item_price.single },
         }
       : undefined,
     mealdrink: item.mealdrink
       ? {
-          item_name: item.mealdrink.item_name,
-          item_price: item.mealdrink.item_price.single , //  Fix here
+          ...item.mealdrink,
+          item_price: { single: item.mealdrink.item_price.single },
         }
       : undefined,
     mealsauce: item.mealsauce
       ? {
-          item_name: item.mealsauce.item_name,
-          item_price: item.mealsauce.item_price.single, // Fix here
+          ...item.mealsauce,
+          item_price: { single: item.mealsauce.item_price.single },
         }
       : undefined,
     size: item.size && typeof item.size === "string" ? item.size : undefined,

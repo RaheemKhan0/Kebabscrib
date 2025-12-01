@@ -103,19 +103,19 @@ const ShoppingCartItem: React.FC<CartItemProps> = ({
               {item.mealsauce.item_name}
             </p>
           )}
-          {item.extra_Sauces?.length > 0 && (
+          {item.extra_Sauces && item.extra_Sauces?.length > 0 && (
             <p>
               <span className="font-semibold text-KC_GREEN">Extra Sauces:</span>{" "}
               {item.extra_Sauces.map((s) => s.item_name).join(", ")}
             </p>
           )}
-          {item.extra_Cheese?.length > 0 && (
+          {item.extra_Cheese && item.extra_Cheese?.length > 0 && (
             <p>
               <span className="font-semibold text-KC_GREEN">Extra Cheese:</span>{" "}
               {item.extra_Cheese.map((c) => c.item_name).join(", ")}
             </p>
           )}
-          {item.extra_Vegetables?.length > 0 && (
+          {item.extra_Vegetables &&item.extra_Vegetables?.length > 0 && (
             <p>
               <span className="font-semibold text-KC_GREEN">
                 Extra Vegetables:

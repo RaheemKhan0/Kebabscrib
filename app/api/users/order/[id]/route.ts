@@ -4,11 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const orderID = params.id;
+  const { id } = await params;
 
-  if (!orderID) {
+  if (!id) {
     return NextResponse.json(
       { error: "No order ID provided" },
       { status: 400 },
@@ -16,7 +16,7 @@ export async function GET(
   }
 
   await connectMongodb();
-  const fetchedOrder = await Order.findById(orderID);
+  const fetchedOrder = await Order.findById(id);
 
   if (!fetchedOrder) {
     return NextResponse.json({ error: "Order not found" }, { status: 404 });

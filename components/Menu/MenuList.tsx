@@ -1,5 +1,4 @@
 "use client";
-import React, { useState, useEffect, useContext } from "react";
 import MenuItem from "./MenuItem";
 import { useMenu } from "@utils/context/MenuContext";
 import LoadingScreen from "../Common/LoadingScreen";
@@ -14,7 +13,8 @@ export interface Menu {
     meal?: number;
   };
   item_category: string;
-  size?: string;
+  size?: "Medium" | "Large" | undefined;
+
   slug: string;
   item_img_url?: string;
   isHidden: boolean;
@@ -36,7 +36,7 @@ const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
   );
   const itemsWithBanner =
     item_category === "Des Sandwiches"
-      ? [{ _id: "taco-banner" },...filteredItems] // Placeholder object
+      ? [{ _id: "taco-banner" }, ...filteredItems] // Placeholder object
       : filteredItems;
 
   // Render menu items based on the selected category

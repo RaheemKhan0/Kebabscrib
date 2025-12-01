@@ -1,5 +1,8 @@
 import VerifyEmailPage from "@components/Auth/VerificationPage";
-const page = () => {
+import { connection } from 'next/server'
+
+const page = async () => {
+  await connection()
   return <VerifyEmailPage />;
 };
 

@@ -1,5 +1,7 @@
 import SuccessPage from "@components/Checkout/SuccessPage";
-const page = () => {
+import { connection } from "next/server";
+const page = async () => {
+  await connection();
   return <SuccessPage />;
 };
 
