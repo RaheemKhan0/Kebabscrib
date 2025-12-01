@@ -1,8 +1,9 @@
 import SuccessPage from "@components/Checkout/SuccessPage";
-import { connection } from "next/server";
-const page = async () => {
-  await connection();
+
+export const dynamic = "force-dynamic";
+
+const OrderSuccessfulPage = () => {
   return <SuccessPage />;
 };
 
-export default page;
+export default OrderSuccessfulPage;

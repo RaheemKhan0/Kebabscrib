@@ -1,9 +1,9 @@
 import VerifyEmailPage from "@components/Auth/VerificationPage";
-import { connection } from 'next/server'
 
-const page = async () => {
-  await connection()
+export const dynamic = "force-dynamic";
+
+const VerifyEmail = () => {
   return <VerifyEmailPage />;
 };
 
-export default page;
+export default VerifyEmail;

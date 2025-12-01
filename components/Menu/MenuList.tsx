@@ -14,7 +14,6 @@ export interface Menu {
   };
   item_category: string;
   size?: "Medium" | "Large" | undefined;
-
   slug: string;
   item_img_url?: string;
   isHidden: boolean;

@@ -1,9 +1,9 @@
 import CheckoutPage from "@components/Checkout/Checkout";
-import { connection } from 'next/server'
 
-const page = async () => {
-  await connection();
+export const dynamic = "force-dynamic";
+
+const PaymentPage = () => {
   return <CheckoutPage />;
 };
 
-export default page;
+export default PaymentPage;

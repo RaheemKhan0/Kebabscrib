@@ -1,10 +1,9 @@
 import ResetPasswordPage from "@components/Auth/ResetPassword";
-import { connection } from "next/server";
 
-const page = async () => {
-  await connection();
+export const dynamic = "force-dynamic";
+
+const ResetPassword = () => {
   return <ResetPasswordPage />;
 };
 
-export default page;
-
+export default ResetPassword;
