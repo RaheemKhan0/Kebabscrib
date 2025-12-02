@@ -15,7 +15,6 @@ import { OrderType } from "types/order";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Menu } from "@components/Menu/MenuList";
-import Stripe from "stripe";
 
 export type Extras = {
   _id: string;
@@ -62,7 +61,6 @@ type ShoppingCartContext = {
   getTotal: () => number;
   getItemExtraTotal: (item: CartItem) => number;
   placeOrder: (name: string, email: string, id?: string) => Promise<void>;
-  formatItemForStripe: () => Stripe.Checkout.SessionCreateParams.LineItem[];
   clearCart: () => void;
 };
 
@@ -201,20 +199,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     );
   };
 
-  const formatItemForStripe = () => {
-    return cartItems.map((item) => ({
-      price_data: {
-        currency: "aed",
-        product_data: { name: item.item_name },
-        unit_amount:
-          (item.meal
-            ? (item.item_price.meal ?? item.item_price.single + 10) +
-              getItemExtraTotal(item)
-            : item.item_price.single + getItemExtraTotal(item)) * 100,
-      },
-      quantity: item.Quantity,
-    }));
-  };
   const placeOrder = async (name: string, email: string, id?: string) => {
     try {
       const order: OrderType = {
@@ -255,7 +239,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         getTotal,
         getItemExtraTotal,
         placeOrder,
-        formatItemForStripe,
         clearCart
       }}
     >
@@ -280,7 +263,6 @@ export const useCart = () => {
       getTotal: () => 0,
       getItemExtraTotal: () => 0,
       placeOrder: async () => {},
-      formatItemForStripe: () => [],
       clearCart: () => {},
     };
   }

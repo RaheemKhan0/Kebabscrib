@@ -59,21 +59,6 @@ export const getTotal = (cartItems: CartItem[]) => {
   );
 };
 
-export const formatItemForStripe = (cartItems: CartItem[]) => {
-  return cartItems.map((item) => ({
-    price_data: {
-      currency: "aed",
-      product_data: { name: item.item_name },
-      unit_amount:
-        (item.meal
-          ? (item.item_price.meal ?? item.item_price.single + 10) +
-            getItemExtraTotal(item)
-          : item.item_price.single + getItemExtraTotal(item)) * 100,
-    },
-    quantity: item.Quantity,
-  }));
-};
-
 export function formatOrderItems(cartItems: CartItem[]): CartItem[] {
   return cartItems.map((item) => ({
     ...item,

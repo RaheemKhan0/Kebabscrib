@@ -34,8 +34,6 @@ export interface OrderItem {
 export type OrderStatus = "draft" | "pending" | "completed";
 
 export interface OrderDocument extends Document {
-  stripe_session_id?: string;
-  customer_id?: string;
   customer_name?: string;
   email?: string;
   phone?: string;
@@ -51,8 +49,6 @@ export interface OrderDocument extends Document {
 
 const orderSchema = new Schema<OrderDocument>(
   {
-    stripe_session_id: { type: String, required: false },
-    customer_id: { type: String, required: false },
     customer_name: { type: String, required: false },
     email: { type: String, required: false },
     phone: { type: String, required: false },
