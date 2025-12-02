@@ -1,6 +1,8 @@
 import PendingOrders from "@components/Admin/Orders/PendingOrders";
 
-const page = () => {
+export const dynamic = "force-dynamic";
+
+const AdminOrdersPage = () => {
   return (
     <div className="bg-EggShell">
       <PendingOrders />
@@ -8,4 +10,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default AdminOrdersPage;

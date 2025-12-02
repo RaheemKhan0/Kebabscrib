@@ -1,13 +1,9 @@
-import React from 'react'
-import LogIn from '@components/Auth/LogIn'
+import LogIn from "@components/Auth/LogIn";
 
-const page = () => {
-  return (
-    <>
-      <LogIn/>
-    </>
-  )
-}
+export const dynamic = "force-dynamic";
 
-export default page
+const LoginPage = () => {
+  return <LogIn />;
+};
 
+export default LoginPage;

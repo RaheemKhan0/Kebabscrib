@@ -1,8 +1,9 @@
-import ForgottenPassword from "@components/Auth/ForgottenPassword"
-const page = () => {
-  return (
-  <ForgottenPassword />
-  )
-}
+import ForgottenPassword from "@components/Auth/ForgottenPassword";
 
-export default page
+export const dynamic = "force-dynamic";
+
+const ForgotPasswordPage = () => {
+  return <ForgottenPassword />;
+};
+
+export default ForgotPasswordPage;

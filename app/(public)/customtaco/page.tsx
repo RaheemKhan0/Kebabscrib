@@ -1,10 +1,9 @@
-import TacoBuilder from '@components/Menu/Tacos/TacoBuilder'
-import React from 'react'
+import TacoBuilder from "@components/Menu/Tacos/TacoBuilder";
 
-const page = () => {
-  return (
-  <TacoBuilder />
-    )
-}
+export const dynamic = "force-dynamic";
 
-export default page
+const CustomTacoPage = () => {
+  return <TacoBuilder />;
+};
+
+export default CustomTacoPage;
