@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectMongodb from "@lib/mongodb";
-import ResetToken from "@model/ResetToken";
+import ResetToken from "@model/reset_token";
 export async function POST(req: NextRequest) {
   try {
     await connectMongodb(); // Ensure DB is connected

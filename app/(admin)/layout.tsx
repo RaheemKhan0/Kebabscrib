@@ -1,4 +1,3 @@
-import SessionWrapper from "@components/Auth/SessionWrapper";
 import "@public/styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import { MenuProvider } from "@utils/context/MenuContext";

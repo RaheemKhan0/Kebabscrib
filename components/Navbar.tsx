@@ -19,7 +19,7 @@ import Image from "next/image";
 
 const Navbar: React.FC = () => {
   const [menu, SetMenu] = useState(false);
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
 
   const logout = async () => {

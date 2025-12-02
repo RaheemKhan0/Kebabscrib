@@ -1,8 +1,8 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import MenuItem from "@model/menu_items";
 import connectMongodb from "@lib/mongodb";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   await connectMongodb();
 
   try {

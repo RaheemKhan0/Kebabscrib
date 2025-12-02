@@ -1,7 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { ClipboardDocumentIcon } from "@heroicons/react/20/solid";
 
 interface ButtonParams {
   href: string;

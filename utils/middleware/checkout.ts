@@ -1,6 +1,5 @@
 "use client";
 import axios from "axios";
-import { OrderType } from "types/order";
 
 export async function getClientSecret({
   orderID,

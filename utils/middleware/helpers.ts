@@ -46,7 +46,7 @@ const getItemExtraTotal = (item: CartItem) => {
   );
 };
 
-const getTotal = (cartItems: CartItem[]) => {
+export const getTotal = (cartItems: CartItem[]) => {
   return cartItems.reduce(
     (total, item) =>
       total +

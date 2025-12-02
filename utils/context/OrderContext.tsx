@@ -9,7 +9,6 @@ import useSWR from "swr";
 import { OrderType } from "types/order";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { fetcher } from "@utils/middleware/helpers";
 
 interface OrdersContextType {
   completeorder: (_id: string | undefined) => Promise<void>;

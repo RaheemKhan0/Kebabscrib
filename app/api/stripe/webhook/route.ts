@@ -3,7 +3,7 @@ import { sendOrderReceiptEmail } from "@lib/emails/sendEmail";
 import Stripe from "stripe";
 import connectMongodb from "@lib/mongodb";
 import Order from "@model/orders";
-import KebabscribUser from "@model/Kebabscrib_User";
+import KebabscribUser from "@model/kebabscrib_user";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2025-04-30.basil",
@@ -104,7 +104,6 @@ export async function POST(req: NextRequest) {
 
     return new NextResponse("Webhook received", { status: 200 });
   } else {
-    const session = event.data.object as Stripe.Checkout.Session;
 
     return NextResponse.json("Event type not handled", { status: 200 });
   }
