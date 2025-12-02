@@ -22,6 +22,7 @@ const ShoppingCart = () => {
     increaseQuantity,
     getTotal,
     getItemExtraTotal,
+    clearCart,
   } = useCart();
   const { data: session, status } = useSession();
   const [showModal, setShowModal] = useState(false);
@@ -29,6 +30,12 @@ const ShoppingCart = () => {
   const [skipVerification, setSkipVerification] = useState(false);
   const router = useRouter();
   const [verifyModalLoading, setVerifyModalLoading] = useState(false);
+
+  const handleDraftOrderSuccess = () => {
+    toast.success("Order submitted! We'll contact you shortly to confirm.");
+    clearCart();
+    router.push("/");
+  };
 
   const handleCheckout = async () => {
     if (status === "unauthenticated") {
@@ -48,13 +55,11 @@ const ShoppingCart = () => {
           status: "draft",
         };
 
-        const newOrder = await axios.post(
-          "/api/users/order/createdraftorder",
-          draftOrder,
-        );
-        router.push(`checkout/details?orderID=${newOrder.data.newOrder._id}`);
+        await axios.post("/api/users/order/createdraftorder", draftOrder);
+        handleDraftOrderSuccess();
       } catch (error) {
         console.error(error);
+        toast.error("Unable to submit order. Please try again.");
       }
     }
   };
@@ -78,20 +83,17 @@ const ShoppingCart = () => {
 
   const onGuestClick = async () => {
     try {
-      console.log("formating CartItems : ", CartItems);
       const draftOrder: OrderType = {
         items: formatOrderItems(CartItems),
         total_price: getTotal(),
         status: "draft",
       };
 
-      const newOrder = await axios.post(
-        "/api/users/order/createdraftorder",
-        draftOrder,
-      );
-      router.push(`/checkout/details?orderID=${newOrder.data.newOrder._id}`);
+      await axios.post("/api/users/order/createdraftorder", draftOrder);
+      handleDraftOrderSuccess();
     } catch (error) {
       console.error(error);
+      toast.error("Unable to submit order. Please try again.");
     }
   };
 
@@ -131,16 +133,14 @@ const ShoppingCart = () => {
                 status: "draft",
               };
 
-              const newOrder = await axios.post(
+              await axios.post(
                 "/api/users/order/createdraftorder",
                 draftOrder,
               );
-
-              router.push(
-                `/checkout/details?orderID=${newOrder.data.newOrder._id}`,
-              );
+              handleDraftOrderSuccess();
             } catch (error) {
               console.error(error);
+              toast.error("Unable to submit order. Please try again.");
             }
           }}
           onVerify={onVerify}
@@ -173,7 +173,7 @@ const ShoppingCart = () => {
           onClick={handleCheckout}
           className="w-full bg-KC_GREEN text-white text-lg font-semibold py-3 rounded-lg hover:bg-KC_GREEN/90 transition-colors duration-200"
         >
-          Proceed to Checkout
+          Submit Order
         </button>
       </div>
     </section>
