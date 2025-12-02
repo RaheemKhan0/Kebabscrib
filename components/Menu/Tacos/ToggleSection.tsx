@@ -17,7 +17,7 @@ const ToggleSection: React.FC<ToggleSectionProps> = ({
   const [height, setHeight] = useState<string | number>(initiallyOpen ? "auto" : 0);
 
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout> | null = null;
+    let timeout: number | null = null;
     let frame: number | null = null;
 
     if (open) {
@@ -36,7 +36,7 @@ const ToggleSection: React.FC<ToggleSectionProps> = ({
 
     return () => {
       if (timeout) {
-        clearTimeout(timeout);
+        window.clearTimeout(timeout);
       }
       if (frame) {
         cancelAnimationFrame(frame);

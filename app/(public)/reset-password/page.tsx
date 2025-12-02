@@ -1,8 +1,9 @@
 import ResetPasswordPage from "@components/Auth/ResetPassword";
 
-const page = () => {
+export const dynamic = "force-dynamic";
+
+const ResetPassword = () => {
   return <ResetPasswordPage />;
 };
 
-export default page;
-
+export default ResetPassword;

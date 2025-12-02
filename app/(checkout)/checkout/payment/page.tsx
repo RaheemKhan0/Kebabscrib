@@ -1,6 +1,9 @@
 import CheckoutPage from "@components/Checkout/Checkout";
-const page = () => {
+
+export const dynamic = "force-dynamic";
+
+const PaymentPage = () => {
   return <CheckoutPage />;
 };
 
-export default page;
+export default PaymentPage;

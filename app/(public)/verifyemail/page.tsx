@@ -1,6 +1,9 @@
 import VerifyEmailPage from "@components/Auth/VerificationPage";
-const page = () => {
+
+export const dynamic = "force-dynamic";
+
+const VerifyEmail = () => {
   return <VerifyEmailPage />;
 };
 
-export default page;
+export default VerifyEmail;

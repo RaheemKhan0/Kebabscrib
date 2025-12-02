@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     const verificationLink = `${request.nextUrl.origin}/verify-email?token=${token}`;
 
     // Send verification email (optional)
-    await sendVerificationEmail(email, verificationLink);
+    await sendVerificationEmail(username, verificationLink, email);
 
     const userResponse = {
       id: savedUser._id,

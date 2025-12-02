@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
         : baseItem.item_price.single;
 
       const sumExtras = (extras = []) =>
-        extras.reduce((total, e) => {
+        extras.reduce((total, e : any) => {
           const matched = findById(e._id);
           if (!matched || !matched.item_price) {
             console.warn(`Extra item not found or invalid: ${e._id}`);

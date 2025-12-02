@@ -39,7 +39,7 @@ export default function OrderSuccessful({ order }: Props) {
           </div>
           <div>
             <h3 className="font-medium">Order Time:</h3>
-            <p>{new Date(order?.createdAt).toLocaleString()}</p>
+            <p>{new Date(order?.createdAt ?? "").toLocaleString()}</p>
           </div>
         </div>
 

@@ -1,10 +1,9 @@
-import React from 'react'
-import SignInForm from '@components/Auth/SignUp'
+import SignInForm from "@components/Auth/SignUp";
 
-const page = () => {
-  return (
-   <SignInForm /> 
-  )
-}
+export const dynamic = "force-dynamic";
 
-export default page
+const SignUpPage = () => {
+  return <SignInForm />;
+};
+
+export default SignUpPage;

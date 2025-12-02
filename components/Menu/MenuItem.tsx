@@ -2,6 +2,7 @@ import "@public/styles/globals.css";
 import { useCart } from "@utils/context/ShoppingCartContext";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useState } from "react";
 
 interface MenuItemProps {
   _id: string;
@@ -12,13 +13,10 @@ interface MenuItemProps {
     combo?: number;
   };
   item_category: string;
-  size?: string;
-  sauces?: string[];
+  size?: "Medium" | "Large" | undefined;
   slug: string;
   item_img_url?: string;
 }
-
-import { useState } from "react";
 
 const MenuItem: React.FC<MenuItemProps> = ({
   _id,
@@ -27,7 +25,6 @@ const MenuItem: React.FC<MenuItemProps> = ({
   item_price,
   item_category,
   size,
-  sauces,
   slug,
   item_img_url,
 }) => {
@@ -113,9 +110,9 @@ const MenuItem: React.FC<MenuItemProps> = ({
               item_price,
               item_category,
               size,
-              sauces,
-              slug,
               item_img_url,
+              meal: false,
+              Quantity: 1,
             });
           }}
         >

@@ -32,7 +32,6 @@ export default function BannerSlider() {
     slides: {
       perView: 1,
     },
-    duration: 1000,
   });
 
   useEffect(() => {

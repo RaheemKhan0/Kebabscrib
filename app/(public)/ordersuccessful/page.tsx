@@ -1,6 +1,9 @@
 import SuccessPage from "@components/Checkout/SuccessPage";
-const page = () => {
+
+export const dynamic = "force-dynamic";
+
+const OrderSuccessfulPage = () => {
   return <SuccessPage />;
 };
 
-export default page;
+export default OrderSuccessfulPage;

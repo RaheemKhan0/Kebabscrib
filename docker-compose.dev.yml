@@ -14,7 +14,6 @@ services:
       - /app/node_modules
     environment:
       MONGODB_URI: mongodb://mongo:27017/kebabscrib
-      MONGODB_USERS_URI: mongodb://mongo:27017/kebabscrib_users
     depends_on:
       - mongo
 

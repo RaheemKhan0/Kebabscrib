@@ -1,10 +1,9 @@
-import React from 'react'
-import ShoppingCart from '@components/ShoppingCart/ShoppingCart'
+import ShoppingCart from "@components/ShoppingCart/ShoppingCart";
 
-const page = () => {
-  return (
-    <ShoppingCart />
-  )
-}
+export const dynamic = "force-dynamic";
 
-export default page
+const CartPage = () => {
+  return <ShoppingCart />;
+};
+
+export default CartPage;

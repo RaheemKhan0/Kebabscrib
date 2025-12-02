@@ -1,7 +1,9 @@
 import CheckoutDetailsPage from "@components/Checkout/CheckoutDetails";
 
-const page = () => {
+export const dynamic = "force-dynamic";
+
+const CheckoutDetails = () => {
   return <CheckoutDetailsPage />;
 };
 
-export default page;
+export default CheckoutDetails;
