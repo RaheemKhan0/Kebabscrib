@@ -1,6 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import bcrypt from "bcrypt";
-import KebabscribUser from "@model/Kebabscrib_User";
+import KebabscribUser from "@model/kebabscrib_user";
 import connectMongodb from "@lib/mongodb";
 import CredentialsProvider from "next-auth/providers/credentials";
 const dotenv = await import("dotenv");
@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "password", type: "password" },
       },
-      async authorize(credentials: any, req): Promise<any> {
+      async authorize(credentials: any): Promise<any> {
         await connectMongodb();
         const user = await KebabscribUser.findOne({
           email: credentials.email,

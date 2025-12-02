@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import connectMongodb from "@lib/mongodb";
-import KebabscribUser from "@model/Kebabscrib_User";
-import ResetToken from "@model/ResetToken";
+import KebabscribUser from "@model/kebabscrib_user";
+import ResetToken from "@model/reset_token";
 import { sendForgottenPasswordEmail } from "@lib/emails/sendEmail";
 
 const RATE_LIMIT_MINUTES = 5;

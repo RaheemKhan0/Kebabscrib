@@ -1,9 +1,9 @@
 import connectMongodb from "@lib/mongodb.js";
-import KebabscribUser from "@model/Kebabscrib_User.js";
+import KebabscribUser from "@model/kebabscrib_user";
 import bcryptjs from "bcrypt";
 import { NextResponse, NextRequest } from "next/server";
 import { sendVerificationEmail } from "@lib/emails/sendEmail";
-import VerificationTokens from "@model/VerificationToken";
+import VerificationTokens from "@model/verification_token";
 import crypto from "crypto";
 
 export async function POST(request: NextRequest) {

@@ -14,7 +14,7 @@ const SignInForm: React.FC = () => {
   const [remember, setRemember] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, checked } = e.target;
 
     if (name === "email") {
       setEmail(value);
@@ -39,7 +39,7 @@ const SignInForm: React.FC = () => {
     };
 
     try {
-      const response = await axios.post("/api/users/signup", formData);
+      await axios.post("/api/users/signup", formData);
       toast.success("Registration Successful");
       // [Fix 2: Use router.push for redirection]
       router.push("/login"); // Redirect to homepage

@@ -1,6 +1,6 @@
-import ResetToken from "@model/ResetToken";
+import ResetToken from "@model/reset_token";
 import { NextRequest, NextResponse } from "next/server";
-import KebabscribUser from "@model/Kebabscrib_User";
+import KebabscribUser from "@model/kebabscrib_user";
 import bcryptjs from "bcrypt";
 
 export async function POST(req: NextRequest) {

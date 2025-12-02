@@ -1,7 +1,25 @@
-import mongoose from "mongoose";
-import Order from "./orders";
+import {
+  Schema,
+  model,
+  models,
+  Document,
+  Types,
+} from "mongoose";
 
-const kebabscribUserSchema = new mongoose.Schema({
+export type UserRole = "admin" | "staff" | "user";
+
+export interface KebabscribUserDocument extends Document {
+  user_name: string;
+  email: string;
+  password: string;
+  isVerified: boolean;
+  role: UserRole;
+  verified: boolean;
+  lastlogin: Date;
+  orders: Types.ObjectId[];
+}
+
+const kebabscribUserSchema = new Schema<KebabscribUserDocument>({
   user_name: {
     type: String,
     required: [true, "Please provide a username"],
@@ -33,16 +51,16 @@ const kebabscribUserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  orders : [
+  orders: [
     {
-      type : mongoose.Schema.Types.ObjectId,
-      ref : Order
-    }
-  ]
+      type: Schema.Types.ObjectId,
+      ref: "Order",
+    },
+  ],
 });
 
 const KebabscribUser =
-  mongoose.models.KebabscribUser ||
-  mongoose.model("KebabscribUser", kebabscribUserSchema);
+  models.KebabscribUser ||
+  model<KebabscribUserDocument>("KebabscribUser", kebabscribUserSchema);
 
 export default KebabscribUser;

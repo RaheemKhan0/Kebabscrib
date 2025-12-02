@@ -1,6 +1,4 @@
 // types/next-auth.d.ts (or anywhere accessible with correct tsconfig path)
-import NextAuth from "next-auth";
-import { JWT } from "next-auth/jwt";
 
 declare module "next-auth" {
   interface Session {

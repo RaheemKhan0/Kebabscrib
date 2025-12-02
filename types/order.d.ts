@@ -1,4 +1,3 @@
-import { Types } from "mongoose";
 import { CartItem } from "@utils/context/ShoppingCartContext";
 
 export interface OrderType {

@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useEffect, useContext, useState } from "react";
+import { createContext, useEffect, useContext } from "react";
 import { Menu } from "@components/Menu/MenuList";
 import axios from "axios";
 import toast from "react-hot-toast";

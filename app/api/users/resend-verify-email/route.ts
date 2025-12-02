@@ -1,9 +1,9 @@
 import { authOptions } from "@/api/auth/[...nextauth]/option";
 import connectMongodb from "@lib/mongodb";
-import VerificationTokens from "@model/VerificationToken";
+import VerificationTokens from "@model/verification_token";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import KebabscribUser from "@model/Kebabscrib_User";
+import KebabscribUser from "@model/kebabscrib_user";
 import { sendVerificationEmail } from "@lib/emails/sendEmail";
 import crypto from "crypto";
 
