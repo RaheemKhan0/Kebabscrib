@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import Footer from "@components/Footer";
-import Navbar from "@components/Navbar";
 import "@public/styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "@utils/context/ShoppingCartContext";
@@ -36,7 +35,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <MenuProvider>
             <CartProvider>
               <Toaster />
-              <Navbar />
               <main>{children}</main>
               <Footer />
             </CartProvider>
