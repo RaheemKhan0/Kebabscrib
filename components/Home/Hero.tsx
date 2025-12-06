@@ -123,7 +123,7 @@ const Hero = () => {
             className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-KC_Yellow text-KC_GREEN rounded-full text-sm sm:text-base md:text-lg font-semibold shadow-md 
             hover:bg-KC_GREEN hover:text-KC_Yellow transition duration-300 hover:scale-105 hover:shadow-lg"
           >
-            Order Now
+            View Menu 
             <svg
               className="w-4 h-4 sm:w-5 sm:h-5"
               fill="currentColor"
