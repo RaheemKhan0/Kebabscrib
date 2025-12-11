@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed": "npx tsx utils/seed/seed.ts"
+    "seed": "npx tsx utils/seed/seed.ts",
+    "fetch-image" : "npx tsx utils/seed/getImagesUrls.ts"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
