@@ -13,12 +13,12 @@ const links = JSON.parse(readFileSync(linksPath, "utf8")) as string[];
 
 const linkMap = new Map<string, string>();
 for (const url of links) {
-  const filepath = url.split("/").pop().split("_").slice(0, -1) ?? "";
-  let filename;
-  if (filepath.length > 0) {
-    filename = path.parse(filepath.reduce((acc, curr) => acc += " " + curr)).name;
-  }
-  console.log("filename : ", filename)
+  const lastSegment = url.split("/").pop();
+  if (!lastSegment) continue;
+  const parts = lastSegment.split("_").slice(0, -1);
+  if (!parts.length) continue;
+  const joined = parts.join(" ");
+  const filename = path.parse(joined).name;
   if (!filename) continue;
   linkMap.set(normalize(filename), url);
 }

@@ -25,7 +25,7 @@ async function getAllImageUrls() {
       next_cursor: nextCursor,
     });
 
-    results.push(...response.resources.map((r) => r.secure_url));
+    results.push(...response.resources.map((r : any) => r.secure_url));
     nextCursor = response.next_cursor;
   } while (nextCursor);
 
