@@ -33,12 +33,21 @@ const seedMenu = async () => {
   await connectMongodb();
   await MenuItem.deleteMany({});
 
-  const docs = products.map((item) => ({
-    ...item,
-    slug: item.slug ?? slugify(item.item_name, { lower: true, strict: true }),
-    isHidden: item.isHidden ?? false,
-    size: item.size ?? { medium: false, large: false },
-  }));
+  const slugCounts = new Map<string, number>();
+  const docs = products.map((item) => {
+    const baseSlug =
+      item.slug ?? slugify(item.item_name, { lower: true, strict: true });
+    const count = slugCounts.get(baseSlug) ?? 0;
+    const slug = count === 0 ? baseSlug : `${baseSlug}-${count}`;
+    slugCounts.set(baseSlug, count + 1);
+
+    return {
+      ...item,
+      slug,
+      isHidden: item.isHidden ?? false,
+      size: item.size ?? { medium: false, large: false },
+    };
+  });
 
   await MenuItem.insertMany(docs);
   console.log(`Seeded ${docs.length} menu items.`);
