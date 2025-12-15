@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import { useMenu } from "@utils/context/MenuContext"
 import LoadingScreen from "@components/Common/LoadingScreen"
 import MenuList from "./MenuList"
@@ -24,15 +24,16 @@ const MenuCategories = () => {
 
   const [activeCategory, setActiveCategory] = useState(DEFAULT_CATEGORY)
 
-  useEffect(() => {
-    if (!categories.length) return
-    if (!categories.includes(activeCategory)) {
-      setActiveCategory(
-        categories.includes(DEFAULT_CATEGORY)
-          ? DEFAULT_CATEGORY
-          : categories[0],
-      )
+  const resolvedCategory = useMemo(() => {
+    if (!categories.length) {
+      return DEFAULT_CATEGORY
     }
+    if (categories.includes(activeCategory)) {
+      return activeCategory
+    }
+    return categories.includes(DEFAULT_CATEGORY)
+      ? DEFAULT_CATEGORY
+      : categories[0]
   }, [categories, activeCategory])
 
   if (!menu) {
@@ -52,7 +53,7 @@ const MenuCategories = () => {
       <header className="flex flex-wrap items-center justify-between gap-6">
         <div className="flex flex-1 flex-wrap gap-3 overflow-x-auto rounded-full border border-KC_GREEN/30 bg-white px-4 py-3 shadow-sm">
           {categories.map((category) => {
-            const isActive = activeCategory === category
+            const isActive = resolvedCategory === category
             return (
               <button
                 key={category}
@@ -73,10 +74,10 @@ const MenuCategories = () => {
 
       <div>
         <h2 className="text-center text-3xl font-bold text-KebabGreen">
-          {activeCategory}
+          {resolvedCategory}
         </h2>
         <div className="mt-6">
-          <MenuList item_category={activeCategory} />
+          <MenuList item_category={resolvedCategory} />
         </div>
       </div>
     </section>
