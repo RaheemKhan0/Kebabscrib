@@ -1,10 +1,8 @@
 "use client";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MenuList from "./MenuList";
 import { useRouter } from "next/navigation";
-import { useMenu } from "@utils/context/MenuContext";
-import LoadingScreen from "@components/Common/LoadingScreen";
 
 // Define the type for the state object with correct keys
 type CheckedItems = {
@@ -21,11 +19,7 @@ const MenuBody: React.FC = () => {
     Sides: false,
     Drinks: false,
   });
-  const { menu } = useMenu();
   const router = useRouter();
-  useEffect(() => {
-    console.log("New State : ", checkedItems);
-  }, [checkedItems]);
 
   // Handle checkbox changes with the correct type
   const handleCheckboxChange = (item: keyof CheckedItems) => {
@@ -52,9 +46,6 @@ const MenuBody: React.FC = () => {
     }
   };
   // bg-[#006244]
-  if (!menu) {
-    return <LoadingScreen />;
-  }
   return (
     <div className="flex flex-col items-center mt-24 px-4 sm:px-8 lg:px-20 w-full max-w-screen-xl mx-auto">
       {/* Nav Bar */}

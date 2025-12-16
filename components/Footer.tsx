@@ -1,49 +1,104 @@
 import React from "react";
-import { FaInstagram, FaFacebookF} from "react-icons/fa";
+import Link from "next/link";
 import Image from "next/image";
+import { FaInstagram, FaFacebookF } from "react-icons/fa";
+import { IoMdCall } from "react-icons/io";
+import { MdOutlineEmail } from "react-icons/md";
 
-const Footer: React.FC = () => {
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Menu", href: "/#menu" },
+];
+
+const socials = [
+  {
+    icon: <FaInstagram />,
+    href: "https://www.instagram.com/kebabscrib/profilecard/?igsh=cGlla2V3ajJ2ZmVu",
+    label: "Instagram",
+  },
+  {
+    icon: <FaFacebookF />,
+    href: "https://facebook.com",
+    label: "Facebook",
+  },
+];
+
+const contactDetails = [
+  { icon: <IoMdCall />, label: "+971 50 123 4567" },
+  { icon: <MdOutlineEmail />, label: "hello@kebabscrib.com" },
+];
+
+const Footer = () => {
   return (
-    <footer className="bg-KC_GREEN text-white py-8 border-t-2 border-t-KebabGold">
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-        <div className="mb-6 md:mb-0">
-          <Image
-            src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1750239647/KC_Logo_Combination_stacked_green_epqs9c.png"
-            alt="Kebab's Crib Logo"
-            width={160}
-            height={40}
-            className="h-10 w-auto"
-          />
-          <p className="mt-2 text-sm text-KebabGold">
-            Serving the best kebabs in town since 2011.
-          </p>
-        </div>
-
-        <div className="flex flex-col md:flex-row gap-6">
+    <footer className="mt-16 border-t border-white/10 bg-gradient-to-br from-DeepSea via-KebabGreen to-KebabGreenDark text-white">
+      <div className="mx-auto max-w-6xl px-6 py-12">
+        <div className="grid gap-10 md:grid-cols-3">
           <div>
-            <h3 className="font-semibold text-KebabGold">Follow Us</h3>
-            <div className="flex space-x-6 mt-4">
-              <a
-                href="https://www.instagram.com/kebabscrib/profilecard/?igsh=cGlla2V3ajJ2ZmVu"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaInstagram className="text-KebabGold hover:text-white text-3xl transition-colors duration-300" />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaFacebookF className="text-KebabGold hover:text-white text-3xl transition-colors duration-300" />
-              </a>           
+            <Image
+              src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1750239647/KC_Logo_Combination_stacked_green_epqs9c.png"
+              alt="Kebabscrib"
+              width={150}
+              height={50}
+              className="h-14 w-auto"
+            />
+            <p className="mt-4 text-sm text-KC_PEACH/80">
+              Serving the best kebabs in town since 2011. Crafted with authentic French Lebanese passion.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.3em] text-KC_PEACH">
+              Quick Links
+            </h3>
+            <ul className="mt-4 space-y-2 text-sm">
+              {navLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-white/90 transition hover:text-KC_Yellow"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.3em] text-KC_PEACH">
+              Visit & Connect
+            </h3>
+            <p className="mt-4 text-sm text-white/80">
+              Seaside Avenue, Dubai Marina<br />Dubai, UAE
+            </p>
+            <div className="mt-4 space-y-2 text-sm text-white/80">
+              {contactDetails.map((item) => (
+                <p key={item.label} className="flex items-center gap-2">
+                  {item.icon}
+                  {item.label}
+                </p>
+              ))}
+            </div>
+            <div className="mt-4 flex gap-4 text-2xl text-KC_Yellow">
+              {socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition hover:text-white"
+                >
+                  {social.icon}
+                </a>
+              ))}
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="text-center mt-8 text-sm text-gray-500">
-        © {new Date().getFullYear()} Kebabscrib. All rights reserved.
+        <div className="mt-10 border-t border-white/10 pt-4 text-center text-xs text-white/70">
+          © {new Date().getFullYear()} Kebabscrib. All rights reserved.
+        </div>
       </div>
     </footer>
   );
