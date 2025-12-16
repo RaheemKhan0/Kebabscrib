@@ -14,6 +14,23 @@ const Hero = () => {
   const buttonRef = useRef(null);
   const learnRef = useRef(null);
 
+  const handleScrollToMenu = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    event.preventDefault();
+    const menuSection = document.getElementById("menu");
+
+    if (!menuSection) return;
+
+    menuSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+
+    // Keep the hash in sync without triggering a jump
+    window.history.replaceState(null, "", "#menu");
+  };
+
   useGSAP(() => {
     const ctx = gsap.context(() => {
       const titleSplit = new SplitText(titleRef.current, {
@@ -121,6 +138,7 @@ const Hero = () => {
             ref={buttonRef}
             href="#menu"
             scroll
+            onClick={handleScrollToMenu}
             className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-KC_Yellow text-KC_GREEN rounded-full text-sm sm:text-base md:text-lg font-semibold shadow-md 
             hover:bg-KC_GREEN hover:text-KC_Yellow transition duration-300 hover:scale-105 hover:shadow-lg"
           >
@@ -140,26 +158,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* LEARN MORE SECTION */}
-      <div className="text-center text-KebabGreen mb-4">
-        <p className="font-parkinsans text-lg tracking-wide">Learn More</p>
-        <div className="flex justify-center mt-2 animate-bounce">
-          <svg
-            ref={learnRef}
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-6 h-6"
-          >
-            <line x1="12" y1="4" x2="12" y2="20" />
-            <polyline points="6 14 12 20 18 14" />
-          </svg>
-        </div>
-      </div>
     </section>
   );
 };

@@ -1,5 +1,4 @@
 "use client"
-
 import { useMemo, useState } from "react"
 import { useMenu } from "@utils/context/MenuContext"
 import LoadingScreen from "@components/Common/LoadingScreen"
@@ -50,8 +49,8 @@ const MenuCategories = () => {
 
   return (
     <section className="mt-28 flex flex-col gap-10 px-4 py-6 md:px-12">
-      <header className="flex flex-wrap items-center justify-between gap-6">
-        <div className="flex flex-1 flex-wrap gap-3 overflow-x-auto rounded-full border border-KC_GREEN/30 bg-white px-4 py-3 shadow-sm">
+      <header className="flex flex-col items-center gap-6">
+        <div className="flex flex-wrap justify-center gap-3 rounded-full border border-KC_GREEN/30 bg-white px-2 py-3 shadow-sm">
           {categories.map((category) => {
             const isActive = resolvedCategory === category
             return (
@@ -62,7 +61,7 @@ const MenuCategories = () => {
                 className={`whitespace-nowrap rounded-full px-5 py-2 text-sm font-semibold transition-colors ${
                   isActive
                     ? "bg-KC_Yellow text-KC_GREEN shadow"
-                    : "bg-transparent text-KebabGreen hover:text-KC_GREEN"
+                    : "text-KebabGreen hover:text-KC_GREEN"
                 }`}
               >
                 {category}
