@@ -8,8 +8,6 @@ import { MdOutlineEmail } from "react-icons/md";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Menu", href: "/#menu" },
-  { label: "Custom Taco", href: "/customtaco" },
-  { label: "Contact", href: "/contactus" },
 ];
 
 const socials = [

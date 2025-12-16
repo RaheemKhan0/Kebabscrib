@@ -12,8 +12,8 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    environment:
-      MONGODB_URI: mongodb://mongo:27017/kebabscrib 
+    env_file:
+      - .env.local
     depends_on:
       - mongo
     
@@ -29,4 +29,3 @@ services:
 
 volumes:
   mongo_data:
-
