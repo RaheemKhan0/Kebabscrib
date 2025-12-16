@@ -13,9 +13,10 @@ services:
       - .:/app
       - /app/node_modules
     environment:
-      MONGODB_URI: mongodb+srv://Khan123:Khan123@kebabscrib.yblgmeg.mongodb.net/?appName=Kebabscrib 
+      MONGODB_URI: mongodb://mongo:27017/kebabscrib 
     depends_on:
       - mongo
+    
 
   mongo:
     image: mongo:6
