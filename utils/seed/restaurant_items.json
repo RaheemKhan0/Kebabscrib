@@ -36,7 +36,7 @@
       "single": 46.25,
       "meal": 56.25
     },
-    "item_img_url" : "mongodb+srv://RaheemKhan:Khan778866@kebabscrib.yblgmeg.mongodb.net/?appName=Kebabscrib",
+    "item_img_url" : "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745681346/Boursin_1_xs5zql.jpg",
     "item_category": "Des Sandwiches"
   },
   {
