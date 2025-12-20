@@ -13,8 +13,11 @@ const MenuCategories = () => {
     if (!menu) return []
     const unique = new Map<string, number>()
     menu.forEach((item) => {
+      if (item.item_category != "Taco") {
+      
       if (item.item_category && !unique.has(item.item_category)) {
         unique.set(item.item_category, unique.size)
+      }
       }
     })
 

@@ -43,7 +43,7 @@ const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
     <div className="container mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-10">
       {itemsWithBanner.map((item) => {
         if ("_id" in item && item._id === "taco-banner") {
-          return <TacoBuilderBanner key="taco-banner" />;
+          return 
         }
         return <MenuItem key={item._id} {...(item as Menu)} />;
       })}
