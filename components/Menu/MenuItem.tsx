@@ -32,7 +32,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
   const router = useRouter();
   const [showFull, setShowFull] = useState(false);
 
-  const isLong = item_description.length > 120; // Customize this limit
+  const isLong = item_description ? item_description.length > 120 : false; // Customize this limit
 
   const handleClick = () => router.push(`/menu/${slug}-${_id}`);
 
