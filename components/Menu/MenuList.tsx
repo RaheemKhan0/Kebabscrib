@@ -2,7 +2,6 @@
 import MenuItem from "./MenuItem";
 import { useMenu } from "@utils/context/MenuContext";
 import LoadingScreen from "../Common/LoadingScreen";
-import TacoBuilderBanner from "./Tacos/TacoBuilderBanner";
 
 export interface Menu {
   _id: string;
