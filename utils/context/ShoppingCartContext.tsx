@@ -40,7 +40,7 @@ export type CartItem = {
   extra_Cheese?: Extras[];
   tacoSauce?: Extras;
   tacoMeats?: Menu[];
-  size?: "Medium" | "Large" | undefined;
+  size?: string;
   meal: boolean;
   extraMeat?: Extras;
   mealdrink?: Menu;

@@ -3,6 +3,11 @@ import MenuItem from "./MenuItem";
 import { useMenu } from "@utils/context/MenuContext";
 import LoadingScreen from "../Common/LoadingScreen";
 
+interface MenuSize {
+  medium?: boolean;
+  large?: boolean;
+}
+
 export interface Menu {
   _id: string;
   item_name: string;
@@ -12,7 +17,7 @@ export interface Menu {
     meal?: number;
   };
   item_category: string;
-  size?: "Medium" | "Large" | undefined;
+  size?: "Medium" | "Large" | MenuSize | undefined;
   slug: string;
   item_img_url?: string;
   isHidden: boolean;
