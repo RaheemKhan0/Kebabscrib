@@ -1,6 +1,5 @@
 import "@public/styles/globals.css";
 import { useCart } from "@utils/context/ShoppingCartContext";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -25,16 +24,12 @@ const MenuItem: React.FC<MenuItemProps> = ({
   item_price,
   item_category,
   size,
-  slug,
   item_img_url,
 }) => {
   const { addItem } = useCart();
-  const router = useRouter();
   const [showFull, setShowFull] = useState(false);
 
   const isLong = item_description ? item_description.length > 120 : false; // Customize this limit
-
-  const handleClick = () => router.push(`/menu/${slug}-${_id}`);
 
   const optimisedUrl = item_img_url?.replace(
     "/upload",
@@ -42,10 +37,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
   );
 
   return (
-    <div
-      className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-full mx-auto flex flex-col justify-between border rounded-lg shadow-md hover:shadow-lg overflow-hidden bg-white h-full"
-      onClick={handleClick}
-    >
+    <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-full mx-auto flex flex-col justify-between border rounded-lg shadow-md hover:shadow-lg overflow-hidden bg-white h-full">
       {/* Image */}
       {optimisedUrl ? (
         <Image
