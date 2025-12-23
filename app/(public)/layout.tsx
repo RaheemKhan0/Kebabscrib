@@ -23,6 +23,13 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Kebabscrib",
   description: "Kebabscrib is a french Restaurant",
+  icons: {
+    icon: {
+      url: "/assets/KC_Logo_Logomark_green.svg",
+      type: "image/svg+xml",
+      sizes: "any",
+    },
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
