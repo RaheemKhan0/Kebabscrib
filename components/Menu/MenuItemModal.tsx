@@ -17,15 +17,15 @@ export interface MenuItemModalData {
 interface MenuItemModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onAddToCart: () => void;
   item: MenuItemModalData;
+  orderLink: string;
 }
 
 const MenuItemModal: React.FC<MenuItemModalProps> = ({
   isOpen,
   onClose,
-  onAddToCart,
   item,
+  orderLink,
 }) => {
   if (!isOpen) return null;
 
@@ -100,12 +100,16 @@ const MenuItemModal: React.FC<MenuItemModalProps> = ({
               )}
             </div>
 
-            <button
-              onClick={onAddToCart}
-              className="h-12 rounded-lg bg-KC_Yellow text-lg font-bold text-KebabGreen transition-colors hover:bg-yellow-300"
+            <a
+              href={orderLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-12 w-full items-center justify-center rounded-full bg-[#ff5a00] text-lg font-semibold uppercase tracking-wide text-white shadow-lg transition hover:bg-[#ff7a2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ff5a00]"
+              aria-label="Order this item on Talabat"
+              onClick={(e) => e.stopPropagation()}
             >
-              Add to Cart
-            </button>
+              Order on Talabat
+            </a>
           </div>
         </div>
       </div>

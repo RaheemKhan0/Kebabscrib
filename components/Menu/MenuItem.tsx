@@ -1,6 +1,5 @@
 import "@public/styles/globals.css";
 import MenuItemModal from "./MenuItemModal";
-import { useCart } from "@utils/context/ShoppingCartContext";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -32,9 +31,10 @@ const MenuItem: React.FC<MenuItemProps> = ({
   size,
   item_img_url,
 }) => {
-  const { addItem } = useCart();
   const [showFull, setShowFull] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const talabatLink =
+    "https://www.talabat.com/uae/restaurant/612274/kebabs-crib?aid=1272";
 
   const isLong = item_description ? item_description.length > 120 : false; // Customize this limit
 
@@ -51,20 +51,6 @@ const MenuItem: React.FC<MenuItemProps> = ({
       .map(([key]) => key.charAt(0).toUpperCase() + key.slice(1));
     return available.length ? available.join(" / ") : undefined;
   })();
-
-  const handleAddToCart = () => {
-    addItem({
-      _id,
-      item_name,
-      item_description,
-      item_price,
-      item_category,
-      size: readableSize,
-      item_img_url,
-      meal: false,
-      Quantity: 1,
-    });
-  };
 
   const handleCardClick = () => {
     setIsModalOpen(true);
@@ -140,25 +126,23 @@ const MenuItem: React.FC<MenuItemProps> = ({
             </div>
           </div>
 
-          {/* Add to Cart */}
-          <button
-            className="h-12 w-full rounded-lg bg-KC_Yellow text-KebabGreen font-bold  mt-4"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleAddToCart();
-            }}
+          {/* Talabat CTA */}
+          <a
+            className="mt-4 inline-flex h-12 w-full items-center justify-center rounded-full bg-[#ff5a00] font-semibold uppercase tracking-wide text-white shadow-lg transition hover:bg-[#ff7a2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ff5a00]"
+            href={talabatLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            aria-label="Order this item on Talabat"
           >
-            Add to Cart
-          </button>
+            Order on Talabat
+          </a>
         </div>
       </div>
       <MenuItemModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        onAddToCart={() => {
-          handleAddToCart();
-          handleCloseModal();
-        }}
+        orderLink={talabatLink}
         item={{
           item_name,
           item_description,
