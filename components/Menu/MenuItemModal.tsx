@@ -18,14 +18,22 @@ interface MenuItemModalProps {
   isOpen: boolean;
   onClose: () => void;
   item: MenuItemModalData;
-  orderLink: string;
+  // orderLink: string;
+  orderProviders: OrderProvider[];
+}
+
+interface OrderProvider {
+  name: string;
+  href: string;
+  className: string;
 }
 
 const MenuItemModal: React.FC<MenuItemModalProps> = ({
   isOpen,
   onClose,
   item,
-  orderLink,
+  // orderLink,
+  orderProviders,
 }) => {
   if (!isOpen) return null;
 
@@ -100,7 +108,7 @@ const MenuItemModal: React.FC<MenuItemModalProps> = ({
               )}
             </div>
 
-            <a
+            {/* <a
               href={orderLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -109,7 +117,24 @@ const MenuItemModal: React.FC<MenuItemModalProps> = ({
               onClick={(e) => e.stopPropagation()}
             >
               Order on Talabat
-            </a>
+            </a> */}
+
+            <div className="grid gap-2">
+              {orderProviders.map((provider) => (
+                <a
+                  key={provider.name}
+                  href={provider.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex h-12 w-full items-center justify-center rounded-full text-lg font-semibold uppercase tracking-wide shadow-lg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${provider.className}`}
+                  aria-label={`Order this item on ${provider.name}`}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Order on {provider.name}
+                </a>
+              ))}
+            </div>
+            
           </div>
         </div>
       </div>
