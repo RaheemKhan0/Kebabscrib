@@ -33,8 +33,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
 }) => {
   const [showFull, setShowFull] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const talabatLink =
-    "https://www.talabat.com/uae/restaurant/612274/kebabs-crib?aid=1272";
+  // const talabatLink =
+  //   "https://www.talabat.com/uae/restaurant/612274/kebabs-crib?aid=1272";
 
   const isLong = item_description ? item_description.length > 120 : false; // Customize this limit
 
