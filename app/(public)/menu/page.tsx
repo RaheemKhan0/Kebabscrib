@@ -1,3 +1,4 @@
+import DeliveryOptions from "@components/Menu/DeliveryOptions"
 import MenuCategories from "@components/Menu/MenuCategories"
 
 export const dynamic = "force-dynamic"
@@ -21,6 +22,7 @@ export default function MenuPage() {
           </div>
         </div>
       </section>
+      <DeliveryOptions />
       <section className="pb-12">
         <MenuCategories />
       </section>
