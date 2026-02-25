@@ -33,8 +33,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
 }) => {
   const [showFull, setShowFull] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const talabatLink =
-    "https://www.talabat.com/uae/restaurant/612274/kebabs-crib?aid=1272";
+  // const talabatLink =
+  //   "https://www.talabat.com/uae/restaurant/612274/kebabs-crib?aid=1272";
 
   const isLong = item_description ? item_description.length > 120 : false; // Customize this limit
 
@@ -126,23 +126,11 @@ const MenuItem: React.FC<MenuItemProps> = ({
             </div>
           </div>
 
-          {/* Talabat CTA */}
-          <a
-            className="mt-4 inline-flex h-12 w-full items-center justify-center rounded-full bg-[#ff5a00] font-semibold uppercase tracking-wide text-white shadow-lg transition hover:bg-[#ff7a2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ff5a00]"
-            href={talabatLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            aria-label="Order this item on Talabat"
-          >
-            Order on Talabat
-          </a>
         </div>
       </div>
       <MenuItemModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        orderLink={talabatLink}
         item={{
           item_name,
           item_description,

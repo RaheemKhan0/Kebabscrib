@@ -13,23 +13,22 @@ const Hero = () => {
   const descRef = useRef(null);
   const buttonRef = useRef(null);
   const learnRef = useRef(null);
+  // const handleScrollToMenu = (
+  //   event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  // ) => {
+  //   event.preventDefault();
+  //   const menuSection = document.getElementById("menu");
 
-  const handleScrollToMenu = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-  ) => {
-    event.preventDefault();
-    const menuSection = document.getElementById("menu");
+  //   if (!menuSection) return;
 
-    if (!menuSection) return;
+  //   menuSection.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "start",
+  //   });
 
-    menuSection.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-
-    // Keep the hash in sync without triggering a jump
-    window.history.replaceState(null, "", "#menu");
-  };
+  //   // Keep the hash in sync without triggering a jump
+  //   window.history.replaceState(null, "", "#menu");
+  // };
 
   useGSAP(() => {
     const ctx = gsap.context(() => {
@@ -107,7 +106,7 @@ const Hero = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-EggShell overflow-hidden h-[100dvh] flex flex-col justify-between"
+      className="relative overflow-hidden h-[100dvh] flex flex-col justify-between"
     >
       {/* CONTENT CENTERED */}
       <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-20">
@@ -136,13 +135,11 @@ const Hero = () => {
 
           <Link
             ref={buttonRef}
-            href="#menu"
-            scroll
-            onClick={handleScrollToMenu}
+            href="/menu"
             className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-KC_Yellow text-KC_GREEN rounded-full text-sm sm:text-base md:text-lg font-semibold shadow-md 
             hover:bg-KC_GREEN hover:text-KC_Yellow transition duration-300 hover:scale-105 hover:shadow-lg"
           >
-            View Menu 
+            View Menu
             <svg
               className="w-4 h-4 sm:w-5 sm:h-5"
               fill="currentColor"

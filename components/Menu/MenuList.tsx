@@ -1,7 +1,7 @@
 "use client";
 import MenuItem from "./MenuItem";
 import { useMenu } from "@utils/context/MenuContext";
-import LoadingScreen from "../Common/LoadingScreen";
+import MenuListSkeleton from "./MenuListSkeleton";
 
 interface MenuSize {
   medium?: boolean;
@@ -32,7 +32,7 @@ const MenuList: React.FC<MenuListProps> = ({ item_category }) => {
 
   // If menu items are still loading
   if (!menu) {
-    return <LoadingScreen />;
+    return <MenuListSkeleton />;
   }
   const filteredItems = menu.filter(
     (item) => item.item_category === item_category && !item.isHidden,
