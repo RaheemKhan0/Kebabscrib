@@ -106,7 +106,7 @@ const Hero = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-EggShell overflow-hidden h-[100dvh] flex flex-col justify-between"
+      className="relative overflow-hidden h-[100dvh] flex flex-col justify-between"
     >
       {/* CONTENT CENTERED */}
       <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-20">
