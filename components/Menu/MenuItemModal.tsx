@@ -18,22 +18,12 @@ interface MenuItemModalProps {
   isOpen: boolean;
   onClose: () => void;
   item: MenuItemModalData;
-  // orderLink: string;
-  orderProviders: OrderProvider[];
-}
-
-interface OrderProvider {
-  name: string;
-  href: string;
-  className: string;
 }
 
 const MenuItemModal: React.FC<MenuItemModalProps> = ({
   isOpen,
   onClose,
   item,
-  // orderLink,
-  orderProviders,
 }) => {
   if (!isOpen) return null;
 
@@ -108,33 +98,6 @@ const MenuItemModal: React.FC<MenuItemModalProps> = ({
               )}
             </div>
 
-            {/* <a
-              href={orderLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex h-12 w-full items-center justify-center rounded-full bg-[#ff5a00] text-lg font-semibold uppercase tracking-wide text-white shadow-lg transition hover:bg-[#ff7a2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ff5a00]"
-              aria-label="Order this item on Talabat"
-              onClick={(e) => e.stopPropagation()}
-            >
-              Order on Talabat
-            </a> */}
-
-            <div className="grid gap-2">
-              {orderProviders.map((provider) => (
-                <a
-                  key={provider.name}
-                  href={provider.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`flex h-12 w-full items-center justify-center rounded-full text-lg font-semibold uppercase tracking-wide shadow-lg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${provider.className}`}
-                  aria-label={`Order this item on ${provider.name}`}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  Order on {provider.name}
-                </a>
-              ))}
-            </div>
-            
           </div>
         </div>
       </div>

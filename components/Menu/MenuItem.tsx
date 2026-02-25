@@ -43,52 +43,6 @@ const MenuItem: React.FC<MenuItemProps> = ({
     "/upload/w_600,q_auto,f_auto",
   );
 
-  // const orderProviders = [
-  //   {
-  //     name: "Talabat",
-  //     href: "https://www.talabat.com/uae/restaurant/612274/kebabs-crib?aid=1272",
-  //     className:
-  //       "bg-[#ff5a00] hover:bg-[#ff7a2a] focus-visible:ring-[#ff5a00]",
-  //   },
-  //   {
-  //     name: "Careem",
-  //     href: "https://careem.com/your-link",
-  //     className:
-  //       "bg-[#1a1a1a] hover:bg-[#333] focus-visible:ring-[#1a1a1a]",
-  //   },
-  //   {
-  //     name: "Delivery",
-  //     href: "https://delivery.com/your-link",
-  //     className:
-  //       "bg-[#00a2ff] hover:bg-[#2ab3ff] focus-visible:ring-[#00a2ff]",
-  //   },
-  //   {
-  //     name: "Noon",
-  //     href: "https://food.noon.com/uae-en/outlet/KBBSCR2LUQ/",
-  //     className:
-  //       "bg-[#fce000] text-black hover:bg-[#ffea3a] focus-visible:ring-[#fce000]",
-  //   },
-  //   {
-  //     name: "Keeta",
-  //     href: "https://keeta.com/your-link",
-  //     className:
-  //       "bg-[#00c853] hover:bg-[#33d873] focus-visible:ring-[#00c853]",
-  //   },
-  // ];
-
-  const orderProviders = [
-    {
-      name: "Talabat",
-      href: "https://www.talabat.com/uae/restaurant/612274/kebabs-crib?aid=1272",
-      className: "bg-[#ff5a00] hover:bg-[#ff7a2a] focus-visible:ring-[#ff5a00]",
-    },
-    {
-      name: "Noon",
-      href: "https://food.noon.com/uae-en/outlet/KBBSCR2LUQ/",
-      className: "bg-[#fce000] text-black hover:bg-[#ffea3a] focus-visible:ring-[#fce000]",
-    },
-  ];
-
   const readableSize = (() => {
     if (!size) return undefined;
     if (typeof size === "string") return size;
@@ -172,42 +126,11 @@ const MenuItem: React.FC<MenuItemProps> = ({
             </div>
           </div>
 
-          {/* Talabat CTA
-          <a
-            className="mt-4 inline-flex h-12 w-full items-center justify-center rounded-full bg-[#ff5a00] font-semibold uppercase tracking-wide text-white shadow-lg transition hover:bg-[#ff7a2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#ff5a00]"
-            href={talabatLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            aria-label="Order this item on Talabat"
-          >
-            Order on Talabat
-          </a> */}
-
-          {/* Order on these Providers */}
-
-          <div className="mt-4 grid gap-2">
-              {orderProviders.map((provider) =>
-                <a
-                  key={provider.name}
-                  className={`inline-flex h-12 w-full items-center justify-center rounded-full font-semibold uppercase tracking-wide shadow-lg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${provider.className}`}
-                  href={provider.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  aria-label={`Order this item on ${provider.name}`}
-                >
-                  Order on {provider.name}
-                </a>
-              )}
-          </div>
-
         </div>
       </div>
       <MenuItemModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        orderProviders={orderProviders}
         item={{
           item_name,
           item_description,
