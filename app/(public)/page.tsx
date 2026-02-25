@@ -1,14 +1,17 @@
 import Hero from "@components/Home/Hero"
 import StoryCards from "@components/Home/StoryCards"
+import { DisplayMenu } from "@components/Menu/DisplayMenu"
+// import Image from "next/image"
 import Link from "next/link"
 
 export const dynamic = "force-dynamic"
 
 export default function Home() {
   return (
-    <div className="bg-EggShell">
+    <div className="bg-textured-eggshell">
       <Hero />
       <StoryCards />
+      <DisplayMenu />
       <section className="mx-auto mt-10 max-w-screen-xl px-4 pb-16 sm:px-6 lg:px-10">
         <div className="rounded-[32px] border border-KC_GREEN/10 bg-white p-6 shadow-lg sm:p-8">
           <div className="flex flex-col items-center gap-4 text-center">
