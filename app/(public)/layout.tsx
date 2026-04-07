@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Footer from "@components/Footer";
+import Navbar from "@components/Navbar";
 import "@public/styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "@utils/context/ShoppingCartContext";
@@ -36,12 +37,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${parkinsans.variable} ${playfair.variable}`}>
       <body
-        className={`${parkinsans.className} bg-EggShell grid grid-rows-[auto,1fr,auto] min-h-screen overflow-x-hidden`}
+        className={`${parkinsans.className} bg-EggShell min-h-screen`}
       >
         <SessionWrapper>
           <MenuProvider>
             <CartProvider>
               <Toaster />
+              <Navbar />
               <main>{children}</main>
               <Footer />
             </CartProvider>
