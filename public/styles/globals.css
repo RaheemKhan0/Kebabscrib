@@ -3,19 +3,23 @@
 @import "tw-animate-css";
 
 @theme {
-  --color-KebabGreen: #0c6045;
-  --color-KebabGreenLight: #178563;
-  --color-KebabGreenDark: #084733;
-  --color-KebabGold: #f7a890;
+  --color-KebabGreen: #006244;
+  --color-KebabGreenLight: #1b7b61;
+  --color-KebabGreenDark: #355646;
+  --color-KebabGold: #cd9b51;
   --color-KC_GREEN: #006244;
-  --color-KC_PEACH: #f9c89b;
+  --color-KC_PEACH: #f7a890;
   --color-KC_Yellow: #f4cf4b;
-  --color-Light_Peach: #f4a88a;
-  --color-EggShell: #fdf6ec;
+  --color-Light_Peach: #f7a890;
+  --color-EggShell: #fdf6ee;
   --color-Sandy: #ecd9b9;
   --color-DeepSea: #2c4c63;
-  --color-KC_RED: #750f04;
+  --color-KC_RED: #9b343c;
   --color-KC_Lemon: #fffd75;
+  --color-KC_WarmNeutral: #ded5ce;
+  --color-KC_Forest: #355646;
+  --color-KC_Ochre: #cd9b51;
+  --color-KC_Maroon: #9b343c;
   --font-parkinsans: "Parkinsans", sans-serif;
   --font-playfair: "Playfair Display", serif;
   --text-md-lg: 1.075rem;
@@ -183,7 +187,7 @@
       transparent 1px,
       transparent 8px
     );
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
 
 .polaroid-frame {
