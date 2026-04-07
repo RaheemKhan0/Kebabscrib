@@ -3,7 +3,7 @@
 const StoryCards = () => {
   return (
     <section
-      className="relative mx-auto mt-8 w-full max-w-screen-xl px-4 sm:px-6 lg:px-10"
+      className="relative mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-10"
     >
       <div className="absolute inset-0 -z-10 rounded-[32px] bg-[radial-gradient(circle_at_20%_20%,rgba(244,207,75,0.25),transparent_55%),radial-gradient(circle_at_80%_30%,rgba(0,98,68,0.18),transparent_50%)]" />
       <div className="grid gap-6 rounded-[32px] border border-KC_GREEN/10 bg-white/80 p-6 shadow-lg backdrop-blur sm:grid-cols-2 lg:grid-cols-3">

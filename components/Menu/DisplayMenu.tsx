@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export const DisplayMenu = () => {
   return (
-    <section className="mx-auto mt-10 max-w-screen-xl px-4 sm:px-6 lg:px-10">
+    <section className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-10">
       {/* <div className="rounded-[32px] border border-KC_GREEN/10 bg-white p-6 shadow-lg sm:p-8"> */}
         <div className="relative mx-auto flex min-h-[520px] w-full flex-col items-center justify-center gap-6 sm:min-h-[600px] lg:min-h-[680px]">
           <div className="relative flex w-full flex-col items-center justify-center">
