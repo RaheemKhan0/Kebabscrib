@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import {
   Dialog,
   DialogPanel,
@@ -8,102 +8,119 @@ import {
 } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+
+const NAV_LEFT = [
+  { name: "Home", path: "/" },
+  { name: "Menu", path: "/menu" },
+  { name: "Delivery", path: "/delivery" },
+];
+
+const NAV_RIGHT = [
+  { name: "Directions", path: "/directions" },
+  { name: "Contact", path: "/contactus" },
+];
+
+const INSTAGRAM_URL = "https://www.instagram.com/kebabscrib";
 
 const Navbar: React.FC = () => {
-  const [menu, SetMenu] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const linkClass = (path: string) =>
+    `relative py-1 text-sm font-medium tracking-wide transition-colors duration-200 group
+    ${pathname === path ? "text-KC_GREEN" : "text-KC_GREEN/70 hover:text-KC_GREEN"}`;
 
   return (
-    <nav className="navbar absolute top-0 left-0 w-full z-50 text-white">
-      <div className="relative flex items-center px-4 py-3">
-        {/* Left: Logo */}
-        <div className="flex-shrink-0 absolute left-4 top-3">
-          <Link href="/" className="flex items-center space-x-3">
-            <Image
-              src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1750239647/KC_Logo_Combination_stacked_green_epqs9c.png"
-              alt="Kebab's Crib Logo"
-              width={144}
-              height={80}
-              priority
-              className="h-20 w-36"
-            />
-          </Link>
-        </div>
+    <>
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
+          ${scrolled ? "bg-EggShell/95 backdrop-blur-sm shadow-sm" : "bg-transparent"}`}
+      >
+        <div className="mx-auto max-w-screen-xl px-6">
+          <div className="flex items-center h-16 md:h-20">
 
-        {/* Center: Navigation Links */}
-        <div className="hidden md:flex flex-1 justify-center mt-7">
-          <ul className="flex space-x-8 font-medium font-parkinsans text-md-lg text-KebabGreen">
-            <li>
-              <Link
-                href="/"
-                className="py-2 px-3 duration-300 hover:text-Light_Peach"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/menu"
-                className="py-2 px-3 duration-300 hover:text-Light_Peach"
-              >
-                Menu
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/contactus"
-                className="py-2 px-3 duration-300 hover:text-Light_Peach"
-              >
-                Contact Us
-              </Link>
-            </li>
-          </ul>
-        </div>
+            {/* LEFT LINKS — desktop only */}
+            <div className="hidden md:flex items-center gap-8 flex-1">
+              {NAV_LEFT.map((item) => (
+                <Link key={item.name} href={item.path} className={linkClass(item.path)}>
+                  {item.name}
+                  <span className={`absolute -bottom-0.5 left-0 h-px bg-KC_GREEN transition-all duration-300 ${pathname === item.path ? "w-full" : "w-0 group-hover:w-full"}`} />
+                </Link>
+              ))}
+            </div>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden ml-auto">
-          <button
-            onClick={() => SetMenu(true)}
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-KC_GREEN rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200"
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="w-5 h-5"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
+            {/* MOBILE: hamburger — left side */}
+            <button
+              className="md:hidden text-KC_GREEN p-2 -ml-2 mr-auto"
+              onClick={() => setMobileOpen(true)}
+              aria-label="Open menu"
             >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+
+            {/* CENTER LOGO */}
+            <div className="flex justify-center flex-shrink-0 md:flex-1">
+              <Link href="/">
+                <Image
+                  src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1750239647/KC_Logo_Combination_stacked_green_epqs9c.png"
+                  alt="Kebab's Crib"
+                  width={120}
+                  height={64}
+                  priority
+                  className="h-10 md:h-14 w-auto"
+                />
+              </Link>
+            </div>
+
+            {/* RIGHT LINKS + INSTAGRAM — desktop only */}
+            <div className="hidden md:flex items-center gap-8 flex-1 justify-end">
+              {NAV_RIGHT.map((item) => (
+                <Link key={item.name} href={item.path} className={linkClass(item.path)}>
+                  {item.name}
+                  <span className={`absolute -bottom-0.5 left-0 h-px bg-KC_GREEN transition-all duration-300 ${pathname === item.path ? "w-full" : "w-0 group-hover:w-full"}`} />
+                </Link>
+              ))}
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-KC_GREEN/60 hover:text-KC_GREEN transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
+                </svg>
+              </a>
+            </div>
+
+            {/* MOBILE: spacer to balance hamburger on left */}
+            <div className="md:hidden w-10 ml-auto" />
+
+          </div>
         </div>
-      </div>
-      {/* Mobile Dialog Menu */}
-      <Transition show={menu} as={Fragment}>
-        <Dialog
-          as="div"
-          className="relative z-50"
-          onClose={() => SetMenu(false)}
-        >
-          {/* Backdrop */}
+      </nav>
+
+      {/* MOBILE DRAWER */}
+      <Transition show={mobileOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-50" onClose={() => setMobileOpen(false)}>
           <TransitionChild
             as={Fragment}
-            enter="ease-out duration-300"
+            enter="ease-out duration-200"
             enterFrom="opacity-0"
             enterTo="opacity-100"
-            leave="ease-in duration-200"
+            leave="ease-in duration-150"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-30" />
+            <div className="fixed inset-0 bg-black/25" />
           </TransitionChild>
 
-          {/* Panel */}
           <div className="fixed inset-0 flex justify-end">
             <TransitionChild
               as={Fragment}
@@ -114,54 +131,80 @@ const Navbar: React.FC = () => {
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <DialogPanel className="w-full max-w-xs bg-EggShell p-6 h-full shadow-xl relative">
+              <DialogPanel className="w-72 bg-EggShell h-full shadow-xl flex flex-col p-8">
+                {/* Close */}
                 <button
-                  onClick={() => SetMenu(false)}
-                  className="absolute top-4 left-4 text-KC_GREEN"
+                  onClick={() => setMobileOpen(false)}
+                  className="self-end text-KC_GREEN/60 hover:text-KC_GREEN transition-colors mb-8"
+                  aria-label="Close menu"
                 >
                   <svg
-                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
                     fill="none"
                     viewBox="0 0 24 24"
-                    strokeWidth="1.5"
                     stroke="currentColor"
-                    className="size-10"
+                    strokeWidth="1.8"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                    />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
 
-                <ul className="mt-20 space-y-4">
-                  {[
-                    { name: "Home", path: "/" },
-                    { name: "Menu", path: "/menu" },
-                    { name: "Contact Us", path: "/contactus" },
-                  ].map((item) => (
+                {/* Logo */}
+                <Link href="/" onClick={() => setMobileOpen(false)} className="mb-10">
+                  <Image
+                    src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1750239647/KC_Logo_Combination_stacked_green_epqs9c.png"
+                    alt="Kebab's Crib"
+                    width={100}
+                    height={56}
+                    className="h-12 w-auto"
+                  />
+                </Link>
+
+                {/* Links */}
+                <ul className="flex flex-col gap-6 flex-1">
+                  {[...NAV_LEFT, ...NAV_RIGHT].map((item) => (
                     <li key={item.name}>
                       <Link
                         href={item.path}
-                        className="relative group block text-lg text-KC_GREEN"
-                        onClick={() => SetMenu(false)}
+                        onClick={() => setMobileOpen(false)}
+                        className={`text-lg font-medium transition-colors duration-200
+                          ${pathname === item.path ? "text-KC_GREEN" : "text-KC_GREEN/60 hover:text-KC_GREEN"}`}
                       >
-                        <span className="relative z-10">{item.name}</span>
-                        <span
-                          className="absolute left-1/2 bottom-0 h-[2px] w-0 bg-KC_GREEN transition-all duration-300 group-hover:w-10 group-hover:left-0"
-                          style={{ transform: "translateY(6px)" }}
-                        />
+                        {item.name}
                       </Link>
                     </li>
                   ))}
                 </ul>
+
+                {/* Instagram */}
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-KC_GREEN/50 hover:text-KC_GREEN transition-colors text-sm mt-8"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-4 h-4"
+                  >
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
+                  </svg>
+                  @kebabscrib
+                </a>
               </DialogPanel>
             </TransitionChild>
           </div>
         </Dialog>
-      </Transition>{" "}
-    </nav>
+      </Transition>
+    </>
   );
 };
 
