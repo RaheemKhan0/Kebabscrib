@@ -11,7 +11,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const NAV_LEFT = [
-  { name: "Home", path: "/" },
   { name: "Menu", path: "/menu" },
   { name: "Delivery", path: "/delivery" },
 ];
@@ -34,15 +33,24 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* Homepage has a sticky hero behind it — navbar can be transparent/white over it.
+     Other pages have solid backgrounds — navbar should always show its scrolled state. */
+  const isHomepage = pathname === "/";
+  const overHero = isHomepage && !scrolled;
+  const showScrolledStyle = !isHomepage || scrolled;
+
   const linkClass = (path: string) =>
-    `relative py-1 text-sm font-medium tracking-wide transition-colors duration-200 group
-    ${pathname === path ? "text-KC_GREEN" : "text-KC_GREEN/70 hover:text-KC_GREEN"}`;
+    `relative py-1 text-base font-medium tracking-wide transition-colors duration-200 group
+    ${overHero
+      ? (pathname === path ? "text-white" : "text-white/80 hover:text-white")
+      : (pathname === path ? "text-KC_GREEN" : "text-KC_GREEN/70 hover:text-KC_GREEN")
+    }`;
 
   return (
     <>
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
-          ${scrolled ? "bg-EggShell/95 backdrop-blur-sm shadow-sm" : "bg-transparent"}`}
+          ${showScrolledStyle ? "bg-KebabGold backdrop-blur-sm shadow-sm" : "bg-transparent"}`}
       >
         <div className="mx-auto max-w-screen-xl px-6">
           <div className="flex items-center h-16 md:h-20">
@@ -52,14 +60,14 @@ const Navbar: React.FC = () => {
               {NAV_LEFT.map((item) => (
                 <Link key={item.name} href={item.path} className={linkClass(item.path)}>
                   {item.name}
-                  <span className={`absolute -bottom-0.5 left-0 h-px bg-KC_GREEN transition-all duration-300 ${pathname === item.path ? "w-full" : "w-0 group-hover:w-full"}`} />
+                  <span className={`absolute -bottom-0.5 left-0 h-px transition-all duration-300 ${overHero ? "bg-white" : "bg-KC_GREEN"} ${pathname === item.path ? "w-full" : "w-0 group-hover:w-full"}`} />
                 </Link>
               ))}
             </div>
 
             {/* MOBILE: hamburger — left side */}
             <button
-              className="md:hidden text-KC_GREEN p-2 -ml-2 mr-auto"
+              className={`md:hidden p-2 -ml-2 mr-auto transition-colors duration-300 ${overHero ? "text-white" : "text-KC_Barn_Red"}`}
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
             >
@@ -77,7 +85,7 @@ const Navbar: React.FC = () => {
                   width={120}
                   height={64}
                   priority
-                  className="h-10 md:h-14 w-auto"
+                  className={`h-25 md:h-25 w-auto transition-all duration-300 ${overHero ? "brightness-0 invert" : ""}`}
                 />
               </Link>
             </div>
@@ -87,10 +95,11 @@ const Navbar: React.FC = () => {
               {NAV_RIGHT.map((item) => (
                 <Link key={item.name} href={item.path} className={linkClass(item.path)}>
                   {item.name}
-                  <span className={`absolute -bottom-0.5 left-0 h-px bg-KC_GREEN transition-all duration-300 ${pathname === item.path ? "w-full" : "w-0 group-hover:w-full"}`} />
+                  <span className={`absolute -bottom-0.5 left-0 h-px transition-all duration-300 ${overHero ? "bg-white" : "bg-KC_GREEN"} ${pathname === item.path ? "w-full" : "w-0 group-hover:w-full"}`} />
                 </Link>
               ))}
-              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-KC_GREEN/60 hover:text-KC_GREEN transition-colors duration-200">
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+                className={`transition-colors duration-200 ${overHero ? "text-white/70 hover:text-white" : "text-KC_GREEN/60 hover:text-KC_GREEN"}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                   <circle cx="12" cy="12" r="4" />
