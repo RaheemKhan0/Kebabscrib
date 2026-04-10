@@ -52,7 +52,6 @@ const autoPlayPlugin: KeenSliderPlugin = (slider) => {
 };
 
 const Hero = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
 
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
@@ -60,9 +59,6 @@ const Hero = () => {
       loop: true,
       defaultAnimation: { duration: 800 },
       slides: { perView: 1 },
-      slideChanged(s) {
-        setCurrentSlide(s.track.details.rel);
-      },
       created() {
         setLoaded(true);
       },
