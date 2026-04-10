@@ -62,7 +62,7 @@ export const BestSellers = () => {
         <p className="text-xs uppercase tracking-[0.3em] text-KC_GREEN/50 font-medium mb-2">
           Fan Favourites
         </p>
-        <h2 className="text-3xl sm:text-4xl font-bold text-KC_GREEN font-parkinsans">
+        <h2 className="text-3xl sm:text-4xl font-bold text-KC_GREEN font-wildysans">
           Our Best Sellers
         </h2>
         <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-KC_GREEN/20" />
