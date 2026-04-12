@@ -4,6 +4,8 @@ import { IoMdCall } from "react-icons/io";
 import { FaWhatsapp } from "react-icons/fa";
 import { MdAccessTime } from "react-icons/md";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Directions | Kebab's Crib",
   description:
