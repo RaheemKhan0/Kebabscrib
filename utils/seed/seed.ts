@@ -24,11 +24,15 @@ interface SeedMenuItem {
 
 const filename = fileURLToPath(import.meta.url);
 const dir = path.dirname(filename);
-const dataPath = path.join(dir, "restaurant_items.json");
+const defaultDataFile = "restaurant_items_with_images.json";
+const fileArg = process.argv.find((arg) => arg.startsWith("--file="));
+const selectedFile = fileArg?.split("=")[1] || defaultDataFile;
+const dataPath = path.join(dir, selectedFile);
 
 const seedMenu = async () => {
   const json = readFileSync(dataPath, "utf8");
   const products: SeedMenuItem[] = JSON.parse(json);
+
 
   await connectMongodb();
   await MenuItem.deleteMany({});
@@ -50,7 +54,7 @@ const seedMenu = async () => {
   });
 
   await MenuItem.insertMany(docs);
-  console.log(`Seeded ${docs.length} menu items.`);
+  console.log(`Seeded ${docs.length} menu items from ${selectedFile}.`);
 };
 
 seedMenu()
@@ -59,6 +63,7 @@ seedMenu()
     process.exit(0);
   })
   .catch((error) => {
+    //console.log(connectMongodb.toString);
     console.error("Seed failed:", error);
     process.exit(1);
   });

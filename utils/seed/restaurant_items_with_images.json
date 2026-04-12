@@ -11,7 +11,7 @@
   },
   {
     "item_name": "Classic Poulet",
-    "item_description": "Carefully curated french chicken kebab",
+    "item_description": "Carefully curated french chicken kebab, fresh salad and bread along with signature sauces to compliment the sandwich",
     "item_price": {
       "single": 46.25,
       "meal": 56.25
@@ -21,7 +21,7 @@
   },
   {
     "item_name": "Classic Veal",
-    "item_description": "Perfectly crafted tender french grilled veal kebab",
+    "item_description": "Perfectly crafted tender french grilled veal kebab, simple, hearty, and full of flavour.",
     "item_price": {
       "single": 46.25,
       "meal": 56.25
@@ -31,12 +31,23 @@
   },
   {
     "item_name": "Boursin",
-    "item_description": "Juicy chicken cubes cooked in a rich, creamy boursin and cheddar cheese sauce",
+    "item_description": "Juicy chicken cubes cooked in a rich, creamy boursin cheese sauce",
     "item_price": {
       "single": 46.25,
       "meal": 56.25
     },
-    "item_category": "Des Sandwiches"
+    "item_category": "Des Sandwiches",
+    "item_img_url" : "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745681346/Boursin_1_xs5zql.jpg"
+  },
+  {
+    "item_name": "Tandoori",
+    "item_description": "Tender tandoori-marinated chicken, layered with fresh vegetables and sauce, giving it a smoky, spiced, and slightly tangy taste.",
+    "item_price": {
+      "single": 46.25,
+      "meal": 56.25
+    },
+    "item_category": "Des Sandwiches",
+    "item_img_url" : "https://res.cloudinary.com/dpqto9jrm/image/upload/v1775827427/Tandoori_Picture_q1pupe.jpg"
   },
   {
     "item_name": "Beef Duo",
@@ -47,26 +58,6 @@
     },
     "item_category": "Des Sandwiches",
     "item_img_url": "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745680041/Beef_Duo_j9tex5.jpg"
-  },
-  {
-    "item_name": "Four Veal",
-    "item_description": "Melt-in-your-mouth veal kebab, topped with gooey mozzarella in a baguette",
-    "item_price": {
-      "single": 46.25,
-      "meal": 56.25
-    },
-    "item_category": "Des Sandwiches",
-    "item_img_url": "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745681349/Four_Veal_zhish2.jpg"
-  },
-  {
-    "item_name": "Four Chicken",
-    "item_description": "A comforting classic—juicy chicken kebab with melted mozzarella in a baguette",
-    "item_price": {
-      "single": 46.25,
-      "meal": 56.25
-    },
-    "item_category": "Des Sandwiches",
-    "item_img_url": "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745681348/Four_Chicken_t18dro.jpg"
   },
   {
     "item_name": "Mix Kebab",
@@ -80,7 +71,7 @@
   },
   {
     "item_name": "Gourmet",
-    "item_description": "Indulge in a creamy perfection—chicken cooked with mushrooms and cheddar",
+    "item_description": "Indulge in a creamy perfection—chicken cooked with mushrooms, cheddar & wholesome cream",
     "item_price": {
       "single": 46.5,
       "meal": 56.25
@@ -119,22 +110,24 @@
     "item_img_url": "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745681351/Merguez_zhoplk.jpg"
   },
   {
-    "item_name": "Medium Taco",
-    "item_description": "Comes with 1 meat, enough if you are hungry",
+    "item_name": "French Taco",
+    "item_description": "Best selling French tacos! French fries, cheese sauce, cheddar and an extra sauce inside; you may choose your meat and extra sauces, while they come in a medium and large sizes",
     "item_price": {
       "single": 44.5,
       "meal": 54.5
     },
-    "item_category": "Taco"
+    "item_category": "Des Taco",
+    "item_img_url": "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745680051/Medium_French_Taco_e1yjcj.jpg"
   },
   {
-    "item_name": "Large Taco",
-    "item_description": "Comes with 2 meats, enough if you are verrrry hungry",
+    "item_name": "Baguettes",
+    "item_description": "Simple, hearty, and full of flavour. Our baguettes are made to feel familiar — fluffy bread, tender meat, creamy cheese, and a warmth you can taste, available with multiple meat options.",
     "item_price": {
-      "single": 62.5,
-      "meal": 72.5
+      "single": 46.25,
+      "meal": 56.25
     },
-    "item_category": "Taco"
+    "item_category": "Des Baguette",
+    "item_img_url": "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745681349/Four_Veal_zhish2.jpg"
   },
   {
     "item_name": "Tenders",

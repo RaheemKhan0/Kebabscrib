@@ -1,31 +1,37 @@
-import DeliveryOptions from "@components/Menu/DeliveryOptions"
-import MenuCategories from "@components/Menu/MenuCategories"
+import { Metadata } from "next";
+import MenuShowcase from "@components/Menu/MenuShowcase";
+import DeliveryBanner from "@components/Menu/DeliveryBanner";
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Menu | Kebab's Crib",
+  description:
+    "Browse our full menu — sandwiches, French tacos, sides, frites, and drinks.",
+};
 
 export default function MenuPage() {
   return (
-    <div className="bg-EggShell">
-      <section className="mx-auto mt-10 max-w-screen-xl px-4 pb-6 sm:px-6 lg:px-10">
-        <div className="rounded-[32px] border border-KC_GREEN/10 bg-white p-6 shadow-lg sm:p-10">
-          <div className="flex flex-col gap-4 text-left">
-            <p className="text-xs uppercase tracking-[0.3em] text-KebabGreen/70">
-              Menu Experience
-            </p>
-            <h1 className="text-3xl font-bold text-KebabGreen sm:text-4xl">
-              Browse categories, open item details, and order fast
-            </h1>
-            <p className="max-w-2xl text-sm text-gray-600 sm:text-base">
-              Use the category filter to explore everything we serve.
-              Tap any item for photos, descriptions, and ordering options.
-            </p>
-          </div>
-        </div>
-      </section>
-      <DeliveryOptions />
-      <section className="pb-12">
-        <MenuCategories />
-      </section>
+    <div className="bg-EggShell min-h-screen">
+      {/* Hero */}
+      <div className="pt-32 sm:pt-40 pb-6 text-center px-6">
+        <p className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-KC_GREEN/40 font-medium mb-4">
+          Explore What We Serve
+        </p>
+        <h1
+          className="font-bold text-KC_GREEN font-wildysans"
+          style={{ fontSize: "clamp(3rem, 7vw, 6rem)" }}
+        >
+          Our Menu
+        </h1>
+        <div className="mx-auto mt-5 h-px w-20 bg-KC_GREEN/15" />
+      </div>
+
+      {/* Menu showcase (tabs + grid) */}
+      <MenuShowcase />
+
+      {/* Delivery banner */}
+      <DeliveryBanner />
     </div>
-  )
+  );
 }

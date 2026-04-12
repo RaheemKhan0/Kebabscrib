@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Footer from "@components/Footer";
+import Navbar from "@components/Navbar";
 import "@public/styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import { CartProvider } from "@utils/context/ShoppingCartContext";
@@ -21,6 +22,12 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      (process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : "http://localhost:3000"),
+  ),
   title: "Kebabscrib",
   description: "Kebabscrib is a french Restaurant",
   icons: {
@@ -36,12 +43,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${parkinsans.variable} ${playfair.variable}`}>
       <body
-        className={`${parkinsans.className} bg-EggShell grid grid-rows-[auto,1fr,auto] min-h-screen overflow-x-hidden`}
+        className={`${parkinsans.className} bg-EggShell min-h-screen`}
       >
         <SessionWrapper>
           <MenuProvider>
             <CartProvider>
               <Toaster />
+              <Navbar />
               <main>{children}</main>
               <Footer />
             </CartProvider>

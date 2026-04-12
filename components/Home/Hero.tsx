@@ -1,162 +1,167 @@
 "use client";
-import React, { useRef } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { SplitText } from "gsap/all";
-import { useGsapPlugins } from "@utils/customhooks/useGsapPlugins";
-import Link from "next/link";
+import React, { useState } from "react";
+import Image from "next/image";
+import { useKeenSlider, KeenSliderPlugin } from "keen-slider/react";
+
+/* ───────────────────────────────────────────
+   Slides — same items as BestSellers.
+   Replace image URLs with high-res landscape
+   photos when ready.
+   ─────────────────────────────────────────── */
+const SLIDES = [
+  {
+    name: "Merguez",
+    tagline: "Bold & Spicy",
+    image: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745681351/Merguez_zhoplk.jpg",
+  },
+  {
+    name: "Mix Kebab",
+    tagline: "Best of Both Worlds",
+    image: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745680051/Mix_Kebab_jgizht.jpg",
+  },
+  {
+    name: "Veal Baguette",
+    tagline: "Melt-In-Your-Mouth",
+    image: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745681349/Four_Veal_zhish2.jpg",
+  },
+  {
+    name: "Medium Taco",
+    tagline: "The French Taco",
+    image: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745680051/Medium_French_Taco_e1yjcj.jpg",
+  },
+  {
+    name: "Poulet Fromage",
+    tagline: "Crispy & Cheesy",
+    image: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745681352/Poulet_Fromage_zjzobp.jpg",
+  },
+];
+
+const AUTO_PLAY_MS = 4000;
+
+const autoPlayPlugin: KeenSliderPlugin = (slider) => {
+  let timeout: ReturnType<typeof setTimeout>;
+  const clear = () => clearTimeout(timeout);
+  const schedule = () => {
+    timeout = setTimeout(() => slider.next(), AUTO_PLAY_MS);
+  };
+  slider.on("created", schedule);
+  slider.on("dragStarted", clear);
+  slider.on("animationEnded", schedule);
+  slider.on("updated", schedule);
+  slider.on("destroyed", clear);
+};
 
 const Hero = () => {
-  useGsapPlugins();
-  const sectionRef = useRef(null);
-  const titleRef = useRef(null);
-  const descRef = useRef(null);
-  const buttonRef = useRef(null);
-  const learnRef = useRef(null);
-  // const handleScrollToMenu = (
-  //   event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-  // ) => {
-  //   event.preventDefault();
-  //   const menuSection = document.getElementById("menu");
+  const [loaded, setLoaded] = useState(false);
 
-  //   if (!menuSection) return;
-
-  //   menuSection.scrollIntoView({
-  //     behavior: "smooth",
-  //     block: "start",
-  //   });
-
-  //   // Keep the hash in sync without triggering a jump
-  //   window.history.replaceState(null, "", "#menu");
-  // };
-
-  useGSAP(() => {
-    const ctx = gsap.context(() => {
-      const titleSplit = new SplitText(titleRef.current, {
-        type: "chars",
-      });
-
-      const descSplit = new SplitText(descRef.current, {
-        type: "lines",
-      });
-
-      gsap.set([titleRef.current, descRef.current], { opacity: 1 });
-
-      const tl = gsap.timeline();
-
-      tl.from(titleSplit.chars, {
-        opacity: 0,
-        y: 30,
-        duration: 0.6,
-        ease: "back.out(1.7)",
-        stagger: 0.04,
-      })
-        .from(
-          descSplit.lines,
-          {
-            opacity: 0,
-            y: 20,
-            duration: 0.6,
-            ease: "power2.out",
-            stagger: 0.1,
-          },
-          "<+0.2",
-        )
-        .fromTo(
-          learnRef.current,
-          { opacity: 0, y: 10 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "sine.inOut",
-          },
-          "<+0.2",
-        )
-        .fromTo(
-          buttonRef.current,
-          {
-            opacity: 0,
-            scale: 0.8,
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.5,
-            ease: "back.out(1.7)",
-          },
-          "<+0.1",
-        )
-        .to(
-          learnRef.current,
-          {
-            y: 10,
-            repeat: -1,
-            yoyo: true,
-            duration: 1,
-            ease: "sine.inOut",
-          },
-          "<",
-        );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
+    {
+      loop: true,
+      defaultAnimation: { duration: 800 },
+      slides: { perView: 1 },
+      created() {
+        setLoaded(true);
+      },
+    },
+    [autoPlayPlugin],
+  );
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative overflow-hidden h-[100dvh] flex flex-col justify-between"
-    >
-      {/* CONTENT CENTERED */}
-      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-20">
-        <div className="max-w-[700px] w-full text-center">
-          <p className="text-xs sm:text-sm uppercase tracking-widest text-KC_Yellow font-semibold mb-2 rounded-xl">
-            Since 2011 • Authentic Taste
-          </p>
+    <section className="sticky top-0 w-full h-[85vh] sm:h-[90vh] z-0">
+      {/* Slider */}
+      <div ref={sliderRef} className="keen-slider h-full">
+        {SLIDES.map((slide, i) => (
+          <div key={i} className="keen-slider__slide relative">
+            {/* Background image */}
+            <Image
+              src={slide.image}
+              alt={slide.name}
+              fill
+              priority={i < 2}
+              className="object-cover"
+              sizes="100vw"
+            />
 
-          <h1
-            ref={titleRef}
-            className="font-extrabold text-KC_GREEN font-parkinsans mb-3 leading-tight whitespace-nowrap opacity-0"
-            style={{
-              fontSize: "clamp(2.5rem, 8vw, 6rem)",
-            }}
-          >
-            Kebab&apos;s Crib
-          </h1>
+            {/* Gradient overlays — bottom for text, top for navbar */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/40 to-transparent" />
 
-          <p
-            ref={descRef}
-            className="text-gray-700 text-sm sm:text-base md:text-lg mb-6 leading-relaxed mx-auto max-w-lg opacity-0"
-          >
-            Dive into the juiciest kebabs, meltiest cheese, and the boldest
-            flavors—crafted with love and fire, straight from our grill.
-          </p>
-
-          <Link
-            ref={buttonRef}
-            href="/menu"
-            className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-KC_Yellow text-KC_GREEN rounded-full text-sm sm:text-base md:text-lg font-semibold shadow-md 
-            hover:bg-KC_GREEN hover:text-KC_Yellow transition duration-300 hover:scale-105 hover:shadow-lg"
-          >
-            View Menu
-            <svg
-              className="w-4 h-4 sm:w-5 sm:h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </Link>
-        </div>
+            {/* Text content — bottom left */}
+            <div className="absolute inset-0 flex flex-col justify-end p-8 sm:p-12 lg:p-16 pb-24 sm:pb-28">
+              <p className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-EggShell/70 font-medium mb-2">
+                {slide.tagline}
+              </p>
+              <h2
+                className="font-bold text-EggShell font-wildysans leading-none"
+                style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)" }}
+              >
+                {slide.name}
+              </h2>
+            </div>
+          </div>
+        ))}
       </div>
+
+      {/* Navigation arrows */}
+      {loaded && (
+        <>
+          <button
+            onClick={() => instanceRef.current?.prev()}
+            aria-label="Previous slide"
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-10
+              w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/15 backdrop-blur-sm
+              flex items-center justify-center text-white/80
+              transition-all duration-200 hover:bg-white/25 hover:text-white hover:scale-105"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={() => instanceRef.current?.next()}
+            aria-label="Next slide"
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-10
+              w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/15 backdrop-blur-sm
+              flex items-center justify-center text-white/80
+              transition-all duration-200 hover:bg-white/25 hover:text-white hover:scale-105"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </>
+      )}
 
     </section>
   );
 };
 
 export default Hero;
+
+
+      // {/* Dots + slide counter */}
+      // {loaded && (
+      //   <div className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 z-10
+      //     flex items-center gap-4">
+      //     {/* Dots */}
+      //     <div className="flex gap-2">
+      //       {SLIDES.map((_, i) => (
+      //         <button
+      //           key={i}
+      //           onClick={() => instanceRef.current?.moveToIdx(i)}
+      //           aria-label={`Go to slide ${i + 1}`}
+      //           className={`rounded-full transition-all duration-300
+      //             ${currentSlide === i
+      //               ? "w-6 h-2 bg-white"
+      //               : "w-2 h-2 bg-white/40 hover:bg-white/60"
+      //             }`}
+      //         />
+      //       ))}
+      //     </div>
+
+      //     {/* Counter */}
+      //     <span className="text-xs text-white/50 font-medium tabular-nums">
+      //       {String(currentSlide + 1).padStart(2, "0")} / {String(SLIDES.length).padStart(2, "0")}
+      //     </span>
+      //   </div>
+      //  )}
