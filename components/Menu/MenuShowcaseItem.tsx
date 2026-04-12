@@ -18,7 +18,7 @@ const MenuShowcaseItem = ({ item }: { item: MenuItem }) => {
   return (
     <div className="group">
       {/* Image */}
-      <div className="relative aspect-[3/2] rounded-xl overflow-hidden bg-KC_GREEN/5">
+      <div className="relative aspect-[3/2] overflow-hidden bg-KC_GREEN/5">
         {item.item_img_url ? (
           <Image
             src={optimizeUrl(item.item_img_url)}
@@ -34,15 +34,14 @@ const MenuShowcaseItem = ({ item }: { item: MenuItem }) => {
         )}
       </div>
 
-      {/* Info */}
-      <div className="mt-4">
+      {/* Info — centered */}
+      <div className="mt-5 text-center">
         <h3 className="font-wildysans text-xl sm:text-2xl text-KC_GREEN">
           {item.item_name}
         </h3>
 
-        {/* Description */}
         {item.item_description && (
-          <p className="mt-1.5 text-sm leading-relaxed text-KC_GREEN/50 max-w-md">
+          <p className="mt-2 text-sm leading-relaxed text-KC_GREEN/50 max-w-md mx-auto">
             {item.item_description}
           </p>
         )}
