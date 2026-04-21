@@ -86,11 +86,11 @@ const OurStory = () => {
 
         {/* ── Text Side ── */}
         <div ref={textRef} className="flex flex-col justify-center">
-          <p className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-KC_PEACH font-medium mb-4">
+          {/* <p className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-KC_PEACH font-medium mb-4">
             How It All Began
-          </p>
+          </p> */}
           <h2
-            className="font-bold text-EggShell font-wildysans mb-8 leading-[1.1]"
+            className="font-bold text-EggShell text-KC_PEACH font-wildysans mb-8 leading-[1.1]"
             style={{ fontSize: "clamp(2.2rem, 4.5vw, 4rem)" }}
           >
             Our Beginnings
@@ -119,13 +119,13 @@ const OurStory = () => {
         </div>
 
         {/* ── Image Side ── */}
-        <div ref={imageRef} className="relative overflow-hidden rounded-2xl">
+        <div ref={imageRef} className="relative overflow-hidden">
           <Image
             src={STORY_IMAGE}
             alt="The Kebab's Crib founders"
             width={800}
             height={800}
-            className="w-full h-auto object-cover rounded-2xl"
+            className="w-full h-auto object-cover "
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
         </div>
