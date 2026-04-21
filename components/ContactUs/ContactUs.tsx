@@ -30,7 +30,7 @@ const ContactUs: React.FC = () => {
   };
 
   return (
-    <div className="bg-EggShell min-h-screen">
+    <div className="bg-textured-eggshell min-h-screen">
 
       {/* ── Hero ── */}
       <div className="pt-32 sm:pt-40 pb-12 text-center px-6">
@@ -151,7 +151,7 @@ const ContactUs: React.FC = () => {
       </div>
 
       {/* ── Quick contact strip ── */}
-      <div className="border-t border-KC_GREEN/10 py-12">
+      {/* <div className="border-t border-KC_GREEN/10 py-12">
         <div className="mx-auto max-w-screen-md px-6">
           <p className="text-center text-[10px] uppercase tracking-[0.3em] text-KC_GREEN/35 mb-5">
             Or reach us directly
@@ -171,7 +171,7 @@ const ContactUs: React.FC = () => {
             </span>
           </div>
         </div>
-      </div>
+      </div> */}
 
     </div>
   );
