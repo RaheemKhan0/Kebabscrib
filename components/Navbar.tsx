@@ -12,11 +12,9 @@ import { usePathname } from "next/navigation";
 
 const NAV_LEFT = [
   { name: "Menu", path: "/menu" },
-  { name: "Delivery", path: "/delivery" },
 ];
 
 const NAV_RIGHT = [
-  { name: "Directions", path: "/directions" },
   { name: "Contact", path: "/contactus" },
 ];
 
