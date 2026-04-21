@@ -30,21 +30,21 @@ const ContactUs: React.FC = () => {
   };
 
   return (
-    <div className="bg-textured-eggshell min-h-screen">
+    <div className="bg-KC_RED min-h-screen">
 
       {/* ── Hero ── */}
       <div className="pt-32 sm:pt-40 pb-12 text-center px-6">
-        <p className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-KC_GREEN/40 font-medium mb-4">
+        <p className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-EggShell/40 font-medium mb-4">
           Say Hello
         </p>
         <h1
-          className="font-bold text-KC_GREEN font-wildysans"
+          className="font-bold text-EggShell font-wildysans"
           style={{ fontSize: "clamp(3rem, 7vw, 6rem)" }}
         >
           Get In Touch
         </h1>
-        <div className="mx-auto mt-5 h-px w-20 bg-KC_GREEN/15" />
-        <p className="mt-6 text-base sm:text-lg text-KC_GREEN/45 max-w-md mx-auto leading-relaxed">
+        <div className="mx-auto mt-5 h-px w-20 bg-EggShell/15" />
+        <p className="mt-6 text-base sm:text-lg text-EggShell/50 max-w-md mx-auto leading-relaxed">
           Questions, feedback, or just want to say hi — we&apos;d love to hear from you.
         </p>
       </div>
@@ -53,11 +53,11 @@ const ContactUs: React.FC = () => {
       <div className="mx-auto max-w-xl px-6 sm:px-8 pb-16">
         <form onSubmit={handleSubmit} className="space-y-8">
 
-          {/* Name — underline style */}
+          {/* Name */}
           <div>
             <label
               htmlFor="name"
-              className="block text-[10px] uppercase tracking-[0.25em] text-KC_GREEN/40 font-medium mb-2"
+              className="block text-[10px] uppercase tracking-[0.25em] text-EggShell/40 font-medium mb-2"
             >
               Name
             </label>
@@ -69,9 +69,9 @@ const ContactUs: React.FC = () => {
               onChange={handleChange}
               required
               placeholder="Your name"
-              className="w-full bg-transparent border-0 border-b border-KC_GREEN/15 pb-3
-                text-base text-KC_GREEN placeholder:text-KC_GREEN/25
-                focus:outline-none focus:border-KC_GREEN transition-colors duration-200"
+              className="w-full bg-transparent border-0 border-b border-EggShell/20 pb-3
+                text-base text-EggShell placeholder:text-EggShell/25
+                focus:outline-none focus:border-EggShell transition-colors duration-200"
             />
           </div>
 
@@ -79,7 +79,7 @@ const ContactUs: React.FC = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-[10px] uppercase tracking-[0.25em] text-KC_GREEN/40 font-medium mb-2"
+              className="block text-[10px] uppercase tracking-[0.25em] text-EggShell/40 font-medium mb-2"
             >
               Email
             </label>
@@ -91,9 +91,9 @@ const ContactUs: React.FC = () => {
               onChange={handleChange}
               required
               placeholder="you@example.com"
-              className="w-full bg-transparent border-0 border-b border-KC_GREEN/15 pb-3
-                text-base text-KC_GREEN placeholder:text-KC_GREEN/25
-                focus:outline-none focus:border-KC_GREEN transition-colors duration-200"
+              className="w-full bg-transparent border-0 border-b border-EggShell/20 pb-3
+                text-base text-EggShell placeholder:text-EggShell/25
+                focus:outline-none focus:border-EggShell transition-colors duration-200"
             />
           </div>
 
@@ -101,7 +101,7 @@ const ContactUs: React.FC = () => {
           <div>
             <label
               htmlFor="message"
-              className="block text-[10px] uppercase tracking-[0.25em] text-KC_GREEN/40 font-medium mb-2"
+              className="block text-[10px] uppercase tracking-[0.25em] text-EggShell/40 font-medium mb-2"
             >
               Message
             </label>
@@ -113,9 +113,9 @@ const ContactUs: React.FC = () => {
               onChange={handleChange}
               required
               placeholder="Tell us what's on your mind..."
-              className="w-full bg-transparent border-0 border-b border-KC_GREEN/15 pb-3
-                text-base text-KC_GREEN placeholder:text-KC_GREEN/25 resize-none
-                focus:outline-none focus:border-KC_GREEN transition-colors duration-200"
+              className="w-full bg-transparent border-0 border-b border-EggShell/20 pb-3
+                text-base text-EggShell placeholder:text-EggShell/25 resize-none
+                focus:outline-none focus:border-EggShell transition-colors duration-200"
             />
           </div>
 
@@ -124,9 +124,9 @@ const ContactUs: React.FC = () => {
             <button
               type="submit"
               disabled={sending}
-              className="inline-flex items-center gap-3 rounded-full bg-KC_GREEN px-8 py-3.5 text-sm
-                font-semibold uppercase tracking-wide text-EggShell
-                transition hover:bg-KC_Forest hover:scale-[1.02] active:scale-[0.98]
+              className="inline-flex items-center gap-3 rounded-full bg-KC_PEACH px-8 py-3.5 text-sm
+                font-semibold uppercase tracking-wide text-KC_RED
+                transition hover:brightness-110 hover:scale-[1.02] active:scale-[0.98]
                 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               {sending ? (
@@ -149,29 +149,6 @@ const ContactUs: React.FC = () => {
           </div>
         </form>
       </div>
-
-      {/* ── Quick contact strip ── */}
-      {/* <div className="border-t border-KC_GREEN/10 py-12">
-        <div className="mx-auto max-w-screen-md px-6">
-          <p className="text-center text-[10px] uppercase tracking-[0.3em] text-KC_GREEN/35 mb-5">
-            Or reach us directly
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-10">
-            <a href="tel:044318050" className="text-sm text-KC_GREEN/70 hover:text-KC_PEACH transition-colors">
-              04 431 8050
-            </a>
-            <span className="hidden sm:block w-1 h-1 rounded-full bg-KC_GREEN/15" />
-            <a href="https://wa.me/971543354066" target="_blank" rel="noopener noreferrer"
-              className="text-sm text-KC_GREEN/70 hover:text-KC_PEACH transition-colors">
-              WhatsApp
-            </a>
-            <span className="hidden sm:block w-1 h-1 rounded-full bg-KC_GREEN/15" />
-            <span className="text-sm text-KC_GREEN/70">
-              kebabscrib@gmail.com
-            </span>
-          </div>
-        </div>
-      </div> */}
 
     </div>
   );
