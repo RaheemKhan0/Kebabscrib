@@ -25,9 +25,81 @@ const REVIEWS: Review[] = [
     timeAgo: "3 months ago",
   },
   {
+    name: "Ayaan Malik",
+    initial: "A",
+    avatarBg: "bg-KC_Ochre",
+    stars: 5,
+    text: "Popped in as was in the area. One of the best beef kebabs Iv had so far . Meat was flavourful complemented by the bread . Met the owner whom is a lovely person . Very welcoming and bubbly. Would definitely recommend to all !",
+    timeAgo: "1 month ago",
+  },
+  {
+    name: "Abdesettar Nencib",
+    initial: "A",
+    avatarBg: "bg-KC_PEACH",
+    stars: 5,
+    text: "I have been ordering alot lately from Kebab's Crib their food is just amazing from quality, packaging and fast delivery\nMy fav sandwich is Tacos minced beef with Harissa it hits the spot\nThank u guys",
+    timeAgo: "1 month ago",
+  },
+  {
+    name: "Emma TALLEC",
+    initial: "E",
+    avatarBg: "bg-KC_Ochre",
+    stars: 5,
+    text: "The staff are very welcoming, and in addition to offering great products, they are lovely. Quick and efficient, we recommend them 100%!",
+    timeAgo: "1 month ago",
+  },
+  {
+    name: "Amrandi Chaima",
+    initial: "A",
+    avatarBg: "bg-KC_PEACH",
+    stars: 5,
+    text: "I had dinner and it was very professional service from ladies arianna was very kind and food very delicious thanks",
+    timeAgo: "1 month ago",
+  },
+  {
+    name: "Amale B",
+    initial: "A",
+    avatarBg: "bg-KC_Ochre",
+    stars: 5,
+    text: "I ordered for the second time and really enjoyed it. It reminded me kebab sandwich in France . Very tasty and delicious. I highly recommend it. Thanks so much",
+    timeAgo: "2 weeks ago",
+  },
+  {
+    name: "Bruno Delvecchio",
+    initial: "B",
+    avatarBg: "bg-KC_PEACH",
+    stars: 5,
+    text: "A very nice sandwich with nice crispy french fries served by Danessa who was very competent, nice and personable. Overall a 5/5 experience",
+    timeAgo: "1 month ago",
+  },
+  {
+    name: "Sabrine Cherif",
+    initial: "S",
+    avatarBg: "bg-KC_Ochre",
+    stars: 5,
+    text: "I was craving French tacos since I am Tunisian and it's very popular in my country and came across this restaurant! Honestly a perfect texture and amazing taste. It may be the best tacos I've tried in Dubai. Please try keep the same quality and service!",
+    timeAgo: "1 month ago",
+  },
+  {
+    name: "Cherie Van Wyk",
+    initial: "C",
+    avatarBg: "bg-KC_PEACH",
+    stars: 5,
+    text: "Gorgeous place, amazing service and the food was unbelievable... highly recommend! Thank you to the lady there tonight, you were absolutely superb",
+    timeAgo: "3 months ago",
+  },
+  {
+    name: "RR",
+    initial: "R",
+    avatarBg: "bg-KC_Ochre",
+    stars: 5,
+    text: "A true hidden gem tucked away among the towering buildings of Marina. The service is quick, the presentation is beautifully done, and both the taste and portion sizes make it absolutely worth coming back.",
+    timeAgo: "4 weeks ago",
+  },
+  {
     name: "Laze Trajkov",
     initial: "L",
-    avatarBg: "bg-KC_Ochre",
+    avatarBg: "bg-KC_PEACH",
     stars: 5,
     text: "The customer service at this store is excellent. The staff is always friendly and helpful. They make sure that every customer feels valued and taken care of.",
     timeAgo: "3 months ago",
@@ -35,58 +107,10 @@ const REVIEWS: Review[] = [
   {
     name: "Teo Zdravkovski",
     initial: "T",
-    avatarBg: "bg-KC_PEACH",
+    avatarBg: "bg-KC_Ochre",
     stars: 5,
     text: "The customer service at this store is truly exceptional, marked by several distinctive aspects. The staff members consistently demonstrate genuine warmth.",
     timeAgo: "2 months ago",
-  },
-  {
-    name: "Teodora Delovska",
-    initial: "T",
-    avatarBg: "bg-KC_Ochre",
-    stars: 5,
-    text: "I recently purchased a fabulous kebab from this amazing store, and let me tell you, it has been a total game-changer. Absolutely phenomenal quality!",
-    timeAgo: "1 month ago",
-  },
-  {
-    name: "Aleksandar Angelov",
-    initial: "A",
-    avatarBg: "bg-KC_PEACH",
-    stars: 5,
-    text: "The quality of the food never fails to impress me. They are not only delicious and well-prepared, but they consistently deliver amazing flavors every time.",
-    timeAgo: "4 months ago",
-  },
-  {
-    name: "Filip Koteski",
-    initial: "F",
-    avatarBg: "bg-KC_Ochre",
-    stars: 5,
-    text: "These kebabs combine a vibrant, eye-catching presentation with utmost comfort and an unbeatable taste. The perfect meal for any occasion.",
-    timeAgo: "2 months ago",
-  },
-  {
-    name: "Jessica Smith",
-    initial: "J",
-    avatarBg: "bg-KC_PEACH",
-    stars: 5,
-    text: "Just got my new order and have to say I'm impressed with the quality. The delivery was really fast, it only took 2 days. Highly recommended!",
-    timeAgo: "3 weeks ago",
-  },
-  {
-    name: "Bratislav Petrovski",
-    initial: "B",
-    avatarBg: "bg-KC_Ochre",
-    stars: 5,
-    text: "This store is my favorite place to order from. The quality of the food is excellent and the prices are reasonable. I always come back for more.",
-    timeAgo: "5 months ago",
-  },
-  {
-    name: "Toni Toshic",
-    initial: "T",
-    avatarBg: "bg-KC_PEACH",
-    stars: 5,
-    text: "I recently made my first purchase from Kebabs Crib and I am beyond impressed! The selection of flavours is incredible and the quality is top notch.",
-    timeAgo: "1 month ago",
   },
 ];
 
@@ -118,7 +142,6 @@ const Stars = ({ count }: { count: number }) => (
 const ReviewCard = ({ review }: { review: Review }) => (
   <div className="flex flex-col h-full rounded-xl border border-KC_GREEN/10 bg-white/60 p-6
     transition-all duration-300 hover:bg-white/80 hover:border-KC_GREEN/15 hover:shadow-sm">
-    {/* Avatar + Name + Stars */}
     <div className="flex items-start gap-3 mb-4">
       <div
         className={`flex-shrink-0 w-9 h-9 rounded-full ${review.avatarBg}
@@ -139,13 +162,9 @@ const ReviewCard = ({ review }: { review: Review }) => (
         </div>
       </div>
     </div>
-
-    {/* Review text */}
     <p className="text-sm leading-relaxed text-KC_GREEN/65 flex-1">
       &ldquo;{review.text}&rdquo;
     </p>
-
-    {/* Google attribution */}
     <div className="mt-4 pt-3 border-t border-KC_GREEN/8 flex items-center gap-1.5">
       <GoogleIcon />
       <span className="text-[10px] text-KC_GREEN/30 uppercase tracking-wider">Google Review</span>
@@ -189,7 +208,6 @@ const GoogleReviews = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      /* Header — fade up */
       if (headerRef.current) {
         gsap.fromTo(
           headerRef.current.children,
@@ -209,7 +227,6 @@ const GoogleReviews = () => {
         );
       }
 
-      /* Cards — staggered fade up */
       if (gridRef.current && !isMobile) {
         gsap.fromTo(
           gridRef.current.children,
@@ -237,9 +254,6 @@ const GoogleReviews = () => {
     <section ref={sectionRef} className="mx-auto max-w-screen-xl px-6 sm:px-10 lg:px-16">
       {/* Header */}
       <div ref={headerRef} className="text-center mb-12 md:mb-16">
-        <p className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-KC_GREEN/40 font-medium mb-4">
-          Straight From Google
-        </p>
         <h2
           className="font-bold text-KC_GREEN font-wildysans leading-tight"
           style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
@@ -247,17 +261,6 @@ const GoogleReviews = () => {
           What Our Customers Say
         </h2>
         <div className="mx-auto mt-4 h-px w-16 bg-KC_GREEN/15" />
-
-        {/* Overall rating */}
-        {/* <div className="mt-6 flex items-center justify-center gap-3">
-          <Stars count={Math.round(OVERALL_RATING)} />
-          <span className="text-sm font-medium text-EggShell/80">
-            {OVERALL_RATING.toFixed(1)}/5
-          </span>
-          <span className="text-sm text-EggShell/35">
-            · {TOTAL_REVIEWS} reviews
-          </span>
-        </div> */}
       </div>
 
       {/* Desktop: grid — Mobile: carousel */}
