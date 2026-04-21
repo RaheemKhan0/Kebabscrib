@@ -32,12 +32,12 @@ import Image from "next/image";
     └─────────┴─────────┴──────────────┴─────────┘
 */
 const COLLAGE = [
-  // Col 1 top
-  { type: "image", src: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1775543803/04-1_qx2nrh.jpg",       alt: "Kebab platter",       pos: "col-start-1 row-start-1 row-end-4" },
+  // Col 1 top — gravity right to show more of the right side
+  { type: "image", src: "https://res.cloudinary.com/dpqto9jrm/image/upload/c_fill,g_east,w_900,h_900,q_auto,f_auto/v1776748920/IMG_5411_e3ryzv.jpg", alt: "Kebab platter", pos: "col-start-1 row-start-1 row-end-4" },
   // Col 2 top
   { type: "video", src: "https://res.cloudinary.com/dpqto9jrm/video/upload/v1775543813/gif_pw9li3.mp4",         alt: "KC in action",        pos: "col-start-2 row-start-1 row-end-5" },
-  // Col 3-4 top — Cover Photo (wide landscape, spans 2 cols)
-  { type: "image", src: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1776668487/Cover_Photo_g0cch4.jpg", alt: "KC Cover Photo",      pos: "col-start-3 col-end-5 row-start-1 row-end-4" },
+  // Col 3-4 top — Cover Photo zoomed in tighter
+  { type: "image", src: "https://res.cloudinary.com/dpqto9jrm/image/upload/q_auto,f_auto/v1776668487/Cover_Photo_g0cch4.jpg", alt: "KC Cover Photo", pos: "col-start-3 col-end-5 row-start-1 row-end-4" },
   // Col 1 bottom
   { type: "video", src: "https://res.cloudinary.com/dpqto9jrm/video/upload/v1775543820/Takeaway_uknx2k.mp4",   alt: "Takeaway",            pos: "col-start-1 row-start-4 row-end-8" },
   // Col 2 bottom
