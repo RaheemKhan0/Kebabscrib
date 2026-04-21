@@ -11,27 +11,27 @@ import { useKeenSlider, KeenSliderPlugin } from "keen-slider/react";
 const SLIDES = [
   {
     name: "Merguez",
-    tagline: "Bold & Spicy",
+    tagline: "Bold and Flavorful Lamb Sausage Sandwich",
     image: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745681351/Merguez_zhoplk.jpg",
   },
   {
     name: "Mix Kebab",
-    tagline: "Best of Both Worlds",
+    tagline: "Best of Both Worlds Chicken & Veal",
     image: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745680051/Mix_Kebab_jgizht.jpg",
   },
   {
     name: "Veal Baguette",
-    tagline: "Melt-In-Your-Mouth",
+    tagline: "Melt in Your Mouth",
     image: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745681349/Four_Veal_zhish2.jpg",
   },
   {
     name: "Medium Taco",
-    tagline: "The French Taco",
+    tagline: "The Cheesy Bestseller",
     image: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745680051/Medium_French_Taco_e1yjcj.jpg",
   },
   {
     name: "Poulet Fromage",
-    tagline: "Crispy & Cheesy",
+    tagline: "Tasty Quartet of Chicken, Ham, Egg and Cheese",
     image: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745681352/Poulet_Fromage_zjzobp.jpg",
   },
 ];
@@ -88,11 +88,11 @@ const Hero = () => {
 
             {/* Text content — bottom left */}
             <div className="absolute inset-0 flex flex-col justify-end p-8 sm:p-12 lg:p-16 pb-24 sm:pb-28">
-              <p className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-EggShell/70 font-medium mb-2">
+              <p className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-EggShell/70 font-parkinsans font-medium mb-2">
                 {slide.tagline}
               </p>
               <h2
-                className="font-bold text-EggShell font-wildysans leading-none"
+                className="font-bold text-EggShell font-parkinsans leading-none"
                 style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)" }}
               >
                 {slide.name}
