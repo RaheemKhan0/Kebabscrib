@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
             <div className="flex justify-center flex-shrink-0 md:flex-1">
               <Link href="/">
                 <Image
-                  src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1750239647/KC_Logo_Combination_stacked_green_epqs9c.png"
+                  src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1776751197/KC_Logo_V2_Combination_stacked_green_a8xphc.png"
                   alt="Kebab's Crib"
                   width={120}
                   height={64}
