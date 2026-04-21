@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import MenuShowcase from "@components/Menu/MenuShowcase";
-import DeliveryBanner from "@components/Menu/DeliveryBanner";
 
 export const dynamic = "force-dynamic";
 
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function MenuPage() {
   return (
-    <div className="bg-EggShell min-h-screen">
+    <div className="bg-textured-eggshell min-h-screen">
       {/* Hero */}
       <div className="pt-32 sm:pt-40 pb-6 text-center px-6">
         <p className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-KC_GREEN/40 font-medium mb-4">
@@ -30,8 +29,7 @@ export default function MenuPage() {
       {/* Menu showcase (tabs + grid) */}
       <MenuShowcase />
 
-      {/* Delivery banner */}
-      <DeliveryBanner />
+      {/* <DeliveryBanner /> */}
     </div>
   );
 }
