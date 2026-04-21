@@ -1,8 +1,3 @@
-import { IoLocationSharp } from "react-icons/io5";
-import { IoMdCall } from "react-icons/io";
-import { FaWhatsapp } from "react-icons/fa";
-import { MdAccessTime } from "react-icons/md";
-
 const MAP_EMBED_URL =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.6!2d55.13!3d25.08!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDA0JzQ4LjAiTiA1NcKwMDcnNDguMCJF!5e0!3m2!1sen!2sae!4v1700000000000!5m2!1sen!2sae";
 
@@ -16,23 +11,20 @@ const LocationStrip = () => {
 
         {/* Header */}
         <div className="text-center mb-12">
-          {/* <p className="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-KC_PEACH font-medium mb-4">
-            Come Visit Us
-          </p> */}
           <h2
-            className="font-bold text-EggShell text-KC_GREEN font-wildysans leading-tight"
+            className="font-bold text-KC_GREEN font-wildysans leading-tight"
             style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
           >
-            Come Visit Us
+            In the Heart of Dubai Marina
           </h2>
-          <div className="mx-auto mt-4 h-px w-16 bg-EggShell/15" />
+          <div className="mx-auto mt-4 h-px w-16 bg-KC_GREEN/15" />
         </div>
 
         {/* Map + Info */}
         <div className="grid lg:grid-cols-5 gap-10 lg:gap-16 items-start">
 
-          {/* Map */}
-          <div className="lg:col-span-3 relative aspect-[4/3] lg:aspect-auto lg:h-[450px]  overflow-hidden">
+          {/* Map — square, no rounded corners */}
+          <div className="lg:col-span-3 relative aspect-square lg:aspect-auto lg:h-[450px] overflow-hidden">
             <iframe
               src={MAP_EMBED_URL}
               width="100%"
@@ -46,56 +38,52 @@ const LocationStrip = () => {
             />
           </div>
 
-          {/* Info */}
-          <div className="lg:col-span-2 flex flex-col gap-8">
+          {/* Info — centered text, no icons */}
+          <div className="lg:col-span-2 flex flex-col gap-8 text-center lg:text-left">
 
             {/* Address */}
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <IoLocationSharp className="w-4 h-4 text-KC_GREEN" />
-                <p className="text-[10px] uppercase tracking-[0.2em] text-KebabGreen/35 font-medium">Address</p>
-              </div>
-              <p className="text-lg font-Parkinsans text-KebabGreen leading-tight">
+              <p className="font-bold font-parkinsans text-KC_GREEN mb-1">
+                Address
+              </p>
+              <p className="text-sm font-parkinsans text-KC_GREEN/70">
                 Shop 1, Marina View Tower A
               </p>
-              <p className="text-sm text-KebabGreen/50 mt-1">Dubai Marina, Dubai</p>
+              <p className="text-sm font-parkinsans text-KC_GREEN/50">Dubai Marina, Dubai</p>
             </div>
 
-            <div className="h-px bg-KebabGreen/50" />
+            <div className="h-px bg-KC_GREEN/10" />
 
             {/* Hours */}
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <MdAccessTime className="w-4 h-4 text-KC_PEACH" />
-                <p className="text-[10px] uppercase tracking-[0.2em] text-KebabGreen/35 font-medium">Hours</p>
-              </div>
-              <div className="space-y-1.5 text-sm">
-                <div className="flex justify-between max-w-xs">
-                  <span className="text-KebabGreen">Sun – Thu</span>
-                  <span className="text-KebabGreen">11:30 AM – 4:30 AM</span>
+              <p className="font-bold font-parkinsans text-KC_GREEN mb-2">
+                Hours
+              </p>
+              <div className="space-y-1.5 text-sm font-parkinsans">
+                <div className="flex justify-between max-w-xs mx-auto lg:mx-0">
+                  <span className="text-KC_GREEN/60">Sun – Thu</span>
+                  <span className="text-KC_GREEN">11:30 AM – 4:30 AM</span>
                 </div>
-                <div className="flex justify-between max-w-xs">
-                  <span className="text-KebabGreen">Fri – Sat</span>
-                  <span className="text-KebabGreen">11:30 AM – 4:45 AM</span>
+                <div className="flex justify-between max-w-xs mx-auto lg:mx-0">
+                  <span className="text-KC_GREEN/60">Fri – Sat</span>
+                  <span className="text-KC_GREEN">11:30 AM – 4:45 AM</span>
                 </div>
               </div>
             </div>
 
-            <div className="h-px bg-KebabGreen/50" />
+            <div className="h-px bg-KC_GREEN/10" />
 
             {/* Contact */}
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <IoMdCall className="w-4 h-4 text-KC_PEACH" />
-                <p className="text-[10px] uppercase tracking-[0.2em] text-KebabGreen/35 font-medium">Contact</p>
-              </div>
-              <div className="space-y-2 text-sm">
-                <a href="tel:044318050" className="block text-KebabGreen hover:text-KC_PE hover:text-KC_PEACH transition-colors">
+              <p className="font-bold font-parkinsans text-KC_GREEN mb-2">
+                Contact
+              </p>
+              <div className="space-y-2 text-sm font-parkinsans">
+                <a href="tel:044318050" className="block text-KC_GREEN/70 hover:text-KC_PEACH transition-colors">
                   04 431 8050
                 </a>
                 <a href="https://wa.me/971543354066" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-KebabGreen hover:text-KC_PEACH transition-colors">
-                  <FaWhatsapp className="w-3.5 h-3.5" />
+                  className="inline-flex items-center gap-1.5 text-KC_GREEN/70 hover:text-KC_PEACH transition-colors">
                   WhatsApp
                 </a>
               </div>
@@ -106,9 +94,9 @@ const LocationStrip = () => {
               href={GOOGLE_MAPS_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 inline-flex items-center justify-center gap-2 rounded-full border border-KebabGreen/20 px-7 py-3
-                text-sm font-medium uppercase tracking-wide text-KebabGreen
-                transition-all duration-300 hover:bg-KebabGreen hover:text-KC_PEACH hover:scale-[1.02] active:scale-[0.98]"
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-KC_PEACH px-8 py-3.5
+                text-sm font-semibold uppercase tracking-wide text-KC_GREEN
+                transition hover:brightness-110 hover:scale-[1.02] active:scale-[0.98]"
             >
               Get Directions
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
