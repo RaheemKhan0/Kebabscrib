@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const STORY_IMAGE =
-  "https://res.cloudinary.com/dpqto9jrm/image/upload/v1775528143/mujtaba_rasba_v1tc0k.jpg";
+  "https://res.cloudinary.com/dpqto9jrm/image/upload/c_crop,g_north_west,h_589,w_674,x_6,y_5/mujtaba_rasba_v1tc0k.jpg";
 
 const OurStory = () => {
   const sectionRef = useRef<HTMLElement>(null);
