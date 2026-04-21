@@ -3,37 +3,18 @@ import { useMemo } from "react";
 import { useMenu } from "@utils/context/MenuContext";
 import MenuShowcaseItem from "./MenuShowcaseItem";
 
-/* Categories to include (in display order). Items from these categories
-   are merged into a single flat list under one "Menu" heading. */
+/* Categories to include — display order is controlled by the seed JSON file */
 const CATEGORIES = ["Des Taco", "Des Baguette", "Des Sandwiches"];
-
-interface MenuItem {
-  _id: string;
-  item_name: string;
-  item_description?: string;
-  item_price: { single?: number; meal?: number };
-  item_category: string;
-  item_img_url?: string;
-  isHidden?: boolean;
-}
 
 const MenuShowcase = () => {
   const { menu } = useMenu();
 
-  /* Flatten all items from the selected categories, ordered by CATEGORIES order */
+  /* Flatten all items from the selected categories — order comes from DB insertion order (seed file) */
   const items = useMemo(() => {
     if (!menu || !Array.isArray(menu)) return [];
-
-    const byCategory: Record<string, MenuItem[]> = {};
-    CATEGORIES.forEach((cat) => (byCategory[cat] = []));
-
-    menu.forEach((item) => {
-      if (!item.isHidden && CATEGORIES.includes(item.item_category)) {
-        byCategory[item.item_category].push(item);
-      }
-    });
-
-    return CATEGORIES.flatMap((cat) => byCategory[cat]);
+    return menu.filter(
+      (item) => !item.isHidden && CATEGORIES.includes(item.item_category),
+    );
   }, [menu]);
 
   /* Loading state */

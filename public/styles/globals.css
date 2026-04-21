@@ -8,6 +8,13 @@
   font-style: normal;
   font-display: swap;
 }
+/* @font-face {
+  font-family: "Gourami";
+  src: url("../fonts/Gourami-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+} */
 
 @theme {
   --color-KebabGreen: #006244;
@@ -31,6 +38,7 @@
   --font-parkinsans: "Parkinsans", sans-serif;
   --font-playfair: "Playfair Display", serif;
   --font-wildysans: "Wildy Sans", sans-serif;
+  --font-gourami: "Gourami", sans-serif;
   --text-md-lg: 1.075rem;
 }
 
@@ -195,7 +203,7 @@
     radial-gradient(circle at 15% 20%, rgba(0, 98, 68, 0.05), transparent 50%),
     radial-gradient(circle at 85% 75%, rgba(247, 161, 139, 0.06), transparent 50%),
     /* KC monogram scattered pattern */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg font-family='serif' font-size='22' font-weight='700'%3E%3Ctext x='30' y='50' fill='%23006244' fill-opacity='0.05'%3EKC%3C/text%3E%3Ctext x='150' y='110' fill='%23006244' fill-opacity='0.05' transform='rotate(-8 150 110)'%3EKC%3C/text%3E%3Ctext x='70' y='180' fill='%23006244' fill-opacity='0.05' transform='rotate(5 70 180)'%3EKC%3C/text%3E%3Ctext x='190' y='220' fill='%23006244' fill-opacity='0.05' transform='rotate(-3 190 220)'%3EKC%3C/text%3E%3C/g%3E%3C/svg%3E"),
+    /* url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg font-family='serif' font-size='22' font-weight='700'%3E%3Ctext x='30' y='50' fill='%23006244' fill-opacity='0.05'%3EKC%3C/text%3E%3Ctext x='150' y='110' fill='%23006244' fill-opacity='0.05' transform='rotate(-8 150 110)'%3EKC%3C/text%3E%3Ctext x='70' y='180' fill='%23006244' fill-opacity='0.05' transform='rotate(5 70 180)'%3EKC%3C/text%3E%3Ctext x='190' y='220' fill='%23006244' fill-opacity='0.05' transform='rotate(-3 190 220)'%3EKC%3C/text%3E%3C/g%3E%3C/svg%3E"), */
     /* Diagonal hatching — dark lines */
     repeating-linear-gradient(
       135deg,
@@ -214,7 +222,7 @@
     radial-gradient(circle at 15% 20%, rgba(247, 161, 139, 0.05), transparent 50%),
     radial-gradient(circle at 85% 75%, rgba(253, 246, 238, 0.03), transparent 50%),
     /* KC monogram scattered pattern */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23fdf6ee' stroke-width='1' stroke-opacity='0.06' font-family='serif' font-size='22' font-weight='700'%3E%3Ctext x='30' y='50' fill='%23fdf6ee' fill-opacity='0.05' stroke='none'%3EKC%3C/text%3E%3Ctext x='150' y='110' fill='%23fdf6ee' fill-opacity='0.05' stroke='none' transform='rotate(-8 150 110)'%3EKC%3C/text%3E%3Ctext x='70' y='180' fill='%23fdf6ee' fill-opacity='0.05' stroke='none' transform='rotate(5 70 180)'%3EKC%3C/text%3E%3Ctext x='190' y='220' fill='%23fdf6ee' fill-opacity='0.05' stroke='none' transform='rotate(-3 190 220)'%3EKC%3C/text%3E%3C/g%3E%3C/svg%3E"),
+    /* url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23fdf6ee' stroke-width='1' stroke-opacity='0.06' font-family='serif' font-size='22' font-weight='700'%3E%3Ctext x='30' y='50' fill='%23fdf6ee' fill-opacity='0.05' stroke='none'%3EKC%3C/text%3E%3Ctext x='150' y='110' fill='%23fdf6ee' fill-opacity='0.05' stroke='none' transform='rotate(-8 150 110)'%3EKC%3C/text%3E%3Ctext x='70' y='180' fill='%23fdf6ee' fill-opacity='0.05' stroke='none' transform='rotate(5 70 180)'%3EKC%3C/text%3E%3Ctext x='190' y='220' fill='%23fdf6ee' fill-opacity='0.05' stroke='none' transform='rotate(-3 190 220)'%3EKC%3C/text%3E%3C/g%3E%3C/svg%3E"), */
     /* Diagonal hatching — light lines */
     repeating-linear-gradient(
       135deg,

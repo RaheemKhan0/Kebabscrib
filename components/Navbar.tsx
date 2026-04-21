@@ -12,11 +12,9 @@ import { usePathname } from "next/navigation";
 
 const NAV_LEFT = [
   { name: "Menu", path: "/menu" },
-  { name: "Delivery", path: "/delivery" },
 ];
 
 const NAV_RIGHT = [
-  { name: "Directions", path: "/directions" },
   { name: "Contact", path: "/contactus" },
 ];
 
@@ -40,7 +38,7 @@ const Navbar: React.FC = () => {
   const showScrolledStyle = !isHomepage || scrolled;
 
   const linkClass = (path: string) =>
-    `relative py-1 text-base font-medium tracking-wide transition-colors duration-200 group
+    `relative py-1 text-base font-bold font-parkinsans tracking-wide transition-colors duration-200 group
     ${overHero
       ? (pathname === path ? "text-white" : "text-white/80 hover:text-white")
       : (pathname === path ? "text-KC_GREEN" : "text-KC_GREEN/70 hover:text-KC_GREEN")
@@ -80,7 +78,7 @@ const Navbar: React.FC = () => {
             <div className="flex justify-center flex-shrink-0 md:flex-1">
               <Link href="/">
                 <Image
-                  src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1750239647/KC_Logo_Combination_stacked_green_epqs9c.png"
+                  src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1776751197/KC_Logo_V2_Combination_stacked_green_a8xphc.png"
                   alt="Kebab's Crib"
                   width={120}
                   height={64}
@@ -161,7 +159,7 @@ const Navbar: React.FC = () => {
                 {/* Logo */}
                 <Link href="/" onClick={() => setMobileOpen(false)} className="mb-10">
                   <Image
-                    src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1750239647/KC_Logo_Combination_stacked_green_epqs9c.png"
+                    src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1776751197/KC_Logo_V2_Combination_stacked_green_a8xphc.png"
                     alt="Kebab's Crib"
                     width={100}
                     height={56}
