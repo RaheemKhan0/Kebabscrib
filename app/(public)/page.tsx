@@ -1,8 +1,9 @@
 import Hero from "@components/Home/Hero"
 import DualVideo from "@components/Home/DualVideo"
-import ContactStrip from "@components/Home/ContactStrip"
 import OurStory from "@components/Home/OurStory"
 import GoogleReviews from "@components/Home/GoogleReviews"
+import LocationStrip from "@components/Home/LocationStrip"
+import CollageStrip from "@components/Home/CollageStrip"
 
 export const dynamic = "force-dynamic"
 
@@ -22,16 +23,20 @@ export default function Home() {
       {/* 2 — Dual Video Strip */}
       <DualVideo />
 
-      {/* 3 — Our Story (full bleed, transitions into maroon) */}
+      {/* 3 — Our Story (full bleed) */}
       <OurStory />
 
-      {/* 4 — Google Reviews */}
-      <div className="bg-textured-eggshell py-16 md:py-24">
-        <GoogleReviews />
+      {/* 4 — Google Reviews + Location + Collage (shared eggshell background) */}
+      <div className="bg-textured-eggshell">
+        <div className="py-16 md:py-24">
+          <GoogleReviews />
+        </div>
+        <div className="py-16 sm:py-24">
+          <LocationStrip />
+        </div>
+        <CollageStrip />
       </div>
 
-      {/* 5 — Contact (final section before footer) */}
-      <ContactStrip />
       </div>{/* end relative z-10 wrapper */}
     </div>
   )
