@@ -65,7 +65,7 @@ export const BestSellers = () => {
         <h2 className="text-3xl sm:text-4xl font-bold text-KC_GREEN font-wildysans">
           Our Best Sellers
         </h2>
-        <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-KC_GREEN/20" />
+        <div className="mx-auto mt-5 h-px w-16 bg-KC_GREEN/15" />
       </div>
 
       {/* Cards */}

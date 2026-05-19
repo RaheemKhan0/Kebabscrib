@@ -260,7 +260,7 @@ const GoogleReviews = () => {
         >
           What Our Customers Say
         </h2>
-        <div className="mx-auto mt-4 h-px w-16 bg-KC_GREEN/15" />
+        <div className="mx-auto mt-5 h-px w-16 bg-KC_GREEN/15" />
       </div>
 
       {/* Desktop: grid — Mobile: carousel */}
