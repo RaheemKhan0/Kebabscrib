@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import LazyVideo from "@components/Common/LazyVideo";
 
 /* ───────────────────────────────────────────
    Gallery items — mix of images & videos.
@@ -101,7 +102,7 @@ const Gallery = () => {
           <h2 className="text-3xl sm:text-4xl font-bold text-KC_GREEN font-wildysans">
             The KC Gallery
           </h2>
-          <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-KC_GREEN/20" />
+          <div className="mx-auto mt-5 h-px w-16 bg-KC_GREEN/15" />
         </div>
 
         {/* Masonry-style grid */}
@@ -116,13 +117,10 @@ const Gallery = () => {
             >
               {item.type === "video" ? (
                 <>
-                  <video
+                  <LazyVideo
                     src={item.src}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="absolute inset-0 h-full w-full object-cover"
+                    width={800}
+                    className="absolute inset-0 h-full w-full"
                   />
                   {/* Play icon overlay */}
                   <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors duration-300">
