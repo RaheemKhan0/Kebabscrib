@@ -38,12 +38,12 @@ const ContactUs: React.FC = () => {
           Say Hello
         </p>
         <h1
-          className="font-bold text-EggShell font-wildysans"
+          className="font-bold text-EggShell font-wildysans leading-tight"
           style={{ fontSize: "clamp(3rem, 7vw, 6rem)" }}
         >
           Get In Touch
         </h1>
-        <div className="mx-auto mt-5 h-px w-20 bg-EggShell/15" />
+        <div className="mx-auto mt-5 h-px w-16 bg-EggShell/15" />
         <p className="mt-6 text-base sm:text-lg text-EggShell/50 max-w-md mx-auto leading-relaxed">
           Questions, feedback, or just want to say hi — we&apos;d love to hear from you.
         </p>

@@ -28,12 +28,12 @@ export default function DirectionsPage() {
           Come Visit Us
         </p>
         <h1
-          className="font-bold text-KC_GREEN font-wildysans"
+          className="font-bold text-KC_GREEN font-wildysans leading-tight"
           style={{ fontSize: "clamp(3rem, 7vw, 6rem)" }}
         >
           Find Us
         </h1>
-        <div className="mx-auto mt-5 h-px w-20 bg-KC_GREEN/15" />
+        <div className="mx-auto mt-5 h-px w-16 bg-KC_GREEN/15" />
         <p className="mt-6 text-base sm:text-lg text-KC_GREEN/45 max-w-md mx-auto leading-relaxed">
           Dubai Marina, right by the water.
         </p>
