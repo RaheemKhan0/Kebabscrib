@@ -36,7 +36,7 @@ const MenuShowcaseItem = ({ item }: { item: MenuItem }) => {
 
       {/* Info — centered */}
       <div className="mt-5 text-center">
-        <h3 className="font--parkinsans text-xl sm:text-2xl text-KC_GREEN">
+        <h3 className="font-wildysans fw-bold text-xl sm:text-2xl text-KC_GREEN">
           {item.item_name}
         </h3>
 

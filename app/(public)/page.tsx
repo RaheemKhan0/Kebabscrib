@@ -1,6 +1,6 @@
 import Hero from "@components/Home/Hero"
 import DualVideo from "@components/Home/DualVideo"
-import OurStory from "@components/Home/OurStory"
+import OurStoryPolaroid from "@components/Home/OurStoryPolaroid"
 import GoogleReviews from "@components/Home/GoogleReviews"
 import LocationStrip from "@components/Home/LocationStrip"
 import CollageStrip from "@components/Home/CollageStrip"
@@ -24,17 +24,25 @@ export default function Home() {
       <DualVideo />
 
       {/* 3 — Our Story (full bleed) */}
-      <OurStory />
+      <OurStoryPolaroid/>
+      
 
       {/* 4 — Google Reviews + Location + Collage (shared eggshell background) */}
       <div className="bg-textured-eggshell">
         <div className="py-16 md:py-24">
-          <GoogleReviews />
+        <CollageStrip />
+          
         </div>
         <div className="py-16 sm:py-24">
-          <LocationStrip />
+        <GoogleReviews />
+          
         </div>
-        <CollageStrip />
+
+        <div className="py-16 sm:py-24"> 
+        <LocationStrip />
+        </div>
+
+        
       </div>
 
       </div>{/* end relative z-10 wrapper */}

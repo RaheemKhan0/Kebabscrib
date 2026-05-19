@@ -40,7 +40,7 @@ const MenuShowcase = () => {
         >
           Menu
         </h2>
-        <div className="mx-auto mt-3 h-px w-12 bg-KC_GREEN/15" />
+        <div className="mx-auto mt-5 h-px w-16 bg-KC_GREEN/15" />
       </div> */}
 
       {/* ── All Items Grid ── */}

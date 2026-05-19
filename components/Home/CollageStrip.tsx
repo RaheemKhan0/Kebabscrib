@@ -1,4 +1,5 @@
 import Image from "next/image";
+import LazyVideo from "@components/Common/LazyVideo";
 
 /*  Layout matches the reference template:
     4 columns, mixed row spans for a magazine-style collage.
@@ -50,14 +51,12 @@ const COLLAGE = [
   { type: "image", src: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1775543783/02_cmpkxs.jpg",         alt: "Sandwich art",        pos: "col-start-4 row-start-6 row-end-8" },
 ];
 
-const WHATSAPP_LINK = "https://wa.me/971543354066?text=Hi%20Kebab's%20Crib!%20I'd%20like%20to%20book%20a%20table.";
-
 const CollageStrip = () => {
   return (
     <section className="w-full overflow-hidden">
 
       {/* CTA */}
-      <div className="text-center py-14 sm:py-20 px-6">
+      {/* <div className="text-center py-14 sm:py-20 px-6">
         <h2
           className="font-bold text-KC_GREEN font-wildysans leading-tight mb-4"
           style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
@@ -80,20 +79,17 @@ const CollageStrip = () => {
           </svg>
           Book via WhatsApp
         </a>
-      </div>
+      </div> */}
 
       {/* Photo Collage — Mobile: simple 2-col grid */}
       <div className="grid grid-cols-2 gap-2 px-2 sm:hidden">
         {COLLAGE.map((item, i) => (
           <div key={i} className={`relative overflow-hidden aspect-square ${i === 0 ? "col-span-2 aspect-video" : ""}`}>
             {item.type === "video" ? (
-              <video
+              <LazyVideo
                 src={item.src}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover"
+                width={800}
+                className="absolute inset-0 w-full h-full"
               />
             ) : (
               <Image
@@ -113,13 +109,10 @@ const CollageStrip = () => {
         {COLLAGE.map((item, i) => (
           <div key={i} className={`relative overflow-hidden ${item.pos}`}>
             {item.type === "video" ? (
-              <video
+              <LazyVideo
                 src={item.src}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover"
+                width={800}
+                className="absolute inset-0 w-full h-full"
               />
             ) : (
               <Image
