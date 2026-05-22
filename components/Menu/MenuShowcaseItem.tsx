@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const optimizeUrl = (url: string) =>
   url.replace("/upload/", "/upload/w_1200,q_auto,f_auto/");
@@ -15,8 +16,10 @@ interface MenuItem {
 }
 
 const MenuShowcaseItem = ({ item }: { item: MenuItem }) => {
+  const href = item.slug ? `/menu/${item.slug}` : "/menu";
+
   return (
-    <div className="group">
+    <Link href={href} className="group block">
       {/* Image */}
       <div className="relative aspect-[3/2] overflow-hidden bg-KC_GREEN/5">
         {item.item_img_url ? (
@@ -36,7 +39,7 @@ const MenuShowcaseItem = ({ item }: { item: MenuItem }) => {
 
       {/* Info — centered */}
       <div className="mt-5 text-center">
-        <h3 className="font-wildysans fw-bold text-xl sm:text-2xl text-KC_GREEN">
+        <h3 className="font-wildysans fw-bold text-xl sm:text-2xl text-KC_GREEN group-hover:text-KC_PEACH transition-colors duration-200">
           {item.item_name}
         </h3>
 
@@ -46,7 +49,7 @@ const MenuShowcaseItem = ({ item }: { item: MenuItem }) => {
           </p>
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 
