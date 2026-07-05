@@ -28,11 +28,11 @@ export const metadata: Metadata = {
         ? `https://${process.env.VERCEL_URL}`
         : "http://localhost:3000"),
   ),
-  title: "Kebabscrib",
+  title: "Kebab's Crib",
   description: "Kebabscrib is a french Restaurant",
   icons: {
     icon: {
-      url: "/assets/KC_Logo_Logomark_green.svg",
+      url: "/assets/Logo.png",
       type: "image/svg+xml",
       sizes: "any",
     },
