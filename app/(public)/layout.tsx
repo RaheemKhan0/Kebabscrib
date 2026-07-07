@@ -33,6 +33,7 @@ export const metadata: Metadata = {
   icons: {
     icon: {
       url: "/assets/Logo.png",
+      type: "image/png",
       sizes: "any",
     },
   },
