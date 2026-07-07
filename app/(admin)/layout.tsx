@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   title: "Kebabscrib Admin",
   icons: {
     icon: {
-      url: "/assets/KC_Logo_Logomark_green.svg",
-      type: "image/svg+xml",
+      url: "/assets/Logo.png",
+      type: "image/png",
       sizes: "any",
     },
   },
