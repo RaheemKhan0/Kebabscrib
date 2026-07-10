@@ -29,7 +29,34 @@ export const metadata: Metadata = {
         : "http://localhost:3000"),
   ),
   title: "Kebab's Crib | Kebabs, French Tacos & Baguettes in Dubai Marina",
-  description: "Halal French-style kebabs, French tacos, cheesy baguettes & loaded sandwiches in Dubai Marina. Dine in or order delivery. Open till late.",
+  description:
+    "Halal French-style kebabs, French tacos, cheesy baguettes & loaded sandwiches in Dubai Marina. Dine in or order delivery. Open till late.",
+  openGraph: {
+    title: "Kebab's Crib | Kebabs, French Tacos & Baguettes in Dubai Marina",
+    description:
+      "Halal French-style kebabs, French tacos & loaded sandwiches in Dubai Marina. Dine in or order delivery. Open till late.",
+    url: "https://www.kebabscrib.ae",
+    siteName: "Kebab's Crib",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1776668487/Cover_Photo_g0cch4.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Kebab's Crib — French kebabs and tacos in Dubai Marina",
+      },
+    ],
+    locale: "en_AE",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kebab's Crib | Kebabs, French Tacos & Baguettes in Dubai Marina",
+    description:
+      "Halal French-style kebabs, French tacos & loaded sandwiches in Dubai Marina. Open till late.",
+    images: [
+      "https://res.cloudinary.com/dpqto9jrm/image/upload/v1776668487/Cover_Photo_g0cch4.jpg",
+    ],
+  },
   icons: {
     icon: {
       url: "/assets/Logo.png",
@@ -39,12 +66,60 @@ export const metadata: Metadata = {
   },
 };
 
+const restaurantJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  name: "Kebab's Crib",
+  image:
+    "https://res.cloudinary.com/dpqto9jrm/image/upload/v1776668487/Cover_Photo_g0cch4.jpg",
+  url: "https://www.kebabscrib.ae",
+  telephone: "+97144318050",
+  priceRange: "$$",
+  servesCuisine: ["French", "Kebab", "Halal", "Fast Food", "Sandwiches"],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Shop 1, Marina View Tower A",
+    addressLocality: "Dubai Marina",
+    addressRegion: "Dubai",
+    addressCountry: "AE",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 25.078995719277618,
+    longitude: 55.14247747540711,
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+      opens: "11:30",
+      closes: "04:30",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Friday", "Saturday"],
+      opens: "11:30",
+      closes: "04:45",
+    },
+  ],
+  menu: "https://www.kebabscrib.ae/menu",
+  acceptsReservations: "False",
+  sameAs: [
+    "https://www.instagram.com/kebabscrib",
+    "https://www.facebook.com/Kebabscrib",
+  ],
+};
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${parkinsans.variable} ${playfair.variable}`}>
       <body
         className={`${parkinsans.className} bg-EggShell min-h-screen`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantJsonLd) }}
+        />
         <SessionWrapper>
           <MenuProvider>
             <CartProvider>
