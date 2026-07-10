@@ -28,8 +28,8 @@ export const metadata: Metadata = {
         ? `https://${process.env.VERCEL_URL}`
         : "http://localhost:3000"),
   ),
-  title: "Kebab's Crib",
-  description: "Kebabscrib is a french Restaurant",
+  title: "Kebab's Crib | Kebabs, French Tacos & Baguettes in Dubai Marina",
+  description: "Halal French-style kebabs, French tacos, cheesy baguettes & loaded sandwiches in Dubai Marina. Dine in or order delivery. Open till late.",
   icons: {
     icon: {
       url: "/assets/Logo.png",
