@@ -17,7 +17,7 @@ const INSTAGRAM_URL = "https://www.instagram.com/kebabscrib";
 
 // NAV COLORS — change these two to your exact brand hex codes anytime.
 const NAV_BG = "#F3E63C"; // yellow bar (shown on scroll / non-home pages)
-const NAV_GREEN = "#0F6E40"; // green text + underline
+
 
 const Navbar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
