@@ -72,7 +72,7 @@ const Navbar: React.FC = () => {
             <div className="flex justify-center flex-shrink-0 md:flex-1">
               <Link href="/">
                 <Image
-                  src="/assets/Logo.png"
+                  src="/assets/Logo.PNG"
                   alt="Kebab's Crib"
                   width={72}
                   height={72}
@@ -147,7 +147,7 @@ const Navbar: React.FC = () => {
                 {/* Logo */}
                 <Link href="/" onClick={() => setMobileOpen(false)} className="mb-10">
                   <Image
-                    src="/assets/Logo.png"
+                    src="/assets/Logo.PNG"
                     alt="Kebab's Crib"
                     width={56}
                     height={56}
