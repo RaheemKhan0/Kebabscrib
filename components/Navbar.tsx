@@ -9,41 +9,37 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-
 const NAV_LEFT = [
+  { name: "Home", path: "/" },
   { name: "Menu", path: "/menu" },
 ];
-
 const NAV_RIGHT = [
+  { name: "Delivery", path: "/delivery" },
   { name: "Contact", path: "/contactus" },
 ];
-
 const INSTAGRAM_URL = "https://www.instagram.com/kebabscrib";
-
 const Navbar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
   /* Homepage has a sticky hero behind it — navbar can be transparent/white over it.
      Other pages have solid backgrounds — navbar should always show its scrolled state. */
   const isHomepage = pathname === "/";
   const overHero = isHomepage && !scrolled;
   const showScrolledStyle = !isHomepage || scrolled;
-
+  // Original link style kept (bold, Parkinsans, tracking-wide, title-case) — only the SIZE is bumped up.
+  // Tweak `text-lg md:text-xl` (18–22px) to taste.
   const linkClass = (path: string) =>
-    `relative py-1 text-base font-bold font-parkinsans tracking-wide transition-colors duration-200 group
+    `relative py-1 text-lg md:text-xl font-bold font-parkinsans tracking-wide transition-colors duration-200 group
     ${overHero
       ? (pathname === path ? "text-white" : "text-white/80 hover:text-white")
       : (pathname === path ? "text-KC_GREEN" : "text-KC_GREEN/70 hover:text-KC_GREEN")
     }`;
-
   return (
     <>
       <nav
@@ -51,8 +47,8 @@ const Navbar: React.FC = () => {
           ${showScrolledStyle ? "bg-KebabGold backdrop-blur-sm shadow-sm" : "bg-transparent"}`}
       >
         <div className="mx-auto max-w-screen-xl px-6">
-          <div className="flex items-center h-16 md:h-20">
-
+          {/* BAR HEIGHT — tall, generous eggslut-style band. Tweak h-16 / md:h-24 to taste. */}
+          <div className="flex items-center h-16 md:h-24">
             {/* LEFT LINKS — desktop only */}
             <div className="hidden md:flex items-center gap-8 flex-1">
               {NAV_LEFT.map((item) => (
@@ -62,7 +58,6 @@ const Navbar: React.FC = () => {
                 </Link>
               ))}
             </div>
-
             {/* MOBILE: hamburger — left side */}
             <button
               className={`md:hidden p-2 -ml-2 mr-auto transition-colors duration-300 ${overHero ? "text-white" : "text-KC_Barn_Red"}`}
@@ -73,21 +68,19 @@ const Navbar: React.FC = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-
-            {/* CENTER LOGO */}
+            {/* CENTER LOGO — favicon mark, sized to fill the taller bar. Tweak h-12 / md:h-16. */}
             <div className="flex justify-center flex-shrink-0 md:flex-1">
               <Link href="/">
                 <Image
-                  src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1776751197/KC_Logo_V2_Combination_stacked_green_a8xphc.png"
+                  src="/assets/Logo.png"
                   alt="Kebab's Crib"
-                  width={120}
-                  height={64}
+                  width={72}
+                  height={72}
                   priority
-                  className={`h-25 md:h-25 w-auto transition-all duration-300 ${overHero ? "brightness-0 invert" : ""}`}
+                  className={`h-12 md:h-16 w-auto transition-all duration-300 ${overHero ? "brightness-0 invert" : ""}`}
                 />
               </Link>
             </div>
-
             {/* RIGHT LINKS + INSTAGRAM — desktop only */}
             <div className="hidden md:flex items-center gap-8 flex-1 justify-end">
               {NAV_RIGHT.map((item) => (
@@ -105,14 +98,11 @@ const Navbar: React.FC = () => {
                 </svg>
               </a>
             </div>
-
             {/* MOBILE: spacer to balance hamburger on left */}
             <div className="md:hidden w-10 ml-auto" />
-
           </div>
         </div>
       </nav>
-
       {/* MOBILE DRAWER */}
       <Transition show={mobileOpen} as={Fragment}>
         <Dialog as="div" className="relative z-50" onClose={() => setMobileOpen(false)}>
@@ -127,7 +117,6 @@ const Navbar: React.FC = () => {
           >
             <div className="fixed inset-0 bg-black/25" />
           </TransitionChild>
-
           <div className="fixed inset-0 flex justify-end">
             <TransitionChild
               as={Fragment}
@@ -155,18 +144,16 @@ const Navbar: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
-
                 {/* Logo */}
                 <Link href="/" onClick={() => setMobileOpen(false)} className="mb-10">
                   <Image
-                    src="https://res.cloudinary.com/dpqto9jrm/image/upload/v1776751197/KC_Logo_V2_Combination_stacked_green_a8xphc.png"
+                    src="/assets/Logo.png"
                     alt="Kebab's Crib"
-                    width={100}
+                    width={56}
                     height={56}
                     className="h-12 w-auto"
                   />
                 </Link>
-
                 {/* Links */}
                 <ul className="flex flex-col gap-6 flex-1">
                   {[...NAV_LEFT, ...NAV_RIGHT].map((item) => (
@@ -182,9 +169,8 @@ const Navbar: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-
                 {/* Instagram */}
-                <a
+                
                   href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -214,5 +200,4 @@ const Navbar: React.FC = () => {
     </>
   );
 };
-
 export default Navbar;
