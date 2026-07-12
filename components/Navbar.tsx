@@ -1,65 +1,73 @@
-import type { Metadata } from "next";
-import { FaMotorcycle, FaWhatsapp, FaPhone } from "react-icons/fa";
+"use client";
+import React, { Fragment, useState, useEffect } from "react";
+import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Delivery | Kebab's Crib — Dubai Marina",
-  description: "Order Kebab's Crib for delivery across Dubai via Talabat, Careem, Deliveroo, Noon or Keeta — or call/WhatsApp us directly in Dubai Marina.",
-};
-
-const HERO_IMG = "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745680051/Mix_Kebab_jgizht.jpg";
-
-const PARTNERS = [
-  { name: "talabat", href: "https://www.talabat.com/uae/restaurant/612274/kebabs-crib?aid=1272" },
-  { name: "careem", href: "https://url.careem.com/uMo8iNUqyKMLA" },
-  { name: "deliveroo", href: "https://deliveroo.ae/menu/dubai/marina/kebabs-crib?utm_campaign=organic&utm_medium=referrer&utm_source=menu_share" },
-  { name: "noon food", href: "https://food.noon.com/uae-en/outlet/KBBSCR2LUQ/" },
-  { name: "keeta", href: "https://url-eu.mykeeta.com/JzHpPofz" },
+const NAV_LEFT = [
+  { name: "Home", path: "/" },
+  { name: "Menu", path: "/menu" },
 ];
+const NAV_RIGHT = [
+  { name: "Delivery", path: "/delivery" },
+  { name: "Contact", path: "/contactus" },
+];
+const INSTAGRAM_URL = "https://www.instagram.com/kebabscrib";
 
-const HERO_STYLE = {
-  backgroundImage: `url('${HERO_IMG}')`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-};
+const NAV_BG = "#F3E63C";
 
-const TEXT_SHADOW = { textShadow: "0 2px 12px rgba(0,0,0,0.65)" };
+const Navbar: React.FC = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
-export default function DeliveryPage() {
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const isHomepage = pathname === "/";
+  const overHero = isHomepage && !scrolled;
+  const showScrolledStyle = !isHomepage || scrolled;
+
+  const linkClass = (path: string) =>
+    `relative py-1 text-xl md:text-2xl font-bold font-parkinsans tracking-wide transition-colors duration-200 group ${
+      overHero
+        ? pathname === path
+          ? "text-white"
+          : "text-white/80 hover:text-white"
+        : pathname === path
+        ? "text-[#0F6E40]"
+        : "text-[#0F6E40]/70 hover:text-[#0F6E40]"
+    }`;
+
+  const underlineClass = (path: string) =>
+    `absolute -bottom-0.5 left-0 h-px transition-all duration-300 ${
+      overHero ? "bg-white" : "bg-[#0F6E40]"
+    } ${pathname === path ? "w-full" : "w-0 group-hover:w-full"}`;
+
   return (
-    <main className="bg-white min-h-screen pt-24 md:pt-32">
-      {/* Hero — full width, no dark overlay */}
-      <div className="relative h-[420px] sm:h-[500px] flex items-center px-8 sm:px-16 lg:px-24" style={HERO_STYLE}>
-        <div className="max-w-lg" style={TEXT_SHADOW}>
-          <p className="text-[11px] uppercase tracking-[0.2em] text-white font-semibold mb-3 font-parkinsans">Order from anywhere</p>
-          <h1 className="text-white font-wildysans text-5xl sm:text-6xl mb-4">Delivery</h1>
-          <p className="text-white text-base sm:text-lg mb-6 font-parkinsans leading-relaxed">Can&apos;t make it to us? We&apos;ll come to you — order for delivery straight from us or through your favourite platform.</p>
-          <div className="flex flex-wrap gap-3">
-            <a href="https://wa.me/971543354066" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-KC_GREEN px-6 py-3.5 text-sm font-semibold text-white font-parkinsans transition hover:brightness-110"><FaWhatsapp className="text-lg" /> WhatsApp order</a>
-            <a href="tel:044318050" className="inline-flex items-center gap-2 rounded-xl border border-white/70 px-6 py-3.5 text-sm text-white font-parkinsans transition hover:bg-white/15"><FaPhone className="text-sm" /> Call 04 431 8050</a>
-          </div>
-          <p className="mt-4 text-xs text-white/90 font-parkinsans max-w-md leading-relaxed">Delivery charges may apply on direct orders — but secret discounts are sometimes awarded on direct delivery.</p>
-        </div>
-      </div>
+    <>
+      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${showScrolledStyle ? "backdrop-blur-sm shadow-sm" : "bg-transparent"}`} style={showScrolledStyle ? { backgroundColor: NAV_BG } : undefined}>
+        <div className="mx-auto max-w-screen-xl px-6">
+          <div className="flex items-center h-24 md:h-32">
+            <div className="hidden md:flex items-center gap-8 flex-1">
+              {NAV_LEFT.map((item) => (
+                <Link key={item.name} href={item.path} className={linkClass(item.path)}>
+                  {item.name}
+                  <span className={underlineClass(item.path)} />
+                </Link>
+              ))}
+            </div>
 
-      {/* Partners — white bg, green text */}
-      <div className="px-8 sm:px-16 lg:px-24 py-12 sm:py-16">
-        <div className="flex flex-wrap justify-between items-baseline gap-3 mb-6">
-          <p className="text-xs uppercase tracking-[0.15em] text-KC_GREEN/60 font-medium font-parkinsans">Or order through a partner</p>
-          <div className="flex gap-2">
-            <span className="text-[11px] px-3 py-1 rounded-full border border-KC_GREEN/25 text-KC_GREEN/70 font-parkinsans">Dine-in</span>
-            <span className="text-[11px] px-3 py-1 rounded-full border border-KC_GREEN/25 text-KC_GREEN/70 font-parkinsans">Takeaway</span>
-            <span className="text-[11px] px-3 py-1 rounded-full bg-KC_GREEN text-white font-semibold font-parkinsans">Delivery</span>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4">
-          {PARTNERS.map((p) => (
-            <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-3 py-8 px-2 rounded-xl border border-KC_GREEN/15 transition hover:border-KC_GREEN hover:bg-KC_GREEN/5 hover:-translate-y-0.5">
-              <FaMotorcycle className="text-2xl text-KC_GREEN" />
-              <span className="text-sm font-medium text-KC_GREEN font-parkinsans">{p.name}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </main>
-  );
-}
+            <button className={`md:hidden p-2 -ml-2 mr-auto transition-colors duration-300 ${overHero ? "text-white" : "text-[#0F6E40]"}`} onClick={() => setMobileOpen(true)} aria-label="Open menu">
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+
+            <div className="flex justify-center flex-shrink-0 md:flex-1">
+              <Link href="/">
+                <Image src="/assets/Logo.PNG" alt="Kebab's Crib" width={240} height={240} priority className="h-20 md:h-28 w-auto transition-all duration-300" />
