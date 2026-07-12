@@ -21,6 +21,9 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
+const ogImage =
+  "https://res.cloudinary.com/dpqto9jrm/image/upload/w_1200,h_630,c_fill,q_auto,f_jpg/v1776668487/Cover_Photo_g0cch4.jpg";
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ??
@@ -39,7 +42,7 @@ export const metadata: Metadata = {
     siteName: "Kebab's Crib",
     images: [
       {
-        url: "https://res.cloudinary.com/dpqto9jrm/image/upload/v1776668487/Cover_Photo_g0cch4.jpg",
+        url: ogImage,
         width: 1200,
         height: 630,
         alt: "Kebab's Crib — French kebabs and tacos in Dubai Marina",
@@ -53,9 +56,7 @@ export const metadata: Metadata = {
     title: "Kebab's Crib | Kebabs, French Tacos & Baguettes in Dubai Marina",
     description:
       "Halal French-style kebabs, French tacos & loaded sandwiches in Dubai Marina. Open till late.",
-    images: [
-      "https://res.cloudinary.com/dpqto9jrm/image/upload/v1776668487/Cover_Photo_g0cch4.jpg",
-    ],
+    images: [ogImage],
   },
   icons: {
     icon: {
@@ -70,8 +71,7 @@ const restaurantJsonLd = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
   name: "Kebab's Crib",
-  image:
-    "https://res.cloudinary.com/dpqto9jrm/image/upload/v1776668487/Cover_Photo_g0cch4.jpg",
+  image: ogImage,
   url: "https://www.kebabscrib.ae",
   telephone: "+97144318050",
   priceRange: "$$",
