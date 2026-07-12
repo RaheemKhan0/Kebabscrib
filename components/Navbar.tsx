@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
   const showScrolledStyle = !isHomepage || scrolled;
 
   const linkClass = (path: string) =>
-    `relative py-1 text-lg md:text-xl font-bold font-parkinsans tracking-wide transition-colors duration-200 group ${
+    `relative py-1 text-xl md:text-2xl font-bold font-parkinsans tracking-wide transition-colors duration-200 group ${
       overHero
         ? pathname === path
           ? "text-white"
@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
       <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${showScrolledStyle ? "backdrop-blur-sm shadow-sm" : "bg-transparent"}`} style={showScrolledStyle ? { backgroundColor: NAV_BG } : undefined}>
         <div className="mx-auto max-w-screen-xl px-6">
           {/* BAR HEIGHT — tall band. Tweak h-20 / md:h-28 to taste. */}
-          <div className="flex items-center h-20 md:h-28">
+          <div className="flex items-center h-24 md:h-32">
             {/* LEFT LINKS — desktop only */}
             <div className="hidden md:flex items-center gap-8 flex-1">
               {NAV_LEFT.map((item) => (
@@ -75,7 +75,7 @@ const Navbar: React.FC = () => {
             {/* CENTER LOGO — round badge, bigger + sharp. Tweak h-16 / md:h-24. */}
             <div className="flex justify-center flex-shrink-0 md:flex-1">
               <Link href="/">
-                <Image src="/assets/Logo.PNG" alt="Kebab's Crib" width={240} height={240} priority className="h-16 md:h-24 w-auto transition-all duration-300" />
+                <Image src="/assets/Logo.PNG" alt="Kebab's Crib" width={240} height={240} priority className="h-20 md:h-28 w-auto transition-all duration-300" />
               </Link>
             </div>
 
