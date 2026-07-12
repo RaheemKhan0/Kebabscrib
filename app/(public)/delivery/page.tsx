@@ -17,42 +17,45 @@ const PARTNERS = [
 ];
 
 const HERO_STYLE = {
-  backgroundImage: `linear-gradient(90deg, rgba(0,38,26,0.92) 0%, rgba(0,52,35,0.6) 45%, rgba(0,52,35,0.15) 80%), url('${HERO_IMG}')`,
+  backgroundImage: `url('${HERO_IMG}')`,
   backgroundSize: "cover",
   backgroundPosition: "center",
 };
 
+const TEXT_SHADOW = { textShadow: "0 2px 12px rgba(0,0,0,0.65)" };
+
 export default function DeliveryPage() {
   return (
-    <main className="bg-KC_GREEN min-h-screen pt-24 md:pt-32">
-      {/* Hero — full width */}
+    <main className="bg-white min-h-screen pt-24 md:pt-32">
+      {/* Hero — full width, no dark overlay */}
       <div className="relative h-[420px] sm:h-[500px] flex items-center px-8 sm:px-16 lg:px-24" style={HERO_STYLE}>
-        <div className="max-w-lg">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-KC_PEACH font-semibold mb-3 font-parkinsans">Order from anywhere</p>
-          <h1 className="text-KC_PEACH font-wildysans text-5xl sm:text-6xl mb-4">Delivery</h1>
-          <p className="text-EggShell/85 text-base sm:text-lg mb-8 font-parkinsans leading-relaxed">Can&apos;t make it to us? We&apos;ll come to you — order for delivery straight from us or through your favourite platform.</p>
+        <div className="max-w-lg" style={TEXT_SHADOW}>
+          <p className="text-[11px] uppercase tracking-[0.2em] text-white font-semibold mb-3 font-parkinsans">Order from anywhere</p>
+          <h1 className="text-white font-wildysans text-5xl sm:text-6xl mb-4">Delivery</h1>
+          <p className="text-white text-base sm:text-lg mb-6 font-parkinsans leading-relaxed">Can&apos;t make it to us? We&apos;ll come to you — order for delivery straight from us or through your favourite platform.</p>
           <div className="flex flex-wrap gap-3">
-            <a href="https://wa.me/971543354066" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-KC_PEACH px-6 py-3.5 text-sm font-semibold text-KC_GREEN font-parkinsans transition hover:brightness-105"><FaWhatsapp className="text-lg" /> WhatsApp order</a>
-            <a href="tel:044318050" className="inline-flex items-center gap-2 rounded-xl border border-KC_PEACH/50 px-6 py-3.5 text-sm text-KC_PEACH font-parkinsans transition hover:bg-KC_PEACH/10"><FaPhone className="text-sm" /> Call 04 431 8050</a>
+            <a href="https://wa.me/971543354066" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-KC_GREEN px-6 py-3.5 text-sm font-semibold text-white font-parkinsans transition hover:brightness-110"><FaWhatsapp className="text-lg" /> WhatsApp order</a>
+            <a href="tel:044318050" className="inline-flex items-center gap-2 rounded-xl border border-white/70 px-6 py-3.5 text-sm text-white font-parkinsans transition hover:bg-white/15"><FaPhone className="text-sm" /> Call 04 431 8050</a>
           </div>
+          <p className="mt-4 text-xs text-white/90 font-parkinsans max-w-md leading-relaxed">Delivery charges may apply on direct orders — but secret discounts are sometimes awarded on direct delivery.</p>
         </div>
       </div>
 
-      {/* Partners — green bg, peach text */}
+      {/* Partners — white bg, green text */}
       <div className="px-8 sm:px-16 lg:px-24 py-12 sm:py-16">
         <div className="flex flex-wrap justify-between items-baseline gap-3 mb-6">
-          <p className="text-xs uppercase tracking-[0.15em] text-KC_PEACH/70 font-medium font-parkinsans">Or order through a partner</p>
+          <p className="text-xs uppercase tracking-[0.15em] text-KC_GREEN/60 font-medium font-parkinsans">Or order through a partner</p>
           <div className="flex gap-2">
-            <span className="text-[11px] px-3 py-1 rounded-full border border-KC_PEACH/30 text-KC_PEACH/80 font-parkinsans">Dine-in</span>
-            <span className="text-[11px] px-3 py-1 rounded-full border border-KC_PEACH/30 text-KC_PEACH/80 font-parkinsans">Takeaway</span>
-            <span className="text-[11px] px-3 py-1 rounded-full bg-KC_PEACH text-KC_GREEN font-semibold font-parkinsans">Delivery</span>
+            <span className="text-[11px] px-3 py-1 rounded-full border border-KC_GREEN/25 text-KC_GREEN/70 font-parkinsans">Dine-in</span>
+            <span className="text-[11px] px-3 py-1 rounded-full border border-KC_GREEN/25 text-KC_GREEN/70 font-parkinsans">Takeaway</span>
+            <span className="text-[11px] px-3 py-1 rounded-full bg-KC_GREEN text-white font-semibold font-parkinsans">Delivery</span>
           </div>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4">
           {PARTNERS.map((p) => (
-            <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-3 py-8 px-2 rounded-xl border border-KC_PEACH/25 transition hover:border-KC_PEACH hover:bg-KC_PEACH/10 hover:-translate-y-0.5">
-              <FaMotorcycle className="text-2xl text-KC_PEACH" />
-              <span className="text-sm font-medium text-KC_PEACH font-parkinsans">{p.name}</span>
+            <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-3 py-8 px-2 rounded-xl border border-KC_GREEN/15 transition hover:border-KC_GREEN hover:bg-KC_GREEN/5 hover:-translate-y-0.5">
+              <FaMotorcycle className="text-2xl text-KC_GREEN" />
+              <span className="text-sm font-medium text-KC_GREEN font-parkinsans">{p.name}</span>
             </a>
           ))}
         </div>
