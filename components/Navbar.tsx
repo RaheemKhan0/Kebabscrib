@@ -171,7 +171,7 @@ const Navbar: React.FC = () => {
                 </ul>
                 {/* Instagram */}
                 
-                  href={INSTAGRAM_URL}
+                  <a href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-KC_GREEN/50 hover:text-KC_GREEN transition-colors text-sm mt-8"
