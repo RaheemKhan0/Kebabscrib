@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: {
-      url: "/assets/Logo.png",
+      url: "/assets/Logo.PNG",
       type: "image/png",
       sizes: "any",
     },
