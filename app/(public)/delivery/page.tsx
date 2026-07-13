@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { FaMotorcycle, FaWhatsapp, FaPhone } from "react-icons/fa";
+import { FaWhatsapp, FaPhone } from "react-icons/fa";
 
 export const metadata: Metadata = {
   title: "Delivery | Kebab's Crib — Dubai Marina",
@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 const HERO_IMG = "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745680051/Mix_Kebab_jgizht.jpg";
 
 const PARTNERS = [
-  { name: "talabat", href: "https://www.talabat.com/uae/restaurant/612274/kebabs-crib?aid=1272" },
-  { name: "careem", href: "https://url.careem.com/uMo8iNUqyKMLA" },
-  { name: "deliveroo", href: "https://deliveroo.ae/menu/dubai/marina/kebabs-crib?utm_campaign=organic&utm_medium=referrer&utm_source=menu_share" },
-  { name: "noon food", href: "https://food.noon.com/uae-en/outlet/KBBSCR2LUQ/" },
-  { name: "keeta", href: "https://url-eu.mykeeta.com/JzHpPofz" },
+  { name: "talabat", href: "https://www.talabat.com/uae/restaurant/612274/kebabs-crib?aid=1272", bg: "#FF5A00", fg: "#ffffff" },
+  { name: "Careem", href: "https://url.careem.com/uMo8iNUqyKMLA", bg: "#4BB543", fg: "#ffffff" },
+  { name: "Deliveroo", href: "https://deliveroo.ae/menu/dubai/marina/kebabs-crib?utm_campaign=organic&utm_medium=referrer&utm_source=menu_share", bg: "#00CCBC", fg: "#ffffff" },
+  { name: "noon food", href: "https://food.noon.com/uae-en/outlet/KBBSCR2LUQ/", bg: "#FEEE00", fg: "#3D2B00" },
+  { name: "Keeta", href: "https://url-eu.mykeeta.com/JzHpPofz", bg: "#FFC72C", fg: "#3D2B00" },
 ];
 
 const HERO_STYLE = {
@@ -26,7 +26,7 @@ const TEXT_SHADOW = { textShadow: "0 2px 12px rgba(0,0,0,0.65)" };
 
 export default function DeliveryPage() {
   return (
-    <main className="bg-white min-h-screen pt-24 md:pt-32">
+    <main className="bg-textured-eggshell min-h-screen pt-24 md:pt-32">
       {/* Hero — full width, no dark overlay */}
       <div className="relative h-[420px] sm:h-[500px] flex items-center px-8 sm:px-16 lg:px-24" style={HERO_STYLE}>
         <div className="max-w-lg" style={TEXT_SHADOW}>
@@ -41,7 +41,7 @@ export default function DeliveryPage() {
         </div>
       </div>
 
-      {/* Partners — white bg, green text */}
+      {/* Partners — brand-colored tiles */}
       <div className="px-8 sm:px-16 lg:px-24 py-12 sm:py-16">
         <div className="flex flex-wrap justify-between items-baseline gap-3 mb-6">
           <p className="text-xs uppercase tracking-[0.15em] text-KC_GREEN/60 font-medium font-parkinsans">Or order through a partner</p>
@@ -53,9 +53,8 @@ export default function DeliveryPage() {
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4">
           {PARTNERS.map((p) => (
-            <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-3 py-8 px-2 rounded-xl border border-KC_GREEN/15 transition hover:border-KC_GREEN hover:bg-KC_GREEN/5 hover:-translate-y-0.5">
-              <FaMotorcycle className="text-2xl text-KC_GREEN" />
-              <span className="text-sm font-medium text-KC_GREEN font-parkinsans">{p.name}</span>
+            <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: p.bg, color: p.fg }} className="flex items-center justify-center py-9 px-3 rounded-2xl font-parkinsans font-bold text-lg sm:text-xl tracking-tight shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg">
+              {p.name}
             </a>
           ))}
         </div>
