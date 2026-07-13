@@ -3,26 +3,28 @@ import { FaWhatsapp, FaPhone } from "react-icons/fa";
 
 export const metadata: Metadata = {
   title: "Delivery | Kebab's Crib — Dubai Marina",
-  description: "Order Kebab's Crib in Dubai Marina — WhatsApp us direct, or via Talabat, Deliveroo, Careem, Noon Food & Keeta for pickup & delivery.",
+  description: "Order Kebab's Crib in Dubai Marina — WhatsApp us direct, or via Talabat, Deliveroo, Careem, Noon Food & Keeta for delivery.",
 };
 
 const HERO_IMG = "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745680051/Mix_Kebab_jgizht.jpg";
 const HERO_STYLE = { backgroundImage: `url('${HERO_IMG}')`, backgroundSize: "cover", backgroundPosition: "center" };
 const TEXT_SHADOW = { textShadow: "0 2px 12px rgba(0,0,0,0.65)" };
+const MAP_SRC = "https://maps.google.com/maps?q=25.0789957,55.1424775&z=16&output=embed";
+const DIRECTIONS = "https://www.google.com/maps/dir//Shop+1,+Marina+View+Tower+A,+Dubai+Marina,+Dubai";
 
 const ORDER = [
   { label: "WhatsApp", sub: "Order Direct", href: "https://wa.me/971543354066" },
-  { label: "Talabat", sub: "Pickup & Delivery", href: "https://www.talabat.com/uae/restaurant/612274/kebabs-crib?aid=1272" },
-  { label: "Deliveroo", sub: "Pickup & Delivery", href: "https://deliveroo.ae/menu/dubai/marina/kebabs-crib?utm_campaign=organic&utm_medium=referrer&utm_source=menu_share" },
-  { label: "Careem", sub: "Pickup & Delivery", href: "https://url.careem.com/uMo8iNUqyKMLA" },
-  { label: "Noon Food", sub: "Pickup & Delivery", href: "https://food.noon.com/uae-en/outlet/KBBSCR2LUQ/" },
-  { label: "Keeta", sub: "Pickup & Delivery", href: "https://url-eu.mykeeta.com/JzHpPofz" },
+  { label: "Talabat", sub: "Delivery only", href: "https://www.talabat.com/uae/restaurant/612274/kebabs-crib?aid=1272" },
+  { label: "Deliveroo", sub: "Delivery only", href: "https://deliveroo.ae/menu/dubai/marina/kebabs-crib?utm_campaign=organic&utm_medium=referrer&utm_source=menu_share" },
+  { label: "Careem", sub: "Delivery only", href: "https://link.careem.com/bhrvzBsvMjPiP" },
+  { label: "Noon Food", sub: "Delivery only", href: "https://food.noon.com/uae-en/outlet/KBBSCR2LUQ/" },
+  { label: "Keeta", sub: "Delivery only", href: "https://url-eu.mykeeta.com/JzHpPofz" },
 ];
 
 export default function DeliveryPage() {
   return (
     <main className="bg-textured-eggshell min-h-screen pt-24 md:pt-32">
-      {/* Hero — kept as-is, Delivery in Parkinsans Bold */}
+      {/* Hero */}
       <div className="relative h-[420px] sm:h-[500px] flex items-center px-8 sm:px-16 lg:px-24" style={HERO_STYLE}>
         <div className="max-w-lg" style={TEXT_SHADOW}>
           <p className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-white/90 font-parkinsans font-medium mb-2">Order from anywhere</p>
@@ -36,27 +38,33 @@ export default function DeliveryPage() {
         </div>
       </div>
 
-      {/* Bottom — editorial order list, no underline */}
+      {/* Bottom */}
       <div className="mx-auto max-w-3xl px-6 sm:px-10 py-14 sm:py-20">
-        <div className="font-parkinsans text-KC_GREEN">
-          <p className="text-lg sm:text-xl uppercase tracking-wide leading-snug">Shop 1, Marina View Tower A<br />Dubai Marina, Dubai</p>
-          <p className="mt-4 text-sm sm:text-base uppercase tracking-wide text-KC_GREEN/70">Sun–Thu 11:30 AM–4:30 AM · Fri–Sat 11:30 AM–4:45 AM</p>
-        </div>
-
-        <div className="mt-8 h-px w-full bg-KC_GREEN/15" />
-
-        <ul className="mt-4 flex flex-col divide-y divide-KC_GREEN/10">
+        <p className="text-xs uppercase tracking-[0.2em] text-KC_GREEN/50 font-parkinsans mb-2">Order online</p>
+        <ul className="flex flex-col divide-y divide-KC_GREEN/10 border-t border-KC_GREEN/10">
           {ORDER.map((o) => (
             <li key={o.label}>
-              <a href={o.href} target="_blank" rel="noopener noreferrer" className="group flex flex-wrap items-baseline gap-x-3 py-5 font-parkinsans uppercase">
+              <a href={o.href} target="_blank" rel="noopener noreferrer" className="group flex items-baseline justify-between gap-4 py-5 font-parkinsans uppercase">
                 <span className="text-2xl sm:text-4xl font-bold text-KC_GREEN tracking-tight group-hover:text-KC_PEACH transition-colors">{o.label}</span>
-                <span className="text-base sm:text-2xl text-KC_GREEN/45 group-hover:text-KC_GREEN/70 transition-colors">— {o.sub}</span>
+                <span className="whitespace-nowrap text-xs sm:text-sm tracking-wide text-KC_GREEN/45 group-hover:text-KC_GREEN/70 transition-colors">{o.sub}</span>
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="mt-8 h-px w-full bg-KC_GREEN/15" />
+        <p className="mt-14 text-xs uppercase tracking-[0.2em] text-KC_GREEN/50 font-parkinsans mb-4">Find us</p>
+        <div className="grid gap-6 sm:grid-cols-2 items-stretch">
+          <div className="font-parkinsans text-KC_GREEN">
+            <p className="text-lg sm:text-xl uppercase tracking-wide font-semibold leading-snug">Shop 1, Marina View Tower A<br />Dubai Marina, Dubai</p>
+            <p className="mt-4 text-sm uppercase tracking-wide text-KC_GREEN/70 leading-relaxed">Sun–Thu 11:30 AM–4:30 AM<br />Fri–Sat 11:30 AM–4:45 AM</p>
+            <a href={DIRECTIONS} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center rounded-full bg-KC_GREEN px-6 py-3 text-sm font-semibold uppercase tracking-wide text-EggShell transition hover:brightness-110">Get Directions</a>
+          </div>
+          <div className="overflow-hidden rounded-2xl border border-KC_GREEN/15 min-h-[220px]">
+            <iframe title="Kebab's Crib location map" src={MAP_SRC} className="h-full w-full min-h-[220px]" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+          </div>
+        </div>
+
+        <div className="mt-12 h-px w-full bg-KC_GREEN/15" />
         <p className="mt-6 text-sm uppercase tracking-[0.15em] text-KC_GREEN/50 font-parkinsans">Open for dine in, takeaway &amp; delivery</p>
       </div>
     </main>
