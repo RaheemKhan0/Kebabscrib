@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
 
             <div className="flex justify-center flex-shrink-0 md:flex-1">
               <Link href="/">
-                <Image src="/assets/Logo.PNG" alt="Kebab's Crib" width={240} height={240} priority className="h-20 md:h-28 w-auto transition-all duration-300" />
+                <Image src="/assets/Kebabs Crib Logo Website.png" alt="Kebab's Crib" width={240} height={240} priority className="h-24 md:h-32 w-auto transition-all duration-300" />
                 </Link>
             </div>
 
@@ -110,7 +110,7 @@ const Navbar: React.FC = () => {
                 </button>
 
                 <Link href="/" onClick={() => setMobileOpen(false)} className="mb-10">
-                  <Image src="/assets/Logo.PNG" alt="Kebab's Crib" width={140} height={140} className="h-20 w-auto" />
+                  <Image src="/assets/Kebabs Crib Logo Website.png" alt="Kebab's Crib" width={140} height={140} className="h-20 w-auto" />
                 </Link>
 
                 <ul className="flex flex-col gap-6 flex-1">
