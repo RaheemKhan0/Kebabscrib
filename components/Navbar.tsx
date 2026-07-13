@@ -15,7 +15,7 @@ const NAV_RIGHT = [
 ];
 const INSTAGRAM_URL = "https://www.instagram.com/kebabscrib";
 
-const NAV_BG = "#F3E63C";
+const NAV_BG = "#F4CF4B";
 
 const Navbar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -39,13 +39,13 @@ const Navbar: React.FC = () => {
           ? "text-white"
           : "text-white/80 hover:text-white"
         : pathname === path
-        ? "text-[#0F6E40]"
-        : "text-[#0F6E40]/70 hover:text-[#0F6E40]"
+        ? "text-[#563A04]"
+        : "text-[#563A04]/70 hover:text-[#563A04]"
     }`;
 
   const underlineClass = (path: string) =>
     `absolute -bottom-0.5 left-0 h-px transition-all duration-300 ${
-      overHero ? "bg-white" : "bg-[#0F6E40]"
+      overHero ? "bg-white" : "bg-[#563A04]"
     } ${pathname === path ? "w-full" : "w-0 group-hover:w-full"}`;
 
   return (
@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
               ))}
             </div>
 
-            <button className={`md:hidden p-2 -ml-2 mr-auto transition-colors duration-300 ${overHero ? "text-white" : "text-[#0F6E40]"}`} onClick={() => setMobileOpen(true)} aria-label="Open menu">
+            <button className={`md:hidden p-2 -ml-2 mr-auto transition-colors duration-300 ${overHero ? "text-white" : "text-[#563A04]"}`} onClick={() => setMobileOpen(true)} aria-label="Open menu">
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
@@ -81,7 +81,7 @@ const Navbar: React.FC = () => {
                   <span className={underlineClass(item.path)} />
                 </Link>
               ))}
-              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className={`transition-colors duration-200 ${overHero ? "text-white/70 hover:text-white" : "text-[#0F6E40]/70 hover:text-[#0F6E40]"}`}>
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className={`transition-colors duration-200 ${overHero ? "text-white/70 hover:text-white" : "text-[#563A04]/70 hover:text-[#563A04]"}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                   <circle cx="12" cy="12" r="4" />
@@ -103,7 +103,7 @@ const Navbar: React.FC = () => {
           <div className="fixed inset-0 flex justify-end">
             <TransitionChild as={Fragment} enter="transform transition ease-out duration-300" enterFrom="translate-x-full" enterTo="translate-x-0" leave="transform transition ease-in duration-200" leaveFrom="translate-x-0" leaveTo="translate-x-full">
               <DialogPanel className="w-72 h-full shadow-xl flex flex-col p-8" style={{ backgroundColor: NAV_BG }}>
-                <button onClick={() => setMobileOpen(false)} className="self-end text-[#0F6E40]/70 hover:text-[#0F6E40] transition-colors mb-8" aria-label="Close menu">
+                <button onClick={() => setMobileOpen(false)} className="self-end text-[#563A04]/70 hover:text-[#563A04] transition-colors mb-8" aria-label="Close menu">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
@@ -116,14 +116,14 @@ const Navbar: React.FC = () => {
                 <ul className="flex flex-col gap-6 flex-1">
                   {[...NAV_LEFT, ...NAV_RIGHT].map((item) => (
                     <li key={item.name}>
-                      <Link href={item.path} onClick={() => setMobileOpen(false)} className={`text-lg font-medium transition-colors duration-200 ${pathname === item.path ? "text-[#0F6E40]" : "text-[#0F6E40]/60 hover:text-[#0F6E40]"}`}>
+                      <Link href={item.path} onClick={() => setMobileOpen(false)} className={`text-lg font-medium transition-colors duration-200 ${pathname === item.path ? "text-[#563A04]" : "text-[#563A04]/60 hover:text-[#563A04]"}`}>
                         {item.name}
                       </Link>
                     </li>
                   ))}
                 </ul>
 
-                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[#0F6E40]/60 hover:text-[#0F6E40] transition-colors text-sm mt-8">
+                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[#563A04]/60 hover:text-[#563A04] transition-colors text-sm mt-8">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                     <circle cx="12" cy="12" r="4" />
