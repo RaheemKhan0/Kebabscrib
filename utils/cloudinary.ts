@@ -2,7 +2,6 @@
    Pass an existing Cloudinary URL and a size hint; returns a transformed URL. */
 
 const VIDEO_BASE = "https://res.cloudinary.com/dpqto9jrm/video/upload/";
-const IMAGE_BASE = "https://res.cloudinary.com/dpqto9jrm/image/upload/";
 
 /**
  * Optimize a Cloudinary video URL.
