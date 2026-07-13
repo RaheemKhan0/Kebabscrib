@@ -22,11 +22,11 @@ const ORDER = [
 export default function DeliveryPage() {
   return (
     <main className="bg-textured-eggshell min-h-screen pt-24 md:pt-32">
-      {/* Hero — kept as-is, Delivery now bold */}
+      {/* Hero — kept as-is, Delivery in Parkinsans Bold */}
       <div className="relative h-[420px] sm:h-[500px] flex items-center px-8 sm:px-16 lg:px-24" style={HERO_STYLE}>
         <div className="max-w-lg" style={TEXT_SHADOW}>
-          <p className="text-[11px] uppercase tracking-[0.2em] text-white font-semibold mb-3 font-parkinsans">Order from anywhere</p>
-          <h1 className="text-white font-wildysans font-bold text-5xl sm:text-6xl mb-4">Delivery</h1>
+          <p className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-white/90 font-parkinsans font-medium mb-2">Order from anywhere</p>
+          <h1 className="text-white font-parkinsans font-bold leading-none text-6xl sm:text-7xl mb-5">Delivery</h1>
           <p className="text-white text-base sm:text-lg mb-6 font-parkinsans leading-relaxed">Can&apos;t make it to us? We&apos;ll come to you — order for delivery straight from us or through your favourite platform.</p>
           <div className="flex flex-wrap gap-3">
             <a href="https://wa.me/971543354066" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-KC_GREEN px-6 py-3.5 text-sm font-semibold text-white font-parkinsans transition hover:brightness-110"><FaWhatsapp className="text-lg" /> WhatsApp order</a>
