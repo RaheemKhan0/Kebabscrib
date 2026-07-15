@@ -60,7 +60,7 @@ const Footer = () => {
                   <FaInstagram className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/Kebabscrib/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
@@ -114,7 +114,7 @@ const Footer = () => {
                 <FaInstagram className="w-5 h-5" />
               </a>
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/Kebabscrib/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
