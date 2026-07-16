@@ -5,34 +5,29 @@ import Link from "next/link";
 const optimizeUrl = (url: string) =>
   url.replace("/upload/", "/upload/w_1200,q_auto,f_auto/");
 
-/* Correct prices — these WIN over the database (its values are out of date) */
-const PRICE_OVERRIDE: Record
-  string,
-  { price?: number; range?: [number, number] }
-> = {
-  "veggie-special": { price: 38.25 },
-  "classic-poulet": { price: 48.25 },
-  boursin: { price: 48.25 },
-  "classic-veal": { price: 48.25 },
-  "mix-kebab": { price: 48.25 },
-  gourmet: { price: 48.25 },
-  tandoori: { price: 48.25 },
-  "beef-duo": { price: 48.25 },
-  "poulet-fromage": { price: 49.25 },
-  "beef-trio": { price: 50.0 },
-  merguez: { price: 52.0 },
-  baguettes: { range: [48.25, 52.0] },
-  "french-taco": { range: [46.5, 62.5] },
+/* Correct prices — these override the out-of-date database values */
+const PRICE_OVERRIDE: Record<string, number> = {
+  "veggie-special": 38.25,
+  "classic-poulet": 48.25,
+  boursin: 48.25,
+  "classic-veal": 48.25,
+  "mix-kebab": 48.25,
+  gourmet: 48.25,
+  tandoori: 48.25,
+  "beef-duo": 48.25,
+  "poulet-fromage": 49.25,
+  "beef-trio": 50.0,
+  merguez: 52.0,
+};
+
+/* Category cards shown as a price range (pre-formatted) */
+const RANGE_OVERRIDE: Record<string, string> = {
+  baguettes: "AED 48.25 - 52.00",
+  "french-taco": "AED 46.50 - 62.50",
 };
 
 const formatPrice = (n: number) =>
   Number.isInteger(n) ? `${n}` : n.toFixed(2);
-
-const formatRange = ([a, b]: [number, number]) => {
-  const hasDecimals = !Number.isInteger(a) || !Number.isInteger(b);
-  const f = (n: number) => (hasDecimals ? n.toFixed(2) : `${n}`);
-  return `${f(a)} – ${f(b)}`;
-};
 
 interface MenuItem {
   _id: string;
@@ -47,14 +42,14 @@ interface MenuItem {
 const MenuShowcaseItem = ({ item }: { item: MenuItem }) => {
   const href = item.slug ? `/menu/${item.slug}` : "/menu";
 
-  /* Use the hardcoded override only — the database prices are out of date */
-  const override = item.slug ? PRICE_OVERRIDE[item.slug] : undefined;
+  const rangeLabel = item.slug ? RANGE_OVERRIDE[item.slug] : undefined;
+  const fixedPrice = item.slug ? PRICE_OVERRIDE[item.slug] : undefined;
 
   let priceLabel: string | null = null;
-  if (override?.range) {
-    priceLabel = `AED ${formatRange(override.range)}`;
-  } else if (override?.price != null) {
-    priceLabel = `AED ${formatPrice(override.price)}`;
+  if (rangeLabel) {
+    priceLabel = rangeLabel;
+  } else if (fixedPrice != null) {
+    priceLabel = `AED ${formatPrice(fixedPrice)}`;
   }
 
   return (
