@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { FaWhatsapp, FaPhone } from "react-icons/fa";
 
 export const metadata: Metadata = {
-  title: "Delivery | Kebab's Crib — Dubai Marina",
-  description: "Order Kebab's Crib in Dubai Marina — WhatsApp us direct, or via Talabat, Deliveroo, Careem, Noon Food & Keeta for delivery.",
+  title: "Order Delivery | Kebab's Crib Dubai Marina",
+  description: "Order Kebab's Crib for delivery in Dubai Marina — on Talabat, Deliveroo, Careem, Noon and Keeta. Fresh French kebabs, tacos and baguettes, open till late through Deliveroo, Keeta, Noon, Careem, Talabat & WhatsApp.",
 };
 
 const HERO_IMG = "https://res.cloudinary.com/dpqto9jrm/image/upload/v1745680051/Mix_Kebab_jgizht.jpg";
