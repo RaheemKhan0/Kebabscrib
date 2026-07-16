@@ -5,8 +5,11 @@ import Link from "next/link";
 const optimizeUrl = (url: string) =>
   url.replace("/upload/", "/upload/w_1200,q_auto,f_auto/");
 
-/* Dine-in prices — used only when an item has no price in the database */
-const PRICE_MAP: Record<string, { price?: number; range?: [number, number] }> = {
+/* Correct dine-in prices — these override the database (its values are out of date) */
+const PRICE_OVERRIDE: Record
+  string,
+  { price?: number; range?: [number, number] }
+> = {
   "veggie-special": { price: 38.25 },
   "classic-poulet": { price: 48.25 },
   boursin: { price: 48.25 },
@@ -16,9 +19,9 @@ const PRICE_MAP: Record<string, { price?: number; range?: [number, number] }> = 
   tandoori: { price: 48.25 },
   "beef-duo": { price: 48.25 },
   "poulet-fromage": { price: 49.25 },
-  merguez: { price: 50.0 },
+  merguez: { price: 52.0 },
   "beef-trio": { price: 50.0 },
-  baguettes: { range: [48.25, 50.0] },
+  baguettes: { range: [48.25, 52.0] },
   "french-taco": { range: [46.5, 62.5] },
 };
 
@@ -44,17 +47,14 @@ interface MenuItem {
 const MenuShowcaseItem = ({ item }: { item: MenuItem }) => {
   const href = item.slug ? `/menu/${item.slug}` : "/menu";
 
-  /* Prefer the database price; fall back to the dine-in list above */
-  const dbPrice = item.item_price?.single;
-  const fallback = item.slug ? PRICE_MAP[item.slug] : undefined;
+  /* Prices are hardcoded here because the database values are out of date */
+  const override = item.slug ? PRICE_OVERRIDE[item.slug] : undefined;
 
   let priceLabel: string | null = null;
-  if (dbPrice != null) {
-    priceLabel = `AED ${formatPrice(dbPrice)}`;
-  } else if (fallback?.price != null) {
-    priceLabel = `AED ${formatPrice(fallback.price)}`;
-  } else if (fallback?.range) {
-    priceLabel = `AED ${formatRange(fallback.range)}`;
+  if (override?.range) {
+    priceLabel = `AED ${formatRange(override.range)}`;
+  } else if (override?.price != null) {
+    priceLabel = `AED ${formatPrice(override.price)}`;
   }
 
   return (
@@ -86,7 +86,7 @@ const MenuShowcaseItem = ({ item }: { item: MenuItem }) => {
           </p>
         )}
         {priceLabel && (
-          <p className="mt-3 text-base sm:text-lg font-wildysans text-KC_GREEN">
+          <p className="mt-3 text-base sm:text-lg font-semibold text-KC_GREEN">
             {priceLabel}
           </p>
         )}
