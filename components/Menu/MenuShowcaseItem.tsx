@@ -81,7 +81,7 @@ const MenuShowcaseItem = ({ item }: { item: MenuItem }) => {
           </p>
         )}
         {priceLabel && (
-          <p className="mt-3 text-base text-KC_GREEN">
+          <p className="mt-3 text-xs text-KC_GREEN/60">
             {priceLabel}
           </p>
         )}
