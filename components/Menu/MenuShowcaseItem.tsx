@@ -5,7 +5,7 @@ import Link from "next/link";
 const optimizeUrl = (url: string) =>
   url.replace("/upload/", "/upload/w_1200,q_auto,f_auto/");
 
-/* Correct dine-in prices — these override the database (its values are out of date) */
+/* Correct prices — these WIN over the database (its values are out of date) */
 const PRICE_OVERRIDE: Record
   string,
   { price?: number; range?: [number, number] }
@@ -19,8 +19,8 @@ const PRICE_OVERRIDE: Record
   tandoori: { price: 48.25 },
   "beef-duo": { price: 48.25 },
   "poulet-fromage": { price: 49.25 },
-  merguez: { price: 52.0 },
   "beef-trio": { price: 50.0 },
+  merguez: { price: 52.0 },
   baguettes: { range: [48.25, 52.0] },
   "french-taco": { range: [46.5, 62.5] },
 };
@@ -47,7 +47,7 @@ interface MenuItem {
 const MenuShowcaseItem = ({ item }: { item: MenuItem }) => {
   const href = item.slug ? `/menu/${item.slug}` : "/menu";
 
-  /* Prices are hardcoded here because the database values are out of date */
+  /* Use the hardcoded override only — the database prices are out of date */
   const override = item.slug ? PRICE_OVERRIDE[item.slug] : undefined;
 
   let priceLabel: string | null = null;
