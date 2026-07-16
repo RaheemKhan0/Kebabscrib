@@ -4,9 +4,9 @@ import MenuShowcaseServer from "@components/Menu/MenuShowcaseServer";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Menu | Kebab's Crib",
+  title: "Menu & Prices | Kebab's Crib Dubai Marina",
   description:
-    "Browse our full menu — sandwiches, French tacos, sides, frites, and drinks.",
+    "See the full Kebab's Crib menu and prices — halal kebabs, French tacos, baguettes and loaded sandwiches in Dubai Marina. Dine in, takeaway or delivery..",
 };
 
 export default function MenuPage() {
