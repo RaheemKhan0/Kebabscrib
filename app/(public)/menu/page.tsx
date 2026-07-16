@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import MenuShowcase from "@components/Menu/MenuShowcase";
+import MenuShowcaseServer from "@components/Menu/MenuShowcaseServer";
 
 export const dynamic = "force-dynamic";
 
@@ -26,10 +26,8 @@ export default function MenuPage() {
         <div className="mx-auto mt-5 h-px w-16 bg-KC_GREEN/15" />
       </div>
 
-      {/* Menu showcase (tabs + grid) */}
-      <MenuShowcase />
-
-      {/* <DeliveryBanner /> */}
+      {/* Menu showcase — now server-rendered */}
+      <MenuShowcaseServer />
     </div>
   );
 }
