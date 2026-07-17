@@ -1,0 +1,51 @@
+const restaurantSchema = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  name: "Kebab's Crib",
+  image:
+    "https://res.cloudinary.com/dpqto9jrm/image/upload/q_auto,f_auto/v1776668487/Cover_Photo_g0cch4.jpg",
+  "@id": "https://www.kebabscrib.ae",
+  url: "https://www.kebabscrib.ae",
+  telephone: "+97144318050",
+  priceRange: "$$",
+  servesCuisine: ["Kebab", "French", "Fast Food", "Halal"],
+  menu: "https://www.kebabscrib.ae/menu",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Shop 1, Marina View Tower A, Dubai Marina",
+    addressLocality: "Dubai",
+    addressCountry: "AE",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 25.0789957,
+    longitude: 55.1424775,
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+      opens: "11:30",
+      closes: "04:30",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Friday", "Saturday"],
+      opens: "11:30",
+      closes: "04:45",
+    },
+  ],
+  sameAs: [
+    "https://www.instagram.com/kebabscrib",
+    "https://www.facebook.com/Kebabscrib/",
+  ],
+};
+
+const RestaurantSchema = () => (
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantSchema) }}
+  />
+);
+
+export default RestaurantSchema;
