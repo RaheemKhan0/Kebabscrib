@@ -4,29 +4,27 @@ import OurStoryPolaroid from "@components/Home/OurStoryPolaroid"
 import GoogleReviews from "@components/Home/GoogleReviews"
 import LocationStrip from "@components/Home/LocationStrip"
 import CollageStrip from "@components/Home/CollageStrip"
+import RestaurantSchema from "@components/RestaurantSchema"
 
 export const dynamic = "force-dynamic"
 
 export default function Home() {
   return (
     <div className="bg-textured-kcgreen">
+      {/* SEO: invisible structured data for search engines */}
+      <RestaurantSchema />
 
       {/* 1 — Hero + Slider (sticky, stays in place) */}
       <Hero />
-
       {/* Spacer — keeps hero fully visible until user scrolls */}
       <div className="h-[85vh] sm:h-[90vh]" />
-
       {/* Everything below scrolls over the hero */}
       <div className="relative z-10">
-
       {/* 2 — Dual Video Strip */}
       <DualVideo />
-
       {/* 3 — Our Story (full bleed) */}
       <OurStoryPolaroid/>
       
-
       {/* 4 — Google Reviews + Location + Collage (shared eggshell background) */}
       <div className="bg-textured-eggshell">
         <div className="py-16 md:py-24">
@@ -37,14 +35,11 @@ export default function Home() {
         <GoogleReviews />
           
         </div>
-
         <div className="py-16 sm:py-24"> 
         <LocationStrip />
         </div>
-
         
       </div>
-
       </div>{/* end relative z-10 wrapper */}
     </div>
   )
